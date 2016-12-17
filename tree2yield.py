@@ -142,6 +142,7 @@ class TreeToYield:
         self._objname = objname if objname else options.obj
         self._weight  = (options.weight and 'data' not in self._name and '2012' not in self._name and '2011' not in self._name )
         self._isdata = 'data' in self._name
+        self._isfastsim = "isFastSim" in settings.keys()
         self._weightString  = options.weightString if not self._isdata else "1"
         self._scaleFactor = scaleFactor
         self._fullYield = 0 # yield of the full sample, as if it passed the full skim and all cuts
@@ -215,9 +216,11 @@ class TreeToYield:
     def adaptDataMCExpr(self,expr):
         ret = expr
         if self._isdata:
-            ret = re.sub(r'\$MC\{.*?\}', '', re.sub(r'\$DATA\{(.*?)\}', r'\1', expr));
+            ret = re.sub(r'\$MC\{.*?\}', '', re.sub(r'\$FASTSIM\{.*?\}', '', re.sub(r'\$DATA\{(.*?)\}', r'\1', expr)));
+        elif self._isfastsim:
+            ret = re.sub(r'\$DATA\{.*?\}', '', re.sub(r'\$MC\{.*?\}', '', re.sub(r'\$FASTSIM\{(.*?)\}', r'\1', expr)));
         else:
-            ret = re.sub(r'\$DATA\{.*?\}', '', re.sub(r'\$MC\{(.*?)\}', r'\1', expr));
+            ret = re.sub(r'\$DATA\{.*?\}', '', re.sub(r'\$FASTSIM\{.*?\}', '', re.sub(r'\$MC\{(.*?)\}', r'\1', expr)));
         return ret
     def adaptExpr(self,expr,cut=False):
         ret = self.adaptDataMCExpr(expr)
