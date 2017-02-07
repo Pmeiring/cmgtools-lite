@@ -23,17 +23,20 @@ def base(selection):
 
 
     #CORE="-P /data1/botta/trees_SOS_80X_130716_Scans/ --mcc susy-sos/mcc-lepWP.txt" # --FMCs {P}/eventBTagWeight"
-    CORE="-P /data/gpetrucc/TREES_80X_SOS_111016_NoIso --Fs {P}/0_both3dCleanLoose_noIso_v2 --mcc susy-sos/lepchoice-recleaner.txt"
+    #CORE="-P /data/gpetrucc/TREES_80X_SOS_111016_NoIso --Fs {P}/0_both3dCleanLoose_noIso_v2 --mcc susy-sos/lepchoice-recleaner.txt"
+    CORE="-P /data1/botta/trees_SOS_010217 --Fs {P}/0_both3dlooseClean_v1 --mcc susy-sos/lepchoice-recleaner.txt"
     CORE+=" -f -j 8 -l 36.5 --s2v --tree treeProducerSusyMultilepton --mcc susy-sos/mcc-sf1.txt --neg" #--mcc susy-sos/2los_triggerdefs.txt #12.9 - 36.5 - 18.1
     if dowhat == "plots": CORE+=" --lspam 'CMS Preliminary' --legendWidth 0.14 --legendFontSize 0.04"
     GO = ""
     if selection=='2los':
-        if (dowhat != "limits") : GO="susy-sos/mca-2los-test-mc.txt susy-sos/2los_tight.txt " #susy-sos/mca-2los-mc.txt
+        if (dowhat != "limits") : GO="susy-sos/mca-2los-test2-mc.txt susy-sos/2los_tight.txt " #susy-sos/mca-2los-mc.txt
         GO="%s %s"%(CORE,GO) 
         #ICHEP
         #GO="%s -L susy-sos/functionsSOS.cc -L susy-sos/lepton_trigger_SF.cc -W 'leptonSF_SOS(LepGood1_pdgId,LepGood1_pt,LepGood1_eta,0)*leptonSF_SOS(LepGood2_pdgId,LepGood2_pt,LepGood2_eta,0)*triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*puw2016_nTrueInt_13fb(nTrueInt)*eventBTagSF'"%GO 
+        #Freezing MORIOND17 (no trigger SF)
+        GO="%s -L susy-sos/functionsSOS.cc -L susy-sos/lepton_trigger_SF.cc -W 'puw2016_nTrueInt_36fb(nTrueInt)'"%GO #getPUW(nTrueInt)
         #FSR MORIOND17
-        GO="%s -L susy-sos/functionsSOS.cc -L susy-sos/lepton_trigger_SF.cc -W 'triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*puw2016_nTrueInt_36fb(nTrueInt)'"%GO #getPUW(nTrueInt)
+        #GO="%s -L susy-sos/functionsSOS.cc -L susy-sos/lepton_trigger_SF.cc -W 'triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*puw2016_nTrueInt_36fb(nTrueInt)'"%GO #getPUW(nTrueInt)
         #FSR MORIOND17 - ICHEP DATA
         #GO="%s -L susy-sos/functionsSOS.cc -L susy-sos/lepton_trigger_SF.cc -W 'triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*puw2016_nTrueInt_13fb(nTrueInt)'"%GO 
         if dowhat == "plots": GO+=" susy-sos/2los_plots.txt"        
