@@ -8,10 +8,10 @@ lep1Eta: abs(LepGood1_eta): 10,0,2.5; XTitle="Lepton 1 #eta",Legend='TR', MoreY=
 lep2Eta: abs(LepGood2_eta): 10,0,2.5; XTitle="Lepton 2 #eta",Legend='TR', MoreY=1.5
 lepflav: if3(abs(LepGood1_pdgId)!=abs(LepGood2_pdgId),1,abs(LepGood1_pdgId)-11) : [-0.5,0.5,1.5,2.5]; XTitle="ee/e#mu/#mu#mu", XNDdiv=505, MoreY=2.0
 dRll: deltaR(LepGood1_eta, LepGood1_phi, LepGood2_eta, LepGood2_phi): 18,0,6; XTitle="dR(ll)"
-mll  : m2l: 20,0,100; XTitle="M(ll) [GeV]"
-mll_50  : m2l: 10,0,50; XTitle="M(ll) [GeV]",Legend='TR',LegendCutoff=1e-10
+fine_mll_50  : m2l: 23,4,50; XTitle="M(ll) [GeV]"
+mll_50  : m2l: 10,4,50; XTitle="M(ll) [GeV]",Legend='TR',LegendCutoff=1e-10
 ptll : pt_2(LepGood1_pt,LepGood1_phi, LepGood2_pt,LepGood2_phi): 10,0,50; XTitle="p_{T}(ll) [GeV]"
-met: met_pt: 10,200,450;  XTitle="E_{T}^{miss}  [GeV]"
+met: met_pt: 14,100,450;  XTitle="E_{T}^{miss}  [GeV]"
 metbins : met_pt : 2,125.,275.; XTitle="E_{T}^{miss}  [GeV]", Legend='TL'
 metmm: metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood2_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, met_pt, met_phi): 14,100,450;  XTitle="E_{T}^{miss}  [GeV]"
 metovht: (met_pt/(htJet25-LepGood1_pt-LepGood2_pt)): 10,0,2; XTitle="E_{T}^{miss}/H_{T}(jet p_{T} > 25)"

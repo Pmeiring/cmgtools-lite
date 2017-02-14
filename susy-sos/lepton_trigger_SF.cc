@@ -132,20 +132,20 @@ float _get_looseToTight_leptonSF_SOS(int pdgid, float _pt, float eta, float var)
   //if (var!=0) assert(0); // NOT IMPLEMENTED
   
   if (!_histo_looseToTight_leptonSF_mu_sos_barrel) {
-    _file_looseToTight_leptonSF_mu_sos_barrel = new TFile("../../data/sos_lepton_SF/mu_SOS_barrel_12invfb.root","read");
+    _file_looseToTight_leptonSF_mu_sos_barrel = new TFile("../../data/sos_lepton_SF/mu_SOS_comb_barrel_36invfb.root","read");
     _histo_looseToTight_leptonSF_mu_sos_barrel = (TGraphAsymmErrors*)(_file_looseToTight_leptonSF_mu_sos_barrel->Get("ratio"));
   }
   if (!_histo_looseToTight_leptonSF_mu_sos_endcap) {
-    _file_looseToTight_leptonSF_mu_sos_endcap = new TFile("../../data/sos_lepton_SF/mu_SOS_endcap_12invfb.root","read");
+    _file_looseToTight_leptonSF_mu_sos_endcap = new TFile("../../data/sos_lepton_SF/mu_SOS_comb_endcap_36invfb.root","read");
     _histo_looseToTight_leptonSF_mu_sos_endcap = (TGraphAsymmErrors*)(_file_looseToTight_leptonSF_mu_sos_endcap->Get("ratio"));
   }
   
   if (!_histo_looseToTight_leptonSF_el_sos_barrel) {
-    _file_looseToTight_leptonSF_el_sos_barrel = new TFile("../../data/sos_lepton_SF/el_SOS_barrel_12invfb.root","read");
+    _file_looseToTight_leptonSF_el_sos_barrel = new TFile("../../data/sos_lepton_SF/el_SOS_barrel_36invfb.root","read");
     _histo_looseToTight_leptonSF_el_sos_barrel = (TGraphAsymmErrors*)(_file_looseToTight_leptonSF_el_sos_barrel->Get("ratio"));
   }
   if (!_histo_looseToTight_leptonSF_el_sos_endcap) {
-    _file_looseToTight_leptonSF_el_sos_endcap = new TFile("../../data/sos_lepton_SF/el_SOS_endcap_12invfb.root","read");
+    _file_looseToTight_leptonSF_el_sos_endcap = new TFile("../../data/sos_lepton_SF/el_SOS_endcap_36invfb.root","read");
     _histo_looseToTight_leptonSF_el_sos_endcap = (TGraphAsymmErrors*)(_file_looseToTight_leptonSF_el_sos_endcap->Get("ratio"));
   }
 
@@ -280,10 +280,43 @@ float leptonSF_SOS(int pdgid, float _pt, float eta, float var=0){
   float tracking = _get_tracking_SF(pdgid,_pt,eta,var);
   float recoToLoose = _get_recoToLoose_leptonSF_SOS(pdgid,_pt,eta,var);
   float looseToTight = _get_looseToTight_leptonSF_SOS(pdgid,_pt,eta,var);
-  float res = tracking*recoToLoose*looseToTight; 
+  //  float res = tracking*recoToLoose*looseToTight; 
+  float res = recoToLoose*looseToTight;  /// *********** CAVEAT: only tight SF so far and loose to reco from ICHEP. Need to activate the reco SF once avilable ***************
   assert (res>0);
   return res;
 }
+
+
+// // Trigger efficiency ---------------------------
+
+// TFile *_file_triggerSF = NULL;
+// TH2F  *_histo_triggerSF = NULL;
+
+// float triggerSF_SOS(float _met, float _met_corr, float var=0){
+ 
+//   //  if (var_ee!=0) assert(0); // NOT IMPLEMENTED
+
+//   if (_met>=200.0 && _met_corr>=200.0)return 1.0;
+  
+//   if (!_file_triggerSF) {
+//     _file_triggerSF  = new TFile("../../data/sos_lepton_SF/trigger_eff_12invfb.root","read");
+//     _histo_triggerSF = (TH2F*)(_file_triggerSF->Get("hnummet"));
+//   }
+ 
+//   float muon_leg_eff=0.95*0.95*0.93; // Mu3 leg * Mu3 leg * DZ
+//   float met = std::min(float(199.9),_met);
+//   float met_corr = std::min(float(199.9),_met_corr);
+
+//   Int_t binx = (_histo_triggerSF->GetXaxis())->FindBin(met);
+//   Int_t biny = (_histo_triggerSF->GetYaxis())->FindBin(met_corr);  
+
+//   if(var>0) return (muon_leg_eff*(_histo_triggerSF->GetBinContent(binx,biny)))+0.05 ;// +/-5%
+//   if(var<0) return (muon_leg_eff*(_histo_triggerSF->GetBinContent(binx,biny)))-0.05 ;
+//   //return muon_leg_eff*(_histo_triggerSF->GetBinContent(binx,biny));  
+//   return 1.0; // ============= CAVEAT: to be reactivated once the SF are available ===============  
+
+// }
+
 
 
 // Trigger efficiency ---------------------------

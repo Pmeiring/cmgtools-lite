@@ -8,5 +8,6 @@ LepGood4_(\w+) : LepGood_\1[iLepSel[3]]; AlsoData
 nLepGood : nLepSel; AlsoData
 m2l\b : m2lSel; AlsoData
 nBJetLoose25\b : nBJetLoose25Sel; AlsoData
+nBJetLoose40\b : nBJetLoose40Sel; AlsoData
 htJet25\b : htJet25Sel; AlsoData
 Jet1_(\w+) : JetSel_\1[0]; AlsoData
