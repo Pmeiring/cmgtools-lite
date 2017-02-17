@@ -8,14 +8,16 @@ import re
 
 ODIR=sys.argv[1]
 
-#dowhat = "plots" 
+dowhat = "plots" 
 #dowhat = "dumps" 
 #dowhat = "yields" 
-dowhat = "limits"
+#dowhat = "limits"
 
 
 # SYST="susy-sos/syst/susy_sos_dummy.txt" ## change file for systematics here
-SYST="susy-sos/syst/susy_sos_syst_test.txt"
+
+#SYST="susy-sos/syst/susy_sos_syst_test.txt" ##For freezing - few banchmark points
+SYST="susy-sos/syst/susy_sos_syst_test2_scan.txt" ##For scan
 PLOTandCUTS="susy-sos/mca-2los-test2-mc.txt susy-sos/2los_tight.txt" ## check later where is replaced. You need to specify there the mca, since they will not be replaced as for "plots" (due to different input order of combineCards)
 
 
@@ -24,8 +26,11 @@ def base(selection):
 
     #CORE="-P /data1/botta/trees_SOS_80X_130716_Scans/ --mcc susy-sos/mcc-lepWP.txt" # --FMCs {P}/eventBTagWeight"
     #CORE="-P /data/gpetrucc/TREES_80X_SOS_111016_NoIso --Fs {P}/0_both3dCleanLoose_noIso_v2 --mcc susy-sos/lepchoice-recleaner.txt"
-    CORE="-P /data1/botta/trees_SOS_010217 --Fs {P}/0_both3dlooseClean_v1 --FMCs {P}/0_eventBTagWeight_v1 --mcc susy-sos/lepchoice-recleaner.txt"
-    CORE+=" -f -j 8 -l 36.8 --s2v --tree treeProducerSusyMultilepton --mcc susy-sos/mcc-sf1.txt --neg" #--mcc susy-sos/2los_triggerdefs.txt #12.9 - 36.8 - 18.1
+    #Freezing
+    #CORE="-P /data1/botta/trees_SOS_010217 --Fs {P}/0_both3dlooseClean_v1 --FMCs {P}/0_eventBTagWeight_v1 --mcc susy-sos/lepchoice-recleaner.txt"
+    #Pre-approval
+    CORE="-P /data1/botta/trees_SOS_010217 --Fs {P}/0_both3dlooseClean_v2 --FMCs {P}/0_eventBTagWeight_v2 --mcc susy-sos/lepchoice-recleaner.txt"
+    CORE+=" -j 8 -f -j 8 -l 36.8 --s2v --tree treeProducerSusyMultilepton --mcc susy-sos/mcc-sf1.txt --neg" #--mcc susy-sos/2los_triggerdefs.txt #12.9 - 36.8 - 18.1
     if dowhat == "plots": CORE+=" --lspam 'CMS Preliminary' --legendWidth 0.14 --legendFontSize 0.04"
     GO = ""
     if selection=='2los':
@@ -103,7 +108,8 @@ if __name__ == '__main__':
             x = x.replace('mca-2los-mc.txt','mca-2los-mcdata-frdata.txt') #ICHEP trees
             x = x.replace('mca-2los-test2-mc.txt','mca-2los-test2-mcdata-frdata.txt') #Moriond trees
             #PLOTandCUTS="susy-sos/mca-2los-mcdata-frdata.txt susy-sos/2los_tight.txt" #ICHEP trees
-            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata.txt susy-sos/2los_tight.txt" #Moriond trees               
+            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata.txt susy-sos/2los_tight.txt" #Moriond trees 
+            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi.txt susy-sos/2los_tight.txt" #Moriond trees SCAN          
         if '_met125_mm' in torun: 
             x = add(x,"-E ^pt5sublep -E ^mm -E ^upperMediumMET -E ^runRange -X ^triggerAll -E ^triggerDoubleMuMET ")
             x = x.replace('-l 12.9','-l 10.1') 
@@ -153,15 +159,16 @@ if __name__ == '__main__':
             if(dowhat != "limits"):x = x.replace('mca-2los-mc.txt','mca-2los-mcdata.txt') #ICHEP trees
             if(dowhat != "limits"):x = x.replace('mca-2los-test2-mc.txt','mca-2los-test2-mcdata.txt') #Moriond trees
             #PLOTandCUTS="susy-sos/mca-2los-mcdata.txt susy-sos/2los_tight.txt" #ICHEP trees
-            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata.txt susy-sos/2los_tight.txt" #Moriond trees
+            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata.txt susy-sos/2los_tight.txt" #Moriond trees
+            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi.txt susy-sos/2los_tight.txt" #Moriond trees SCAN          
             if(dowhat != "limits"):x = add(x,"--showRatio --maxRatioRange -2 5") #--showMCError
             if(dowhat == "limits" and ('_stop20' in torun)):x = add(x,"--xp TChiWZ_150_dM20")
             if(dowhat == "limits" and (('_ewk20' in torun) or ('_ewk7' in torun) or ('_ewkHig' in torun))):x = add(x,"--xp T2tt_350_dM20")
         if '_met200' in torun:
-            x = add(x,"-E ^mediumMET -E ^MT -X ^TT -E ^CRDYTT -R ^ledlepPt NoUpledlepPt '20 < LepGood1_pt || fabs(LepGood1_ip3d)>0.01 || fabs(LepGood1_sip3d)>2 || fabs(LepGood2_ip3d)>0.01 || fabs(LepGood2_sip3d)>2' -R mtautau Invmtautau '0.<mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)&&mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)<160.' -X ^triggerAll -E ^triggerMET")
+            x = add(x,"--scale-process DYJets 0.9 -E ^mediumMET -E ^MT -X ^TT -E ^CRDYTT -R ^ledlepPt NoUpledlepPt '20 < LepGood1_pt || fabs(LepGood1_ip3d)>0.01 || fabs(LepGood1_sip3d)>2 || fabs(LepGood2_ip3d)>0.01 || fabs(LepGood2_sip3d)>2' -R mtautau Invmtautau '0.<mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)&&mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)<160.' -X ^triggerAll -E ^triggerMET")
         if '_met125' in torun:
             x = x.replace('puw2016_vtx_4fb(nVert)', 'puw2016_vtx_postTS_1p4fb(nVert)' )
-            x = add(x,"-E ^mm -E ^upperMediumMET -E ^MT -X ^TT -E ^CRDYTT -R ^ledlepPt NoUpledlepPt '20 < LepGood1_pt || fabs(LepGood1_ip3d)>0.01 || fabs(LepGood1_sip3d)>2 || fabs(LepGood2_ip3d)>0.01 || fabs(LepGood2_sip3d)>2' -R mtautau Invmtautau '0.<mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)&&mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)<160.' -E ^runRange -X ^triggerAll -E ^triggerDoubleMuMET -E ^pt5sublep")
+            x = add(x,"--scale-process DYJets 0.8 -E ^mm -E ^upperMediumMET -E ^MT -X ^TT -E ^CRDYTT -R ^ledlepPt NoUpledlepPt '20 < LepGood1_pt || fabs(LepGood1_ip3d)>0.01 || fabs(LepGood1_sip3d)>2 || fabs(LepGood2_ip3d)>0.01 || fabs(LepGood2_sip3d)>2' -R mtautau Invmtautau '0.<mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)&&mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)<160.' -E ^runRange -X ^triggerAll -E ^triggerDoubleMuMET -E ^pt5sublep")
             x = x.replace('-l 12.9','-l 10.1') 
             x = x.replace('-l 36.8','-l 34.0')
             x = x.replace('-l 18.1','-l 15.3') 
@@ -181,14 +188,15 @@ if __name__ == '__main__':
             if(dowhat != "limits"):x = x.replace('mca-2los-mc.txt','mca-2los-mcdata.txt') #ICHEP trees
             if(dowhat != "limits"):x = x.replace('mca-2los-test2-mc.txt','mca-2los-test2-mcdata.txt') #Moriond trees
             #PLOTandCUTS="susy-sos/mca-2los-mcdata.txt susy-sos/2los_tight.txt" #ICHEP trees
-            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata.txt susy-sos/2los_tight.txt" #Moriond trees
+            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata.txt susy-sos/2los_tight.txt" #Moriond trees
+            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi.txt susy-sos/2los_tight.txt" #Moriond trees SCAN          
             if(dowhat != "limits"):x = add(x,"--showRatio --maxRatioRange -2 5") #--showMCError
             if(dowhat == "limits" and ('_stop20' in torun)):x = add(x,"--xp TChiWZ_150_dM20")
             if(dowhat == "limits" and (('_ewk20' in torun) or ('_ewk7' in torun) or ('_ewkHig' in torun))):x = add(x,"--xp T2tt_350_dM20")            
         if '_met200' in torun:             
-            x = add(x,"-E ^mediumMET -X ^TT -E ^CRttTT -X ^bveto -E ^btag -R ^ledlepPt NoUpledlepPt '5 < LepGood1_pt' -X ^triggerAll -E ^triggerMET")  
+            x = add(x," --scale-process TT 0.86 -E ^mediumMET -X ^TT -E ^CRttTT -X ^bveto -E ^btag -R ^ledlepPt NoUpledlepPt '5 < LepGood1_pt' -X ^triggerAll -E ^triggerMET")  
         if '_met125' in torun:             
-            x = add(x,"-E ^mm -E ^upperMediumMET -X ^TT -E ^CRttTT -X ^bveto -E ^btag -E ^pt5sublep -R ^ledlepPt NoUpledlepPt '5 < LepGood1_pt' -E ^runRange -X ^triggerAll -E ^triggerDoubleMuMET")
+            x = add(x," --scale-process TT 0.84 -E ^mm -E ^upperMediumMET -X ^TT -E ^CRttTT -X ^bveto -E ^btag -E ^pt5sublep -R ^ledlepPt NoUpledlepPt '5 < LepGood1_pt' -E ^runRange -X ^triggerAll -E ^triggerDoubleMuMET")
             x = x.replace('-l 12.9','-l 10.1')  
             x = x.replace('-l 36.8','-l 34.0')
             x = x.replace('-l 18.1','-l 15.3') 
@@ -209,7 +217,8 @@ if __name__ == '__main__':
         x = x.replace('mca-2los-mc.txt','mca-2los-mcdata-frdata.txt') #ICHEP trees
         x = x.replace('mca-2los-test2-mc.txt','mca-2los-test2-mcdata-frdata.txt') #Moriond trees
         #PLOTandCUTS="susy-sos/mca-2los-mcdata-frdata.txt susy-sos/2los_tight.txt" #ICHEP trees
-        PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata.txt susy-sos/2los_tight.txt" #Moriond trees        
+        #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata.txt susy-sos/2los_tight.txt" #Moriond trees     
+        PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi.txt susy-sos/2los_tight.txt" #Moriond trees SCAN          
         if dowhat == "limits":
             runIt(x,torun,["LepGood1_pt"],["'[5,12,20,30]'"])
         else:
