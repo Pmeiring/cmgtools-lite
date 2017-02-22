@@ -14,7 +14,7 @@ Higgs_300_120+:Higgsino_300_120:(16.7*16991/300000)/2: triggerSF_SOS(met_pt,metm
 
 
 # ---- TTbar 
-TT		: TTJets_DiLepton: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; FillColor=ROOT.kBlue-7, Label="tt(2l)"
+TT		: TTJets_DiLepton+TTJets_DiLepton_ext: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; FillColor=ROOT.kBlue-7, Label="tt(2l)"
 
 
 # ---- DY HT bins - Including internal conversions (ZG* mll<4 GeV)

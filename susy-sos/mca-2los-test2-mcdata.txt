@@ -14,7 +14,7 @@ T2tt_350_dM20+ : T2ttDiLep : 3.787*(0.332)*(0.332)*(6726004/((0.332)*(0.332)*730
 
 
 # ---- TTbar 
-TT		: TTJets_DiLepton: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; FillColor=ROOT.kBlue-7, Label="tt(2l)"
+TT		: TTJets_DiLepton+TTJets_DiLepton_ext: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; FillColor=ROOT.kBlue-7, Label="tt(2l)"
 
 
 # ---- DY HT bins - Including internal conversions (ZG* mll<4 GeV)

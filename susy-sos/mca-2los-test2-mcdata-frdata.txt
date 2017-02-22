@@ -21,7 +21,7 @@ TChiWZ_150_dM20+ :  TChiWZ_150_130  : 0.001*0.1*5180.86 : bTagWeightFS*triggerSF
 
 
 # ---- TTbar 
-TT		: TTJets_DiLepton: xsec: ScaleFactorTT*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0); FillColor=ROOT.kBlue-7, Label="tt(2l)", NormSystematic=0.1
+TT		: TTJets_DiLepton+TTJets_DiLepton_ext: xsec: ScaleFactorTT*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0); FillColor=ROOT.kBlue-7, Label="tt(2l)", NormSystematic=0.1
 
 
 # ---- DY HT bins - Including internal conversions (ZG* mll<4 GeV)
