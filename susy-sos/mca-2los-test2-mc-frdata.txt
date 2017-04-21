@@ -13,6 +13,22 @@ Higgs_300_120+:Higgsino_300_120:(16.7*16991/300000)/2: triggerSF_SOS(met_pt,metm
 # T2tt_350_dM20+ : T2ttDiLep : 3.787*(0.332)*(0.332)*(6726004/((0.332)*(0.332)*730000)): triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId != 0 && GenSusyMStop < 351 && GenSusyMStop > 349 && GenSusyMNeutralino < 332 && GenSusyMNeutralino > 328); FillColor=ROOT.kRed, Label="T2tt350/20", isFastSim
 
 
+
+##### from new Scan
+
+TChiWZ_150_dM7+ : TChiWZ_150_143  : 0.001*0.1*5180.86 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kOrange-3, Label="TChi150/7", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+
+TChiWZ_150_dM20+ : TChiWZ_150_130  : 0.001*0.1*5180.86 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kOrange, Label="TChi150/20", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+
+## ---- point from Higgsino -----
+TChiWZ_120_dM20_Higgsino+ : TN2N1_120_80 : 0.001*0.1*3276.91 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1 && Jet_mcPt<8)==0) ;FillColor=ROOT.kRed, Label=" TN2N1_120_80" , Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+
+## -----------------------------
+
+T2tt_350_dM20+ : T2tt_350_330 : 0.105*3.78661 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kRed, Label="T2tt350/20", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+
+
+
 # ---- TTbar 
 TT		: TTJets_DiLepton+TTJets_DiLepton_ext: xsec: ScaleFactorTT*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0); FillColor=ROOT.kBlue-7, Label="tt(2l)", NormSystematic=0.1
 
@@ -76,14 +92,24 @@ TW       : TBar_tWch_ext :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0
 
 
 # ---- Non prompt
-fakes_data: MET_Run2016B_23Sep2016_v3_runs_273150_275376 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
-fakes_data: MET_Run2016C_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
-fakes_data: MET_Run2016D_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
-fakes_data: MET_Run2016E_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
-fakes_data: MET_Run2016F_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
-fakes_data: MET_Run2016G_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
-fakes_data: MET_Run2016H-PromptReco-v2_runs_281207_284035 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
-fakes_data: MET_Run2016H-PromptReco-v3_runs_284036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016B_23Sep2016_v3_runs_273150_275376 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016C_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016D_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016E_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016F_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016G_23Sep2016_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016H-PromptReco-v2_runs_281207_284035 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+#fakes_data: MET_Run2016H-PromptReco-v3_runs_284036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+
+
+fakes_data: MET_Run2016B_03Feb2017_ver2_v2_runs_273150_275376 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+fakes_data: MET_Run2016C_03Feb2017_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+fakes_data: MET_Run2016D_03Feb2017_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+fakes_data: MET_Run2016E_03Feb2017_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+fakes_data: MET_Run2016F_03Feb2017_v1_runs_271036_284044; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+fakes_data: MET_Run2016G_03Feb2017_v1_runs_271036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+fakes_data: MET_Run2016H_03Feb2017_ver2_v1_runs_281085_284035 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
+fakes_data: MET_Run2016H_03Feb2017_ver3_v1_runs_284036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
 
 
 

@@ -543,7 +543,7 @@ def doRatioHists(pspec,pmap,total,totalSyst,maxRange,fixRange=False,fitRatio=Non
     leg1.SetLineColor(0)
     leg1.SetTextFont(42)
     leg1.SetTextSize(0.035*0.7/0.3)
-    leg1.AddEntry(unity, "total bkg. unc.", "F")
+    #leg1.AddEntry(unity, "total bkg. unc.", "F")
     if showStatTotLegend: leg1.Draw()
     global legendratio0_, legendratio1_
     legendratio0_ = leg0
@@ -941,7 +941,7 @@ class PlotMaker:
                 if plotmode == "norm": legendCutoff = 0 
                 if plotmode == "stack":
                     if options.noStackSig: mcStyle = ("L","F")
-                    else:                  mcStyle = "F"
+                    else:                  mcStyle = ("F")
                 else: mcStyle = "L"
                 doLegend(pmap,mca,corner=pspec.getOption('Legend','TR'),
                                   cutoff=legendCutoff, mcStyle=mcStyle,

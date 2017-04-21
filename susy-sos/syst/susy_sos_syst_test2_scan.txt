@@ -7,20 +7,24 @@ Float_DY              : DYJets : .* : 2.0 : lnU
 
 
 # Lepton efficiencies and trigger (flat)
-#CMS_lepton_SF	      : DYJets|TT|VV|TW|Rares|sig_.* : .* : lepSF : templates
-CMS_lepton_SF	      : DYJets|TT|VV|TW|Rares|sig_.* : .* : 1.05
+CMS_lepton_SF	      : DYJets|TT|VV|TW|sig_.* : .* : lepSF : templates
+#CMS_lepton_SF	      : DYJets|TT|VV|TW|Rares|sig_.* : .* : 1.05
 CMS_sos_triggerEff    : DYJets|TT|VV|TW|Rares|sig_.* : .* : 1.05
 
 
 # JES (add signal)
 CMS_sos_JES	      : DYJets|TT|VV|TW|sig_.* : .* : jec : templates 
 
-CMS_btag_SF_LF        : DYJets|TT|VV|TW|sig_.* : .* : bTag_LF : templates
-CMS_btag_SF_HF        : DYJets|TT|VV|TW|sig_.* : .* : bTag_HF : templates
+#CMS_btag_SF_LF        : DYJets|TT|VV|TW|sig_.* : .* : bTag_LF : templates
+#CMS_btag_SF_HF        : DYJets|TT|VV|TW|sig_.* : .* : bTag_HF : templates
+
+#Test without VV
+CMS_btag_SF_LF        : DYJets|TT|TW|sig_.* : .* : bTag_LF : templates
+CMS_btag_SF_HF        : DYJets|TT|TW|sig_.* : .* : bTag_HF : templates
 
 
 # TT Spin correlation
-CMS_sos_TTspin		: TT: .* : Spin : templates
+# CMS_sos_TTspin		: TT: .* : Spin : templates
 
 # TT polarization
 CMS_sos_TTWpol		: TT: .* : Wpol : templates
@@ -35,6 +39,7 @@ CMS_sos_TTWpol		: TT: .* : Wpol : templates
 CMS_sos_fake_closure    : fakes_data|fakes_mc : .* : 1.3 
 CMS_sos_VV_xsec         : VV : .* : 1.5
 CMS_sos_TW_xsec         : TW : .* : 2.0
+CMS_sos_Rares_xsec      : Rares : .* : 2.0
 
 
 # Statistical uncertainty bin-by-bin
@@ -49,10 +54,9 @@ CMS_sos_templstat5      : TW  : .* : 1.0 : stat_foreach_shape_bins : .*
 
 # FastSim only uncertainties
 
-LepSF_FastSim           : sig_.* : .* : 1.04
+LepSF_FastSim           : sig_.* : .* : 1.06
 CMS_btag_SF_FastSim_LF     : sig_.* : .* : bTag_SF_FastSim_LF : templates
 CMS_btag_SF_FastSim_HF     : sig_.* : .* : bTag_SF_FastSim_HF : templates
-#CMS_sos_met_FastSim     : sig_.* : .* : met : templates
-#CMS_sos_ISR_FastSim     : sig_.* : .* : ISR : templates
+CMS_sos_met_FastSim     : sig_.* : .* : met : templates
+CMS_sos_ISR_FastSim     : sig_.* : .* : ISR : templates
 CMS_sos_Q2_FastSim      : sig_.* : .* : 1.03
-
