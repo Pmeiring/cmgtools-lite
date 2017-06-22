@@ -1,0 +1,25 @@
+To run the code:
+
+0) prepare a file with the cross section for your model:
+   - see for example: xs_T2tt.root for the structure
+
+1) take the root file in output from combine and place it into limits/ dir 
+   - same format as e.g. the one in limits/scan_T2tt_Moriond_approval.root
+
+2) prepare the configuration in scanSOS.py indicating:
+   - the block for your scan (input root file, number of points, range, etc..)
+   - follow the example for SUS16025 configuration how it is done at the end of the file where currently the T2tt scan has been run: 
+    
+    scan = Scan('T2tt')	      
+    scan.makeExclusion()	      
+    scan.makePrettyPlots()
+    
+    (CAVEAT: in the curren code there are multiplicative factors for taking into account the fact that SUS16025 input x-sections have leptonic BR etc, or are in fb, etc.., please check that you don't need these factors and remove them from the code. They are in the form of e.g.: xs=xs*10)
+
+3) run the command
+   python scanSOS.py 
+
+4) output will be saved into makeExclusionPlot/config/SUSXXYYZZ/
+
+5) move into makeExclusionPlot/ folder and follow the instructions in the README in there
+
