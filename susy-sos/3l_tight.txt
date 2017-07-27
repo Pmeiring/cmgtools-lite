@@ -1,60 +1,52 @@
 alwaystrue: 1
-triggerAll: $DATA{HLT_SOSHighMET || HLT_SOSDoubleMuLowMET || HLT_SOSTripleMu } $MC{1}
+triggerAll: $FASTSIM{1} $DATA{HLT_SOSHighMET || HLT_SOSDoubleMulowMET || HLT_SOSTripleMu} $MC{HLT_SOSHighMET || HLT_SOSDoubleMuLowMET || HLT_SOSTripleMu} 
 trilep: nLepGood == 3
-# if trigger high MET
 ledlepPt: 5 < LepGood1_pt && LepGood1_pt < 30
-# sublepPt: (fabs(LepGood2_pdgId)==13 && LepGood2_pt > 3.5) || (fabs(LepGood2_pdgId)==11 && LepGood2_pt > 5)
-# trilepPt: (fabs(LepGood3_pdgId)==13 && LepGood2_pt > 3.5) || (fabs(LepGood3_pdgId)==11 && LepGood3_pt > 5)
-# # if trigger mumuMET
-# mml
+sublepPt: (fabs(LepGood2_pdgId)==13 && LepGood2_pt > 3.5) || (fabs(LepGood2_pdgId)==11 && LepGood2_pt > 5)
+trilepPt: (fabs(LepGood3_pdgId)==13 && LepGood2_pt > 3.5) || (fabs(LepGood3_pdgId)==11 && LepGood3_pt > 5)
+minMll: minMllSFOS >4  && minMllSFOS<50	
+ZvetoTrigger: maxMllSFOS < 60
+OneOSSF: ((fabs(LepGood1_pdgId) == fabs(LepGood2_pdgId)) && (LepGood1_pdgId*LepGood2_pdgId < 0) ) || ((fabs(LepGood1_pdgId) == fabs(LepGood3_pdgId)) && (LepGood1_pdgId*LepGood3_pdgId < 0) ) || ((fabs(LepGood3_pdgId) == fabs(LepGood2_pdgId)) && (LepGood3_pdgId*LepGood2_pdgId < 0) )
 
-# mmm: abs(LepGood1_pdgId)==13 && abs(LepGood2_pdgId)==13 && abs(LepGood3_pdgId)==13; Disable=True
-# ledlepPt: 5 < LepGood1_pt && LepGood1_pt < 30
-# sublepPt: (fabs(LepGood2_pdgId)==13 && LepGood2_pt > 3.5) || (fabs(LepGood2_pdgId)==11 && LepGood2_pt > 5)	  
-# trilepPt: (fabs(LepGood3_pdgId)==13 && LepGood3_pt > 3.5) || (fabs(LepGood3_pdgId)==11 && LepGood3_pt > 5)
+#### cut for low MET
+mumumu: fabs(LepGood1_pdgId) == 13 && fabs(LepGood2_pdgId) == 13 && fabs(LepGood3_pdgId) == 13
+lowMET: met_pt>75 && met_pt<125
+minAFAS: minMllAFAS>4 && minMllAFAS <60
 
+#Upsilon_veto:((fabs(LepGood1_pdgId) == fabs(LepGood2_pdgId)) && (LepGood1_pdgId*LepGood2_pdgId < 0) )  && (mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) < 9 ||(mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) > 10.5)) && ((fabs(LepGood3_pdgId) == fabs(LepGood2_pdgId)) && (LepGood3_pdgId*LepGood2_pdgId < 0) ) && (mass_2(LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) < 9 ||(mass_2(LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) > 10.5)) && ((fabs(LepGood1_pdgId) == fabs(LepGood3_pdgId)) && (LepGood1_pdgId*LepGood3_pdgId < 0) ) && (mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) < 9 ||(mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) > 10.5))
 
-
-
-# ledlepPt: 30< LepGood1_pt
-
-# sublepPt:  LepGood2_pt >10 &&  LepGood3_pt >10
-
-# Mll: minMllSFOS>4
-# Mll: minMllSFOS>4 
-
-# TTT: ((0==1)||(((fabs(LepGood1_pdgId)==13 && LepGood1_softMuonId>0) || (fabs(LepGood1_pdgId)==11 && eleWPT(LepGood1_pt,LepGood1_etaSc,LepGood1_mvaIdSpring15))) && LepGood1_relIso03<0.5 && (LepGood1_relIso03*LepGood1_pt)<5. && LepGood1_sip3d<4)) && ((0==1)||(((fabs(Le
-# pGood2_pdgId)==13 && LepGood2_softMuonId>0) || (fabs(LepGood2_pdgId)==11 && eleWPT(LepGood2_pt,LepGood2_etaSc,LepGood2_mvaIdSpring15))) && LepGood2_relIso03<0.5 && (LepGood2_relIso03*LepGood2_pt)<5. && LepGood2_sip3d<4)) &&  ((0==1)||(((fabs(LepGood3_pdgId)==13 && Le
-# pGood3_softMuonId>0) || (fabs(LepGood3_pdgId)==11 && eleWPT(LepGood3_pt,LepGood3_etaSc,LepGood3_mvaIdSpring15))) && LepGood3_relIso03<0.5 && (LepGood3_relIso03*LepGood2_pt)<5. && LepGood3_sip3d<4))
-
-# bveto : Sum$(Jet_btagCSV>0.46)==0
-
-# Upsilon_veto:(mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) < 9 ||(mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) > 10.5))
-#  && (mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) < 9 || (mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) > 10.5)) && ( ma
-# ss_2(LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) < 9 || ( mass_2(LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) > 10.5))
-
-# Zveto: abs(mZ1-91.2)<10
-
-#  met: met_pt>200
-
-# # met: met_pt>125 && met_pt<200
-
-# # met: met_pt<125 && met_pt>75
-
-# # minLepMetDphi:min(abs(deltaPhi(LepGood1_phi, met_phi)),min(abs(deltaPhi(LepGood2_phi, met_phi)), abs(deltaPhi(LepGood3_phi, met_phi))))<1
-
-# # ptlll : pt_3(LepGood1_pt,LepGood1_phi,LepGood2_pt,LepGood2_phi,LepGood3_pt,LepGood3_phi)<30
-
-# #triggerAll: $DATA{HLT_SOSHighMET} $MC{1}
-
-# #triggerAll: $DATA{HLT_SOSDoubleMuLowMET} $MC{1}
-
-# #runRange: (!isData) || run >= 274954
+FF: ((abs(LepGood1_pdgId)==13 && LepGood1_ICHEPsoftMuonId || (abs(LepGood1_pdgId)==11 && eleWPVVL(LepGood1_pt,LepGood1_etaSc,LepGood1_mvaIdSpring15) && LepGood1_lostHits==0 && LepGood1_convVeto)) && abs(LepGood1_ip3d)<0.0175 && LepGood1_sip3d<2.5 && LepGood1_jetBTagCSV<0.46 && (LepGood1_relIso03*LepGood1_pt<20+300/LepGood1_pt)) && \
+   ((abs(LepGood2_pdgId)==13 && LepGood2_ICHEPsoftMuonId || (abs(LepGood2_pdgId)==11 && eleWPVVL(LepGood2_pt,LepGood2_etaSc,LepGood2_mvaIdSpring15) && LepGood2_lostHits==0 && LepGood2_convVeto)) && abs(LepGood2_ip3d)<0.0175 && LepGood2_sip3d<2.5 && LepGood2_jetBTagCSV<0.46 && (LepGood2_relIso03*LepGood2_pt<20+300/LepGood2_pt)) && \
+    ((abs(LepGood3_pdgId)==13 && LepGood3_ICHEPsoftMuonId || (abs(LepGood3_pdgId)==11 && eleWPVVL(LepGood3_pt,LepGood3_etaSc,LepGood3_mvaIdSpring15) && LepGood3_lostHits==0 && LepGood3_convVeto)) && abs(LepGood3_ip3d)<0.0175 && LepGood3_sip3d<2.5 && LepGood3_jetBTagCSV<0.46 && (LepGood3_relIso03*LepGood3_pt<20+300/LepGood3_pt))
+TT : ((0==1)||(((abs(LepGood1_pdgId)==13 || eleWPT(LepGood1_pt,LepGood1_etaSc,LepGood1_mvaIdSpring15))) && LepGood1_relIso03<0.5 && LepGood1_relIso03*LepGood1_pt<5. && abs(LepGood1_ip3d)<0.01 && LepGood1_sip3d<2)) &&\
+ ((0==1)||(((abs(LepGood2_pdgId)==13 || eleWPT(LepGood2_pt,LepGood2_etaSc,LepGood2_mvaIdSpring15))) && LepGood2_relIso03<0.5 && LepGood2_relIso03*LepGood2_pt<5. && abs(LepGood2_ip3d)<0.01 && LepGood2_sip3d<2)) &&\
+ ((0==1)||(((abs(LepGood3_pdgId)==13 || eleWPT(LepGood3_pt,LepGood3_etaSc,LepGood3_mvaIdSpring15))) && LepGood3_relIso03<0.5 && LepGood3_relIso03*LepGood3_pt<5. && abs(LepGood3_ip3d)<0.01 && LepGood3_sip3d<2))
+bveto : nBJetLoose25 == 0
 
 
-# # some cuts that are off by default but can be turned on with -E
-# mml: ((abs(LepGood1_pdgId)==13 && abs(LepGood2_pdgId)==13) &&
-# LepGood1_pdgId*LepGood2_pdgId<0 && LepGood2_pt>5) ||
-# ((abs(LepGood1_pdgId)==13 && abs(LepGood3_pdgId)==13) &&
-# LepGood1_pdgId*LepGood3_pdgId<0 && Lep) || ((abs(LepGood2_pdgId)==13 && abs(LepGood3_pdgId)==13) && LepGood2_pdgId*LepGood3_pdgId<0); Disable=True
+#Filters are now applied only on Data!!! (to be corrected)
+#event-filters: $DATA{Flag_HBHENoiseFilter>=1 && Flag_HBHENoiseIsoFilter>=1 && Flag_goodVertices>=1 && Flag_eeBadScFilter>=1 && #Flag_EcalDeadCellTriggerPrimitiveFilter>=1 && Flag_globalTightHalo2016Filter >=1 && Flag_badChargedHadronFilter>=1 && Flag_badMuonMoriond2017>=1 && #Flag_badCloneMuonMoriond2017>=1} $MC{1} $FASTSIM{1}
+#blinding: (!isData) || (run <= 276811 || (run>=278820 && run<=279931)) 
+
+
+
+
+
+
+
+
+# some cuts that are off by default but can be turned on with -E
+lowpt3l : pt3l<20 ; Disable=True
+highpt3l: pt3l >20 ; Disable=True
+FFLooseIP: ((abs(LepGood1_pdgId)==13 && LepGood1_ICHEPsoftMuonId || (abs(LepGood1_pdgId)==11 && eleWPVVL(LepGood1_pt,LepGood1_etaSc,LepGood1_mvaIdSpring15) && LepGood1_lostHits==0 && LepGood1_convVeto))  && LepGood1_jetBTagCSV<0.46 && (LepGood1_relIso03*LepGood1_pt<20+300/LepGood1_pt)) && \
+   ((abs(LepGood2_pdgId)==13 && LepGood2_ICHEPsoftMuonId || (abs(LepGood2_pdgId)==11 && eleWPVVL(LepGood2_pt,LepGood2_etaSc,LepGood2_mvaIdSpring15) && LepGood2_lostHits==0 && LepGood2_convVeto))  && LepGood2_jetBTagCSV<0.46 && (LepGood2_relIso03*LepGood2_pt<20+300/LepGood2_pt)) && \
+    ((abs(LepGood3_pdgId)==13 && LepGood3_ICHEPsoftMuonId || (abs(LepGood3_pdgId)==11 && eleWPVVL(LepGood3_pt,LepGood3_etaSc,LepGood3_mvaIdSpring15) && LepGood3_lostHits==0 && LepGood3_convVeto))  && LepGood3_jetBTagCSV<0.46 && (LepGood3_relIso03*LepGood3_pt<20+300/LepGood3_pt)); Disable=True
+TTLooseIP: ((0==1)||(((abs(LepGood1_pdgId)==13 || eleWPT(LepGood1_pt,LepGood1_etaSc,LepGood1_mvaIdSpring15))) && LepGood1_relIso03<0.5 && LepGood1_relIso03*LepGood1_pt<5. &&  LepGood1_sip3d<4)) && \
+    ((0==1)||(((abs(LepGood2_pdgId)==13 || eleWPT(LepGood2_pt,LepGood2_etaSc,LepGood2_mvaIdSpring15))) && LepGood2_relIso03<0.5 && LepGood2_relIso03*LepGood2_pt<5.  && LepGood2_sip3d<4)) && \
+    ((0==1)||(((abs(LepGood3_pdgId)==13 || eleWPT(LepGood3_pt,LepGood3_etaSc,LepGood3_mvaIdSpring15))) && LepGood3_relIso03<0.5 && LepGood3_relIso03*LepGood3_pt<5. && LepGood3_sip3d<2)); Disable=True
+#### cut for medium MET
+mml: ((fabs(LepGood1_pdgId) == fabs(LepGood2_pdgId)) && (LepGood1_pdgId*LepGood2_pdgId < 0) && (fabs(LepGood1_pdgId) == 13 && fabs(LepGood2_pdgId) == 13) ) || ((fabs(LepGood1_pdgId) == fabs(LepGood3_pdgId)) && (LepGood1_pdgId*LepGood3_pdgId < 0) && (fabs(LepGood1_pdgId) == 13 && fabs(LepGood3_pdgId) == 13)) || ((fabs(LepGood3_pdgId) == fabs(LepGood2_pdgId)) && (LepGood3_pdgId*LepGood2_pdgId < 0) && (fabs(LepGood2_pdgId) == 13 && fabs(LepGood3_pdgId) == 13) ); Disable=True
+mediumMET: met_pt>125 && met_pt<200; Disable=True
+#### cut for high MET
+highMET: met_pt>200; Disable=True
 

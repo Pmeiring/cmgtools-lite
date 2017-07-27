@@ -1,32 +1,36 @@
 #---- SUSY signal points:
 
-Higgs_300_120+:Higgsino_300_120:(16.7*16991/300000)/2: triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0) ;FillColor=ROOT.kOrange,   Label="Hig(120-300)", isFastSim 
-# Higgs_300_80+:Higgsino_300_80:(76.2*14684/300000)/2: triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0) ;FillColor=ROOT.kRed,   Label="Hig(80-300)", isFastSim
+
+##### from privately points
+# Higgs_300_120+:Higgsino_300_120:(16.7*16991/300000)/2: triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0) ;FillColor=ROOT.kOrange,   Label="Hig(120-300)", isFastSim 
+# Higgs_300_80+:Higgsino_300_80:(76.2*14684/300000)/2: triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0) ;FillColor=ROOT.kRed,   Label="Hig(80-300)", isFastSim 
 # Higgs_500_120+:Higgsino_500_120:(15.8*12485/300000)/2: triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0) ;FillColor=ROOT.kOrange-3,   Label="Hig(120-500)", isFastSim 
 # Higgs_500_80+:Higgsino_500_80:(70.9*11481/300000)/2: triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0) ;FillColor=ROOT.kPink+6,   Label="Hig(80-500)", isFastSim
 
 
+##### from old Scan
 # TChiWZ_150_dM7+: SMS_TChiWZ :  0.001*0.1*5180.86*(22297188/97372) : triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId != 0 && LepGood2_mcMatchId != 0 && GenSusyMNeutralino < 144 && GenSusyMNeutralino > 142 && GenSusyMChargino < 151 && GenSusyMChargino > 149); FillColor=ROOT.kOrange-3, Label="TChi150/7", isFastSim
-
 # TChiWZ_150_dM20+: SMS_TChiWZ :  0.001*0.1*5180.86*(22297188/92017) : triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId != 0 && LepGood2_mcMatchId != 0 && GenSusyMNeutralino < 131 && GenSusyMNeutralino > 129 && GenSusyMChargino < 151 && GenSusyMChargino > 149); FillColor=ROOT.kOrange, Label="TChi150/20", isFastSim
-
 # T2tt_350_dM20+ : T2ttDiLep : 3.787*(0.332)*(0.332)*(6726004/((0.332)*(0.332)*730000)): triggerSF_SOS(met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId != 0 && GenSusyMStop < 351 && GenSusyMStop > 349 && GenSusyMNeutralino < 332 && GenSusyMNeutralino > 328); FillColor=ROOT.kRed, Label="T2tt350/20", isFastSim
 
 
+# ##### from new Scan
 
-##### from new Scan
+# #TChiWZ_150_dM7+ : TChiWZ_150_143  : 0.001*0.1*5180.86 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kOrange-3, Label="TChi150/7", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
 
-TChiWZ_150_dM7+ : TChiWZ_150_143  : 0.001*0.1*5180.86 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kOrange-3, Label="TChi150/7", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+# TChiWZ_150_dM20+ : TChiWZ_150_130  : 0.001*0.1*5180.86 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kOrange, Label="TChi150/20", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
 
-TChiWZ_150_dM20+ : TChiWZ_150_130  : 0.001*0.1*5180.86 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kOrange, Label="TChi150/20", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
 
-## ---- point from Higgsino -----
-TChiWZ_120_dM20_Higgsino+ : TN2N1_120_80 : 0.001*0.1*3276.91 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1 && Jet_mcPt<8)==0) ;FillColor=ROOT.kRed, Label=" TN2N1_120_80" , Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+TChiWZ_225_dM20+ : TChiWZ_225_205  : 0.001*0.1*1165.0 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kOrange, Label="TChi150/20", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
 
-## -----------------------------
 
-T2tt_350_dM20+ : T2tt_350_330 : 0.105*3.78661 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kRed, Label="T2tt350/20", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+# ## ---- point from Higgsino -----
+# TChiWZ_120_dM20_HiggsinoN2N1+ : TN2N1_120_80 : 0.001*0.1*3276.91 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1 && Jet_mcPt<8)==0) ;FillColor=ROOT.kRed, Label=" TN2N1_120_80" , Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
 
+# TChiWZ_120_dM20_HiggsinoN2C1+ : TN2C1_120_80 : 0.001*0.1*3764.88 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1 &&Jet_mcPt<8)==0); FillColor=ROOT.kOrange-3, Label="TN2C1_120_80", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
+# ## -----------------------------
+
+# T2tt_350_dM20+ : T2tt_350_330 : 0.105*3.78661 : bTagWeightFS*(triggereff_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0)/triggerSF_SOS(LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,met_pt,metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,met_pt,met_phi),0))*(LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && Sum$(abs(Jet_eta)<2.5 && Jet_chHEF<0.1  && Jet_mcPt<8)==0) ; FillColor=ROOT.kRed, Label="T2tt350/20", Friends=[('sf/t'\,'{P}/0_eventBTagWeightFS_v1/evVarFriend_{cname}.root')], isFastSim
 
 
 # ---- TTbar 
@@ -68,6 +72,8 @@ DYJets     : DYJetsToLL_M50_HT2500toInf :  xsec: ScaleFactorDY*(LepGood1_mcMatch
 # WWZZ 	: ZZTo2L2Q: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0  ;  Label="WWZZ", FillColor=ROOT.kAzure-4
 # WWZZ  : ZZTo4L: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0  ;  Label="WWZZ", FillColor=ROOT.kAzure-4
 
+
+
 #VV  : WJetsToLNu_HT70to100 : xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="VV", FillColor=ROOT.kViolet-4, NormSystematic=0.5
 #VV  : WJetsToLNu_HT100to200_ext : xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="VV", FillColor=ROOT.kViolet-4, NormSystematic=0.5
 #VV  : WJetsToLNu_HT200to400_ext+WJetsToLNu_HT200to400_ext2 : xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="VV", FillColor=ROOT.kViolet-4, NormSystematic=0.5
@@ -82,7 +88,6 @@ VV   : WZTo3LNu: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="V
 VV   : VVTo2L2Nu+VVTo2L2Nu_ext: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0  ; Label="VV", FillColor=ROOT.kViolet-4, NormSystematic=0.5
 VV   : ZZTo2L2Q: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0  ; Label="VV", FillColor=ROOT.kViolet-4, NormSystematic=0.5
 VV   : ZZTo4L: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0  ; Label="VV", FillColor=ROOT.kViolet-4, NormSystematic=0.5
-
 
 
 
@@ -112,7 +117,6 @@ fakes_data: MET_Run2016H_03Feb2017_ver2_v1_runs_281085_284035 ; FakeRate="susy-s
 fakes_data: MET_Run2016H_03Feb2017_ver3_v1_runs_284036_284044 ; FakeRate="susy-sos/fakeRate-2los-frdata-qcd-prdata.txt", Label="Fakes", FillColor=ROOT.kGray, NormSystematic=0.4
 
 
-
 ##### Additional: negligible contribution
 # # ---- External Conversions:
 # Convs  : TTGJets : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
@@ -120,16 +124,18 @@ fakes_data: MET_Run2016H_03Feb2017_ver3_v1_runs_284036_284044 ; FakeRate="susy-s
 # Convs  : ZGTo2LG_ext : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 # Convs  : TGJets : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 #---- Rare:
-Rares : TTWToLNu_ext :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5
-Rares : TTZToLLNuNu :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5
-Rares : TTZToLLNuNu_m1to10 : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5
-Rares : TTJets_SingleLeptonFromT : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="", FillColor=ROOT.kMagenta+2, NormSystematic=0.5
-Rares : TTJets_SingleLeptonFromTbar : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5
-#Rares : TTHnobb :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5 #Still missing
-Rares : WZZ :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5
-Rares : WWZ :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5
-Rares : ZZZ :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5 
-Rares : WWW :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2, NormSystematic=0.5 
-#Rares : WpWpJJ : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kOrange-3, NormSystematic=0.5
-#Rares : WWDouble : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kOrange-3, NormSystematic=0.5
+Rares : TTWToLNu_ext :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5
+Rares : TTZToLLNuNu :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5
+Rares : TTZToLLNuNu_m1to10 : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5
+Rares : TTJets_SingleLeptonFromT : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5
+Rares : TTJets_SingleLeptonFromTbar : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5
+#Rares : TTHnobb :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5 #Still missing
+Rares : WZZ :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5
+Rares : WWZ :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5
+Rares : ZZZ :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5 
+Rares : WWW :  xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0; Label="Rares", FillColor=ROOT.kMagenta+2#, NormSystematic=0.5 
+#Rares : WpWpJJ : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kOrange-3#, NormSystematic=0.5
+#Rares : WWDouble : xsec : LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="Rares", FillColor=ROOT.kOrange-3#, NormSystematic=0.5
+
+
 

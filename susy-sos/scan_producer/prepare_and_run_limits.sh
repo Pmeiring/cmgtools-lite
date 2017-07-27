@@ -5,14 +5,16 @@ eval `scramv1 runtime -sh`
 
 # Set here output dirs and types of limits 
 type="_unblind" ## type of limits you want to extract
-## can be: '_unblind' (observed) or _ddbk (expected)
-DIR=observed_limit_scan_final_moriond17_TN2N1_v1/ #onepoint_Stop_forPostFit_final/ #observed_limit_scan_final_moriond17_T2tt/  # local dir where all the temporary cards and histograms will be saved
+## can be: '_unblind' (observed) or _ddbkg (expected)
+DIR=fullsyst_2los_onepoint_unblind/ #onepoint_Stop_forPostFit_final/ #observed_limit_scan_final_moriond17_T2tt/  # local dir where all the temporary cards and histograms will be saved
 version=result_v0  # if you want a different versioning inside the $DIR
-WWWDIR=/afs/cern.ch/user/b/botta/www/Susy/2016/Moriond17/trees_SOS_010217/ ## Directory where you want to save the final results (combined final limits)
+WWWDIR=/afs/cern.ch/user/b/botta/www/2017/SoftAndDisplaced/trees_SOS_010217/260717 ## Directory where you want to save the final results (combined final limits)
 signal="ewk" #"stop" #"ewk"
-signalName="TChiWZ_150_dM7" #"T2tt_350_dM20" #"TChiWZ_150_dM20"   #"T2tt_350_dM20" 
+signalName="sig_TChiWZ_225_205"  #"TChiWZ_150_dM7" #"T2tt_350_dM20" #"TChiWZ_150_dM20"   #"T2tt_350_dM20" (as in mca)
 echo "Producing cards from sos_plot.py"
 
+
+#### 2l OS Signal Regions
 
 python susy-sos/sos_plots.py $DIR 2los_SR_bins_notriggers_${signal}_met125_mm$type
 python susy-sos/sos_plots.py $DIR 2los_SR_bins_notriggers_${signal}_met125_mm$type | sh                                                                  
@@ -20,6 +22,8 @@ python susy-sos/sos_plots.py $DIR 2los_SR_bins_notriggers_${signal}_met200$type
 python susy-sos/sos_plots.py $DIR 2los_SR_bins_notriggers_${signal}_met200$type | sh 
 python susy-sos/sos_plots.py $DIR 2los_SR_bins_notriggers_${signal}_met300$type
 python susy-sos/sos_plots.py $DIR 2los_SR_bins_notriggers_${signal}_met300$type | sh                                                                      
+
+# #### 2l OS Background region
 
 python susy-sos/sos_plots.py $DIR 2los_CR_DY_vars_data_${signal}_met125$type
 python susy-sos/sos_plots.py $DIR 2los_CR_DY_vars_data_${signal}_met125$type  | sh      
@@ -32,6 +36,20 @@ python susy-sos/sos_plots.py $DIR 2los_CR_TT_vars_dataMET_${signal}_met200$type 
 
 python susy-sos/sos_plots.py $DIR 2los_CR_SS_bins_notriggers_${signal}_met200$type 
 python susy-sos/sos_plots.py $DIR 2los_CR_SS_bins_notriggers_${signal}_met200$type | sh
+
+
+##### 3l Signal region
+
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met75_lowPt3l$type
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met75_lowPt3l$type | sh
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met75_highPt3l$type 
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met75_highPt3l$type | sh
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met125_lowPt3l$type
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met125_lowPt3l$type | sh
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met125_highPt3l$type
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met125_highPt3l$type | sh
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met200$type
+# python susy-sos/sos_plots.py $DIR 3l_SR_bins_notriggers_${signal}_met200$type | sh 
 
 
 ################## RUNNING COMBINE #############################################
@@ -91,7 +109,20 @@ mkdir $WWWDIR/$DIR
 ## combining
 echo "Combining datacards..."
 
+### 2lOS with CR
 combineCards.py SR_MET125=${signalName}/2los_SR_bins_notriggers_${signal}_met125_mm$type.card.txt SR_MET200=${signalName}/2los_SR_bins_notriggers_${signal}_met200$type.card.txt SR_MET300=${signalName}/2los_SR_bins_notriggers_${signal}_met300$type.card.txt DYCR_MET125=${signalName}/2los_CR_DY_vars_data_${signal}_met125$type.card.txt DYCR_MET200=${signalName}/2los_CR_DY_vars_data_${signal}_met200$type.card.txt TTCR_MET125=${signalName}/2los_CR_TT_vars_dataMET_${signal}_met125$type.card.txt  TTCR_MET200=${signalName}/2los_CR_TT_vars_dataMET_${signal}_met200$type.card.txt SSCR_MET200=${signalName}/2los_CR_SS_bins_notriggers_${signal}_met200$type.card.txt > ${signalName}/2los_SR_bins_notriggers_${signal}_comb.card.txt
+
+
+### 2lOS without CR
+#combineCards.py SR_MET125=${signalName}/2los_SR_bins_notriggers_${signal}_met125_mm$type.card.txt SR_MET200=${signalName}/2los_SR_bins_notriggers_${signal}_met200$type.card.txt SR_MET300=${signalName}/2los_SR_bins_notriggers_${signal}_met300$type.card.txt > ${signalName}/2los_SR_bins_notriggers_${signal}_comb.card.txt
+
+
+### 2lOS without CR + 3l
+#combineCards.py SR_MET125=${signalName}/2los_SR_bins_notriggers_${signal}_met125_mm$type.card.txt SR_MET200=${signalName}/2los_SR_bins_notriggers_${signal}_met200$type.card.txt SR_MET300=${signalName}/2los_SR_bins_notriggers_${signal}_met300$type.card.txt SR_MET75_3lLow=${signalName}/3l_SR_bins_notriggers_${signal}_met75_lowPt3l$type.card.txt SR_MET75_3lHigh=${signalName}/3l_SR_bins_notriggers_${signal}_met75_highPt3l$type.card.txt SR_MET125_3lLow=${signalName}/3l_SR_bins_notriggers_${signal}_met125_lowPt3l$type.card.txt SR_MET125_3lHigh=${signalName}/3l_SR_bins_notriggers_${signal}_met125_highPt3l$type.card.txt SR_MET200_3l=${signalName}/3l_SR_bins_notriggers_${signal}_met200$type.card.txt > ${signalName}/2los_SR_bins_notriggers_${signal}_comb.card.txt
+
+
+### 2lOS with CR + 3l
+#combineCards.py SR_MET125=${signalName}/2los_SR_bins_notriggers_${signal}_met125_mm$type.card.txt SR_MET200=${signalName}/2los_SR_bins_notriggers_${signal}_met200$type.card.txt SR_MET300=${signalName}/2los_SR_bins_notriggers_${signal}_met300$type.card.txt DYCR_MET125=${signalName}/2los_CR_DY_vars_data_${signal}_met125$type.card.txt DYCR_MET200=${signalName}/2los_CR_DY_vars_data_${signal}_met200$type.card.txt TTCR_MET125=${signalName}/2los_CR_TT_vars_dataMET_${signal}_met125$type.card.txt  TTCR_MET200=${signalName}/2los_CR_TT_vars_dataMET_${signal}_met200$type.card.txt SSCR_MET200=${signalName}/2los_CR_SS_bins_notriggers_${signal}_met200$type.card.txt SR_MET75_3lLow=${signalName}/3l_SR_bins_notriggers_${signal}_met75_lowPt3l$type.card.txt SR_MET75_3lHigh=${signalName}/3l_SR_bins_notriggers_${signal}_met75_highPt3l$type.card.txt SR_MET125_3lLow=${signalName}/3l_SR_bins_notriggers_${signal}_met125_lowPt3l$type.card.txt SR_MET125_3lHigh=${signalName}/3l_SR_bins_notriggers_${signal}_met125_highPt3l$type.card.txt SR_MET200_3l=${signalName}/3l_SR_bins_notriggers_${signal}_met200$type.card.txt > ${signalName}/2los_SR_bins_notriggers_${signal}_comb.card.txt
 
 
 #echo "Linking the associated root file.."
