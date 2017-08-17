@@ -36,6 +36,9 @@ bveto : nBJetLoose25 == 0
 
 
 # some cuts that are off by default but can be turned on with -E
+triggerTripleMu: $FASTSIM{1} $DATA{HLT_SOSTripleMu} $MC{HLT_SOSTripleMu}; Disable=True
+triggerDoubleMuMET: $FASTSIM{1} $DATA{HLT_SOSDoubleMuLowMET} $MC{HLT_SOSDoubleMuLowMET}; Disable=True
+triggerMET: $FASTSIM{1} $DATA{HLT_SOSHighMET} $MC{HLT_SOSHighMET}; Disable=True
 lowpt3l : pt3l<20 ; Disable=True
 highpt3l: pt3l >20 ; Disable=True
 FFLooseIP: ((abs(LepGood1_pdgId)==13 && LepGood1_ICHEPsoftMuonId || (abs(LepGood1_pdgId)==11 && eleWPVVL(LepGood1_pt,LepGood1_etaSc,LepGood1_mvaIdSpring15) && LepGood1_lostHits==0 && LepGood1_convVeto))  && LepGood1_jetBTagCSV<0.46 && (LepGood1_relIso03*LepGood1_pt<20+300/LepGood1_pt)) && \
@@ -46,7 +49,7 @@ TTLooseIP: ((0==1)||(((abs(LepGood1_pdgId)==13 || eleWPT(LepGood1_pt,LepGood1_et
     ((0==1)||(((abs(LepGood3_pdgId)==13 || eleWPT(LepGood3_pt,LepGood3_etaSc,LepGood3_mvaIdSpring15))) && LepGood3_relIso03<0.5 && LepGood3_relIso03*LepGood3_pt<5. && LepGood3_sip3d<2)); Disable=True
 #### cut for medium MET
 mml: ((fabs(LepGood1_pdgId) == fabs(LepGood2_pdgId)) && (LepGood1_pdgId*LepGood2_pdgId < 0) && (fabs(LepGood1_pdgId) == 13 && fabs(LepGood2_pdgId) == 13) ) || ((fabs(LepGood1_pdgId) == fabs(LepGood3_pdgId)) && (LepGood1_pdgId*LepGood3_pdgId < 0) && (fabs(LepGood1_pdgId) == 13 && fabs(LepGood3_pdgId) == 13)) || ((fabs(LepGood3_pdgId) == fabs(LepGood2_pdgId)) && (LepGood3_pdgId*LepGood2_pdgId < 0) && (fabs(LepGood2_pdgId) == 13 && fabs(LepGood3_pdgId) == 13) ); Disable=True
-mediumMET: met_pt>125 && met_pt<200; Disable=True
+mediumMET: met_pt>125 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, met_pt, met_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId))>125 && met_pt<200; Disable=True
 #### cut for high MET
-highMET: met_pt>200; Disable=True
+highMET: met_pt>200 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, met_pt, met_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId,LepGood3_pdgId))>200; Disable=True
 
