@@ -179,7 +179,8 @@ if __name__ == '__main__':
         if '_ddbkg' in torun: 
             if(dowhat != "limits"):x = add(x,"--noStackSig --showIndivSigs ") #--showMCError
             x = x.replace('mca-3l-test2-mc.txt','mca-3l-test2-mc-frmc.txt') #Moriond trees
-            PLOTandCUTS="susy-sos/mca-3l-test2-mc-frmc.txt susy-sos/3l_tight.txt" #Moriond trees   
+            PLOTandCUTS="susy-sos/mca-3l-test2-mc-frmc_FastSimTChiWZ.txt susy-sos/3l_tight.txt" #Moriond trees scan  
+            #PLOTandCUTS="susy-sos/mca-3l-test2-mc-frmc.txt susy-sos/3l_tight.txt" #Moriond trees   
         if '_met75' in torun: 
             x = x.replace('-l 35.9','-l 16.2') 
             if '_lowPt3l' in torun:

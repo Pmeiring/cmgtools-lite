@@ -42,7 +42,7 @@ int get_bin_recoToLoose(float pt){
   else if(pt> 12.0 && pt<=18.0) return 9;
   else if(pt>18.) return 10;
   else {
-    cout << "Error in get_bin_recoToLoose" << endl;
+    //cout << "Error in get_bin_recoToLoose" << endl;
     assert(0);
   }
 }
@@ -54,7 +54,7 @@ int get_bin_looseToTight_mu(float pt){
   else if(pt>15.0  && pt<=20.0) return 3;
   else if(pt>20.0) return 4;
   else {
-    cout << "Error in get_bin_looseToTight_mu" << endl;
+    //cout << "Error in get_bin_looseToTight_mu" << endl;
     assert(0);
   }
 }
@@ -66,7 +66,7 @@ int get_bin_looseToTight_el(float pt){
   else if(pt>20.0  && pt<=25.0) return 3;
   else if(pt>25.0) return 4;
   else {
-    cout << "Error in get_bin_looseToTight_el" << endl;
+    //cout << "Error in get_bin_looseToTight_el" << endl;
     assert(0);
   }
 }
@@ -354,8 +354,8 @@ void init_triggerSF_SOS(){
     _histo_l1_mc_DoubleMu_MET = (TH2F*)(_file_triggerSF->Get("hist2dnum_MC_L1Mu__HLT_DoubleMu3_PFMET50pt"));
     _histo_l2_mc_DoubleMu_MET = (TH2F*)(_file_triggerSF->Get("hist2dnum_MC_L2Mu__HLT_DoubleMu3_PFMET50pt"));
     _histo_l3_mc_DoubleMu_MET = (TH2F*)(_file_triggerSF->Get("hist2dnum_MC_L3Mu__HLT_DoubleMu3_PFMET50pt"));
-    _histo_l2_mc_TripleMu_12_10_5= (TH2F*)(_file_triggerSF->Get("hist2dnum_HLT_Mu5__HLT_TripleMu_12_10_5pt"));
-    _histo_l3_mc_TripleMu_5_3_3= (TH2F*)(_file_triggerSF->Get("hist2dnum_HLT_Mu3__HLT_TripleMu_5_3_3pt"));
+    _histo_l2_mc_TripleMu_12_10_5= (TH2F*)(_file_triggerSF->Get("hist2dnum_MC_HLT_Mu5__HLT_TripleMu_12_10_5pt"));
+    _histo_l3_mc_TripleMu_5_3_3= (TH2F*)(_file_triggerSF->Get("hist2dnum_MC_HLT_Mu3__HLT_TripleMu_5_3_3pt"));
   }   
 
 
@@ -459,7 +459,7 @@ float triggerSF_3l(float _pt1, float _eta1, float _pt2, float _eta2, float _pt3,
     if (choose_leptons == 23){
       return triggerSF_SOS(_pt2, _eta2, _pt3, _eta3, _met, _met_corr);
     }
-    if (choose_leptons ==123){
+    if (choose_leptons == 123){
       if (!_file_triggerSF) init_triggerSF_SOS();
 
       //// MET
@@ -476,8 +476,9 @@ float triggerSF_3l(float _pt1, float _eta1, float _pt2, float _eta2, float _pt3,
       float mu_data = 1.0 ;
       float mu_mc = 1.0;
       float met_mc = 1.0;
-      float dca_data= 0.906; // DCA SF (inclusive) 
-      return (mu_data*dca_data*met_data)/(mu_mc*met_mc);
+      float dca_data= 0.906; // DCA SF (inclusive)
+      float dca_mc= 0.962; // DCA SF (inclusive) 
+      return (mu_data*dca_data*met_data)/(mu_mc*dca_mc*met_mc);
     }
     return 1; // to be checked!
     //cout << "Error in triggerSF_3l " << choose_leptons << endl;
@@ -490,20 +491,25 @@ float triggerSF_3l(float _pt1, float _eta1, float _pt2, float _eta2, float _pt3,
     float eta1 = std::min(float(2.399),abs(_eta1));
     float eta2 = std::min(float(2.399),abs(_eta2));
     float eta3 = std::min(float(2.399),abs(_eta3));
-  
+    float pt1_temp= std::max(float(5.0),_pt1); // protection as we don't have efficiencies below 5 GeV
+    float pt2_temp= std::max(float(5.0),_pt2);
+    float pt3_temp= std::max(float(5.0),_pt3);
+    float pt1= std::min(float(100.0),pt1_temp); // protection as we don't have efficiencies below 5 GeV                                                                                                           
+    float pt2= std::min(float(100.0),pt2_temp);
+    float pt3= std::min(float(100.0),pt3_temp);
 
     ///////first leg muon
-    float mu1_l1_data= _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(_pt1)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
-    float mu1_l2_data= _histo_l2_data_TripleMu_12_10_5->GetBinContent(((_histo_l2_data_TripleMu_12_10_5->GetXaxis())->FindBin(_pt1)),((_histo_l2_data_TripleMu_12_10_5->GetYaxis())->FindBin(eta1)));
+    float mu1_l1_data= _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(pt1)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
+    float mu1_l2_data= _histo_l2_data_TripleMu_12_10_5->GetBinContent(((_histo_l2_data_TripleMu_12_10_5->GetXaxis())->FindBin(pt1)),((_histo_l2_data_TripleMu_12_10_5->GetYaxis())->FindBin(eta1)));
 
 
    //////// second leg muon
-   float mu2_l1_data= _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(_pt2)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta2)));
-   float mu2_l3_data = _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(_pt2)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta2)));
+   float mu2_l1_data= _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(pt2)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta2)));
+   float mu2_l3_data = _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(pt2)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta2)));
 
    //////// third leg muon
-   float mu3_l1_data = _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(_pt3)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta3)));
-   float mu3_l3_data = _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(_pt3)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta3)));
+   float mu3_l1_data = _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(pt3)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta3)));
+   float mu3_l3_data = _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(pt3)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta3)));
  
    /////// DZ
    float dz_data= 0.985; // DZ SF (inclusive) 
@@ -511,23 +517,23 @@ float triggerSF_3l(float _pt1, float _eta1, float _pt2, float _eta2, float _pt3,
    float mass_data= 0.996; // Mass SF (inclusive) 
   
    //////// first leg muon
-   float mu1_l1_mc= _histo_l1_mc_DoubleMu_MET->GetBinContent(((_histo_l1_mc_DoubleMu_MET->GetXaxis())->FindBin(_pt1)),((_histo_l1_mc_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
-   float mu1_l2_mc= _histo_l2_mc_TripleMu_12_10_5->GetBinContent(((_histo_l2_mc_TripleMu_12_10_5->GetXaxis())->FindBin(_pt1)),((_histo_l2_mc_TripleMu_12_10_5->GetYaxis())->FindBin(eta1)));
+   float mu1_l1_mc= _histo_l1_mc_DoubleMu_MET->GetBinContent(((_histo_l1_mc_DoubleMu_MET->GetXaxis())->FindBin(pt1)),((_histo_l1_mc_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
+   float mu1_l2_mc= _histo_l2_mc_TripleMu_12_10_5->GetBinContent(((_histo_l2_mc_TripleMu_12_10_5->GetXaxis())->FindBin(pt1)),((_histo_l2_mc_TripleMu_12_10_5->GetYaxis())->FindBin(eta1)));
 
    //////// second leg muon
-   float mu2_l1_mc= _histo_l1_mc_DoubleMu_MET->GetBinContent(((_histo_l1_mc_DoubleMu_MET->GetXaxis())->FindBin(_pt2)),((_histo_l1_mc_DoubleMu_MET->GetYaxis())->FindBin(eta2)));
-   float mu2_l3_mc = _histo_l3_mc_TripleMu_5_3_3->GetBinContent(((_histo_l3_mc_TripleMu_5_3_3->GetXaxis())->FindBin(_pt2)),((_histo_l3_mc_TripleMu_5_3_3->GetYaxis())->FindBin(eta2)));
+   float mu2_l1_mc= _histo_l1_mc_DoubleMu_MET->GetBinContent(((_histo_l1_mc_DoubleMu_MET->GetXaxis())->FindBin(pt2)),((_histo_l1_mc_DoubleMu_MET->GetYaxis())->FindBin(eta2)));
+   float mu2_l3_mc = _histo_l3_mc_TripleMu_5_3_3->GetBinContent(((_histo_l3_mc_TripleMu_5_3_3->GetXaxis())->FindBin(pt2)),((_histo_l3_mc_TripleMu_5_3_3->GetYaxis())->FindBin(eta2)));
 
    //////// third leg muon
-   float mu3_l1_mc = _histo_l1_mc_DoubleMu_MET->GetBinContent(((_histo_l1_mc_DoubleMu_MET->GetXaxis())->FindBin(_pt3)),((_histo_l1_mc_DoubleMu_MET->GetYaxis())->FindBin(eta3)));
-   float mu3_l3_mc = _histo_l3_mc_TripleMu_5_3_3->GetBinContent(((_histo_l3_mc_TripleMu_5_3_3->GetXaxis())->FindBin(_pt3)),((_histo_l3_mc_TripleMu_5_3_3->GetYaxis())->FindBin(eta3)));
+   float mu3_l1_mc = _histo_l1_mc_DoubleMu_MET->GetBinContent(((_histo_l1_mc_DoubleMu_MET->GetXaxis())->FindBin(pt3)),((_histo_l1_mc_DoubleMu_MET->GetYaxis())->FindBin(eta3)));
+   float mu3_l3_mc = _histo_l3_mc_TripleMu_5_3_3->GetBinContent(((_histo_l3_mc_TripleMu_5_3_3->GetXaxis())->FindBin(pt3)),((_histo_l3_mc_TripleMu_5_3_3->GetYaxis())->FindBin(eta3)));
  
       
    float res;
    if(mu1_l1_mc*mu2_l1_mc*mu3_l1_mc*mu1_l2_mc*mu2_l3_mc*mu3_l3_mc==0) res=1.0;  // was 0!
    else res=(((mu1_l1_data*mu2_l1_data*mu3_l1_data*mu1_l2_data*mu2_l3_data*mu3_l3_data)*((7.401/(7.401+8.856))+((8.856/(8.856+7.401))*dz_data*mass_data)))/(mu1_l1_mc*mu2_l1_mc*mu3_l1_mc*mu1_l2_mc*mu2_l3_mc*mu3_l3_mc));
    
-   if (res<=0) cout << "*** Warning we have a negative (or zero) Trigger efficiency ***"<< endl;
+   if (res<=0) cout << "*** Warning we have a negative (or zero) Trigger SF ***"<< endl;
    //  if(var>0) return res+0.05; // +5%
    //  if(var<0) return res-0.05; // -5%
   return res;
@@ -551,6 +557,7 @@ float triggereff_SOS(float _pt1, float _eta1, float _pt2, float _eta2, float _me
 
   float eta1 = std::min(float(2.399),abs(_eta1));
   float eta2 = std::min(float(2.399),abs(_eta2));
+
   ///////// first leg muon
   float mu1_l1_data= _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(_pt1)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
   float mu1_l2_data= _histo_l2_data_DoubleMu_MET->GetBinContent(((_histo_l2_data_DoubleMu_MET->GetXaxis())->FindBin(_pt1)),((_histo_l2_data_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
@@ -597,8 +604,8 @@ float triggereff_3l(float _pt1, float _eta1, float _pt2, float _eta2, float _pt3
     }
     if (choose_leptons==13) {
       return triggereff_SOS( _pt1, _eta1, _pt3,  _eta3, _met, _met_corr, 0);              
-    }                                                                                                                                                                          
-    if (choose_leptons==333){
+    }                                                                                                                                    
+    if (choose_leptons==123){
       if (!_file_triggerSF) init_triggerSF_SOS();
       
       //// MET
@@ -614,12 +621,12 @@ float triggereff_3l(float _pt1, float _eta1, float _pt2, float _eta2, float _pt3
       else met_data=met_data_num/met_data_denom;
       
       float mu_data = 1.0 ;
-      float mu_mc = 1.0;
-      float met_mc = 1.0;
+      //float mu_mc = 1.0;
+      //float met_mc = 1.0;
       float dca_data= 0.906; // DCA SF (inclusive) 
       
       //float res;
-      return (mu_data*dca_data*met_data)/(mu_mc*met_mc);
+      return (mu_data*dca_data*met_data);
     } 
     return 1; // to be checked!
     //cout << "Error in triggereff_3l" << endl;
@@ -633,25 +640,41 @@ float triggereff_3l(float _pt1, float _eta1, float _pt2, float _eta2, float _pt3
   float eta1 = std::min(float(2.399),abs(_eta1));
   float eta2 = std::min(float(2.399),abs(_eta2));
   float eta3 = std::min(float(2.399),abs(_eta3));
+  float pt1_temp= std::max(float(5.0),_pt1); // protection as we don't have efficiencies below 5 GeV                                                                                                             
+  float pt2_temp= std::max(float(5.0),_pt2);
+  float pt3_temp= std::max(float(5.0),_pt3);
+  float pt1= std::min(float(100.0),pt1_temp); // protection as we don't have efficiencies below 5 GeV                                                                                                           
+  float pt2= std::min(float(100.0),pt2_temp);
+  float pt3= std::min(float(100.0),pt3_temp);
+
   ///////// first leg muon
-  float mu1_l1_data= _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(_pt1)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
-  float mu1_l2_data= _histo_l2_data_TripleMu_12_10_5->GetBinContent(((_histo_l2_data_TripleMu_12_10_5->GetXaxis())->FindBin(_pt1)),((_histo_l2_data_TripleMu_12_10_5->GetYaxis())->FindBin(eta1)));  
+  float mu1_l1_data= _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(pt1)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta1)));
+  float mu1_l2_data= _histo_l2_data_TripleMu_12_10_5->GetBinContent(((_histo_l2_data_TripleMu_12_10_5->GetXaxis())->FindBin(pt1)),((_histo_l2_data_TripleMu_12_10_5->GetYaxis())->FindBin(eta1)));  
   //////// second leg muon
-  float mu2_l1_data = _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(_pt2)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta2)));
-  float mu2_l3_data = _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(_pt2)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta2)));
+  float mu2_l1_data = _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(pt2)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta2)));
+  float mu2_l3_data = _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(pt2)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta2)));
   //////// third leg muon
-  float mu3_l1_data = _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(_pt3)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta3)));
-  float mu3_l3_data= _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(_pt3)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta3)));
+  float mu3_l1_data = _histo_l1_data_DoubleMu_MET->GetBinContent(((_histo_l1_data_DoubleMu_MET->GetXaxis())->FindBin(pt3)),((_histo_l1_data_DoubleMu_MET->GetYaxis())->FindBin(eta3)));
+  float mu3_l3_data= _histo_l3_data_TripleMu_5_3_3->GetBinContent(((_histo_l3_data_TripleMu_5_3_3->GetXaxis())->FindBin(pt3)),((_histo_l3_data_TripleMu_5_3_3->GetYaxis())->FindBin(eta3)));
  
   /////// DZ
   float dz_data= 0.985; // DZ SF (inclusive) 
   /////// DCA
   float mass_data= 0.996; // Mass SF (inclusive) 
  
-  float res= mu1_l1_data*mu2_l1_data*mu3_l1_data*mu1_l2_data*mu2_l3_data*mu3_l3_data*dz_data*mass_data*((7.401/(7.401+8.856))+((8.856/(8.856+7.401))*dz_data*mass_data));
+  float res= mu1_l1_data*mu2_l1_data*mu3_l1_data*mu1_l2_data*mu2_l3_data*mu3_l3_data*((7.401/(7.401+8.856))+((8.856/(8.856+7.401))*dz_data*mass_data));
+  //if(_met>=75.0 && _met<125.0 && pt1<30 && pt2<30 && pt3<30 && pt1>5 && pt2>3.5 && pt3>3.5 && choose_leptons==123) {
+  //    cout <<"The total efficiency is : " << res <<endl;
+  //    cout << "pT1/pT2/pT3 = " << pt1 <<"/"<< pt2 <<"/"<< pt3<< endl;  
+  //    cout << "eta1/eta2/eta3 = " << eta1 <<"/"<< eta2 <<"/"<< eta3<< endl;
+  //    cout << "mu1_l2_data/mu2_l3_data/mu3_l3_data = " << mu1_l2_data <<"/"<< mu2_l3_data <<"/"<< mu3_l3_data<< endl;
+  //    cout << "the rest = " << ((7.401/(7.401+8.856))+((8.856/(8.856+7.401))*dz_data*mass_data))<< endl;
+  //    cout << "L1 values= " << mu1_l1_data*mu2_l1_data*mu3_l1_data <<endl;  
+  //    cout << "================" << endl; 
+  //  }
   assert (res>0 && "*** Warning we have a negative (or zero) Trigger efficiency ***");
-//  if(var>0) return res+0.05; // +5%
-//  if(var<0) return res-0.05; // -5%
+  //  if(var>0) return res+0.05; // +5%
+  //  if(var<0) return res-0.05; // -5%
   return res;
   } 
   return 1; // to be checked!
