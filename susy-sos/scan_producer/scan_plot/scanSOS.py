@@ -72,6 +72,8 @@ class Scan(object):
             self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
             self.limitfile = 'limits/scan_TChiWZ_Moriond_FINAL.root'#'limits/scan_TChiWZ_Moriond_approval.root'#'limits/scan_TChiWZ_Moriond_v1.root'#'limits/scan_TChiWZ_noPU_xsTH_scale.root'#'scan_TChiWZ_v2.root'
 
+ 
+
     def loadXsecs(self):
         if not self.xsecFile:
             estring = 'ERROR: no xsec file specified for scan {name}!!!\nExiting...'.format(name=self.name)
@@ -216,7 +218,7 @@ class Scan(object):
                 xs = self.xsec_histo.GetBinContent( self.xsec_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i))))
                 if self.name == 'T2tt':
                    xs=xs*10000
-                if self.name == 'TChiNeuWZ':
+                if (self.name == 'TChiNeuWZ' or self.name == 'TChiWZ_2los3l'):
                    xs=xs*10
                    '''print "this ",xs
                    print " ",j
@@ -362,10 +364,11 @@ class Scan(object):
         self.saveULGraphsInFile()
         print '... done making pretty plots'
 
-scan = Scan('TChiNeuWZ')
-scan.makeExclusion()
-scan.makePrettyPlots()
+# scan = Scan('TChiNeuWZ')
+# scan.makeExclusion()
+# scan.makePrettyPlots()
 
-#scan = Scan('T2tt')
-#scan.makeExclusion()
-#scan.makePrettyPlots()
+# scan = Scan('T2tt')
+# scan.makeExclusion()
+# scan.makePrettyPlots()
+

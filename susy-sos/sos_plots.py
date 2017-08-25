@@ -18,7 +18,7 @@ dowhat = "plots"
 #SYST="susy-sos/syst/susy_sos_dummy.txt" ## dmmy for SMS combination test
 #SYST="susy-sos/syst/susy_sos_dummy2.txt" ## dummy for SMS combination test 
 #SYST="susy-sos/syst/susy_sos_syst_test.txt" ##For freezing - few banchmark points
-SYST="susy-sos/syst/susy_sos_syst_test2_scan.txt" ##For scan
+SYST="susy-sos/syst/susy_sos3l_syst_test2_scan.txt" ##For scan
 #SYST="susy-sos/syst/susy_sos_syst_scan_combination.txt" ## For combination (RC change!)
 PLOTandCUTS="susy-sos/mca-2los-test2-mc.txt susy-sos/2los_tight.txt" ## check later where is replaced. You need to specify there the mca, since they will not be replaced as for "plots" (due to different input order of combineCards)
 
@@ -183,10 +183,11 @@ if __name__ == '__main__':
             #PLOTandCUTS="susy-sos/mca-3l-test2-mc-frmc.txt susy-sos/3l_tight.txt" #Moriond trees   
         if '_met75' in torun: 
             x = x.replace('-l 35.9','-l 16.2') 
-            if '_lowPt3l' in torun:
-                x = add(x," -E ^lowpt3l -X ^triggerAll -E ^triggerTripleMu")
-            if '_highPt3l' in torun:
-                x = add(x," -E ^highpt3l -X ^triggerAll -E ^triggerTripleMu")
+            x = add(x," -X ^triggerAll -E ^triggerTripleMu -E ^pt5subleps ")
+            if '_lowPt' in torun:
+                x = add(x," -E ^lowpt3l ")
+            if '_highPt' in torun:
+                x = add(x," -E ^highpt3l ")
             if dowhat == "limits":
                 runIt(x,torun,["minMllSFOS"],["'[4,10,20,30,50]'"])
             else: 
@@ -194,10 +195,10 @@ if __name__ == '__main__':
                     runIt(x,'%s/all'%torun,['SR_bins_3l'])
         if '_met125' in torun: 
             x = x.replace('-l 35.9','-l 33.2') 
-            x = add(x," -X ^mumumu -X ^lowMET -X minAFAS -E ^mml -E ^mediumMET -X ^triggerAll -E ^triggerDoubleMuMET")
-            if '_lowPt3l' in torun:
+            x = add(x," -X ^mumumu -X ^lowMET -X minAFAS -E ^mml -E ^mediumMET -X ^triggerAll -E ^triggerDoubleMuMET  -E ^pt5subleps")
+            if '_lowPt' in torun:
                 x = add(x," -E ^lowpt3l ")
-            if '_highPt3l' in torun:
+            if '_highPt' in torun:
                 x = add(x," -E ^highpt3l ")
             if dowhat == "limits":
                 runIt(x,torun,["minMllSFOS"],["'[4,10,20,30,50]'"])

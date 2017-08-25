@@ -34,8 +34,8 @@ where your CMSSW version for combine is located inside your local area).
 hadd higgsCombineTChiWZ.Asymptotic.FINAL.root sig_TN2C1*/*Asymptotic*.root
 
 7) copy the file higgsCombineTChiWZ.Asymptotic.FINAL.root under
-scan_plot/scanSOS/limits/ with an appropriate name which recalls how
+scan_plot/limits/ with an appropriate name which recalls how
 it has been produced (like "[..]_final_Moriond17.root").
 
-8) follow the instructions on scan_plot/scanSOS/README to produce
+8) follow the instructions on scan_plot/README to produce
 the final plot.

@@ -10,11 +10,19 @@ echo "- a name for output mca (OUTPUT_MCA_MCDATA)"
 echo "After running the script the mca_signal_block.txt with the signal block will be produced and attached to the template mca giving in output the final mca ready to be used."  
 echo "==================================================="  
 
-INPUT_FILE="input_TChiWZ.txt" #"input_TChiWZ_noMET.txt" #"input_T2tt_noISR.txt" #"input_T2tt_noISR.txt" # "input_TChiWZ.txt" 
-LIST="list_TN2N1.txt" #"list_onepoint.txt" #"list_T2tt.txt" # "list_onepoint.txt"
-OUTPUT_FILE="mca_signal_block_TN2N1.txt" #"mca_signal_block_noMET.txt" #"mca_signal_block_T2tt_noISR.txt" # "mca_signal_block_onepoint.txt"
-OUTPUT_MCA_FRDATA="mca-2los-test2-mcdata-frdata_FastSimTN2N1.txt"
-OUTPUT_MCA_MCDATA="mca-2los-test2-mcdata-mcfakes_FastSimTN2N1.txt"
+
+
+#INPUT_FILE="input_TChiWZ.txt" #"input_TChiWZ_noMET.txt" #"input_T2tt_noISR.txt" #"input_T2tt_noISR.txt" # "input_TChiWZ.txt" 
+#LIST="list_TN2N1.txt" #"list_onepoint.txt" #"list_T2tt.txt" # "list_onepoint.txt"
+#OUTPUT_FILE="mca_signal_block_TN2N1.txt" #"mca_signal_block_noMET.txt" #"mca_signal_block_T2tt_noISR.txt" # "mca_signal_block_onepoint.txt"
+#OUTPUT_MCA_FRDATA="mca-2los-test2-mcdata-frdata_FastSimTN2N1.txt"
+#OUTPUT_MCA_MCDATA="mca-2los-test2-mcdata-mcfakes_FastSimTN2N1.txt"
+
+INPUT_FILE="input_TChiWZ_3l.txt" #"input_TChiWZ_noMET.txt" #"input_T2tt_noISR.txt" #"input_T2tt_noISR.txt" # "input_TChiWZ.txt" 
+LIST="list_TChiWZ.txt" #"list_TN2N1.txt" #"list_onepoint.txt" #"list_T2tt.txt" # "list_onepoint.txt"
+OUTPUT_FILE="mca_signal_block_TChiWZ_3l.txt" #"mca_signal_block_noMET.txt" #"mca_signal_block_T2tt_noISR.txt" # "mca_signal_block_onepoint.txt"
+#OUTPUT_MCA_FRDATA="mca-3l-test2-mc-frdata_FastSimTChiWZ.txt"
+OUTPUT_MCA_MCDATA="mca-3l-test2-mc-frmc_FastSimTChiWZ.txt"
 
 cat $INPUT_FILE | while read line_input
 do
@@ -35,5 +43,9 @@ do
     echo "#======= " >> $OUTPUT_FILE
 done
 
-cat mca-2los-test2-mcdata-mcfakes_template.txt $OUTPUT_FILE >> $OUTPUT_MCA_MCDATA
-cat mca-2los-test2-mcdata-frdata_template.txt  $OUTPUT_FILE >> $OUTPUT_MCA_FRDATA 
+
+#cat mca-2los-test2-mcdata-mcfakes_template.txt $OUTPUT_FILE >> $OUTPUT_MCA_MCDATA
+#cat mca-2los-test2-mcdata-frdata_template.txt $OUTPUT_FILE >> $OUTPUT_MCA_FRDATA 
+
+cat mca-3l-test2-mc-mcfakes_template.txt $OUTPUT_FILE >> $OUTPUT_MCA_MCDATA
+#cat mca-3l-test2-mcdata-frdata_template.txt  $OUTPUT_FILE >> $OUTPUT_MCA_FRDATA 
