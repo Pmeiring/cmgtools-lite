@@ -2,7 +2,7 @@ import sys, copy
 import ROOT as r
 from array import array
 #import array
-
+import math
 
 
 class binning:
@@ -30,7 +30,7 @@ class Scan(object):
         self.xtitle = 'mother'; self.ytitle = 'daughter'
         self.xsecFile = 0
         self.zmaxEff = 0.5
-        self.extraSmoothes = 0
+        self.extraSmoothes = 2
         self.paper = 'SUS7'
         self.xvar = 'GenSusyMScan1_Edge'
         self.yvar = 'GenSusyMScan2_Edge'
@@ -70,9 +70,109 @@ class Scan(object):
             self.zmaxEff = 0.30
             self.xsecFile = 'xs_TChiNeuWZ.root'
             self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
-            self.limitfile = 'limits/scan_TChiWZ_Moriond_FINAL.root'#'limits/scan_TChiWZ_Moriond_approval.root'#'limits/scan_TChiWZ_Moriond_v1.root'#'limits/scan_TChiWZ_noPU_xsTH_scale.root'#'scan_TChiWZ_v2.root'
+            self.limitfile = 'limits/scan_TChiWZ_Moriond_FINAL.root' 
 
- 
+        if self.name == 'TN2C1':
+            self.makeMCDatacards = True
+            self.paper = 'SUS16025'
+            self.xbinsize = 1.
+            self.ybinsize = 1.
+            self.xbins = binning(100,330, self.xbinsize)
+            self.ybins = binning(  0, 60, self.ybinsize)#50                                                                                                                                                       
+            self.yx = r.TH2F('histo_'+self.name, 'histo_'+self.name, self.xbins.n, self.xbins._min, self.xbins._max, self.ybins.n, self.ybins._min, self.ybins._max)
+            self.zminUL = 1e-3; self.zmaxUL = 1e3
+            self.zmaxEff = 0.30
+            self.xsecFile = 'xs_TN2C1.root' 
+            self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
+            self.limitfile = 'limits/scan_TN2C1_Moriond_FINAL.root'
+
+        if self.name == 'TN2N1':
+            self.makeMCDatacards = True
+            self.paper = 'SUS16025'
+            self.xbinsize = 1.
+            self.ybinsize = 1.
+            self.xbins = binning(100,330, self.xbinsize)
+            self.ybins = binning(  0, 60, self.ybinsize)#50                                                                                                                                                       
+            self.yx = r.TH2F('histo_'+self.name, 'histo_'+self.name, self.xbins.n, self.xbins._min, self.xbins._max, self.ybins.n, self.ybins._min, self.ybins._max)
+            self.zminUL = 1e-3; self.zmaxUL = 1e3
+            self.zmaxEff = 0.30
+            self.xsecFile = 'xs_TN2N1.root'
+            self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
+            self.limitfile = 'limits/scan_TN2N1_Moriond_FINAL.root' 
+
+        if self.name == 'TN2N1_TN2C1_comb':
+            self.makeMCDatacards = True
+            self.paper = 'SUS16025'
+            self.xbinsize = 1.
+            self.ybinsize = 1.
+            self.xbins = binning(100,330, self.xbinsize)
+            self.ybins = binning(  0, 60, self.ybinsize)#50                                                                                                                                                                                                                                                                  
+            self.yx = r.TH2F('histo_'+self.name, 'histo_'+self.name, self.xbins.n, self.xbins._min, self.xbins._max, self.ybins.n, self.ybins._min, self.ybins._max)
+            self.zminUL = 1e-3; self.zmaxUL = 1e3
+            self.zmaxEff = 0.30
+            self.xsecFile  = 'xs_TN2N1.root'
+            self.xsecFile2 = 'xs_TN2C1.root'
+            self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
+            self.limitfile = 'limits/scan_TN2N1_TN2C1_combination_Moriond_FINAL.root'
+
+
+        if self.name == 'TN2N1_pheno':
+            self.makeMCDatacards = True
+            self.paper = 'SUS16025'
+            self.xbinsize = 1.
+            self.ybinsize = 1.
+            self.xbins = binning(100,330, self.xbinsize)
+            self.ybins = binning(  0, 60, self.ybinsize)#50                                                                           
+            self.yx = r.TH2F('histo_'+self.name, 'histo_'+self.name, self.xbins.n, self.xbins._min, self.xbins._max, self.ybins.n, self.ybins._min, self.ybins._max)
+            self.zminUL = 1e-3; self.zmaxUL = 1e3
+            self.zmaxEff = 0.30
+            self.xsecFile = 'xs_TN2N1_pheno.root'                                                                              
+            self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
+            self.limitfile = 'limits/scan_TN2N1_pheno_Moriond_FINAL.root'
+
+        if self.name == 'TN2C1_pheno':
+            self.makeMCDatacards = True
+            self.paper = 'SUS16025'
+            self.xbinsize = 1.
+            self.ybinsize = 1.
+            self.xbins = binning(100,330, self.xbinsize)
+            self.ybins = binning(  0, 60, self.ybinsize)#50                                                                             
+            self.yx = r.TH2F('histo_'+self.name, 'histo_'+self.name, self.xbins.n, self.xbins._min, self.xbins._max, self.ybins.n, self.ybins._min, self.ybins._max)
+            self.zminUL = 1e-3; self.zmaxUL = 1e3
+            self.zmaxEff = 0.30
+            self.xsecFile = 'xs_TN2C1_pheno.root'
+            self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
+            self.limitfile = 'limits/scan_TN2C1_pheno_Moriond_FINAL.root'
+
+        if self.name == 'TN2N1_TN2C1_pheno_comb':
+            self.makeMCDatacards = True
+            self.paper = 'SUS16025'
+            self.xbinsize = 1.
+            self.ybinsize = 1.
+            self.xbins = binning(100,330, self.xbinsize)
+            self.ybins = binning(  0, 60, self.ybinsize)#50                                                                                                                                                                                                                                                                   
+            self.yx = r.TH2F('histo_'+self.name, 'histo_'+self.name, self.xbins.n, self.xbins._min, self.xbins._max, self.ybins.n, self.ybins._min, self.ybins._max)
+            self.zminUL = 1e-3; self.zmaxUL = 1e3
+            self.zmaxEff = 0.30
+            self.xsecFile = 'xs_TN2N1_pheno2.root'
+            self.xsecFile2 = 'xs_TN2C1_pheno2.root'
+            self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
+            self.limitfile = 'limits/scan_TN2N1_TN2C1_phenoFinal_combination_Moriond_FINAL.root'
+
+        if self.name == 'pMSSM':
+            self.makeMCDatacards = True
+            self.paper = 'SUS16025'
+            self.xbinsize = 1.
+            self.ybinsize = 1.
+            self.xbins = binning(100,240, self.xbinsize)
+            self.ybins = binning(200,1000, self.ybinsize)#50                                                                                                                                                       
+            self.yx = r.TH2F('histo_'+self.name, 'histo_'+self.name, self.xbins.n, self.xbins._min, self.xbins._max, self.ybins.n, self.ybins._min, self.ybins._max)
+            self.zminUL = 1e-3; self.zmaxUL = 1e3
+            self.zmaxEff = 0.30
+            self.xsecFile = 'xs_pMSSM.root'
+            self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
+            self.limitfile = 'limits/scan_pMSSM_Moriond_FINAL.root'
+
 
     def loadXsecs(self):
         if not self.xsecFile:
@@ -80,6 +180,9 @@ class Scan(object):
             sys.exit(estring)
         xsecf = r.TFile(self.xsecFile,'READ')
         self.xsec_histo = copy.deepcopy(xsecf.Get('xs'))
+        if self.xsecFile2:
+            xsecf2 = r.TFile(self.xsecFile2,'READ')
+            self.xsec2_histo = copy.deepcopy(xsecf2.Get('xs'))
 
     def makeExclusion(self):
         print 'making the exclusions!!'
@@ -123,7 +226,8 @@ class Scan(object):
             massx = point.mh
             massy = point.iSeed
             limit = point.limit
-            massy = (massx - massy) 
+            if self.name != 'pMSSM':
+                massy = (massx - massy)
             j=massy
             cor=1
             if j<7.5:
@@ -141,13 +245,33 @@ class Scan(object):
             #limit=limit/cor ## george?
             if point.quantileExpected <  0.:
                 self.ex_obs.Fill(massx, massy, limit)
-                xsec   = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(massx))
-                xsec_e = self.xsec_histo.GetBinError  (self.xsec_histo.FindBin(massx))
+                ## R.C. modified here for adapting to the different scans
+                if self.name == 'TN2N1':
+                    mass_mu = (massx+(massx-massy))/2
+                    xsec   = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(mass_mu))
+                    xsec_e = self.xsec_histo.GetBinError  (self.xsec_histo.FindBin(mass_mu))
+                elif self.name == 'TN2C1':
+                    mass_mu = (0.75*massx)+(0.25*(massx-massy))
+                    xsec   = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(mass_mu))
+                    xsec_e = self.xsec_histo.GetBinError  (self.xsec_histo.FindBin(mass_mu))
+                elif self.name == 'TN2N1_TN2C1_comb':    
+                    mass_mu_n2n1 = (massx+(massx-massy))/2
+                    mass_mu_n2c1 = (0.75*massx)+(0.25*(massx-massy))
+                    xsec   = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(mass_mu_n2n1)) + self.xsec2_histo.GetBinContent(self.xsec2_histo.FindBin(mass_mu_n2c1))
+                    xsec_e = math.sqrt(math.pow(self.xsec_histo.GetBinError(self.xsec_histo.FindBin(mass_mu_n2n1)),2) + math.pow(self.xsec2_histo.GetBinError(self.xsec2_histo.FindBin(mass_mu_n2c1)),2))
+                elif (self.name == 'pMSSM' or self.name == 'TN2N1_pheno' or self.name == 'TN2C1_pheno') :
+                    xsec   = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(massx,massy))
+                    xsec_e = self.xsec_histo.GetBinError  (self.xsec_histo.FindBin(massx,massy))
+                elif self.name == 'TN2N1_TN2C1_pheno_comb':
+                    xsec   = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(massx,massy)) + self.xsec2_histo.GetBinContent(self.xsec2_histo.FindBin(massx,massy))
+                    xsec_e = math.sqrt( math.pow(self.xsec_histo.GetBinError(self.xsec_histo.FindBin(massx,massy)),2) + math.pow(self.xsec2_histo.GetBinError(self.xsec2_histo.FindBin(massx,massy)),2))
+                else:
+                    xsec   = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(massx))
+                    xsec_e = self.xsec_histo.GetBinError  (self.xsec_histo.FindBin(massx))
+                
                 self.ex_obs_p1s.Fill(massx, massy, limit*((xsec+xsec_e)/xsec))
-                #print "Limits : massx=", massx, " massy=", massy, " limit=",limit
-                #print "Limit obs_p1s: massx=", massx, " massy=", massy, " xsec=", xsec, " xsec_unc=", xsec_e, "+1sigma=", limit*((xsec+xsec_e)/xsec)
                 self.ex_obs_m1s.Fill(massx, massy, limit*((xsec-xsec_e)/xsec))
-                #print "Limit obs_m1s: massx=", massx, " massy=", massy, " xsec=", xsec, " xsec_unc=", xsec_e, "-1sigma=", limit*((xsec-xsec_e)/xsec)
+
             elif 0.49 < point.quantileExpected < 0.51:
                 self.ex_exp.Fill(massx, massy, limit)
             elif 0.15 < point.quantileExpected < 0.17:
@@ -158,7 +282,6 @@ class Scan(object):
                 self.ex_exp_p2s.Fill(massx, massy, limit)
             elif 0.96 < point.quantileExpected < 0.99:
                 self.ex_exp_m2s.Fill(massx, massy, limit)
-
 
         #if self.name == 'T2tt':
         #    for step in [25, 12.5]:
@@ -204,6 +327,7 @@ class Scan(object):
         smoothed_2dg.SetNpy( int((smoothed_2dg.GetYmax() - smoothed_2dg.GetYmin())/ (self.ybinsize/2.) ) )
         foobar = smoothed_2dg.GetHistogram() ## have to call this, otherwise root will freak out
         c = smoothed_2dg.GetContourList(1.0)
+        #c = smoothed_2dg.GetContourList(2.51)
         smoothed_g   = c[max( (i.GetN(),j) for j,i in enumerate( c )  )[1]]
         setattr(self, 'c', c)
         smoothed_g.SetName(tmp_name_graph)
@@ -215,59 +339,46 @@ class Scan(object):
         h_rhisto = copy.deepcopy(self.ex_obs)
         for i in range(h_rhisto.GetNbinsX()+1):
             for j in range(h_rhisto.GetNbinsY()+1):
-                xs = self.xsec_histo.GetBinContent( self.xsec_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i))))
-                if self.name == 'T2tt':
-                   xs=xs*10000
-                if (self.name == 'TChiNeuWZ' or self.name == 'TChiWZ_2los3l'):
-                   xs=xs*10
-                   '''print "this ",xs
-                   print " ",j
-                   if j<7.5:
-                      xs=xs*0.6
-                   elif j<10:
-                      xs=xs*0.77
-                   elif j<15:
-                      xs=xs*0.9
-                   elif j<20:
-                      xs=xs*0.94
-                   elif j<30:
-                      xs=xs*0.98
-                   elif j<40:
-                      xs=xs*0.99
-                   print "to that",xs'''
-                                
-                h_rhisto.SetBinContent(i,j,h_rhisto.GetBinContent(i,j)*xs )# *xs)#/1000.)
-              
-                #if( (h_rhisto.GetXaxis()).GetBinCenter(i)>449 and (h_rhisto.GetXaxis()).GetBinCenter(i)<451 and (h_rhisto.GetYaxis()).GetBinCenter(j)>29 and (h_rhisto.GetYaxis()).GetBinCenter(j)<31):
-                    #print 'xs ', xs
-                    #print 'x-axis mass ', (h_rhisto.GetXaxis()).GetBinCenter(i) 
-                    #print 'y-axis mass ', (h_rhisto.GetYaxis()).GetBinCenter(j) 
-                    #print 'r= ', h_rhisto.GetBinContent(i,j)
-                    #print 'h_rhisto.GetBinContent(i,j)*xs ', h_rhisto.GetBinContent(i,j)*xs 
-                    #print '-----------' 
+                if self.name == 'TN2N1':
+                    delta_m=h_rhisto.GetYaxis().GetBinCenter(j)
+                    m_x=h_rhisto.GetXaxis().GetBinCenter(i)
+                    m_mu = (0.5*m_x)+(0.5*(m_x-delta_m))
+                    xs = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(int(m_mu)))
+                    xs=xs*10 # unfolding the leptonic BR (0.10)
+                elif self.name == 'TN2C1':
+                    delta_m=h_rhisto.GetYaxis().GetBinCenter(j)
+                    m_x=h_rhisto.GetXaxis().GetBinCenter(i)
+                    m_mu = (0.75*m_x)+(0.25*(m_x-delta_m))                
+                    xs = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(int(m_mu)))
+                    xs=xs*10 # unfolding the leptonic BR (0.10) 
+                elif self.name == 'TN2N1_TN2C1_comb':
+                    delta_m=h_rhisto.GetYaxis().GetBinCenter(j)
+                    m_x=h_rhisto.GetXaxis().GetBinCenter(i)
+                    m_mu_n2n1 = (0.5*m_x)+(0.5*(m_x-delta_m))
+                    m_mu_n2c1 = (0.75*m_x)+(0.25*(m_x-delta_m))                     
+                    xs = self.xsec_histo.GetBinContent(self.xsec_histo.FindBin(int(m_mu_n2n1))) + self.xsec2_histo.GetBinContent(self.xsec_histo.FindBin(int(m_mu_n2c1)))
+                    xs=xs*10 # unfolding the leptonic BR (0.10) 
+                elif self.name == 'pMSSM':
+                    xs = self.xsec_histo.GetBinContent( self.xsec_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i)),int(h_rhisto.GetYaxis().GetBinCenter(j))))
+                    xs = xs*14.3 ## NB: approximated efficiency from p.122 of Basil's Higgsino booklet
+                elif (self.name == 'TN2N1_pheno' or self.name == 'TN2C1_pheno') :
+                    xs = self.xsec_histo.GetBinContent( self.xsec_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i)),int(h_rhisto.GetYaxis().GetBinCenter(j))))
+                    xs = xs*10 # unfolding the leptonic BR (0.10) 
+                elif self.name == 'TN2N1_TN2C1_pheno_comb':
+                  xs = self.xsec_histo.GetBinContent( self.xsec_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i)),int(h_rhisto.GetYaxis().GetBinCenter(j)))) + self.xsec2_histo.GetBinContent( self.xsec2_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i)),int(h_rhisto.GetYaxis().GetBinCenter(j))))
+                  xs = xs*10 # unfolding the leptonic BR (0.10) 
+                elif self.name == 'TChiNeuWZ':
+                    xs = self.xsec_histo.GetBinContent( self.xsec_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i))))
+                    xs=xs*10 # unfolding the leptonic BR (0.10) 
+                elif self.name == 'T2tt':
+                    xs = self.xsec_histo.GetBinContent( self.xsec_histo.FindBin(int(h_rhisto.GetXaxis().GetBinCenter(i))))
+                    xs=xs*10000
 
+                h_rhisto.SetBinContent(i,j,h_rhisto.GetBinContent(i,j)*xs )
         gr2d = r.TGraph2D(h_rhisto)
         gr2d.SetNpx( int((gr2d.GetXmax() - gr2d.GetXmin())/ (self.xbinsize/2.) ) )
         gr2d.SetNpy( int((gr2d.GetYmax() - gr2d.GetYmin())/ (self.ybinsize/2.) ) )
         tmp_2d_histo = gr2d.GetHistogram()
-        '''if self.name == 'TChiNeuWZ':
-         for i in range( tmp_2d_histo.GetNbinsX()+1):
-            for j in range(tmp_2d_histo.GetNbinsY()+1):
-                cor=1
-                print j
-                if j<7.5:
-                    cor=cor*0.6
-                elif j<10:
-                    cor=cor*0.77
-                elif j<15:
-                    cor=cor*0.9
-                elif j<20:
-                    cor=cor*0.94
-                elif j<30:
-                    cor=cor*0.98
-                elif j<40:
-                    cor=cor*0.99
-                tmp_2d_histo.SetBinContent(i,j,tmp_2d_histo.GetBinContent(i,j)*cor )'''
         tmp_2d_histo.SetName('ul_histo')
         setattr(self, 'ul_histo', copy.deepcopy(tmp_2d_histo))
         print '... done making the UL histo'
@@ -279,12 +390,14 @@ class Scan(object):
         self.ul_histo.Write()
         self.ex_exp_smoothed_graph    .Write()
         self.ex_exp_p1s_smoothed_graph.Write()
-        self.ex_exp_m1s_smoothed_graph.Write()
+        if(self.name == 'TChiNeuWZ' or self.name == 'T2tt' or self.name == 'pMSSM' or self.name == 'TN2N1_TN2C1_comb' or self.name == 'TN2N1_TN2C1_pheno_comb'):
+            self.ex_exp_m1s_smoothed_graph.Write() 
         self.ex_obs_smoothed_graph    .Write()
         self.ex_obs_p1s_smoothed_graph.Write()
         self.ex_obs_m1s_smoothed_graph.Write()
         self.ex_exp_p2s_smoothed_graph.Write()
-        self.ex_exp_m2s_smoothed_graph.Write()
+        if(self.name == 'TChiNeuWZ' or self.name == 'T2tt' ):
+            self.ex_exp_m2s_smoothed_graph.Write()
         #self.xtran(ex_obs_smoothed_graph).Write()
 
         f.Close()
@@ -344,13 +457,17 @@ class Scan(object):
         return xValue,yValue   
     def makePrettyPlots(self):
         print 'starting to make pretty plots'
-        for t in ['_obs', '_obs_p1s', '_obs_m1s', '_exp', '_exp_p1s', '_exp_m1s','_exp_p2s', '_exp_m2s' ]:
+        #for t in ['_obs', '_obs_p1s', '_obs_m1s', '_exp', '_exp_p1s', '_exp_m1s','_exp_p2s', '_exp_m2s' ]: # Only for TChiWZ and T2tt
+        #for t in ['_obs', '_obs_p1s', '_obs_m1s', '_exp', '_exp_p1s','_exp_p2s' ]: # Only for TN2N1 and C1N1 (full Higgsino)
+        for t in ['_obs', '_obs_p1s', '_obs_m1s', '_exp', '_exp_p1s', '_exp_m1s','_exp_p2s' ]: # Only for combination
+        #for t in ['_obs', '_obs_p1s', '_obs_m1s', '_exp', '_exp_m1s', '_exp_p1s','_exp_p2s' ]:
             tmp_2d_graph = r.TGraph2D(getattr(self, 'ex%s'%t))
             #tmp_2d_graph=transposeGraph(getattr(self,'ex%s'%t))
             tmp_2d_graph.SetNpx( int((tmp_2d_graph.GetXmax() - tmp_2d_graph.GetXmin())/ (self.xbinsize) ) )
             tmp_2d_graph.SetNpy( int((tmp_2d_graph.GetYmax() - tmp_2d_graph.GetYmin())/ (self.ybinsize) ) )
             tmp_2d_histo = tmp_2d_graph.GetHistogram()
-            tmp_graph_list = tmp_2d_graph.GetContourList(1.01)
+            tmp_graph_list = tmp_2d_graph.GetContourList(1.01) 
+            #tmp_graph_list = tmp_2d_graph.GetContourList(2.61)
             tmp_graph = tmp_graph_list[max( (i.GetN(),j) for j,i in enumerate( tmp_graph_list )  )[1]]
             setattr(self, 'ex%s_graph'%t, copy.deepcopy(tmp_graph    ) )
             setattr(self, 'ex%s_2dg'  %t, copy.deepcopy(tmp_2d_graph ) )
@@ -364,11 +481,38 @@ class Scan(object):
         self.saveULGraphsInFile()
         print '... done making pretty plots'
 
-# scan = Scan('TChiNeuWZ')
-# scan.makeExclusion()
-# scan.makePrettyPlots()
+#scan = Scan('TChiNeuWZ')
+#scan.makeExclusion()
+#scan.makePrettyPlots()
 
-# scan = Scan('T2tt')
-# scan.makeExclusion()
-# scan.makePrettyPlots()
+#scan = Scan('T2tt')
+#scan.makeExclusion()
+#scan.makePrettyPlots()
 
+#scan = Scan('TN2N1')
+#scan.makeExclusion()
+#scan.makePrettyPlots()
+
+#scan = Scan('TN2C1')
+#scan.makeExclusion()
+#scan.makePrettyPlots()
+
+#scan = Scan('TN2N1_TN2C1_comb')
+#scan.makeExclusion()                                                                                                                                                                                            
+#scan.makePrettyPlots()    
+
+scan = Scan('TN2N1_TN2C1_pheno_comb')
+scan.makeExclusion()
+scan.makePrettyPlots()
+
+#scan = Scan('TN2N1_pheno')
+#scan.makeExclusion()
+#scan.makePrettyPlots()
+
+#scan = Scan('TN2C1_pheno')
+#scan.makeExclusion()
+#scan.makePrettyPlots()
+
+#scan = Scan('pMSSM')
+#scan.makeExclusion()
+#scan.makePrettyPlots()
