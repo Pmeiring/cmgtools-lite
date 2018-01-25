@@ -214,23 +214,23 @@ class smsPlotABS(object):
         LExpM.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
         LExpM.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset)
         
-        LExpP2 = rt.TGraph(2)
-        LExpP2.SetName("LExpP2")
-        LExpP2.SetTitle("LExpP2")
-        LExpP2.SetLineColor(color(self.EXP['colorLine']))
-        LExpP2.SetLineStyle(5)
-        LExpP2.SetLineWidth(2)  
-        LExpP2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.75*yRange/100*10+offset)
-        LExpP2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.75*yRange/100*10+offset)
+#        LExpP2 = rt.TGraph(2)
+#        LExpP2.SetName("LExpP2")
+#        LExpP2.SetTitle("LExpP2")
+#        LExpP2.SetLineColor(color(self.EXP['colorLine']))
+#        LExpP2.SetLineStyle(5)
+#        LExpP2.SetLineWidth(2)  
+#        LExpP2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-1.75*yRange/100*10+offset)
+#        LExpP2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-1.75*yRange/100*10+offset)
         
-        LExpM2 = rt.TGraph(2)
-        LExpM2.SetName("LExpP2")
-        LExpM2.SetTitle("LExpP2")
-        LExpM2.SetLineColor(color(self.EXP['colorLine']))
-        LExpM2.SetLineStyle(5)
-        LExpM2.SetLineWidth(2)  
-        LExpM2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.25*yRange/100*10+offset)
-        LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.25*yRange/100*10+offset)
+#        LExpM2 = rt.TGraph(2)
+#        LExpM2.SetName("LExpP2")
+#        LExpM2.SetTitle("LExpP2")
+#        LExpM2.SetLineColor(color(self.EXP['colorLine']))
+#        LExpM2.SetLineStyle(5)
+#        LExpM2.SetLineWidth(2)  
+#        LExpM2.SetPoint(0,self.model.Xmin+3*xRange/100, self.model.Ymax-2.25*yRange/100*10+offset)
+#        LExpM2.SetPoint(1,self.model.Xmin+10*xRange/100, self.model.Ymax-2.25*yRange/100*10+offset)
         
 
         textExp = rt.TLatex(self.model.Xmin+11*xRange/100, self.model.Ymax-2.15*yRange/100*10+offset, 
@@ -299,14 +299,14 @@ class smsPlotABS(object):
         self.EXP['minus'].SetLineStyle(7)
         self.EXP['minus'].SetLineWidth(2) 
         #all me
-        # expected + 2sigma
-        self.EXP['plus2'].SetLineColor(color(self.EXP['colorLine']))
-        self.EXP['plus2'].SetLineStyle(5)
-        self.EXP['plus2'].SetLineWidth(2) 
-        # expected - 2sigma
-        self.EXP['minus2'].SetLineColor(color(self.EXP['colorLine']))
-        self.EXP['minus2'].SetLineStyle(5)
-        self.EXP['minus2'].SetLineWidth(2)                      
+#        # expected + 2sigma
+#        self.EXP['plus2'].SetLineColor(color(self.EXP['colorLine']))
+#        self.EXP['plus2'].SetLineStyle(5)
+#        self.EXP['plus2'].SetLineWidth(2) 
+#        # expected - 2sigma
+#        self.EXP['minus2'].SetLineColor(color(self.EXP['colorLine']))
+#        self.EXP['minus2'].SetLineStyle(5)
+#        self.EXP['minus2'].SetLineWidth(2)                      
         # DRAW LINES
         self.EXP['nominal'].Draw("LSAME")
         self.EXP['plus'].Draw("LSAME")

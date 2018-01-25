@@ -13,7 +13,7 @@ class sms():
         if modelname.find("TChiNeuWZ") != -1: self.TChiNeuWZ()
         if modelname.find("T2tt") != -1: self.T2tt()
         if modelname.find("T1qqqq") != -1: self.T1qqqq()
-
+        if modelname.find("pMSSM") != -1: self.pMSSM()
 
     def T2tt(self):
         # model name
@@ -193,3 +193,25 @@ class sms():
         self.LSP = "m#kern[0.1]{_{"+lsp_s+"}} [GeV]"
         # turn off diagonal lines
         self.diagOn = False
+
+    def pMSSM(self):
+        # model name
+        self.modelname = "pMSSM"
+        # decay chain
+        lsp_s = "#lower[-0.12]{#tilde{#chi}}#lower[0.2]{#scale[0.85]{^{0}}}#kern[-1.3]{#scale[0.85]{_{1}}}"
+        self.label= "Higgsino pMSSM model, NLO exclusion"
+        self.label2= ""
+        # scan range to plot
+        self.Xmin = 100.
+        self.Xmax = 190.
+        self.Ymin =   300
+        self.Ymax =  950
+        self.Zmin = 0.1#0.1
+        self.Zmax = 100#10.   
+        # produce sparticle
+        self.LSP = "M_{1} = 0.5 M_{2} [GeV]"
+        self.sParticle = "#mu [GeV]"
+        # turn off diagonal lines
+        self.diagOn = False
+        self.diagX = array('d',[100,180])
+        self.diagY = array('d',[ 93,243])

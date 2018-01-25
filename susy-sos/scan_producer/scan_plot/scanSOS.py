@@ -29,6 +29,7 @@ class Scan(object):
         self.xbins = binning(100,100,1000); self.ybins = binning(100,100,1000)
         self.xtitle = 'mother'; self.ytitle = 'daughter'
         self.xsecFile = 0
+        self.xsecFile2 = None
         self.zmaxEff = 0.5
         self.extraSmoothes = 2
         self.paper = 'SUS7'
@@ -171,7 +172,7 @@ class Scan(object):
             self.zmaxEff = 0.30
             self.xsecFile = 'xs_pMSSM.root'
             self.xtitle = 'm_{Chargino=Neutralino2}'; self.ytitle = 'm_{LSP}'
-            self.limitfile = 'limits/scan_pMSSM_Moriond_FINAL.root'
+            self.limitfile = 'limits/scan_pMSSM_Moriond_FINAL_highStat.root'
 
 
     def loadXsecs(self):
