@@ -1177,11 +1177,11 @@ float fakeRatePromptRateWeight_3l_ijk(float l1fr, float l1pr , bool l1pass,
       else         myw *= (target ? -  f[i]  :   p[i]    );
       // (3)
 
-//      int shouldpass = selfs;
-//      for (int j=0; j<2-i; j++) shouldpass = shouldpass/10;
-//      shouldpass = shouldpass%2; // 1 if I'm predicting a passing, 0 if I'm predicting a failing
-//      if (shouldpass) myw *= (target ?    p[i]    :     f[i]   );
-//      else            myw *= (target ? (1 - p[i]) : (1 - f[i]) );
+      int shouldpass = selfs;
+      for (int j=0; j<2-i; j++) shouldpass = shouldpass/10;
+      shouldpass = shouldpass%2; // 1 if I'm predicting a passing, 0 if I'm predicting a failing
+      if (shouldpass) myw *= (target ?    p[i]    :     f[i]   );
+      else            myw *= (target ? (1 - p[i]) : (1 - f[i]) );
     }
     weight += myw;
   }
