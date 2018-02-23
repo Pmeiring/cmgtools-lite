@@ -30,9 +30,7 @@ lowmet: met_pt: 10, 70, 130 ;  XTitle="E_{T}^{miss}  [GeV]"
 intermediatemet: met_pt: 10,120, 220;  XTitle="E_{T}^{miss}  [GeV]"
 highmet: met_pt:30,200, 500;  XTitle="E_{T}^{miss}  [GeV]"
 met    : met_pt: 20, 60 , 500; XTitle = "E_{T}^{miss}  [GeV]"
-#lowmet : met_pt : 10 , 50 ,275.; XTitle="E_{T}^{miss}  [GeV]", Legend='TL'
-#mediummet: met_pt: 10, 100, 220; XTitle="E_{T}^{miss} [GeV]"
-#highmet: met_pt: 20, 100, 400; XTitle="E_{T}^{miss} [GeV]"
+
 
 lep1MetDphi: abs(deltaPhi(LepGood1_phi, met_phi)) : 7,0,3.14 ; XTitle="#Delta#phi(l1\,E_{T}^{miss})"
 lep2MetDphi: abs(deltaPhi(LepGood2_phi, met_phi)) : 7,0,3.14 ; XTitle="#Delta#phi(l2\,E_{T}^{miss})"
