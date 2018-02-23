@@ -18,7 +18,7 @@ dowhat = "plots"
 #SYST="susy-sos/syst/susy_sos_dummy.txt" ## dmmy for SMS combination test
 #SYST="susy-sos/syst/susy_sos_dummy2.txt" ## dummy for SMS combination test 
 #SYST="susy-sos/syst/susy_sos_syst_test.txt" ##For freezing - few banchmark points
-SYST="susy-sos/syst/susy_sos3l_syst_test2_scan.txt" ##For scan
+SYST="susy-sos/syst/susy_sos_syst_test2_scan.txt" #"susy-sos/syst/susy_sos3l_syst_test2_scan.txt" ##For scan
 #SYST="susy-sos/syst/susy_sos_syst_scan_combination.txt" ## For combination (RC change!)
 PLOTandCUTS="susy-sos/mca-2los-test2-mc.txt susy-sos/2los_tight.txt" ## check later where is replaced. You need to specify there the mca, since they will not be replaced as for "plots" (due to different input order of combineCards)
 
@@ -31,6 +31,7 @@ def base(selection):
     #Freezing
     #CORE="-P /data1/botta/trees_SOS_010217 --Fs {P}/0_both3dlooseClean_v1 --FMCs {P}/0_eventBTagWeight_v1 --mcc susy-sos/lepchoice-recleaner.txt"
     #Pre-approval
+    #CORE="-P /data1/botta/trees_SOS_010217 --Fs {P}/0_both3dlooseClean_v2 --FMCs {P}/0_eventBTagWeight_v2 --mcc susy-sos/lepchoice-recleaner.txt"
     CORE="-P /data1/peruzzi/trees_SOS_110917_noVtx --Fs {P}/0_both3dlooseClean_v2 --FMCs {P}/0_eventBTagWeight_v2 --mcc susy-sos/lepchoice-recleaner.txt"
     CORE+=" -j 8 -f -l 35.9 --s2v --tree treeProducerSusyMultilepton --mcc susy-sos/mcc-sf1.txt --neg" #--mcc susy-sos/2los_triggerdefs.txt #12.9 - 35.9 - 18.1
     if dowhat == "plots": CORE+=" --lspam 'CMS Preliminary' --legendWidth 0.14 --legendFontSize 0.04"
@@ -130,10 +131,10 @@ if __name__ == '__main__':
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN          
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_noMET.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - no MET      
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimT2tt_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - onepoint
-            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTN2N1_TN2C1_pheno.txt susy-sos/2los_tight.txt" #Moriond trees SCAN  - Higgsino
+            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTN2N1_TN2C1_phenoFinal.txt susy-sos/2los_tight.txt" #Moriond trees SCAN  - Higgsino
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimpMSSM.txt susy-sos/2los_tight.txt" #Moriond trees SCAN  - Higgsino pMSSM
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimT2tt.txt susy-sos/2los_tight.txt" #Moriond trees SCAN  - stop  
-            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
+            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
         if '_met125_mm' in torun: 
             x = add(x,"-E ^pt5sublep -E ^mm -E ^upperMediumMET -E ^runRange -X ^triggerAll -E ^triggerDoubleMuMET ")
             x = x.replace('-l 12.9','-l 10.1') 
@@ -191,10 +192,10 @@ if __name__ == '__main__':
             x = x.replace('mca-3l-test2-mc.txt','mca-3l-test2-mcdata.txt') #Moriond trees
             if '_inclFakes' in torun: x = add(x," -I ^TT") 
             if '_doubleFakes' in torun: x= add(x, "-X ^TT -E ^doubleFakes")
-       if '_met75' in torun: 
+        if '_met75' in torun: 
             x = x.replace('-l 35.9','-l 16.2') 
             x = add(x," -X ^triggerAll -E ^triggerTripleMu -E ^pt5subleps ")
-           if '_lowPt' in torun:
+            if '_lowPt' in torun:
                 x = add(x," -E ^lowpt3l ")
             if '_highPt' in torun:
                 x = add(x," -E ^highpt3l ")
@@ -206,7 +207,7 @@ if __name__ == '__main__':
         if '_met125' in torun: 
             x = x.replace('-l 35.9','-l 33.2') 
             x = add(x,"-X ^mumumu -X ^lowMET -X ^minAFAS -E ^mml -E ^mediumMET -X ^triggerAll -E ^triggerDoubleMuMET -E ^pt5subleps")
-           if '_lowPt' in torun:
+            if '_lowPt' in torun:
                 x = add(x," -E ^lowpt3l ")
             if '_highPt' in torun:
                 x = add(x," -E ^highpt3l ")
@@ -241,10 +242,10 @@ if __name__ == '__main__':
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN   
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_noMET.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - no MET   
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimT2tt_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - onepoint
-            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTN2N1_TN2C1_pheno.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino
+            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTN2N1_TN2C1_phenoFinal.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimpMSSM.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino pMSSM
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimT2tt.txt susy-sos/2los_tight.txt" #Moriond trees SCAN  - stop    
-            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
+            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
             if(dowhat != "limits"):x = add(x,"--showRatio --maxRatioRange -2 5") #--showMCError
             if(dowhat == "limits" and ('_stop20' in torun)):x = add(x,"--xp TChiWZ_150_dM20")
             if(dowhat == "limits" and (('_ewk20' in torun) or ('_ewk7' in torun) or ('_ewkHig' in torun))):x = add(x,"--xp T2tt_350_dM20")
@@ -278,10 +279,10 @@ if __name__ == '__main__':
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN          
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_noMET.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - no MET   
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimT2tt_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - onepoint         
-            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTN2N1_TN2C1_pheno.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino         
+            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTN2N1_TN2C1_phenoFinal.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino         
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimpMSSM.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino pMSSM        
             #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimT2tt.txt susy-sos/2los_tight.txt" #Moriond trees SCAN  - stop 
-            PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
+            #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
             if(dowhat != "limits"):x = add(x,"--showRatio --maxRatioRange -2 5") #--showMCError
             if(dowhat == "limits" and ('_stop20' in torun)):x = add(x,"--xp TChiWZ_150_dM20")
             if(dowhat == "limits" and (('_ewk20' in torun) or ('_ewk7' in torun) or ('_ewkHig' in torun))):x = add(x,"--xp T2tt_350_dM20")            
@@ -314,10 +315,10 @@ if __name__ == '__main__':
         #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN          
         #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_noMET.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - no MET
         #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimT2tt_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - onepoint
-        #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTN2N1_TN2C1_pheno.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino
+        PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTN2N1_TN2C1_phenoFinal.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino
         #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimpMSSM.txt susy-sos/2los_tight.txt" #Moriond trees SCAN - Higgsino pMSSM
         #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimT2tt.txt susy-sos/2los_tight.txt" #Moriond trees SCAN  - stop  
-        PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
+        #PLOTandCUTS="susy-sos/mca-2los-test2-mcdata-frdata_FastSimTChi_onepoint.txt susy-sos/2los_tight.txt" #Moriond trees   
         if dowhat == "limits":
             runIt(x,torun,["LepGood1_pt"],["'[5,12,20,30]'"])
         else:
