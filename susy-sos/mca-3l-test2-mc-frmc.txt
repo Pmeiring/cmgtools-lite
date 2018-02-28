@@ -32,7 +32,7 @@ TChiWZ_225_dM20+  :  TChiWZ_225_205  : 0.001*0.1*1165.09 : bTagWeightFS*(trigger
 
 # ---- Diboson - Including internal conversions (VV* mll<4 GeV)
 
-WG   : WGToLNuG_amcatanlo_ext : xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="WG", FillColor=ROOT.kViolet+10
+WG   : WGToLNuG_amcatnlo_ext : xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="WG", FillColor=ROOT.kViolet+10
 WZ   : WZTo3LNu: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0 ; Label="WZ", FillColor=ROOT.kViolet-4
 ZZ   : ZZTo4L: xsec: LepGood1_mcMatchId!=0 && LepGood2_mcMatchId!=0 && LepGood3_mcMatchId!=0  ; Label="ZZ", FillColor=ROOT.kCyan+4
 
@@ -89,7 +89,7 @@ fakes_mc  : TBar_tWch_ext :  xsec: LepGood1_mcMatchId==0 || LepGood2_mcMatchId==
 
 # ---- External Conversions:
 # Convs  : TTGJets : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
-# Convs  : WGToLNuG_amcatanlo_ext : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
+# Convs  : WGToLNuG_amcatnlo_ext : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 # Convs  : ZGTo2LG_ext : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 # Convs  : TGJets : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 #---- Rare:

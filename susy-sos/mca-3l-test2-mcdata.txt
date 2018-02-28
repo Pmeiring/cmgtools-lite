@@ -60,7 +60,7 @@ TW       : TBar_tWch_ext :  xsec: LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0
 
 # ---- External Conversions:
 # Convs  : TTGJets : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
-### Convs  : WGToLNuG_amcatanlo_ext : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
+### Convs  : WGToLNuG_amcatnlo_ext : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 ### Convs  : ZGTo2LG_ext : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 ### Convs  : TGJets : xsec : ((LepGood1_mcMatchId==0 && LepGood1_mcPromptGamma==1) || (LepGood2_mcMatchId==0 && LepGood2_mcPromptGamma==1)) || (LepGood3_mcMatchId==0 && LepGood3_mcPromptGamma==1)) ; Label="Conv", FillColor=ROOT.kOrange
 #---- Rare:
