@@ -27,6 +27,7 @@ class MCCorrections:
         self._corrections = []
         infile = open(file,'r')
         for line in infile:
+            if len(line.strip())==0: continue
             if re.match("\s*#.*", line): continue
             while line.strip()[-1] == "\\":
                 line = line.strip()[:-1] + infile.next()
