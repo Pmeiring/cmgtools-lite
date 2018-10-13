@@ -13,6 +13,8 @@ sys.argv = args
 ROOT.gROOT.SetBatch(True)
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
+ROOT.v5.TFormula.SetMaxima(100000)
+
 from copy import *
 
 from CMGTools.TTHAnalysis.plotter.cutsFile import *
@@ -243,6 +245,8 @@ class TreeToYield:
         self._tree  = t
         #self._tree.SetCacheSize(10*1000*1000)
         if "root://" in self._fname: self._tree.SetCacheSize()
+        for ali in self._options.aliasses:
+            self._tree.SetAlias(ali[0],ali[1])
         self._friends = []
         friendOpts = self._options.friendTrees[:]
         friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._options.friendTreesSimple]
@@ -563,6 +567,7 @@ def addTreeToYieldOptions(parser):
     parser.add_option("--neglist", dest="negAllowed", action="append", default=[], help="Give process names where negative values are allowed")
     parser.add_option("--max-entries",     dest="maxEntries", default=1000000000, type="int", help="Max entries to process in each tree") 
     parser.add_option("-L", "--load-macro",  dest="loadMacro",   type="string", action="append", default=[], help="Load the following macro, with .L <file>+");
+    parser.add_option("--alias", dest="aliasses", action="append", nargs=2, default=[], help="Define tree aliasses")
 
 def mergeReports(reports):
     import copy
