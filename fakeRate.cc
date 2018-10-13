@@ -1140,6 +1140,24 @@ float fakeRatePromptRateWeight_2l_23(float l1pt, float l1eta, int l1pdgId, float
                             l2pt, l2eta, l2pdgId, l2pass, 2, 3);
 }
 
+float fakeRatePromptRateWeight_2l_23_1f(float l1pt, float l1eta, int l1pdgId, float l1pass,
+                            float l2pt, float l2eta, int l2pdgId, float l2pass)
+{
+    if((l1pass && !l2pass) || (!l1pass && l2pass))
+        return fakeRatePromptRateWeight_2l_23(l1pt, l1eta, l1pdgId, l1pass,
+                            l2pt, l2eta, l2pdgId, l2pass);
+    return 0;
+}
+
+float fakeRatePromptRateWeight_2l_23_2f(float l1pt, float l1eta, int l1pdgId, float l1pass,
+                            float l2pt, float l2eta, int l2pdgId, float l2pass)
+{
+    if(!l1pass && !l2pass)
+        return fakeRatePromptRateWeight_2l_23(l1pt, l1eta, l1pdgId, l1pass,
+                            l2pt, l2eta, l2pdgId, l2pass);
+    return 0;
+}
+
 float fakeRatePromptRateWeight_3l_ijk(float l1fr, float l1pr , bool l1pass,
 				      float l2fr, float l2pr , bool l2pass,
 				      float l3fr, float l3pr , bool l3pass,
@@ -1189,3 +1207,36 @@ float fakeRatePromptRateWeight_3l_ijk(float l1fr, float l1pr , bool l1pass,
  
   return weight;
 }
+
+
+
+float fakeRatePromptRateWeight_3l_ijk_1f(float l1fr, float l1pr , bool l1pass,
+				      float l2fr, float l2pr , bool l2pass,
+				      float l3fr, float l3pr , bool l3pass,
+				      int selhyp=-1, int selfs=111) {
+
+    if((!l1pass && l2pass && l3pass) || (l1pass && !l2pass && l3pass) || (l1pass && l2pass && !l3pass))
+		return fakeRatePromptRateWeight_3l_ijk(l1fr, l1pr, l1pass, l2fr, l2pr, l2pass, l3fr, l3pr, l3pass, selhyp, selfs);
+    return 0;
+}
+
+float fakeRatePromptRateWeight_3l_ijk_2f(float l1fr, float l1pr , bool l1pass,
+				      float l2fr, float l2pr , bool l2pass,
+				      float l3fr, float l3pr , bool l3pass,
+				      int selhyp=-1, int selfs=111) {
+
+    if((!l1pass && !l2pass && l3pass) || (l1pass && !l2pass && !l3pass) || (!l1pass && l2pass && !l3pass))
+		return fakeRatePromptRateWeight_3l_ijk(l1fr, l1pr, l1pass, l2fr, l2pr, l2pass, l3fr, l3pr, l3pass, selhyp, selfs);
+    return 0;
+}
+
+float fakeRatePromptRateWeight_3l_ijk_3f(float l1fr, float l1pr , bool l1pass,
+				      float l2fr, float l2pr , bool l2pass,
+				      float l3fr, float l3pr , bool l3pass,
+				      int selhyp=-1, int selfs=111) {
+
+    if(!l1pass && !l2pass && !l3pass)
+		return fakeRatePromptRateWeight_3l_ijk(l1fr, l1pr, l1pass, l2fr, l2pr, l2pass, l3fr, l3pr, l3pass, selhyp, selfs);
+    return 0;
+}
+
