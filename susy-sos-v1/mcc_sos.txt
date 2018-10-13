@@ -1,0 +1,11 @@
+LepGood1_(\w+)          : LepGood_\1[iLepSel[0] ] ; AlsoData
+LepGood2_(\w+)          : LepGood_\1[iLepSel[1] ] ; AlsoData
+LepGood3_(\w+)          : LepGood_\1[iLepSel[2] ] ; AlsoData
+LepGood4_(\w+)          : LepGood_\1[iLepSel[3] ] ; AlsoData
+nLepGood                : nLepSel                 ; AlsoData
+m2l\b                   : m2lSel                  ; AlsoData
+m3l\b                   : m3lSel                  ; AlsoData
+mZ1\b                   : mZ1Sel                  ; AlsoData
+minMllSFOS\b            : minMllSFOSSel           ; AlsoData
+maxMllSFOS\b            : maxMllSFOSSel           ; AlsoData
+Jet1_(\w+)              : JetSel_\1[0]            ; AlsoData

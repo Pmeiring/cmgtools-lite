@@ -1,0 +1,55 @@
+
+## the command
+cmd               : python mcPlots.py $(mca) $(cuts) $(pfile) -T $(tdirsstring)  --s2v --tree {TREENAME} -f --cmsprel '{LSPAM}' --legendWidth 0.20 --legendFontSize 0.035     {MCCS} {MACROS} {RATIO} -l {LUMI} --pdir {O} {FRIENDS} {PROCS} {PLOTS} {FLAGS}"
+
+## mode-related statements
+tdirsstring       : " ".join(["-P "+element.rstrip("/") for element in $(tdirs)])
+procsstring       : " ".join(["-p "+element.rstrip("/") for element in $(procs)])
+macrostring       : " ".join(["--load-macro "+element for element in $(macros)]) 
+friendsstring     : " ".join(["--Fs {P}/"+element for element in $(friends)])
+friendsdatastring : " ".join(["--FDs {P}/"+element for element in $(friends)])
+friendsmcstring   : " ".join(["--FMCs {P}/"+element for element in $(friends)])
+
+## containers to build
+containers+ : mca_2l_master
+containers+ : mca_2l_dy
+containers+ : mca_2l_tt
+containers+ : mca_2l_vv
+containers+ : mca_2l_fakes
+containers+ : mca_2l_rares
+
+## questions
+## * how the format of all these files and the cfg?
+## * how setting ``later you should replace this variable'', e.g. in cmd (don't wanna replace it right away)
+## * how to access variables, parameters, entities, also from different modes? HIERARCHY! TIDY UP!
+
+## * need to more closely relate to DAFFi infrastructure
+##   - data sample
+##   - selection sample (including substructure! basically applying multiple of those on top of each other, global weight..?)
+##   - input parameter
+##   - output parameter
+
+
+## $(name) always accesses a parameter of the same entity
+## $(entity.name) accesses a parameter of the entity "entity"
+## $(cfg.name) accesses a parameter of the entity cfg ? 
+
+## goal (for now):
+## * separate code and information
+##   - setup (modes and builds of containers)
+##   - cfg file (all cuts, plots, functions in macros, statements in mcc, etc.
+## * be able to run the thing
+## * make releases: bookkeep the runnings (store cfg, setup)
+
+## generalization to run datacards (c.f. susy-interface job_scanmaker.py)
+## * need a better run control (batch submission)
+## * need to choose (basically hard-coded) multiple modes within a scheme
+##   - it means, executing the same code multiple times within the same scope
+##   - within this scheme, maybe one also needs to address some of the processes DAFFi 
+##     would otherwise take care of (e.g. building the containers); e.g. scale factors
+##     only become available after a certain mode has been run -> how to make this parameter flow?!
+
+## proper modules only have the parameters, and a single container that is not dumped
+## pseudo-modules have the parameters and the schemes/modes, but not the containers
+
+

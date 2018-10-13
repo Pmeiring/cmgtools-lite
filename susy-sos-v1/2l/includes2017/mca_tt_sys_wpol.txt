@@ -1,0 +1,10 @@
+
+## WPOL UP
+## -----------------------------------------------------------
+prompt_tt_wpol_Up : TTJets_DiLepton + TTJets_DiLepton_ext : ScaleFactorTT*xsec*WpolWup   ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", FillColor=ROOT.kBlue-7, Label="tt(2l)", Friends=[('sf/t'\,'{P}/0_eventShapeWeight_v2/evVarFriend_{cname}.root')], SkipMe=True
+
+## WPOL DN
+## -----------------------------------------------------------
+prompt_tt_wpol_Dn : TTJets_DiLepton + TTJets_DiLepton_ext : ScaleFactorTT*xsec*WpolWdown ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", FillColor=ROOT.kBlue-7, Label="tt(2l)", Friends=[('sf/t'\,'{P}/0_eventShapeWeight_v2/evVarFriend_{cname}.root')], SkipMe=True
+
+

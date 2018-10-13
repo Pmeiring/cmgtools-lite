@@ -1,0 +1,51 @@
+
+## filters
+alwaystrue  : 1
+filtersAll  : $FASTSIM{1} $DATA{EventFilters17} $MC{1} 
+
+## final state
+dilep       : nLepGood == 2
+OS          : LepGood1_pdgId*LepGood2_pdgId<0
+
+## lepton section
+CRledlepPt  : 5 < LepGood1_pt
+sublepPt    : (fabs(LepGood2_pdgId)==13 && LepGood2_pt > 3.5) || (fabs(LepGood2_pdgId)==11 && LepGood2_pt > 5)
+twoFO       : ((abs(LepGood1_pdgId)==13 && LepGood1_softMuonId || (abs(LepGood1_pdgId)==11 && LepGood1_lostHits==0 && LepGood1_convVeto)) && abs(LepGood1_ip3d)<0.0175 && LepGood1_sip3d<2.5 && LepGood1_jetBTagCSV<0.46 && (LepGood1_relIso03*LepGood1_pt<20+300/LepGood1_pt)) && \
+              ((abs(LepGood2_pdgId)==13 && LepGood2_softMuonId || (abs(LepGood2_pdgId)==11 && LepGood2_lostHits==0 && LepGood2_convVeto)) && abs(LepGood2_ip3d)<0.0175 && LepGood2_sip3d<2.5 && LepGood2_jetBTagCSV<0.46 && (LepGood2_relIso03*LepGood2_pt<20+300/LepGood2_pt))
+twoTight    : ((0==1)||(LepGood1_isTightString)) && ((0==1)||(LepGood2_isTightString))
+sideband    : placeholder
+oneNotTight : !(LepGood1_isTightString) || !(LepGood2_isTightString) ; Disable=True
+oneLNT      : (!(LepGood1_isTightString) && (LepGood2_isTightString)) || ((LepGood1_isTightString) && !(LepGood2_isTightString)) ; Disable=True
+twoLNT      : !(LepGood1_isTightString) && !(LepGood2_isTightString)  ; Disable=True
+
+## lepton-related
+mll         : m2l>4 && m2l<50
+upsilonVeto : m2l<9 || m2l>10.5
+dilepPt     : pt2l>3
+
+## event-related
+minMET      : met_pt>125 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, met_pt, met_phi) > 125
+METoverHT   : (met_pt/(htJet25-LepGood1_pt-LepGood2_pt))>(2/3) && (met_pt/(htJet25-LepGood1_pt-LepGood2_pt)) < 1.4
+minHT       : (htJet25-LepGood1_pt-LepGood2_pt) > 100 
+ISRjet      : Jet1_id == 5 
+CRbtags     : nBJetLoose40 > 0  
+mtautau     : 0.>mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)||mass_tautau(met_pt,met_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi)>160.
+
+## to activate: low MET
+pt5sublep   : (fabs(LepGood2_pdgId)==13 && LepGood2_pt > 5) || (fabs(LepGood2_pdgId)==11 && LepGood2_pt > 5) ; Disable=True
+met125_met  : met_pt < 200                                                                                   ; Disable=True
+met125_mumu : abs(LepGood1_pdgId)==13 && abs(LepGood2_pdgId)==13                                             ; Disable=True
+met125_trig : $FASTSIM{1} $DATA{HLT_MuMuMET17} $MC{HLT_MuMuMET17}                                            ; Disable=True
+###met125_run  : (!isData) || run >= 274954                                                                     ; Disable=True ### not needed
+
+## to activate: high MET
+met200_met1 : met_pt > 200 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, met_pt, met_phi) > 200 ; Disable=True
+met200_trig : $FASTSIM{1} $DATA{HLT_HighMET17} $MC{HLT_HighMET17}                                            ; Disable=True
+
+
+
+
+
+
+
+

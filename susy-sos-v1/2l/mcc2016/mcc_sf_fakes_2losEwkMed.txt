@@ -1,0 +1,4 @@
+##ScaleFactor1F: 1; AlsoData
+##ScaleFactor2F: 1; AlsoData
+ScaleFactor1F: 0.89; AlsoData
+ScaleFactor2F: 1.73; AlsoData

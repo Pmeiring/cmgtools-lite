@@ -1,0 +1,7 @@
+alwaystrue  : 1
+dilep       : nLepGood >= 2
+ledlepPt    : 5 < LepGood1_pt
+twoFO       : ((abs(LepGood1_pdgId)==13 && LepGood1_ICHEPsoftMuonId || (abs(LepGood1_pdgId)==11 && eleWPVVL(LepGood1_pt,LepGood1_etaSc,LepGood1_mvaIdSpring15) && LepGood1_lostHits==0 && LepGood1_convVeto)) && abs(LepGood1_ip3d)<0.0175 && LepGood1_sip3d<2.5 && LepGood1_jetBTagCSV<0.46 && (LepGood1_relIso03*LepGood1_pt<20+300/LepGood1_pt)) && \
+              ((abs(LepGood2_pdgId)==13 && LepGood2_ICHEPsoftMuonId || (abs(LepGood2_pdgId)==11 && eleWPVVL(LepGood2_pt,LepGood2_etaSc,LepGood2_mvaIdSpring15) && LepGood2_lostHits==0 && LepGood2_convVeto)) && abs(LepGood2_ip3d)<0.0175 && LepGood2_sip3d<2.5 && LepGood2_jetBTagCSV<0.46 && (LepGood2_relIso03*LepGood2_pt<20+300/LepGood2_pt))
+mll         : m2l>4
+minMET      : met_pt>75

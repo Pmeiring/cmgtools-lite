@@ -1,0 +1,14 @@
+
+## DATA
+## -----------------------------------------------------------
+data : MET_2017B        ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : MET_2017C        ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : MET_2017D        ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : MET_2017E        ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : MET_2017F        ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : DoubleMuon_2017B ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : DoubleMuon_2017C ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : DoubleMuon_2017D ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : DoubleMuon_2017E ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+data : DoubleMuon_2017F ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Data"
+

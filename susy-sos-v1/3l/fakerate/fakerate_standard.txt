@@ -1,0 +1,8 @@
+weight    : 1.0
+cut-change: placeholder : 1
+
+load-histo: FR2_mu : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_QCD_mu_data_comb
+load-histo: FR2_el : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_QCD_el_data_comb
+load-histo: FR3_mu : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_mu_PromptBkg
+load-histo: FR3_el : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_el_PromptBkg
+

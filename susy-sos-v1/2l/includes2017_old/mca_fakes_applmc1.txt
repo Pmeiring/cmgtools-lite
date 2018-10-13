@@ -1,0 +1,20 @@
+
+## FAKES (SEMI-DD)
+## -----------------------------------------------------------
+fakes_applmc1   : WJetsToLNu_HT70to100                                 : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_applmc1   : WJetsToLNu_HT100to200_ext                            : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WJetsToLNu_HT200to400_ext+WJetsToLNu_HT200to400_ext2 : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WJetsToLNu_HT400to600+WJetsToLNu_HT400to600_ext      : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WJetsToLNu_HT600to800+WJetsToLNu_HT600to800_ext      : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WJetsToLNu_HT800to1200_ext                           : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WJetsToLNu_HT1200to2500                              : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WJetsToLNu_HT2500toInf+WJetsToLNu_HT2500toInf_ext    : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : TTJets_SingleLeptonFromTbar                          : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : TTJets_SingleLeptonFromT                             : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : TToLeptons_sch                                       : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : T_tch_powheg                                         : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : TBar_tch_powheg                                      : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WZTo1L3Nu                                            : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WZTo1L1Nu2Q                                          : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc1   : WWToLNuQQ                                            : ScaleFactor1F*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc1.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+

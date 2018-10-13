@@ -1,0 +1,3 @@
+## Moriond17 values
+ScaleFactorDY: 0.99; AlsoData
+ScaleFactorTT: 0.94; AlsoData
