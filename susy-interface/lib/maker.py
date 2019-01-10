@@ -312,11 +312,11 @@ class Maker():
 		if len(args) != len(self.keys): 
 			print "error, not all arguments given"
 			return -1
-		dict = {}
+		adict = {}
 		for i,k in enumerate(self.keys):
-			dict[k] = args[i]
+			adict[k] = args[i]
 		multi = " -j %d"%(self.options.jobs) if self.options.jobs>0 else ""
-		return self.base.format(**dict) + multi
+		return self.base.format(**adict) + multi
 	def parseBase(self):
 		self.keys = filter(lambda x: x, [i[1] for i in Formatter().parse(self.base)])
 	def prepareSplit(self, samplename):

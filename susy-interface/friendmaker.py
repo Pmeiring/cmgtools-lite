@@ -39,6 +39,8 @@ options.modules = func.splitList(options.modules)
 options.accept  = func.splitList(options.accept )
 options.exclude = func.splitList(options.exclude)
 mm              = maker.Maker("friendmaker", base, args, options, parser.defaults)
+
+print mm.getFriendModules()
 mm.loadNEvtSample()
 
 flags = mm.getOption("flags", [])
@@ -49,6 +51,7 @@ for module in mm.getFriendModules():
 	mm.workdir = mm.cmssw +"/src/CMGTools/TTHAnalysis/macros"
 	output     = mm.outdir +"/"+ module
 	func.mkdir(output,False)
+	print 'mkdir ', output
 	func.mkdir(output +"/log",False)
 	if options.bk: func.mkdir(output +"/ref",False)
 
@@ -100,15 +103,21 @@ for module in mm.getFriendModules():
 		if options.direct and options.queue and not options.noSplit:
 			mm.prepareSplit(d)
 			mm.splittedSubmit(attr, d, False)
+			print "preparing direct"
 		else:
 			mm.submit(attr, d, False)
+			print "preparing split"
 
+		print "done submit (preparing)"
 	if options.bk and file:
 		func.cp(mm.cmssw+"/src/CMGTools/TTHAnalysis/macros/prepareEventVariablesFriendTree.py", output+"/ref")
 		func.cp(mm.cmssw+"/src/CMGTools/TTHAnalysis/python/tools/"+file                       , output+"/ref")
+	print "done bk"
 
 mm.runJobs()
+print "done runjobs"
 mm.clearJobs()
+print "done clearjobs"
 
 ## finalize the production
 if options.direct and options.finalize and not options.noSplit:
