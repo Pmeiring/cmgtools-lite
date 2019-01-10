@@ -9,8 +9,10 @@ class Job():
 		self.commands   = commands
 		self.options    = options
 		self.forceLocal = forceLocal
-		testqueue       = ["8nm", "1nh", "8nh", "1nd", "2nd", "1nw", "2nw"]
-		self.template   = "lxbatch_runner.sh"
+#		testqueue       = ["8nm", "1nh", "8nh", "1nd", "2nd", "1nw", "2nw"]
+#		self.template   = "lxbatch_runner.sh"
+		testqueue = ["espresso", "microcentury", "longlunch", "workday", "tomorrow", "testmatch", "nextweek"]
+		self.template   = "htcondor_runner.sh"
 		if "t3ui" in os.environ["HOSTNAME"]:
 			testqueue = ["short.q", "all.q", "long.q"]
 			self.template = "psibatch_runner.sh"
@@ -18,6 +20,7 @@ class Job():
 			testqueue = ["batch"]
 			self.template = "oviedobatch_runner.sh"
 		self.script     = self.master.srcpath +"/submitJob_"+name+".sh"
+		self.HTCsub     = self.master.srcpath +"/HTCsub_"+name+".sh"
 		if self.options.queue and not any([t in self.options.queue for t in testqueue]):
 		#if self.options.queue and not self.options.queue in testqueue:
 			self.master.error("Cannot find queue '"+self.options.queue+"' on this system.")
@@ -35,6 +38,9 @@ class Job():
 		#elif self.options.queue in ["batch"]:
 			jobLine = bash("qstat "+str(self.batchId))
 			toReturn = not(jobLine=="" or "Unknown Job Id Error" in jobLine)
+		elif any([t in self.options.queue for t in ["espresso", "microcentury", "longlunch", "workday", "tomorrow", "testmatch", "nextweek"]]):
+			jobLine = bash("condor_q "+str(self.batchId))
+			toReturn = not(jobLine=="" or "Job <"+str(self.batchId)+"> is not found" in jobLine)
 		else:
 			jobLine = bash("bjobs "+str(self.batchId))
 			toReturn = not(jobLine=="" or "Job <"+str(self.batchId)+"> is not found" in jobLine)
@@ -71,15 +77,32 @@ class Job():
 			if any([t in self.options.queue for t in ["all.q", "long.q", "short.q"]]):
 			#if self.options.queue in ["all.q", "long.q", "short.q", "all.q@t3wn59.psi.ch"]:
 				super = "qsub -q {queue} -N SPM_{name} "
+				super += "-o {dir}/submitJob_{name}.out -e {dir}/submitJob_{name}.err "
+				self.batchId = self.runCmd(super + self.script)
 			elif any([t in self.options.queue for t in ["batch"]]):
 			#elif self.options.queue in ["batch"] and os.path.isdir('/pool/ciencias/'):
 				super = "qsub -q {queue} -N SPM_{name} "
-			super += "-o {dir}/submitJob_{name}.out -e {dir}/submitJob_{name}.err "
-			super = super.format(queue=self.options.queue, name=self.name, dir=self.master.logpath)
+				super += "-o {dir}/submitJob_{name}.out -e {dir}/submitJob_{name}.err "
+				self.batchId = self.runCmd(super + self.script)
+			elif any([t in self.options.queue for t in ["espresso", "microcentury", "longlunch", "workday", "tomorrow", "testmatch", "nextweek"]]):
+				template = [l.strip("\n") for l in open("susy-interface/scripts/htcondor_submitter.sh").readlines()]
+				f = open(self.HTCsub, "w")
+				for line in template:
+					line = line.replace("[SCRIPT]"       , self.script   )
+					line = line.replace("[NAME]"       , self.name   )
+					line = line.replace("[QUEUE]"       , self.options.queue   )
+					line = line.replace("[DIR]"       , self.master.logpath   )
+					f.write(line+"\n")
+				f.close()
+				super = "condor_submit "+str(self.HTCsub)
+				self.runCmd(super)
+				##to be fixed for monitoring htcondor jobs
+				self.batchId = 0
+				
 		else:
 			super = "source "
-		self.batchId = self.runCmd(super + self.script)
 	def runCmd(self, theCmd):
+		print "running command ",theCmd
 		jobLine = bash(theCmd)
 		theId   = -1
 		if not self.options.queue or self.forceLocal: return theId
@@ -87,7 +110,8 @@ class Job():
 		elif any([t in self.options.queue for t in ["batch"]                     ]): theId=int(jobLine.split('.')[0])
 		#if   self.options.queue in ["all.q", "long.q", "short.q"]                : theId=int(jobLine.split()[2])
 		#elif self.options.queue in ["batch"] and os.path.isdir('/pool/ciencias/'): theId=int(jobLine.split('.')[0])
-		else: theId = int(jobLine.split()[1].strip("<").strip(">"))
+		###else: theId = int(jobLine.split()[1].strip("<").strip(">"))
+		else: theId = 0
 		return theId
 
 
