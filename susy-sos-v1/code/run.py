@@ -20,7 +20,7 @@ class Statement:
 		self.raw 
 
 class Parameter:
-	def __init__(self, module, name, value, options=[])
+	def __init__(self, module, name, value, options=[]):
 		self.module  = module
 		self.name    = name
 		self.value   = value
@@ -44,9 +44,9 @@ class Cfg:
 			if line[0:1]=="#": continue
 			if len(line)==0: continue
 			sl = [s.strip() for s in line.split(":")]
-			self.params.append(Parameter(sl[0], sl[1], self.parseOpts(sl[2] if len(sl)>2 else ""))
+			self.params.append(Parameter(sl[0], sl[1], self.parseOpts(sl[2] if len(sl)>2 else "")))
 #parsing of + and = symbols
-
+					   
 
 	def parseOpts(self, string):
 		if len(string)==0: return []
@@ -92,7 +92,7 @@ class QuasiModule:
 		for parameter in self.cfg.parameters:
 			self.parameters.append(QuasiModuleParameter(self, parameter))
 
-	def loadMode(self):
+#	def loadMode(self):
 
 
 	def getParam(self, name):
@@ -139,7 +139,7 @@ class Scheme:
 		self.build()
 		cmd(self.cmd)
 
-	def build(self):
+#	def build(self):
 		## building the scheme (sequence of general commands + mode commands)
 
 
@@ -192,7 +192,7 @@ run.execute()
 ## how to run the plotter script?
 
 ## ingredients
-   => plotter command
+###   => plotter command
 
 ## generate the plotter 
 
@@ -216,30 +216,30 @@ class Cfg:
 		if len(param)==1: return param[0]
 		return None
 
-	def load(self):
- 324         if not self.path: return
- 325         classes        = listClasses()
- 326         self.objects   = []
- 327         self.variables = []
- 328         for line in open(self.path,"r"):
- 329             line = line.strip().strip("\n").strip()
- 330             if line[0:1]=="#" or len(line)==0: continue
- 331             sl   = [ss .strip() for ss  in line.split(":")]
- 332             ss   = [sss.strip() for sss in sl[1].split(";")]
- 333             if sl[0] in classes:
- 334                 varr = []; raw = []
- 335                 if len(ss)>1: raw = [ssss.strip() for ssss in ss[1].replace("\\,",";").split(",")]
- 336                 for opt in raw:
- 337                     ssl = opt.split("=")
- 338                     if len(ssl)==1: print "adding True to", ssl[0]; ssl.append("True")
- 339                     isList = (ssl[0][-1:]=="+")
- 340                     isDict = (ssl[0][-1:]=="#")
+##	def load(self):
+## 324         if not self.path: return
+## 325         classes        = listClasses()
+## 326         self.objects   = []
+## 327         self.variables = []
+## 328         for line in open(self.path,"r"):
+## 329             line = line.strip().strip("\n").strip()
+## 330             if line[0:1]=="#" or len(line)==0: continue
+## 331             sl   = [ss .strip() for ss  in line.split(":")]
+## 332             ss   = [sss.strip() for sss in sl[1].split(";")]
+## 333             if sl[0] in classes:
+## 334                 varr = []; raw = []
+## 335                 if len(ss)>1: raw = [ssss.strip() for ssss in ss[1].replace("\\,",";").split(",")]
+## 336                 for opt in raw:
+## 337                     ssl = opt.split("=")
+## 338                     if len(ssl)==1: print "adding True to", ssl[0]; ssl.append("True")
+## 339                     isList = (ssl[0][-1:]=="+")
+## 340                     isDict = (ssl[0][-1:]=="#")
 
 
 
 
-class TreeDrawer:
-	def __init__(self, cfg, options):
+##class TreeDrawer:
+##	def __init__(self, cfg, options):
 
 
 
