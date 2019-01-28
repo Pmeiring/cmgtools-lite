@@ -6,7 +6,9 @@ BEGIN::sos2l16
   cutfile      := susy-sos-v1/2l/cuts_sos_2016.txt
   plotfile     := susy-sos-v1/2l/plots_sos.txt
   sysfile      := susy-sos-v1/systs_sos_2016.txt
-  sfriends    +:= 0_both3dlooseClean_v2
+  sfriends    +:= both3dloose
+#  sfriends    +:= 0_both3dlooseClean_v2
+#   srfriends    +:= 0_both3dlooseClean_v2
   smcfriends  +:= 0_eventBTagWeight_v2
   sfsfriends  +:= 0_eventBTagWeightFS_v1;0_eventShapeWeight_v2
   macros      +:= susy-sos-v1/functionsSOS.cc ; susy-sos-v1/functionsSF.cc ; susy-sos-v1/functionsPUW.cc

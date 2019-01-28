@@ -5,7 +5,7 @@ today = datetime.datetime.now().strftime("%Y-%m-%d")
 
 ## == configuration =================================
 
-tag  = "fullstatusFix"
+tag  = "vtavolarTest"
 
 pfx  = ""
 #####pfx  = "_sc"
@@ -30,12 +30,14 @@ model   = "TChiWZ"
 
 treedirs = {
             ###2016: "/data1/botta/trees_SOS_010217"  ,
-            2016: "/data1/cheidegg/trees_SOS_010217_skimmed",
-            2017: "/data1/peruzzi/trees_SOS_030518"         ,
+###            2016: "/data1/cheidegg/trees_SOS_010217_skimmed",
+            2016: "/afs/cern.ch/user/p/peruzzi/work/sostrees/trees_SOS_010217/;/afs/cern.ch/work/v/vtavolar/SusySOSSW_2/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/",
+##            2016: "/afs/cern.ch/user/v/vtavolar/SusySOS/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/botta/trees_SOS_010217/",
+            2017: "/afs/cern.ch/user/v/vtavolar/SusySOS/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/peruzzi/trees_SOS_030518"         ,
            }
 
-plotdir  = "/afs/cern.ch/user/c/cheidegg/www/heppy"
-carddir  = "/afs/cern.ch/work/c/cheidegg/scratch"
+plotdir  = "/afs/cern.ch/user/v/vtavolar/www/SusySOS"
+carddir  = "/afs/cern.ch/user/v/vtavolar/work/SusySOS/cards"
 
 scales = [
           #("_noSF", "--replInMccs mcc2016/mcc_sf_met125.txt:mcc_sf_met.txt --replInMccs mcc2016/mcc_sf_met200.txt:mcc_sf_met.txt --replInMccs mcc2017/mcc_sf_met125.txt:mcc_sf_met.txt --replInMccs mcc2017/mcc_sf_met200.txt:mcc_sf_met.txt"),
