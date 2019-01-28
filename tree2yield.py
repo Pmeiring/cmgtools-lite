@@ -152,6 +152,7 @@ class TreeToYield:
         self._settings = settings
         loadMCCorrections(options)            ## make sure this is loaded
         self._mcCorrs = globalMCCorrections() ##  get defaults
+        self._init() ##init tree
         if 'SkipDefaultMCCorrections' in settings: ## unless requested to 
             self._mcCorrs = []                     ##  skip them
         if self._isdata: 
@@ -249,22 +250,38 @@ class TreeToYield:
             self._tree.SetAlias(ali[0],ali[1])
         self._friends = []
         friendOpts = self._options.friendTrees[:]
+        print "friendOpts, ",friendOpts
         friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._options.friendTreesSimple]
         friendOpts += (self._options.friendTreesData if self._isdata else self._options.friendTreesMC)
         friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in (self._options.friendTreesDataSimple if self._isdata else self._options.friendTreesMCSimple) ]
         if 'Friends' in self._settings: friendOpts += self._settings['Friends']
         if 'FriendsSimple' in self._settings: friendOpts += [ ('sf/t', d+"/evVarFriend_{cname}.root") for d in self._settings['FriendsSimple'] ]
+        print "friendOpts, ",friendOpts
         for tf_tree,tf_file in friendOpts:
 #            print 'Adding friend',tf_tree,tf_file
             basepath = None
+            tf_filename = None
+            print "tree2yield"
+            print self._options.path
+            print self._cname
             for treepath in getattr(self._options, 'path', []):
-                if self._cname in os.listdir(treepath):
-                    basepath = treepath
+                print 'treepath ',treepath
+                tf_file_s = tf_file
+                tf_filename_s = tf_file_s.format(name=self._name, cname=self._cname, P=treepath)
+                print "looking for ",tf_filename_s
+                if os.path.exists(tf_filename_s):
+                    print "FOUND! ",tf_filename_s
+                    tf_filename = tf_file.format(name=self._name, cname=self._cname, P=treepath)
                     break
-            if not basepath:
-                raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, cname, repr(options.path)))
-
-            tf_filename = tf_file.format(name=self._name, cname=self._cname, P=basepath)
+            if not tf_filename:
+                raise RuntimeError("%s -- ERROR: Friend tree file not found in paths")
+#                if self._cname in os.listdir(treepath):
+#                    basepath = treepath
+#                    print "chosen basepath ",basepath
+#                    break
+#            if not basepath:
+#                raise RuntimeError("%s -- ERROR: %s process not found in paths (%s)" % (__name__, cname, repr(options.path)))
+ #           tf_filename = tf_file.format(name=self._name, cname=self._cname, P=basepath)
             tf = self._tree.AddFriend(tf_tree, tf_filename),
             self._friends.append(tf)
         self._isInit = True
