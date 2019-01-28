@@ -314,7 +314,11 @@ class Maker():
 			return -1
 		adict = {}
 		for i,k in enumerate(self.keys):
+			print "i ",i
+			print "k ",k
 			adict[k] = args[i]
+			print "adict[k] ",adict[k]
+			print "args[i] ",args[i]
 		multi = " -j %d"%(self.options.jobs) if self.options.jobs>0 else ""
 		return self.base.format(**adict) + multi
 	def parseBase(self):
@@ -336,6 +340,7 @@ class Maker():
 			return
 		self.registerJob(name, [cmd], forceLocal, collect, work, src)
 	def registerJob(self, name, commands, forceLocal = False, collect = 0, work = None, src = None):
+		print "registerJob"
 		if not hasattr(self, "jobs"    ): self.jobs = []
 		if not hasattr(self, "jobcount"): self.jobcount = -1
 		self.jobcount += 1
@@ -372,6 +377,7 @@ class Maker():
 	def submit(self, args, name = "maker", run = True, forceLocal = False):
 		self.talk("Preparing job '"+name+"'")
 		cmd = self.makeCmd(args)
+		print "cmd ",cmd
 		if run: self.runCmd     (cmd, name, forceLocal)
 		else  : self.registerCmd(cmd, name, forceLocal)
 	def splittedSubmit(self, args, name = "maker", run = True, forceLocal = False, cFlag="-c", nFlag="-N"):

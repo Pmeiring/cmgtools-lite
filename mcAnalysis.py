@@ -31,6 +31,8 @@ def _runGetEntries(args):
 
 class MCAnalysis:
     def __init__(self,samples,options):
+        print "mca samples ", samples
+        print "mca options ",options
         self._options = options
         self._allData     = {}
         self._data        = []
@@ -51,6 +53,7 @@ class MCAnalysis:
         self.readMca(samples,options)
 
     def readMca(self,samples,options):
+        print "samples mca ",samples
         for line in open(samples,'r'):
             if re.match("\s*#.*", line): continue
             line = re.sub(r"(?<!\\)#.*","",line)  ## regexp black magic: match a # only if not preceded by a \!
@@ -126,7 +129,10 @@ class MCAnalysis:
                 objname  = extra["ObjName"]  if "ObjName"  in extra else options.obj
 
                 basepath = None
+                print options.path
                 for treepath in options.path:
+                    print treepath
+                    print cname
                     if os.path.exists(treepath+"/"+cname):
                         basepath = treepath
                         break
@@ -147,7 +153,10 @@ class MCAnalysis:
                     rootfile = open(rootfile+".url","r").readline().strip()
                 pckfile = basepath+"/%s/skimAnalyzerCount/SkimReport.pck" % cname
 
-                tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname); ttys.append(tty)
+                tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname)
+                print "tty ",tty
+                ttys.append(tty)
+                print "ttys ",ttys
                 if signal: 
                     self._signals.append(tty)
                     self._isSignal[pname] = True
@@ -518,6 +527,9 @@ class MCAnalysis:
         else:
             from multiprocessing import Pool
             pool = Pool(self._options.jobs)
+            print pool
+            print func
+            print self._options
             retlist = pool.map(func, tasks, 1)
             pool.close()
             pool.join()

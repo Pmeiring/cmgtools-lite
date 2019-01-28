@@ -686,6 +686,7 @@ class PlotMaker:
         elist = (self._options.elist == True) or (self._options.elist == 'auto' and len(plots.plots()) > 2)
         for subname, title, cut in sets:
             print "cut set: ",title
+            print "elist: ",elist
             if elist: mca.applyCut(cut)
             dir = self._dir
             if subname:
@@ -1250,7 +1251,10 @@ if __name__ == "__main__":
     addPlotMakerOptions(parser)
     parser.add_option("-o", "--out", dest="out", default=None, help="Output file name. by default equal to plots -'.txt' +'.root'");
     (options, args) = parser.parse_args()
+    print "mcPlots.py: options ", options
+    print "mcPlots.py: args ", args
     mca  = MCAnalysis(args[0],options)
+    print "mca ",mca
     cuts = CutsFile(args[1],options)
     plots = PlotFile(args[2],options)
     outname  = options.out if options.out else (args[2].replace(".txt","")+".root")
@@ -1275,6 +1279,9 @@ if __name__ == "__main__":
     #fcut.write(cuts); fcut.write("\n"); fcut.close()
     outfile  = ROOT.TFile(outname,"RECREATE")
     plotter = PlotMaker(outfile,options)
+    print "mca ",mca
+    print "cuts, ",cuts
+    print "plots, ",plots
     plotter.run(mca,cuts,plots)
     outfile.Close()
 

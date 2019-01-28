@@ -61,6 +61,7 @@ friends = mm.collectFriends()
 sl      = mm.getVariable("lumi","12.9").replace(".","p")
 
 for r in range(len(mm.regions)):
+	print "region ",r
 	mm.iterateRegion()
 
 	mccs    = mm.collectMCCs  ()
@@ -73,12 +74,16 @@ for r in range(len(mm.regions)):
 	scenario = mm.getScenario(True)
 
 	for p in plots:
+		print "p ",p
 		for m in makes:
+			print "m, ",m
 			output = mm.outdir +"/plot/"+ scenario +"/"+ sl +"fb/"+ p +"/"+ m
 			func.mkdir(output)
-	
 			procs   = collectProcesses(mm, m)
+			print "procs ",procs
 			pplots  = collectPPlots   (mm, p, options.customPlots)
+			print "pplots ",pplots
+
 
 			mm.submit([mm.getVariable("mcafile",""), mm.getVariable("cutfile",""), mm.getVariable("plotfile",""), mm.treedirs, mm.getVariable("treename","treeProducerSusyMultilepton"), options.lspam, mccs, macros, ratio, mm.getVariable("lumi","12.9"), output, friends, procs, pplots, flags],mm.region.name+"_"+p+"_"+m,False)
 
