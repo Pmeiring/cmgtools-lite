@@ -29,7 +29,8 @@ class Job():
 		self.commands += commands
 	def batchRuns(self):
 		if hasattr(self, "batchDone"): return self.batchDone
-		if self.batchId==-1 or not self.options.queue: return False
+#		if self.batchId==-1 or not self.options.queue: return False
+		if not self.options.queue: return False
 		if any([t in self.options.queue for t in ["all.q", "long.q", "short.q"]]):
 		#if self.options.queue in ["all.q", "long.q", "short.q", "all.q@t3wn59.psi.ch"]:
 			jobLine = bash("qstat -j "+str(self.batchId))
@@ -73,6 +74,7 @@ class Job():
 	def run(self):
 		self.prepareCommands() # here, because of the add commands method
 		if self.options.queue and not self.forceLocal:
+			print "submitting to queue"
 			super = "bsub -q {queue} -J SPM_{name} "
 			if any([t in self.options.queue for t in ["all.q", "long.q", "short.q"]]):
 			#if self.options.queue in ["all.q", "long.q", "short.q", "all.q@t3wn59.psi.ch"]:
@@ -101,6 +103,7 @@ class Job():
 				
 		else:
 			super = "source "
+			self.batchId = self.runCmd(super + self.script)
 	def runCmd(self, theCmd):
 		print "running command ",theCmd
 		jobLine = bash(theCmd)
