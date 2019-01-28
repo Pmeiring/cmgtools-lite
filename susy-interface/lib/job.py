@@ -80,11 +80,13 @@ class Job():
 			#if self.options.queue in ["all.q", "long.q", "short.q", "all.q@t3wn59.psi.ch"]:
 				super = "qsub -q {queue} -N SPM_{name} "
 				super += "-o {dir}/submitJob_{name}.out -e {dir}/submitJob_{name}.err "
+				super = super.format(queue=self.options.queue, name=self.name, dir=self.master.logpath)
 				self.batchId = self.runCmd(super + self.script)
 			elif any([t in self.options.queue for t in ["batch"]]):
 			#elif self.options.queue in ["batch"] and os.path.isdir('/pool/ciencias/'):
 				super = "qsub -q {queue} -N SPM_{name} "
 				super += "-o {dir}/submitJob_{name}.out -e {dir}/submitJob_{name}.err "
+				super = super.format(queue=self.options.queue, name=self.name, dir=self.master.logpath)
 				self.batchId = self.runCmd(super + self.script)
 			elif any([t in self.options.queue for t in ["espresso", "microcentury", "longlunch", "workday", "tomorrow", "testmatch", "nextweek"]]):
 				template = [l.strip("\n") for l in open("susy-interface/scripts/htcondor_submitter.sh").readlines()]
