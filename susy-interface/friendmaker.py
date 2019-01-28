@@ -31,8 +31,9 @@ parser.add_option("--bk"          , dest="bk"     , action="store_true", default
 parser.add_option("--log"         , dest="log"    , action="store_true", default=False, help="Put log file into subdirectory 'log' in output directory")
 parser.add_option("-F", "--force" , dest="force"  , action="store_true", default=False, help="Run the module even if it already exists")
 parser.add_option("--finalize"    , dest="finalize", action="store_true", default=False, help="Merge the chunks and check if everything is correct")
+parser.add_option("-I"    , "--import", dest="imports", type="string",  default=[], action="append", help="Specify path for module import")
 
-base = "python prepareEventVariablesFriendTree.py {T} {O} --tra2 --tree {TREENAME} --vector -T sf -d {SAMPLES} -m {MODULES} {FRIENDS} {ADDITIONAL} -I CMGTools.TTHAnalysis.tools.multilepFriendTreeProducersToCleanup {FLAGS}"
+base = "python prepareEventVariablesFriendTree.py {T} {O} --tra2 --tree {TREENAME} --vector -T sf -d {SAMPLES} -m {MODULES} {FRIENDS} {ADDITIONAL} -I CMGTools.TTHAnalysis.tools.multilepFriendTreeProducersToCleanup  {IMPORTS} {FLAGS}"
 (options, args) = parser.parse_args()
 options         = maker.splitLists(options)
 options.modules = func.splitList(options.modules)
@@ -98,8 +99,11 @@ for module in mm.getFriendModules():
                                 additional += " --env oviedo"
 
 			if options.log: additional += " --log "+output+"/log"
+		theimports = []
+		if options.imports is not []:
+			theimports = "-I "+" -I ".join(options.imports)
 
-		attr = [mm.treedir, output, mm.getVariable("treename","treeProducerSusyMultilepton"), d, module, friends, additional, " ".join(flags)]
+		attr = [mm.treedir, output, mm.getVariable("treename","treeProducerSusyMultilepton"), d, module, friends, additional, theimports, " ".join(flags)]
 		if options.direct and options.queue and not options.noSplit:
 			mm.prepareSplit(d)
 			mm.splittedSubmit(attr, d, False)
@@ -124,6 +128,7 @@ if options.direct and options.finalize and not options.noSplit:
 	## need direct because otherwise job submission within job submission
 
 	for module in mm.getFriendModules():
+		output     = mm.outdir +"/"+ module
 		mm.workdir = output
 		func.cmd("chmod 755 "+mm.cmssw+"/src/CMGTools/TTHAnalysis/macros/leptons/friendChunkAdd.sh")
 		cmd = mm.cmssw +"/src/CMGTools/TTHAnalysis/macros/leptons/friendChunkAdd.sh evVarFriend ."
