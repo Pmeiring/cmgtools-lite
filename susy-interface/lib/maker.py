@@ -394,8 +394,8 @@ class Maker():
 	def talk(self, message, isError=False):
 	    if isError:
 	        print "ERROR: "+message
-	        print "Aborting..."
-	        sys.exit()
+##	        print "Aborting..."
+##	        sys.exit()
 	    print timestamp()+": "+message
 	def useVar(self, key, value):
 		self.use[key] = value

@@ -1,5 +1,6 @@
 import os
 from functions import *
+import time
 
 class Job():
 	def __init__(self, master, name, commands, options, forceLocal = False, work = None, src = None):
@@ -40,8 +41,8 @@ class Job():
 			jobLine = bash("qstat "+str(self.batchId))
 			toReturn = not(jobLine=="" or "Unknown Job Id Error" in jobLine)
 		elif any([t in self.options.queue for t in ["espresso", "microcentury", "longlunch", "workday", "tomorrow", "testmatch", "nextweek"]]):
-			jobLine = bash("condor_q "+str(self.batchId))
-			toReturn = not(jobLine=="" or "Job <"+str(self.batchId)+"> is not found" in jobLine)
+			jobLine = bash("condor_q "+str(self.batchId)+" -af JobStatus")
+			toReturn = not(jobLine=="" or jobLine=="3" or jobLine=="4") #jobStatus is not Removed (3) or Completed (4). Sumbission_error (6)?
 		else:
 			jobLine = bash("bjobs "+str(self.batchId))
 			toReturn = not(jobLine=="" or "Job <"+str(self.batchId)+"> is not found" in jobLine)
@@ -94,14 +95,32 @@ class Job():
 				for line in template:
 					line = line.replace("[SCRIPT]"       , self.script   )
 					line = line.replace("[NAME]"       , self.name   )
-					line = line.replace("[QUEUE]"       , self.options.queue   )
+					line = line.replace("[QUEUE]"       , '"'+self.options.queue+'"'   )
 					line = line.replace("[DIR]"       , self.master.logpath   )
 					f.write(line+"\n")
 				f.close()
 				super = "condor_submit "+str(self.HTCsub)
 				self.runCmd(super)
 				##to be fixed for monitoring htcondor jobs
-				self.batchId = 0
+				jobIdCmd = "condor_wait %s/job.%s.log -status -wait 0.01" % (self.master.logpath, self.name)
+				jobIdOut = bash(jobIdCmd)
+				print "wait out ",jobIdOut
+				if jobIdOut == "":
+					print "jobIdOut is empty"
+					ntry=0
+					while(ntry<5 and jobIdOut==""):
+						print "sleeping 1 and trying again for the %s time"%ntry
+						time.sleep(1)
+						jobIdOut = bash(jobIdCmd)
+						ntry=ntry+1
+						print "now jobIdOut is", jobIdOut
+					
+				if jobIdOut == "":
+					print "Could not set job Id for this job, setting to 0"
+					self.batchId = 0
+				else:
+					self.batchId = jobIdOut.split()[0][:-2]
+				print "condor jobId ",self.batchId
 				
 		else:
 			super = "source "
