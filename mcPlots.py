@@ -1254,7 +1254,7 @@ if __name__ == "__main__":
     print "mcPlots.py: options ", options
     print "mcPlots.py: args ", args
     mca  = MCAnalysis(args[0],options)
-    print "mca ",mca
+#    print "mca ",mca
     cuts = CutsFile(args[1],options)
     plots = PlotFile(args[2],options)
     outname  = options.out if options.out else (args[2].replace(".txt","")+".root")
@@ -1279,7 +1279,7 @@ if __name__ == "__main__":
     #fcut.write(cuts); fcut.write("\n"); fcut.close()
     outfile  = ROOT.TFile(outname,"RECREATE")
     plotter = PlotMaker(outfile,options)
-    print "mca ",mca
+ #   print "mca ",mca
     print "cuts, ",cuts
     print "plots, ",plots
     plotter.run(mca,cuts,plots)

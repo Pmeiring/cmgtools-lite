@@ -154,7 +154,7 @@ class MCAnalysis:
                 pckfile = basepath+"/%s/skimAnalyzerCount/SkimReport.pck" % cname
 
                 tty = TreeToYield(rootfile, options, settings=extra, name=pname, cname=cname, objname=objname)
-                print "tty ",tty
+#                print "tty ",tty
                 ttys.append(tty)
                 print "ttys ",ttys
                 if signal: 

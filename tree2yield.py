@@ -152,7 +152,7 @@ class TreeToYield:
         self._settings = settings
         loadMCCorrections(options)            ## make sure this is loaded
         self._mcCorrs = globalMCCorrections() ##  get defaults
-        self._init() ##init tree
+        ##self._init() ##init tree
         if 'SkipDefaultMCCorrections' in settings: ## unless requested to 
             self._mcCorrs = []                     ##  skip them
         if self._isdata: 
