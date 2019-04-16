@@ -115,7 +115,8 @@ def openSkimReports():
 						break
 				f.close()
 				break
-	return [e/tote for e in evts]	
+	##return [e/tote for e in evts] 
+	return [e/tote  if tote!=0. else 0. for e in evts]	
 
 def getWsum(cutvalue=20):
 	global filelist
@@ -325,7 +326,7 @@ if len(frmet)==2:
 	
 	
 	## get central value of acceptance 
-	doMetVariation(accdir + "/common/SR.input.root", accdir + "/acc_SR.input.root", sig, thejec, themet, wVars, q2vars)
+###	doMetVariation(accdir + "/common/SR.input.root", accdir + "/acc_SR.input.root", sig, thejec, themet, wVars, q2vars)
 
 
 ## prepare the proper job
@@ -351,6 +352,7 @@ f.close()
 
 ## run the proper job, which is actually just making the cards
 mybase = sysbase.format(MCA=mcadir + "/mca_full_"+name+".txt", CUTS=thecuts, SYS=thesyst, O=outdir+"/mps/"+short)
-cmd(mybase.replace("[[","{").replace("]]","}") + " --ip x " + plugFiles([bkgdir+"/common/SR.input.root", accdir+"/acc_SR.input.root"]))
+##cmd(mybase.replace("[[","{").replace("]]","}") + " --ip x " + plugFiles([bkgdir+"/common/SR.input.root", accdir+"/acc_SR.input.root"]))
+cmd(mybase.replace("[[","{").replace("]]","}") + " --ip x " + plugFiles([bkgdir+"/common/SR.input.root"]))
 
 
