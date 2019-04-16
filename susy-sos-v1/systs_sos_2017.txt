@@ -1,0 +1,163 @@
+## background flat uncertainties
+
+lumi_2016        : sig_.*|prompt_.*|rares        : .* : 1.025
+####puw              : sig_.*|prompt_.*|rares        : .* : 1.02 ## just for sync
+############puw              : sig_.*|prompt_.*|rares        : .* : puw      : templates
+
+trigeff_2016     : sig_.*|prompt_.*|rares        : .* : 1.05 ## verify this number
+
+float_tt         : prompt_tt                     : .* : 2.0 : lnU
+float_dy         : prompt_dy                     : .* : 2.0 : lnU
+float_wz         : prompt_wz                     : .* : 2.0 : lnU
+
+norm_vv          : prompt_vv                     : .* : 1.5
+norm_zz          : prompt_zz                     : .* : 1.5 ## verify this number
+norm_fakes       : fakes_.*                      : .* : 1.4 ## verify this number
+norm_rares       : rares                         : .* : 2.0
+
+
+#### background shape uncertainties
+##
+##lepSF            : sig_.*|prompt_.*|rares        : .* : lepSF    : templates
+##jes              : sig_.*|prompt_.*|rares        : .* : jec      : templates
+##
+##bTagLF           : sig_.*|prompt_.*|rares        : .* : bTagLF   : templates
+##bTagHF           : sig_.*|prompt_.*|rares        : .* : bTagHF   : templates
+#####bTagJes          : sig_.*|prompt_.*|rares        : .* : bTagJes  : templates
+#####bTagHFStats1     : sig_.*|prompt_.*|rares        : .* : bTagHFS1 : templates
+#####bTagHFStats2     : sig_.*|prompt_.*|rares        : .* : bTagHFS2 : templates
+#####bTagLFStats1     : sig_.*|prompt_.*|rares        : .* : bTagLFS1 : templates
+#####bTagLFStats2     : sig_.*|prompt_.*|rares        : .* : bTagLFS2 : templates
+#####bTagCFErr1       : sig_.*|prompt_.*|rares        : .* : bTagCFE1 : templates
+#####bTagCFErr2       : sig_.*|prompt_.*|rares        : .* : bTagCFE2 : templates
+##
+##wpol             : prompt_tt                     : .* : wpol     : templates
+##
+##
+#### signal uncertainties
+##
+##lepSFsig         : sig_.*                        : .* : 1.06 ## verify this number
+######lepSFsig        : sig_.*                        : .* : lepSFsig   : templates
+##met              : sig_.*                        : .* : met       : templates 
+##isr              : sig_.*                        : .* : isr       : templates 
+##q2acc            : sig_.*                        : .* : 1.03 ## only for sync
+######q2acc            : sig_.*                        : .* : q2acc     : templates
+##bTagLFsig        : sig_.*                        : .* : bTagLFsig : templates
+##bTagHFsig        : sig_.*                        : .* : bTagHFsig : templates
+#
+#
+## statistical uncertainty bin-by-bin
+#
+#stat_2lss_tt          : prompt_tt                : .*2lss.*       : 1.0 : stat_foreach_shape_bins : .*
+#stat_2lss_dy          : prompt_dy                : .*2lss.*       : 1.0 : stat_foreach_shape_bins : .*
+#stat_2lss_vv          : prompt_vv                : .*2lss.*       : 1.0 : stat_foreach_shape_bins : .*
+#stat_2lss_fakes       : fakes_.*                 : .*2lss.*       : 1.0 : stat_foreach_shape_bins : .*
+#stat_2lss_rares       : rares                    : .*2lss.*       : 1.0 : stat_foreach_shape_bins : .*
+#stat_2lss_sig         : sig_.*                   : .*2lss.*       : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_2losEwkLow_tt    : prompt_tt                : .*2losEwkLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkLow_dy    : prompt_dy                : .*2losEwkLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkLow_vv    : prompt_vv                : .*2losEwkLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkLow_fakes : fakes_.*                 : .*2losEwkLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkLow_rares : rares                    : .*2losEwkLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkLow_sig   : sig_.*                   : .*2losEwkLow.* : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_2losEwkMed_tt    : prompt_tt                : .*2losEwkMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkMed_dy    : prompt_dy                : .*2losEwkMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkMed_vv    : prompt_vv                : .*2losEwkMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkMed_fakes : fakes_.*                 : .*2losEwkMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkMed_rares : rares                    : .*2losEwkMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkMed_sig   : sig_.*                   : .*2losEwkMed.* : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_2losEwkHig_tt    : prompt_tt                : .*2losEwkHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkHig_dy    : prompt_dy                : .*2losEwkHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkHig_vv    : prompt_vv                : .*2losEwkHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkHig_fakes : fakes_.*                 : .*2losEwkHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkHig_rares : rares                    : .*2losEwkHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losEwkHig_sig   : sig_.*                   : .*2losEwkHig.* : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_2losColLow_tt    : prompt_tt                : .*2losColLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColLow_dy    : prompt_dy                : .*2losColLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColLow_vv    : prompt_vv                : .*2losColLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColLow_fakes : fakes_.*                 : .*2losColLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColLow_rares : rares                    : .*2losColLow.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColLow_sig   : sig_.*                   : .*2losColLow.* : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_2losColMed_tt    : prompt_tt                : .*2losColMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColMed_dy    : prompt_dy                : .*2losColMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColMed_vv    : prompt_vv                : .*2losColMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColMed_fakes : fakes_.*                 : .*2losColMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColMed_rares : rares                    : .*2losColMed.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColMed_sig   : sig_.*                   : .*2losColMed.* : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_2losColHig_tt    : prompt_tt                : .*2losColHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColHig_dy    : prompt_dy                : .*2losColHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColHig_vv    : prompt_vv                : .*2losColHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColHig_fakes : fakes_.*                 : .*2losColHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColHig_rares : rares                    : .*2losColHig.* : 1.0 : stat_foreach_shape_bins : .*
+#stat_2losColHig_sig   : sig_.*                   : .*2losColHig.* : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_dyLow_tt         : prompt_tt                : .*dyLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyLow_dy         : prompt_dy                : .*dyLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyLow_vv         : prompt_vv                : .*dyLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyLow_fakes      : fakes_.*                 : .*dyLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyLow_rares      : rares                    : .*dyLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyLow_sig        : sig_.*                   : .*dyLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_dyMed_tt         : prompt_tt                : .*dyMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyMed_dy         : prompt_dy                : .*dyMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyMed_vv         : prompt_vv                : .*dyMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyMed_fakes      : fakes_.*                 : .*dyMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyMed_rares      : rares                    : .*dyMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_dyMed_sig        : sig_.*                   : .*dyMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_ttLow_tt         : prompt_tt                : .*ttLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttLow_dy         : prompt_dy                : .*ttLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttLow_vv         : prompt_vv                : .*ttLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttLow_fakes      : fakes_.*                 : .*ttLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttLow_rares      : rares                    : .*ttLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttLow_sig        : sig_.*                   : .*ttLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_ttMed_tt         : prompt_tt                : .*ttMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttMed_dy         : prompt_dy                : .*ttMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttMed_vv         : prompt_vv                : .*ttMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttMed_fakes      : fakes_.*                 : .*ttMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttMed_rares      : rares                    : .*ttMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_ttMed_sig        : sig_.*                   : .*ttMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_3lLow_wz         : prompt_wz                : .*3lLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lLow_zz         : prompt_zz                : .*3lLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lLow_vv         : prompt_vv                : .*3lLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lLow_fakes      : fakes_.*                 : .*3lLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lLow_rares      : rares                    : .*3lLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lLow_sig        : sig_.*                   : .*3lLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_3lMed_wz         : prompt_wz                : .*3lMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lMed_zz         : prompt_zz                : .*3lMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lMed_vv         : prompt_vv                : .*3lMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lMed_fakes      : fakes_.*                 : .*3lMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lMed_rares      : rares                    : .*3lMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_3lMed_sig        : sig_.*                   : .*3lMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_wzMin_wz         : prompt_wz                : .*wzMin.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMin_zz         : prompt_zz                : .*wzMin.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMin_vv         : prompt_vv                : .*wzMin.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMin_fakes      : fakes_.*                 : .*wzMin.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMin_rares      : rares                    : .*wzMin.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMin_sig        : sig_.*                   : .*wzMin.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_wzLow_wz         : prompt_wz                : .*wzLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzLow_zz         : prompt_zz                : .*wzLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzLow_vv         : prompt_vv                : .*wzLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzLow_fakes      : fakes_.*                 : .*wzLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzLow_rares      : rares                    : .*wzLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzLow_sig        : sig_.*                   : .*wzLow.*      : 1.0 : stat_foreach_shape_bins : .*
+#
+#stat_wzMed_wz         : prompt_wz                : .*wzMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMed_zz         : prompt_zz                : .*wzMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMed_vv         : prompt_vv                : .*wzMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMed_fakes      : fakes_.*                 : .*wzMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMed_rares      : rares                    : .*wzMed.*      : 1.0 : stat_foreach_shape_bins : .*
+#stat_wzMed_sig        : sig_.*                   : .*wzMed.*      : 1.0 : stat_foreach_shape_bins : .*
+
+
