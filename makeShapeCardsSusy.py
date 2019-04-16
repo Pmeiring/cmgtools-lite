@@ -10,7 +10,7 @@ parser.add_option("-b",   "--bin",    dest="binname", type="string", default=Non
 parser.add_option("-o",   "--out",    dest="outname", type="string", default="SR", help="Name of the output file") 
 parser.add_option("--od", "--outdir", dest="outdir", type="string", default=None, help="Output directory") 
 parser.add_option("-v", "--verbose",  dest="verbose",  default=0,  type="int",    help="Verbosity level (0 = quiet, 1 = verbose, 2+ = more)")
-parser.add_option("--asimov", dest="asimov", action="store_true", help="Asimov")
+parser.add_option("--asimov", dest="asimov", action="store_true", default=False, help="Asimov")
 parser.add_option("--postfix-pred",dest="postfixmap", type="string", default=[], action="append", help="Function to apply to prediction, to correct it before running limits")
 parser.add_option("--infile",dest="infile", type="string", default=[], action="append", help="File to read histos from")
 parser.add_option("--ip", "--infile-prefix", dest="infilepfx", type="string", default=None, help="Prefix to the process names as the histo name in the infile")
@@ -141,14 +141,11 @@ if len(options.infile)>0:
         thefile.Close()
     for p in mca.listSignals(True)+mca.listBackgrounds(True)+['data']:
         if not p in report.keys() and not p in options.ignore: todo.append(p)
-    print report.keys()
-    print todo
     for p in todo:
         report.update(mca.getPlotsRaw("x", args[2], args[3], cuts.allCuts(), nodata=options.asimov, process=p, closeTreeAfter=True))
 ## no infile given, process all histos
 else:
     report = mca.getPlotsRaw("x", args[2], args[3], cuts.allCuts(), nodata=options.asimov, closeTreeAfter=True)
-
 
 for post in postfixes:
     for rep in report:
