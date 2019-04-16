@@ -70,6 +70,9 @@ lep2MetMT   : mt_2(LepGood2_pt,LepGood2_phi, met_pt,met_phi)           : 8,0,120
 ## for DY CR in 2017
 era2017     : hashBasedRunPeriod2017(isData,run,lumi,evt) : [-0.5,0.5,1.5,2.5,3.5,4.5]; XTitle = "2017 data taking era", Legend='TR', MoreY=2.0, xBinLabels="B\,C\,D\,E\,F"
 
+## to check MET fix in 2017
+metVsFixMet_2Dplot : metFixEE2017_pt\:met_pt : 45,0,450,45,0,450; XTitle="MET", YTitle="MET fix EE"
+HLT_MuMuMET17 : HLT_MuMuMET17: 2, 0.,2.; XTtitle="HLT_MuMuMET17"
 
 ###yields: nLepGood : 1,-0.5,0.5; YTitle='Total Event Yields';
 ###nVert: nVert : 40,-0.5,41.5; XTitle="N_{vtx}"

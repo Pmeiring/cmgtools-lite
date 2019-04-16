@@ -15,7 +15,8 @@ threeFO     : ((abs(LepGood1_pdgId)==13 && LepGood1_softMuonId || (abs(LepGood1_
               ((abs(LepGood2_pdgId)==13 && LepGood2_softMuonId || (abs(LepGood2_pdgId)==11 && LepGood2_lostHits==0 && LepGood2_convVeto)) && abs(LepGood2_ip3d)<0.0175 && LepGood2_sip3d<2.5 && LepGood2_jetBTagCSV<0.46 && (LepGood2_relIso03*LepGood2_pt<20+300/LepGood2_pt)) && \
               ((abs(LepGood3_pdgId)==13 && LepGood3_softMuonId || (abs(LepGood3_pdgId)==11 && LepGood3_lostHits==0 && LepGood3_convVeto)) && abs(LepGood3_ip3d)<0.0175 && LepGood3_sip3d<2.5 && LepGood3_jetBTagCSV<0.46 && (LepGood3_relIso03*LepGood3_pt<20+300/LepGood3_pt))
 threeTight  : ((0==1)||(LepGood1_isTightString)) && ((0==1)||(LepGood2_isTightString)) && ((0==1)||(LepGood3_isTightString))
-sideband    : placeholder
+##sideband    : placeholder
+sideband    : 1
 oneNotTight : !(LepGood1_isTightString) || !(LepGood2_isTightString) || !(LepGood3_isTightString) ; Disable=True
 oneLNT      : (!(LepGood1_isTightString) && (LepGood2_isTightString) && (LepGood3_isTightString)) || ((LepGood1_isTightString) && !(LepGood2_isTightString) && (LepGood3_isTightString)) || ((LepGood1_isTightString) && (LepGood2_isTightString) && !(LepGood3_isTightString)) ; Disable=True
 twoLNT      : (!(LepGood1_isTightString) && !(LepGood2_isTightString) && (LepGood3_isTightString)) || (!(LepGood1_isTightString) && (LepGood2_isTightString) && !(LepGood3_isTightString)) || ((LepGood1_isTightString) && !(LepGood2_isTightString) && !(LepGood3_isTightString)) ; Disable=True
@@ -27,18 +28,21 @@ Zveto       : maxMllSFOS < 60
 upsilonVeto : ((!(fabs(LepGood1_pdgId) == fabs(LepGood2_pdgId) && LepGood1_pdgId*LepGood2_pdgId < 0)) || mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) < 9 || mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) > 10.5) && ((!(fabs(LepGood1_pdgId) == fabs(LepGood3_pdgId) && LepGood1_pdgId*LepGood3_pdgId < 0)) || mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) < 9 || mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) > 10.5) && ((!(fabs(LepGood2_pdgId) == fabs(LepGood3_pdgId) && LepGood2_pdgId*LepGood3_pdgId < 0)) || mass_2(LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) < 9 || mass_2(LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass, LepGood3_pt, LepGood3_eta, LepGood3_phi, LepGood3_mass) > 10.5)
 
 ## event-related
-minMET      : met_pt>125 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, met_pt, met_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 125
+##minMET      : met_pt>125 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, met_pt, met_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 125 ##nominal met
+minMET      : metFixEE2017_pt>125 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, metFixEE2017_pt, metFixEE2017_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 125 ## met fix EE 2017
 bveto       : nBJetLoose25 == 0
 pt5subleps  : LepGood2_pt>5 && LepGood3_pt>5
 
 ## to activate: low MET
 met125_mumulep : ((fabs(LepGood1_pdgId) == fabs(LepGood2_pdgId)) && (LepGood1_pdgId*LepGood2_pdgId < 0) && (fabs(LepGood1_pdgId) == 13 && fabs(LepGood2_pdgId) == 13)) || ((fabs(LepGood1_pdgId) == fabs(LepGood3_pdgId)) && (LepGood1_pdgId*LepGood3_pdgId < 0) && (fabs(LepGood1_pdgId) == 13 && fabs(LepGood3_pdgId) == 13)) || (((fabs(LepGood3_pdgId) == fabs(LepGood2_pdgId)) && (LepGood3_pdgId*LepGood2_pdgId < 0) && (fabs(LepGood2_pdgId) == 13 && fabs(LepGood3_pdgId) == 13))) ; Disable=True
-met125_met  : met_pt < 200                                        ; Disable=True
+##met125_met  : met_pt < 200                                        ; Disable=True ##nominal met
+met125_met  : metFixEE2017_pt < 200                                        ; Disable=True ## met fix EE 2017
 met125_trig : $FASTSIM{1} $DATA{HLT_MuMuMET17} $MC{HLT_MuMuMET17} ; Disable=True
 ####met125_run  : (!isData) || run >= 274954                          ; Disable=True ## not needed
 
 ## to activate: medium MET
-met200_met1 : met_pt > 200 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, met_pt, met_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 200 ; Disable=True
+##met200_met1 : met_pt > 200 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, met_pt, met_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 200 ; Disable=True ##nominal met
+met200_met1 : metFixEE2017_pt > 200 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, metFixEE2017_pt, metFixEE2017_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 200 ; Disable=True ## met fix EE 2017
 met200_trig : $FASTSIM{1} $DATA{HLT_HighMET17} $MC{HLT_HighMET17} ; Disable=True
 
 

@@ -59,6 +59,8 @@ lep1MetMT   : mt_2(LepGood1_pt,LepGood1_phi, met_pt,met_phi)           : 8,0,120
 lep2MetMT   : mt_2(LepGood2_pt,LepGood2_phi, met_pt,met_phi)           : 8,0,120  ; XTitle="M_{T}(l2\,p_{T}^{miss})", MoreY=1.5
 lep3MetMT   : mt_2(LepGood3_pt,LepGood3_phi, met_pt,met_phi)           : 8,0,120  ; XTitle="M_{T}(l3\,p_{T}^{miss})", MoreY=1.5
 
+## to check MET fix in 2017
+metVsFixMet_2Dplot : metFixEE2017_pt\:met_pt : 45,0,450,45,0,450; XTitle="MET", YTitle="MET fix EE"
 
 ###yields: nLepGood : 1,-0.5,0.5; YTitle='Total Event Yields';
 ###nVert: nVert : 40,-0.5,41.5; XTitle="N_{vtx}"

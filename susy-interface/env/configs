@@ -67,20 +67,40 @@ BEGIN::sos2l17
   consume      := sos2l16
   mcafile      := susy-sos-v1/2l/mca_sos_2017.txt
   cutfile      := susy-sos-v1/2l/cuts_sos_2017.txt
-  smcfriends  +:= 0_pileup_v1
+##  smcfriends  +:= 0_pileup_v1
+  smcfriends  +:= vtxWeight
   sfsfriends  +:= 
   alias       #:= {wBG : 1.0*vtxWeight2017 }
-  alias       #:= {wFS : 1.0 }
+  alias       #:= {wFS : 1.0*1.0 }
+  frFilesFS    := ;;
+  frFilesFSJec := ;;
+  frFilesFSMet := ;;
+  sysfile      := susy-sos-v1/systs_sos_2017.txt
+  wVarsFS     #:= {bTagHF    : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {bTagLF    : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {bTagHFsig : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {bTagLFsig : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {isr       : 1.0*1.0 ; 1.0*1.0 }
 ENDDEF
 
 BEGIN::sos3l17
   consume      := sos3l16
   mcafile      := susy-sos-v1/3l/mca_sos_2017.txt
   cutfile      := susy-sos-v1/3l/cuts_sos_2017.txt
-  smcfriends  +:= 0_pileup_v1
+##  smcfriends  +:= 0_pileup_v1
+  smcfriends  +:= vtxWeight
   sfsfriends  +:= 
   alias       #:= {wBG : 1.0*vtxWeight2017 }
-  alias       #:= {wFS : 1.0 }
+  alias       #:= {wFS : 1.0*1.0 }
+  frFilesFS    := ;;
+  frFilesFSJec := ;;
+  frFilesFSMet := ;;
+  sysfile      := susy-sos-v1/systs_sos_2017.txt
+  wVarsFS     #:= {bTagHF    : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {bTagLF    : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {bTagHFsig : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {bTagLFsig : 1.0*1.0 ; 1.0*1.0 }
+  wVarsFS     #:= {isr       : 1.0*1.0 ; 1.0*1.0 }
 ENDDEF
 
 

@@ -1,6 +1,6 @@
 ## DY
 ## -----------------------------------------------------------
-prompt_dy : DYJetsToLL_M4to50_HT70to100  + DYJetsToLL_M4to50_HT70to100_ext1  : ScaleFactorDY*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="DY", FillColor=ROOT.kCyan
+###prompt_dy : DYJetsToLL_M4to50_HT70to100  + DYJetsToLL_M4to50_HT70to100_ext1  : ScaleFactorDY*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="DY", FillColor=ROOT.kCyan
 prompt_dy : DYJetsToLL_M4to50_HT100to200 + DYJetsToLL_M4to50_HT100to200_ext1 : ScaleFactorDY*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="DY", FillColor=ROOT.kCyan
 prompt_dy : DYJetsToLL_M4to50_HT200to400 + DYJetsToLL_M4to50_HT200to400_ext1 : ScaleFactorDY*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="DY", FillColor=ROOT.kCyan
 prompt_dy : DYJetsToLL_M4to50_HT400to600 + DYJetsToLL_M4to50_HT400to600_ext1 : ScaleFactorDY*xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="DY", FillColor=ROOT.kCyan
