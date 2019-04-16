@@ -274,7 +274,8 @@ class TreeToYield:
                     tf_filename = tf_file.format(name=self._name, cname=self._cname, P=treepath)
                     break
             if not tf_filename:
-                raise RuntimeError("%s -- ERROR: Friend tree file not found in paths")
+                print tf_filename
+                raise RuntimeError("%s -- ERROR: Friend tree file not found in paths" %tf_filename)
 #                if self._cname in os.listdir(treepath):
 #                    basepath = treepath
 #                    print "chosen basepath ",basepath

@@ -205,7 +205,8 @@ class MCAnalysis:
                         if re.match(p+"$", pname): tty.setOption('PegNormToProcess', p1)
                 if pname not in self._rank: self._rank[pname] = len(self._rank)
             if to_norm: 
-                for tty in ttys: tty.setScaleFactor("%s*%g" % (scale, 1000.0/total_w))
+###                for tty in ttys: tty.setScaleFactor("%s*%g" % (scale, 1000.0/total_w))
+                for tty in ttys: tty.setScaleFactor("%s*%g" % (scale, 1000.0/total_w if total_w!=0. else 0.))
         #if len(self._signals) == 0: raise RuntimeError, "No signals!"
         #if len(self._backgrounds) == 0: raise RuntimeError, "No backgrounds!"
     def listProcesses(self,allProcs=False):

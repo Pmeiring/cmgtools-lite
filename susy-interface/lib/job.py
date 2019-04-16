@@ -123,11 +123,13 @@ class Job():
 				print "condor jobId ",self.batchId
 				
 		else:
+			print "running locally, sourcing"
 			super = "source "
 			self.batchId = self.runCmd(super + self.script)
 	def runCmd(self, theCmd):
 		print "running command ",theCmd
-		jobLine = bash(theCmd)
+###		jobLine = bash(theCmd)
+		jobLine = cmd(theCmd)
 		theId   = -1
 		if not self.options.queue or self.forceLocal: return theId
 		if   any([t in self.options.queue for t in ["all.q", "long.q", "short.q"]]): theId=int(jobLine.split()[2])

@@ -5,7 +5,8 @@ today = datetime.datetime.now().strftime("%Y-%m-%d")
 
 ## == configuration =================================
 
-tag  = "vtavolarTest"
+##tag  = "vtavolarTest_newFtrees_SR_bkgOnly_noHLT"
+tag  = "vtavolarTest_cards_data"
 
 pfx  = ""
 #####pfx  = "_sc"
@@ -17,11 +18,11 @@ add  = ""
 #add  = "--sP lep1.*"
 #add  = "--sP SR_2l_col_fine"
 
-do = 0 ## only all plots
-#do = 1 ## only SR cards
+#do = 0 ## only all plots
+do = 1 ## only SR cards
 #do = 2 ## only cards for all plots
 
-runBkgs = False
+runBkgs = True
 runSigs = True
 model   = "TChiWZ"
 
@@ -31,9 +32,11 @@ model   = "TChiWZ"
 treedirs = {
             ###2016: "/data1/botta/trees_SOS_010217"  ,
 ###            2016: "/data1/cheidegg/trees_SOS_010217_skimmed",
-            2016: "/afs/cern.ch/user/p/peruzzi/work/sostrees/trees_SOS_010217/;/afs/cern.ch/work/v/vtavolar/SusySOSSW_2/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/",
+            2016: "/afs/cern.ch/user/p/peruzzi/work/sostrees/trees_SOS_010217/;/afs/cern.ch/work/v/vtavolar/SusySOSSW_2_clean/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter;/afs/cern.ch/work/v/vtavolar/SusySOSSW_2_clean/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/botta/trees_SOS_010217;/data1/botta/trees_SOS_010217",
+	    
 ##            2016: "/afs/cern.ch/user/v/vtavolar/SusySOS/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/botta/trees_SOS_010217/",
-            2017: "/afs/cern.ch/user/v/vtavolar/SusySOS/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/peruzzi/trees_SOS_030518"         ,
+            ####2017: "/afs/cern.ch/user/v/vtavolar/SusySOS/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/peruzzi/trees_SOS_030518"         ,
+	    2017: "/eos/cms/store/user/ipapaver/susySOS_trees_FixEE17;/afs/cern.ch/user/v/vtavolar/work/SusySOSSW_2_clean/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/checkMETFix_bkgTrees"        , 
            }
 
 plotdir  = "/afs/cern.ch/user/v/vtavolar/www/SusySOS"
@@ -46,8 +49,9 @@ scales = [
 
 modes = {
          2: [
-             #("SR"       , "data;prompt_.*;rares;fakes_appldata"       , None                        ),
-             #("SRmc"     , "data;prompt_.*;rares;fakes_matched_.*"     , None                        ),
+             ###("SR"       , "data;prompt_.*;rares;fakes_appldata"       , None                        ),
+###             ("SRmc"     , "data;prompt_.*;rares;fakes_matched_.*"     , None                        ),
+##		("SRmc"     , "prompt_.*;rares;fakes_matched_.*"     , None                        ),
              ("SRsemi"   , "data;prompt_.*;rares;fakes_applmcBoth"     , None                        ),
              #("AR"       , "data;prompt_.*;rares;fakes_matched_.*"     , "-X twoTight -E oneNotTight"),
              #("AR1F"     , "data;prompt_.*;rares;fakes_matched_.*"     , "-X twoTight -E oneLNT"     ),
@@ -61,7 +65,8 @@ modes = {
             ],
          3: [
              #("SR"       , "data;prompt_.*;rares;fakes_appldata"       , None                          ),
-             #("SRmc"     , "data;prompt_.*;rares;fakes_matched_.*"     , None                          ),
+###             ("SRmc"     , "data;prompt_.*;rares;fakes_matched_.*"     , None                          ),
+##		("SRmc"     , "prompt_.*;rares;fakes_matched_.*"     , None                          ),
              ("SRsemi"   , "data;prompt_.*;rares;fakes_applmcBoth"     , None                          ),
              #("AR"       , "data;prompt_.*;rares;fakes_matched_.*"     , "-X threeTight -E oneNotTight"),
              #("AR1F"     , "data;prompt_.*;rares;fakes_matched_.*"     , "-X threeTight -E oneLNT"     ),
@@ -94,40 +99,41 @@ regions = [
            ####("sos3l16", "3lMin16"     , redlumi16, "sig_TChiWZ_.*"), \
            ("sos3l16", "3lLow16"     , redlumi16, "sig_TChiWZ_.*"), \
            ("sos3l16", "3lMed16"     , fullumi16, "sig_TChiWZ_.*"), \
-           #("sos2l16", "dyLow16"     , redlumi16, "sig_T2tt_.*"), \
-           #("sos2l16", "dyMed16"     , fullumi16, "sig_T2tt_.*"), \
-           #("sos2l16", "ttLow16"     , redlumi16, "sig_T2tt_.*"), \
-           #("sos2l16", "ttMed16"     , fullumi16, "sig_T2tt_.*"), \
+           ("sos2l16", "dyLow16"     , redlumi16, "sig_T2tt_.*"), \
+           ("sos2l16", "dyMed16"     , fullumi16, "sig_T2tt_.*"), \
+           ("sos2l16", "ttLow16"     , redlumi16, "sig_T2tt_.*"), \
+           ("sos2l16", "ttMed16"     , fullumi16, "sig_T2tt_.*"), \
            #("sos2l16", "vvLow16"     , redlumi16, "sig_TChiWZ_.*"), \
            #("sos2l16", "vvMed16"     , fullumi16, "sig_TChiWZ_.*"), \
            #("sos3l16", "wzMin16"     , fullumi16, "sig_TChiWZ_.*"), \
            #("sos3l16", "wzLow16"     , fullumi16, "sig_TChiWZ_.*"), \
            #("sos3l16", "wzMed16"     , fullumi16, "sig_TChiWZ_.*"), \
 
-           #("sos2l17", "2lss17"      , fullumi17, "sig_T2tt_.*"), \
-           #("sos2l17", "2losEwkLow17", redlumi17, "sig_TChiWZ_.*"), \
-           #("sos2l17", "2losEwkMed17", fullumi17, "sig_TChiWZ_.*"), \
-           #("sos2l17", "2losEwkHig17", fullumi17, "sig_TChiWZ_.*"), \
-           #("sos2l17", "2losColLow17", redlumi17, "sig_T2tt_.*"), \
-           #("sos2l17", "2losColMed17", fullumi17, "sig_T2tt_.*"), \
-           #("sos2l17", "2losColHig17", fullumi17, "sig_T2tt_.*"), \
-           #("sos3l17", "3lLow17"     , redlumi17, "sig_TChiWZ_.*"), \
-           #("sos3l17", "3lMed17"     , fullumi17, "sig_TChiWZ_.*"), \
-           #("sos2l17", "dyLow17"     , redlumi17, "sig_T2tt_.*"), \
-           #("sos2l17", "dyMed17"     , fullumi17, "sig_T2tt_.*"), \
-           #("sos2l17", "ttLow17"     , redlumi17, "sig_T2tt_.*"), \
-           #("sos2l17", "ttMed17"     , fullumi17, "sig_T2tt_.*"), \
-           #("sos2l17", "vvLow17"     , redlumi17, "sig_TChiWZ_.*"), \
-           #("sos2l17", "vvMed17"     , fullumi17, "sig_TChiWZ_.*"), \
-           #("sos3l17", "wzMin17"     , fullumi17, "sig_TChiWZ_.*"), \
-           #("sos3l17", "wzLow17"     , fullumi17, "sig_TChiWZ_.*"), \
-           #("sos3l17", "wzMed17"     , fullumi17, "sig_TChiWZ_.*"), \
+##           ("sos2l17", "2lss17"      , fullumi17, "sig_T2tt_.*"), \
+##           ("sos2l17", "2losEwkLow17", redlumi17, "sig_TChiWZ_.*"), \
+##           ("sos2l17", "2losEwkMed17", fullumi17, "sig_TChiWZ_.*"), \
+##           ("sos2l17", "2losEwkHig17", fullumi17, "sig_TChiWZ_.*"), \
+##           ("sos2l17", "2losColLow17", redlumi17, "sig_T2tt_.*"), \
+##           ("sos2l17", "2losColMed17", fullumi17, "sig_T2tt_.*"), \
+##           ("sos2l17", "2losColHig17", fullumi17, "sig_T2tt_.*"), \
+##           ("sos3l17", "3lLow17"     , redlumi17, "sig_TChiWZ_.*"), \
+##           ("sos3l17", "3lMed17"     , fullumi17, "sig_TChiWZ_.*"), \
+##           ("sos2l17", "dyLow17"     , redlumi17, "sig_T2tt_.*"), \
+##           ("sos2l17", "dyMed17"     , fullumi17, "sig_T2tt_.*"), \
+##           ("sos2l17", "ttLow17"     , redlumi17, "sig_T2tt_.*"), \
+##           ("sos2l17", "ttMed17"     , fullumi17, "sig_T2tt_.*"), \
+##           ("sos2l17", "vvLow17"     , redlumi17, "sig_TChiWZ_.*"), \
+##           ("sos2l17", "vvMed17"     , fullumi17, "sig_TChiWZ_.*"), \
+##           ("sos3l17", "wzMin17"     , fullumi17, "sig_TChiWZ_.*"), \
+##           ("sos3l17", "wzLow17"     , fullumi17, "sig_TChiWZ_.*"), \
+##           ("sos3l17", "wzMed17"     , fullumi17, "sig_TChiWZ_.*"), \
           ]
 
 
-plotbase = "python susy-interface/plotmaker.py {C} {R} \"{T}\" {O} -l {L} --make datasig --plots all -o {S} --flags \"--perBin {F}\" {P} {A} -W '{W}' -j 8"
-cardbkgs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --bkgOnly --redoBkg --flags \"{F}\" --mca susy-sos-v1/{FS}/mca_sos_{YR}_forScan.txt -j 4"
-cardsigs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --sigOnly --flags \"{F}\" --postfix '--postfix-pred fakes_applmcBoth*=fixFakePredictionForZeroEvts --frFile $CMSSW_BASE/src/CMGTools/TTHAnalysis/data/fakerate/{FR} --frMap FR_SOS_QCD_FL_data_comb --mpfr {R}' --mca susy-sos-v1/{FS}/mca_sos_{YR}_forScan.txt -j 4"
+###plotbase = "python susy-interface/plotmaker.py {C} {R} \"{T}\" {O} -l {L} --make datasig --plots all -o {S} --flags \"--perBin {F}\" {P} {A} -W '{W}' -j 8"
+plotbase = "python susy-interface/plotmaker.py {C} {R} \"{T}\" {O} -l {L} --make bkgs --plots all -o {S} --flags \"--perBin {F}\" {P} {A} -W '{W}' -j 8"
+cardbkgs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --bkgOnly --redoBkg --flags \"{F}\" --mca susy-sos-v1/{FS}/mca_sos_{YR}_forScan_sdd.txt -j 4"
+cardsigs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --sigOnly --flags \"{F}\" --postfix '--postfix-pred fakes_applmcBoth*=fixFakePredictionForZeroEvts --frFile $CMSSW_BASE/src/CMGTools/TTHAnalysis/data/fakerate/{FR} --frMap FR_SOS_QCD_FL_data_comb --mpfr {R}' --mca susy-sos-v1/{FS}/mca_sos_{YR}_forScan_sdd.txt -j 4"
 
 
 ## == code ==========================================
