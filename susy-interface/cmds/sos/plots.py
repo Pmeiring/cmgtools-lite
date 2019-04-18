@@ -32,7 +32,8 @@ model   = "TChiWZ"
 treedirs = {
             ###2016: "/data1/botta/trees_SOS_010217"  ,
 ###            2016: "/data1/cheidegg/trees_SOS_010217_skimmed",
-            2016: "/afs/cern.ch/user/p/peruzzi/work/sostrees/trees_SOS_010217/;/afs/cern.ch/work/v/vtavolar/SusySOSSW_2_clean/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter;/afs/cern.ch/work/v/vtavolar/SusySOSSW_2_clean/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/botta/trees_SOS_010217;/data1/botta/trees_SOS_010217",
+            2016: "/afs/cern.ch/user/p/peruzzi/work/sostrees/trees_SOS_010217/;/afs/cern.ch/work/v/vtavolar/SusySOSSW_2_clean/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter;/data1/botta/trees_SOS_010217",
+##/afs/cern.ch/work/v/vtavolar/SusySOSSW_2_clean/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/botta/trees_SOS_010217;
 	    
 ##            2016: "/afs/cern.ch/user/v/vtavolar/SusySOS/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/botta/trees_SOS_010217/",
             ####2017: "/afs/cern.ch/user/v/vtavolar/SusySOS/cleanTest/CMSSW_8_0_25/src/CMGTools/TTHAnalysis/python/plotter/data1/peruzzi/trees_SOS_030518"         ,
