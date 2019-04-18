@@ -18,8 +18,8 @@ add  = ""
 #add  = "--sP lep1.*"
 #add  = "--sP SR_2l_col_fine"
 
-#do = 0 ## only all plots
-do = 1 ## only SR cards
+do = 0 ## only all plots
+#do = 1 ## only SR cards
 #do = 2 ## only cards for all plots
 
 runBkgs = True
