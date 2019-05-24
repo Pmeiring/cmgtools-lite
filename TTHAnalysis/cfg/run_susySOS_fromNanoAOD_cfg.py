@@ -371,62 +371,12 @@ if getHeppyOption("justSummary"):
     printSummary(selectedComponents)
     sys.exit(0)
 
-from CMGTools.TTHAnalysis.tools.nanoAOD.ttH_modules import *
+from CMGTools.TTHAnalysis.tools.nanoAOD.susySOS_modules import *
 
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 
-# in the cut string, keep only the main cuts to have it simpler
-modules = ttH_sequence_step1
-conf = dict(
-    muPt = 5, 
-    elePt = 7, 
-    #        miniRelIso = 0.4,  # we use Iperbolic, see old cfg run_susySOS_cfg.py
-    sip3d = 2.5, 
-    dxy =  0.05, 
-    dz = 0.1, 
-    minMet = 50.,
-    ip3d = 0.0175,
-    iperbolic_iso_0 = 20.,
-    iperbloic_iso_1 = 300.,
-    eleId = "mvaFall17V2noIso_WPL", ## CHECK
-)
-cut =  ("nMuon + nElectron >= 2 &&" + ##if heppy option fast
-        "MET_pt > {minMet}"
-       "Sum$(Muon_pt > {muPt} && Muon_sip3d < {sip3d}) +"
-       "Sum$(Electron_pt > {muPt}  && Electron_sip3d < {sip3d} && Electron_{eleId}) >= 2").format(**conf) ## && Muon_miniPFRelIso_all < {miniRelIso} && Electron_miniPFRelIso_all < {miniRelIso}  #mettere qui MET_pt>50 #cp dal cfg la selezione
-#cut  = ttH_skim_cut
-muonSelection     = lambda l : abs(l.eta) < 2.4 and l.pt > conf["muPt"]  and l.sip3d < conf["sip3d"] and abs(l.dxy) < conf["dxy"] and abs(l.dz) < conf["dz"]  and l.relIso03*l.pt < ( conf["iperbolic_iso_0"]+conf["iperbolic_iso_1"]/l.pt) and abs(l.ip3D) < conf["ip3d"] ##is it relIso03?  ##and l.miniPFRelIso_all < conf["miniRelIso"]
-electronSelection = lambda l : abs(l.eta) < 2.5 and l.pt > conf["elePt"]  and l.sip3d < conf["sip3d"] and abs(l.dxy) < conf["dxy"] and abs(l.dz) < conf["dz"] and l.relIso03*l.pt < ( conf["iperbolic_iso_0"]+conf["iperbolic_iso_1"]/l.pt) and abs(l.ip3D) < conf["ip3d"] ##is it relIso03? ##and l.miniPFRelIso_all < conf["miniRelIso"]
-
-from CMGTools.TTHAnalysis.tools.nanoAOD.ttHPrescalingLepSkimmer import ttHPrescalingLepSkimmer
-# NB: do not wrap lepSkim a lambda, as we modify the configuration in the cfg itself 
-lepSkim = ttHPrescalingLepSkimmer(5, 
-                                  muonSel = muonSelection, electronSel = electronSelection,
-                                  minLeptonsNoPrescale = 2, # things with less than 2 leptons are rejected irrespectively of the prescale
-                                  prescaleFactor = 1, ##do not apply prescale ##does it do any skimming then?
-                                  minLeptons = 2, requireSameSignPair = False,
-                                  jetSel = lambda j : j.pt > 25 and abs(j.eta) < 2.4, 
-                                  minJets = 0, minMET = 0)
-
-from PhysicsTools.NanoAODTools.postprocessing.modules.common.collectionMerger import collectionMerger
-lepMerge = collectionMerger(input = ["Electron","Muon"], 
-                            output = "LepGood", 
-                            selector = dict(Muon = muonSelection, Electron = electronSelection))
-
-from CMGTools.TTHAnalysis.tools.nanoAOD.ttHLeptonCombMasses import ttHLeptonCombMasses
-lepMasses = ttHLeptonCombMasses( [ ("Muon",muonSelection), ("Electron",electronSelection) ], maxLeps = 4)
-
-from CMGTools.TTHAnalysis.tools.nanoAOD.autoPuWeight import autoPuWeight
-from CMGTools.TTHAnalysis.tools.nanoAOD.yearTagger import yearTag
-from CMGTools.TTHAnalysis.tools.nanoAOD.xsecTagger import xsecTag
-from CMGTools.TTHAnalysis.tools.nanoAOD.lepJetBTagAdder import lepJetBTagCSV, lepJetBTagDeepCSV
-
-ttH_sequence_step1 = [lepSkim, lepMerge, autoPuWeight, yearTag, xsecTag, lepJetBTagCSV, lepJetBTagDeepCSV, lepMasses]
-
-
-if analysis == "frqcd":
-    modules = ttH_sequence_step1_FR
-    cut = ttH_skim_cut_FR 
+modules = susySOS_sequence_step1
+cut = susySOS_skim_cut 
 
 branchsel_in = os.environ['CMSSW_BASE']+"/src/CMGTools/TTHAnalysis/python/tools/nanoAOD/branchsel_in.txt"
 branchsel_out = None
