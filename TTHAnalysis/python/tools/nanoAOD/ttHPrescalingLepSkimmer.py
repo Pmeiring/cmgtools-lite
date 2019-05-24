@@ -51,7 +51,7 @@ class ttHPrescalingLepSkimmer( Module ):
                         toBePrescaled = False
                 else:
                     toBePrescaled = False
-        if self.minJets > 0:
+        if self.minJets > -1: #was 0, changed to -1: if 0 cannot clean jets and keep them all
             jets = filter(self.jetSel, Collection(event, 'Jet'))
             if len(jets) >= self.minJets:
                 toBePrescaled = False
