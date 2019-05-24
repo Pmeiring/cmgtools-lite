@@ -6,7 +6,7 @@ class ttHLeptonCombMasses( Module ):
         self.leptonsAndSels = leptonsAndSels[:]
         self.maxLeps = maxLeps
         self.postfix = postfix
-        self.branches = [ 'm2l','m3l','m4l', 'mZ1', 'mZ1SFSS', 'mZ2', 'mZZ', 'minMllSFOS','minMllAFOS','minMllAFAS' ]
+        self.branches = [ 'm2l','m3l','m4l', 'mZ1', 'mZ1SFSS', 'mZ2', 'mZZ', 'minMllSFOS', 'maxMllSFOS', 'minMllAFOS','minMllAFAS' ]
 
     def beginFile(self, inputFile, outputFile, inputTree, wrappedOutputTree):
         self.wrappedOutputTree = wrappedOutputTree
@@ -31,6 +31,7 @@ class ttHLeptonCombMasses( Module ):
         bestZ2 = [ 0., -1,-1, 0. ]
         bestZZ = 0
         minMllSFOS = -1
+        maxMllSFOS = -1
         minMllAFOS = -1
         minMllAFAS = -1
         for i,l1 in enumerate(leps):
@@ -40,6 +41,7 @@ class ttHLeptonCombMasses( Module ):
                 if minMllAFAS < 0 or minMllAFAS > zmass: minMllAFAS = zmass
                 if l1.pdgId == -l2.pdgId:
                     if minMllSFOS < 0 or minMllSFOS > zmass: minMllSFOS = zmass
+                    if maxMllSFOS < 0 or maxMllSFOS < zmass: maxMllSFOS = zmass
                     if minMllAFOS < 0 or minMllAFOS > zmass: minMllAFOS = zmass
                     if bestZ1[0] == 0 or abs(zmass - 91.188) < abs(bestZ1[0] - 91.188):
                         bestZ1 = [ zmass, i, j ]
@@ -51,6 +53,7 @@ class ttHLeptonCombMasses( Module ):
         self.wrappedOutputTree.fillBranch('mZ1'+self.postfix, bestZ1[0])
         self.wrappedOutputTree.fillBranch('mZ1SFSS'+self.postfix, bestZ1sfss[0])
         self.wrappedOutputTree.fillBranch('minMllSFOS'+self.postfix, minMllSFOS)
+        self.wrappedOutputTree.fillBranch('maxMllSFOS'+self.postfix, maxMllSFOS)
         self.wrappedOutputTree.fillBranch('minMllAFOS'+self.postfix, minMllAFOS)
         self.wrappedOutputTree.fillBranch('minMllAFAS'+self.postfix, minMllAFAS)
 
