@@ -706,9 +706,17 @@ EWKZToLL2Jets, EWKZToLL2Jets_ext,
 EWKZToNuNu2Jets, EWKZToNuNu2Jets_ext,
 ]
 
+##SUSY SOS signals
+#TChiWZ
+SMS_TChiWZ=kreator.makeMCComponent("SMS_TChiWZ","/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/RunIISummer16MiniAODv3-PUMoriond17_GridpackScan_94X_mcRun2_asymptotic_v3-v1/MINIAODSIM","CMS",".*root",1)
+##FIXME! add other signal models
+SignalSUSY = [
+SMS_TChiWZ
+]
+
 ### ----------------------------- summary ----------------------------------------
 
-mcSamples = TTs + SingleTop + VJets + DYJetsM50HT + DYJetsM5to50HT + DYNJets + WJetsToLNuHT + WJetsToLNuPT + WNJets + GJetsHT + ZJetsToNuNuHT + QCDHT + QCDPtbcToE + QCDPt + QCDPtEMEnriched + [QCD_Mu15] + QCD_Mu5 +  DiBosons + TriBosons + TTV + Higgs + Rares + EWKV2Jets 
+mcSamples = TTs + SingleTop + VJets + DYJetsM50HT + DYJetsM5to50HT + DYNJets + WJetsToLNuHT + WJetsToLNuPT + WNJets + GJetsHT + ZJetsToNuNuHT + QCDHT + QCDPtbcToE + QCDPt + QCDPtEMEnriched + [QCD_Mu15] + QCD_Mu5 +  DiBosons + TriBosons + TTV + Higgs + Rares + EWKV2Jets + SignalSUSY
 
 samples = mcSamples
 

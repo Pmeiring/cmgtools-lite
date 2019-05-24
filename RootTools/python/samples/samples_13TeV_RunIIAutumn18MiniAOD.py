@@ -414,10 +414,18 @@ GGHZZ4L,
 VHToNonbb, VHToNonbb_ll,
 ]
 
+##Signals for SUSY SOS
+##TChiWZ
+SMS_TChiWZ=kreator.makeMCComponent("SMS_TChiWZ","/SMS-TChiWZ_ZToLL_mZMin-0p1_TuneCP2_13TeV-madgraphMLM-pythia8/RunIIAutumn18MiniAOD-GridpackScan_102X_upgrade2018_realistic_v15-v1/MINIAODSIM","CMS",".*root",1)
+##FIXME! add other signal models
+SignalSUSY = [
+SMS_TChiWZ
+]
+
 # ----------------------------- summary ----------------------------------------
 
 
-mcSamples = QCDPt + QCDHT + QCD_Mus + QCD_EMs + QCD_bcToE + Ws + DYs + VJetsQQHT + TTs + Ts + TTXs + TTXXs + DiBosons + TriBosons + Higgs
+mcSamples = QCDPt + QCDHT + QCD_Mus + QCD_EMs + QCD_bcToE + Ws + DYs + VJetsQQHT + TTs + Ts + TTXs + TTXXs + DiBosons + TriBosons + Higgs + SignalSUSY
 
 
 samples = mcSamples
