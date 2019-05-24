@@ -1,5 +1,5 @@
 import re, os, sys
-from CMGTools.RootTools.samples.configTools import printSummary, mergeExtensions, doTestN
+from CMGTools.RootTools.samples.configTools import printSummary, mergeExtensions, doTestN, configureSplittingFromTime, cropToLumi
 from CMGTools.RootTools.samples.autoAAAconfig import autoAAA
 from PhysicsTools.HeppyCore.framework.heppy_loop import getHeppyOption
 
@@ -343,6 +343,7 @@ selectedComponents = mcSamples + dataSamples
 if getHeppyOption('selectComponents'):
     selectedComponents = byCompName(selectedComponents, getHeppyOption('selectComponents').split(","))
 autoAAA(selectedComponents, quiet=not(getHeppyOption("verboseAAA",False)))
+configureSplittingFromTime(selectedComponents,100 if preprocessor else 10,4)
 selectedComponents, _ = mergeExtensions(selectedComponents)
 
 # create and set preprocessor if requested
@@ -365,6 +366,48 @@ if getHeppyOption("nanoPreProcessor"):
         preproc_data = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,preproc_cfg[year][1]),cmsswArea=preproc_cmsswArea,keepOutput=True)
         for comp in selectedComponents:
             comp.preprocessor = preproc_data if comp.isData else preproc_mc
+
+####later update to ttH cfg: relevant for SOS?
+##    if year==2017:
+##        preproc_mcv1 = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,"mc94Xv1"),cmsswArea=preproc_cmsswArea,keepOutput=True)
+##        for comp in selectedComponents:
+##            if comp.isMC and "Fall17MiniAODv2" not in comp.dataset:
+##                print "Warning: %s is MiniAOD v1, dataset %s" % (comp.name, comp.dataset)
+##                comp.preprocessor = preproc_mcv1
+##    if analysis == "frqcd":
+##        for comp in selectedComponents:
+##            comp.preprocessor._keepOutput = False
+##            comp.preprocessor._injectTriggerFilter = True
+##            comp.preprocessor._injectJSON = True
+##            if 'Mu' in comp.dataset:
+##                comp.preprocessor._cfgHasFilter = True
+##                comp.preprocessor._inlineCustomize = ("""
+##process.skim1Mu = cms.EDFilter("PATMuonRefSelector",
+##    src = cms.InputTag("slimmedMuons"),
+##    cut = cms.string("pt > %g && miniPFIsolation.chargedHadronIso < 0.45*pt && abs(dB('PV3D')) < 8*edB('PV3D')"),
+##    filter = cms.bool(True),
+##)
+##process.nanoAOD_step.insert(0, process.skim1Mu)
+##""" % (7.5 if "DoubleMuon" in comp.dataset else 4.5))
+##            elif 'QCD_Pt' in comp.dataset:
+##                comp.preprocessor._cfgHasFilter = True
+##                comp.preprocessor._inlineCustomize = ("""
+##process.skim1El = cms.EDFilter("PATElectronRefSelector",
+##    src = cms.InputTag("slimmedElectrons"),
+##    cut = cms.string("pt > 6 && miniPFIsolation.chargedHadronIso < 0.45*pt && abs(dB('PV3D')) < 8*edB('PV3D')"),
+##    filter = cms.bool(True),
+##)
+##process.nanoAOD_step.insert(0, process.skim1El)
+##""")
+##if analysis == "frqcd":
+##    cropToLumi(selectedComponents, 1.0)
+##    cropToLumi(byCompName(selectedComponents,["QCD"]), 0.3)
+##    cropToLumi(byCompName(selectedComponents,["QCD_Pt\d+to\d+$"]), 0.1)
+##    configureSplittingFromTime(selectedComponents, 10, 3, maxFiles=8)
+##    configureSplittingFromTime(byCompName(selectedComponents, ["EGamma","Single.*Run2017.*","SingleMuon_Run2018.*"]), 10, 4, maxFiles=12) 
+##    configureSplittingFromTime(byCompName(selectedComponents, ["WJ","TT","DY"]), 60, 3, maxFiles=6) 
+##    configureSplittingFromTime(byCompName(selectedComponents, [r"QCD_Pt\d+to\d+$","QCD.*EME"]), 60, 3, maxFiles=6) 
+##
 
 # print summary of components to process
 if getHeppyOption("justSummary"): 

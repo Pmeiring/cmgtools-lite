@@ -39,7 +39,7 @@ triggers_1e_iso = [ "HLT_Ele32_WPTight_Gsf_v*" ]
 triggers_1e_noniso = [ "HLT_Ele115_CaloIdVT_GsfTrkIdT_v*"] 
 
 # Prescaled lepton triggers
-triggers_FR_1mu       = [ "HLT_Mu%d_TrkIsoVVL_v*" % pt for pt in (8,17,19) ] # DoubleMu PD
+triggers_FR_1mu_iso   = [ "HLT_Mu%d_TrkIsoVVL_v*" % pt for pt in (8,17,19) ] # DoubleMu PD
 triggers_FR_1mu_noiso = [ "HLT_Mu%d_v*" % pt for pt in (8,17,19) ] # DoubleMu PD
 triggers_FR_1mu_noiso_smpd = [ "HLT_Mu%d_v*" % pt for pt in (12,15,20,27) ] + ["HLT_Mu3_PFJet40_v*"] # SingleMu PD
 triggers_FR_1mu_noiso_highpt = [ "HLT_Mu%d_v*" % pt for pt in (50,) ] # SingleMu PD
@@ -51,7 +51,6 @@ triggers_SOS_doublemulowMET = ["HLT_DoubleMu3_DZ_PFMET50_PFMHT60_v*"]
 triggers_SOS_highMET = ["HLT_PFMETNoMu100_PFMHTNoMu100_IDTight_PFHT60_v*","HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60_v*","HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_v*","HLT_PFMETNoMu140_PFMHTNoMu140_IDTight_v*"] #NoMu version
 #triggers_SOS_highMET = ["HLT_PFMET100_PFMHT100_IDTight_PFHT60_v*","HLT_PFMET120_PFMHT120_IDTight_PFHT60_v*","HLT_PFMET120_PFMHT120_IDTight_v*", "HLT_PFMET140_PFMHT140_IDTight_v*"]
 triggers_SOS_tripleMu = ["HLT_TripleMu_5_3_3_Mass3p8to60_DZ_v*"]
-
 
 
 ### Wrap all in a dictionary for easier importing of multiple years

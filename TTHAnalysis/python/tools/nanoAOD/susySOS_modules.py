@@ -26,7 +26,7 @@ lepSkim = ttHPrescalingLepSkimmer(5,
                                   minLeptonsNoPrescale = 2, # things with less than 2 leptons are rejected irrespectively of the prescale
                                   prescaleFactor = 1, ##do not apply prescale ##does it do any skimming then?
                                   minLeptons = 2, requireSameSignPair = False,
-                                  jetSel = lambda j : j.pt > 25 and abs(j.eta) < 2.4, 
+                                  jetSel = lambda j : j.pt > 25 and abs(j.eta) < 2.4 and j.jetId > 0, 
                                   minJets = 0, minMET = 0)
 
 from PhysicsTools.NanoAODTools.postprocessing.modules.common.collectionMerger import collectionMerger
@@ -48,7 +48,7 @@ susySOS_sequence_step1 = [lepSkim, lepMerge, autoPuWeight, yearTag, xsecTag, lep
 #==== 
 from PhysicsTools.NanoAODTools.postprocessing.tools import deltaR
 from CMGTools.TTHAnalysis.tools.nanoAOD.ttHLepQCDFakeRateAnalyzer import ttHLepQCDFakeRateAnalyzer
-lepFR = ttHLepQCDFakeRateAnalyzer(jetSel = lambda j : j.pt > 25 and abs(j.eta) < 2.4,
+lepFR = ttHLepQCDFakeRateAnalyzer(jetSel = lambda j : j.pt > 25 and abs(j.eta) < 2.4 and j.jetId > 0,
                                   pairSel = lambda pair : deltaR(pair[0].eta, pair[0].phi, pair[1].eta, pair[1].phi) > 0.7,
                                   maxLeptons = 1, requirePair = True)
 
@@ -95,7 +95,7 @@ recleaner_step1 = lambda : CombinedObjectTaggerForCleaning("InternalRecl",
                                        tightLeptonSel = tightLeptonSel,
                                        FOTauSel = foTauSel,
                                        tightTauSel = tightTauSel,
-                                       selectJet = lambda jet: abs(jet.eta)<2.4 and jet.pt > 25, # FIXME need to select on pt or ptUp or ptDown
+                                       selectJet = lambda jet: abs(jet.eta)<2.4 and jet.pt > 25 and jet.jetId > 0, # FIXME need to select on pt or ptUp or ptDown
                                        coneptdef = lambda lep: conept_TTH(lep))
 recleaner_step2_mc = lambda : fastCombinedObjectRecleaner(label="Recl", inlabel="_InternalRecl",
                                        cleanTausWithLooseLeptons=True,
