@@ -14,7 +14,7 @@ conf = dict(
 susySOS_skim_cut =  ("nMuon + nElectron >= 2 &&" + ##if heppy option fast
         "MET_pt > {minMet}  &&"+
        "Sum$(Muon_pt > {muPt} && Muon_sip3d < {sip3d}) +"
-       "Sum$(Electron_pt > {muPt}  && Electron_sip3d < {sip3d} && Electron_{eleId}) >= 2").format(**conf) ## && Muon_miniPFRelIso_all < {miniRelIso} && Electron_miniPFRelIso_all < {miniRelIso}  #mettere qui MET_pt>50 #cp dal cfg la selezione
+       "Sum$(Electron_pt > {elePt}  && Electron_sip3d < {sip3d} && Electron_{eleId}) >= 2").format(**conf) ## && Muon_miniPFRelIso_all < {miniRelIso} && Electron_miniPFRelIso_all < {miniRelIso}  #mettere qui MET_pt>50 #cp dal cfg la selezione
 #cut  = ttH_skim_cut
 muonSelection     = lambda l : abs(l.eta) < 2.4 and l.pt > conf["muPt"]  and l.sip3d < conf["sip3d"] and abs(l.dxy) < conf["dxy"] and abs(l.dz) < conf["dz"]  and l.pfRelIso03_all*l.pt < ( conf["iperbolic_iso_0"]+conf["iperbolic_iso_1"]/l.pt) and abs(l.ip3d) < conf["ip3d"] ##is it relIso03?  ##and l.miniPFRelIso_all < conf["miniRelIso"]##l.relIso03*l.pt
 electronSelection = lambda l : abs(l.eta) < 2.5 and l.pt > conf["elePt"]  and l.sip3d < conf["sip3d"] and abs(l.dxy) < conf["dxy"] and abs(l.dz) < conf["dz"] and l.pfRelIso03_all*l.pt < ( conf["iperbolic_iso_0"]+conf["iperbolic_iso_1"]/l.pt) and abs(l.ip3d) < conf["ip3d"] ##is it relIso03? ##and l.miniPFRelIso_all < conf["miniRelIso"] #l.relIso03*l.pt

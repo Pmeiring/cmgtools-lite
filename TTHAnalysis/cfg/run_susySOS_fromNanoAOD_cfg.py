@@ -96,7 +96,7 @@ if year == 2018:
             "TGJets_lep", 
 
             #missing tbc
-#            "ZZTo2L2Q," 
+#            "ZZTo2L2Q", 
             "WpWpJJ",
 #            "WZTo1L3Nu",
 #            "WGToLNuG_amcatnlo_ext",
@@ -125,15 +125,15 @@ if year == 2018:
 ##conf db e cercare stream dato il nome del trigger
 
 elif year == 2017:
-    mcSamples = byCompName(mcSamples_ [
+    mcSamples = byCompName(mcSamples_, [
 ##        "DYJetsToLL_M50$", "TT(Lep|Semi)_pow", "TTHnobb_pow",
         
         ##main bkgs
         "T_tWch_noFullyHad", "TBar_tWch_noFullyHad",
 
-        "DYJetsToLL_M4to50_HT70to100," 
-        "DYJetsToLL_M4to50_HT70to100_ext1",
-        "DYJetsToLL_M4to50_HT100to200,   " 
+        #"DYJetsToLL_M4to50_HT70to100," #Sample status = INVALID on DAS
+        #"DYJetsToLL_M4to50_HT70to100_ext1", #Sample status = INVALID on DAS
+        "DYJetsToLL_M4to50_HT100to200", 
         "DYJetsToLL_M4to50_HT100to200_ext1",
         "DYJetsToLL_M4to50_HT200to400",
         "DYJetsToLL_M4to50_HT200to400_ext1",
@@ -141,7 +141,7 @@ elif year == 2017:
         "DYJetsToLL_M4to50_HT400to600_ext1",
         "DYJetsToLL_M4to50_HT600toInf",
 
-        "DYJetsToLL_M50_HT100to200," 
+        "DYJetsToLL_M50_HT100to200", 
         "DYJetsToLL_M50_HT100to200_ext1",
         "DYJetsToLL_M50_HT200to400",
         "DYJetsToLL_M50_HT200to400_ext1",
@@ -187,10 +187,10 @@ elif year == 2017:
         "TTZToLLNuNu_amc",
         "TTZToLLNuNu_m1to10",
         "TTGJets",
-        "TGJets_lep"
+        "TGJets_lep",
 
 #more to be included
-#            "ZZTo2L2Q," 
+#            "ZZTo2L2Q",
             "WpWpJJ",
 #            "WZTo1L3Nu",
 #            "WGToLNuG_amcatnlo_ext",
@@ -222,9 +222,9 @@ elif year == 2016:
         "DYJetsToLL_M5to50_HT400to600_ext",
         "DYJetsToLL_M5to50_HT600toInf",
         "DYJetsToLL_M5to50_HT600toInf_ext",
-##        "DYJetsToLL_M4to50_HT70to100," 
+##        "DYJetsToLL_M4to50_HT70to100", 
 ##        "DYJetsToLL_M4to50_HT70to100_ext1",
-##        "DYJetsToLL_M4to50_HT100to200,   " 
+##        "DYJetsToLL_M4to50_HT100to200", 
 ##        "DYJetsToLL_M4to50_HT100to200_ext1",
 ##        "DYJetsToLL_M4to50_HT200to400",
 ##        "DYJetsToLL_M4to50_HT200to400_ext1",
@@ -244,7 +244,7 @@ elif year == 2016:
         "DYJetsToLL_M50_HT800to1200",
         "DYJetsToLL_M50_HT1200to2500",
         "DYJetsToLL_M50_HT2500toInf",
-#        "DYJetsToLL_M50_HT100to200," 
+#        "DYJetsToLL_M50_HT100to200", 
 #        "DYJetsToLL_M50_HT100to200_ext1",
 #        "DYJetsToLL_M50_HT200to400",
 #        "DYJetsToLL_M50_HT200to400_ext1",
@@ -310,7 +310,7 @@ elif year == 2016:
        # "TGJets_lep" #missing
 
 #more to be included
-        "ZZTo2L2Q," 
+        "ZZTo2L2Q", 
         "WpWpJJ",
         "WZTo1L3Nu",
         "WGToLNuG_amcatnlo",
@@ -354,7 +354,7 @@ if getHeppyOption("nanoPreProcessor"):
     preproc_cfg = {2016: ("mc94X2016","data94X2016"),
                    2017: ("mc94Xv2","data94Xv2"),
                    2018: ("mc102X","data102X_ABC","data102X_D")}
-    preproc_cmsswArea = "/afs/cern.ch/user/v/vtavolar/work/SusySOSSW_2_clean/nanoAOD/CMSSW_10_2_15"
+    preproc_cmsswArea = "/afs/cern.ch/user/v/vtavolar/work/SusySOSSW_2_clean/nanoAOD/CMSSW_10_2_15" #MODIFY ACCORDINGLY
     preproc_mc = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,preproc_cfg[year][0]),cmsswArea=preproc_cmsswArea,keepOutput=True)
     if year==2018:
         preproc_data_ABC = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,preproc_cfg[year][1]),cmsswArea=preproc_cmsswArea,keepOutput=True, injectTriggerFilter=True, injectJSON=True)
