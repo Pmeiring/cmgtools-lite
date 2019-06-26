@@ -209,101 +209,14 @@ float _get_tracking_SF(int pdgid, float pt, float eta, float var){
      _histo_reco_ele_sf = (TH2F*)(_file_trackingSF->Get("EGamma_SF2D"));
    }
 
-   return 1.0 ;
+   return 1.0;
    // --- commented due to a bug in the original Egamma file
    // return _histo_reco_ele_sf->GetBinContent(((_histo_reco_ele_sf->GetXaxis())->FindBin(eta)),((_histo_reco_ele_sf->GetYaxis())->FindBin(pt_min)));
  }
  else{
+   // Tracking efficiency for muons is 1. according to MuonPOG
    // ---  muons, from: http://ebrondol.web.cern.ch/ebrondol/TrackingTnP_Zmumu/80_20/all2016Runs_vs_/tk0_dr030e030/ and http://ebrondol.web.cern.ch/ebrondol/TrackingTnP_Zmumu/80_20/all2016Runs_vs_/
-   if(pt>10){ 
-     //---pT>10 GeV-------
-     if(abs(eta)>0.0 && abs(eta)<=0.20 ){
-       return 0.9800;
-     } 
-     else if(abs(eta)>0.20 && abs(eta)<=0.40 ){
-       return 0.9862;
-     } 
-     else if(abs(eta)>0.40 && abs(eta)<=0.60 ){
-       return 0.9872;
-     } 
-     else if(abs(eta)>0.60 && abs(eta)<=0.80 ){
-       return 0.9845;
-     } 
-     else if(abs(eta)>0.80 && abs(eta)<=1.00 ){
-       return 0.9847;
-     } 
-     else if(abs(eta)>1.00 && abs(eta)<=1.20 ){
-       return 0.9801;
-     } 
-     else if(abs(eta)>1.20 && abs(eta)<=1.40 ){
-       return 0.9825;
-     } 
-     else if(abs(eta)>1.40 && abs(eta)<=1.60 ){
-       return 0.9754;
-     } 
-     else if(abs(eta)>1.60 && abs(eta)<=1.80 ){
-       return 0.9860;
-     } 
-     else if(abs(eta)>1.80 && abs(eta)<=2.00 ){
-       return 0.9810;
-     } 
-     else if(abs(eta)>2.00 && abs(eta)<=2.20 ){
-       return 0.9815;
-     } 
-     else if(abs(eta)>2.20 && abs(eta)<=2.40 ){
-       return 0.9687;
-     } 
-     else{
-       return 1.0;
-     }
-   }
-   
-   // --- pT<10 GeV ---
-   
-   else{
-     
-     if(abs(eta)>0.0 && abs(eta)<=0.20 ){
-       return 0.9968;
-     } 
-     else if(abs(eta)>0.20 && abs(eta)<=0.40 ){
-       return 0.9975;
-     } 
-     else if(abs(eta)>0.40 && abs(eta)<=0.60 ){
-       return 0.9979;
-     } 
-     else if(abs(eta)>0.60 && abs(eta)<=0.80 ){
-       return 0.9978;
-     } 
-     else if(abs(eta)>0.80 && abs(eta)<=1.00 ){
-       return 0.9980;
-     } 
-     else if(abs(eta)>1.00 && abs(eta)<=1.20 ){
-       return 0.9971;
-     } 
-     else if(abs(eta)>1.20 && abs(eta)<=1.40 ){
-       return 0.9961;
-     } 
-     else if(abs(eta)>1.40 && abs(eta)<=1.60 ){
-       return 0.9954;
-     } 
-     else if(abs(eta)>1.60 && abs(eta)<=1.80 ){
-       return 0.9955;
-     } 
-     else if(abs(eta)>1.80 && abs(eta)<=2.00 ){
-       return 0.9941;
-     } 
-     else if(abs(eta)>2.00 && abs(eta)<=2.20 ){
-       return 0.9925;
-     } 
-     else if(abs(eta)>2.20 && abs(eta)<=2.40 ){
-       return 0.9866;
-     } 
-     else{
-       return 1.0;
-     }
-     
-   }
-   
+   return 1.0;
  }
  
 }
@@ -312,11 +225,15 @@ float _get_tracking_SF(int pdgid, float pt, float eta, float var){
 
 float leptonSF_SOS(int pdgid, float pt, float eta, float var=0){
 
+  // For e + mu
   float tracking = _get_tracking_SF(pdgid,pt,eta,var);
+  // For mu
   float recoToLoose = _get_recoToLoose_leptonSF_SOS(pdgid,pt,eta,var);
+  // For e + mu
   float looseToTight = _get_looseToTight_leptonSF_SOS(pdgid,pt,eta,var);
+
   float res = tracking*recoToLoose*looseToTight; 
-  //float res = recoToLoose; 
+
   assert (res>0 && "*** Warning we have a negative (or zero) Lepton SF ***");
   return res;
 }
