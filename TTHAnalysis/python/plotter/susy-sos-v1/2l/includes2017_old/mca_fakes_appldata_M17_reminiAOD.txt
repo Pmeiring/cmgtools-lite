@@ -1,0 +1,9 @@
+
+## FAKES (DD)
+## -----------------------------------------------------------
+fakes_appldata : MET_Run2017B ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_appldata.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_appldata : MET_Run2017C ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_appldata.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_appldata : MET_Run2017D ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_appldata.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_appldata : MET_Run2017E ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_appldata.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_appldata : MET_Run2017F ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_appldata.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+

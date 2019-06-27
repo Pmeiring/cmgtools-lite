@@ -1,0 +1,20 @@
+
+## FAKES (SEMI-DD)
+## -----------------------------------------------------------
+fakes_applmc   : WJetsToLNu_HT70to100                                 : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_applmc   : WJetsToLNu_HT100to200_ext                            : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WJetsToLNu_HT200to400_ext+WJetsToLNu_HT200to400_ext2 : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WJetsToLNu_HT400to600+WJetsToLNu_HT400to600_ext      : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WJetsToLNu_HT600to800+WJetsToLNu_HT600to800_ext      : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WJetsToLNu_HT800to1200_ext                           : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WJetsToLNu_HT1200to2500                              : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WJetsToLNu_HT2500toInf+WJetsToLNu_HT2500toInf_ext    : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : TTJets_SingleLeptonFromTbar                          : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : TTJets_SingleLeptonFromT                             : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : TToLeptons_sch                                       : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : TToLeptons_tch_powheg                                : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : TBarToLeptons_tch_powheg                             : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WZTo1L3Nu                                            : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WZTo1L1Nu2Q                                          : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_applmc   : WWToLNuQQ                                            : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_applmc.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+

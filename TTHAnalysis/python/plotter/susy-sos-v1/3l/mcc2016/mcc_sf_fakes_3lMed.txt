@@ -1,0 +1,4 @@
+ScaleFactor1F: 0.79; AlsoData
+ScaleFactor2F: 0.85; AlsoData
+#########ScaleFactor2F: 1.00; AlsoData ## wrong-o (status reporto)
+ScaleFactor3F: 2.23; AlsoData

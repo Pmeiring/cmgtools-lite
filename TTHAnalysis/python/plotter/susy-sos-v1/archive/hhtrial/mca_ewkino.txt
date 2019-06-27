@@ -1,0 +1,26 @@
+
+## Sync samples
+## -----------------------------------------------------------
+sig_hh+ : GGHH : xsec ; FillColor=ROOT.kPink-9, FakeRate="susy-ewkino/hhtrial/fakerate_standard_central.txt\,susy-ewkino/hhtrial/fakerate_load_isprompt.txt", Label="gg\#rightarrow HH", NormSystematic=0.2
+
+## WZ (to keep the order)
+## -----------------------------------------------------------
+prompt_WZ           : WZTo3LNu : 1.12*xsec ; FillColor=ROOT.kOrange, FakeRate="susy-ewkino/hhtrial/fakerate_standard_central.txt\,susy-ewkino/hhtrial/fakerate_load_isprompt.txt", Label="WZ", NormSystematic=0.3
+
+## Backgrounds
+## -----------------------------------------------------------
+##incl_fakes_appldata   : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_fakes_appldata_M17_reminiAOD.txt"
+#incl_fakes_appldata_e : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_fakes_appldata_M17_reminiAOD_fromE.txt"
+#incl_fakes_appldata_m : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_fakes_appldata_M17_reminiAOD_fromM.txt"
+#incl_fakes_appldata_t : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_fakes_appldata_M17_reminiAOD_fromT.txt"
+##incl_promptsub        : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_promptsub.txt"
+#incl_promptsub_e      : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_promptsub_fromE.txt"
+#incl_promptsub_m      : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_promptsub_fromM.txt"
+#incl_promptsub_t      : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_promptsub_fromT.txt"
+#incl_fakes_flavor     : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_fakes_flavorsplit.txt"
+incl_fakes_flavor     : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_fakes_flavorsplit_second.txt"
+#incl_fakes_process    : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_fakes_processsplit.txt"
+incl_flips_appldata   : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_flips_appldata_M17_reminiAOD.txt"
+incl_prompts          : + ; IncludeMca="susy-ewkino/hhtrial/includes/mca_prompts.txt"
+
+

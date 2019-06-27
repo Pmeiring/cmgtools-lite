@@ -1,0 +1,28 @@
+
+## WZ
+## -----------------------------------------------------------
+prompt_wz : WZTo3LNu                : ScaleFactorWZ*xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="WZ", FillColor=ROOT.kViolet-4
+
+## ZZ
+## -----------------------------------------------------------
+prompt_zz : ZZTo4L                  : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="ZZ", FillColor=ROOT.kViolet-5
+
+## VV
+## -----------------------------------------------------------
+prompt_vv : VVTo2L2Nu+VVTo2L2Nu_ext                                         : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M5to50_HT70to100                                     : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M5to50_HT100to200 + DYJetsToLL_M5to50_HT100to200_ext : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M5to50_HT200to400_ext                                : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M5to50_HT400to600 + DYJetsToLL_M5to50_HT400to600_ext : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M5to50_HT600toInf + DYJetsToLL_M5to50_HT600toInf_ext : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT70to100                                        : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT100to200+DYJetsToLL_M50_HT100to200_ext         : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT200to400+DYJetsToLL_M50_HT200to400_ext         : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT400to600+DYJetsToLL_M50_HT400to600_ext         : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT600to800                                       : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT800to1200                                      : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT1200to2500                                     : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+prompt_vv : DYJetsToLL_M50_HT2500toInf                                      : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-3
+
+
+

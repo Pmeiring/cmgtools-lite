@@ -1,0 +1,20 @@
+
+## command-related options
+
+
+tname             : treeProducerSusyMultilepton
+lumimain          : 35.9
+lumired           : 33.2
+optionsall        :  --showIndivSigs --noStackSig
+tdirs+            : /data1/botta/something
+procs+            : 
+macros+           : susy-sos-v1/functionsSOS.cc, susy-sos-v1/functionsSF.cc, susy-sos-v1/functionsPUW.cc
+friends+          : 0_both3dlooseClean_v2
+friendsdata+      : 
+friendsmc+        : 0_eventBTagWeight_v2
+
+
+## container-related options
+
+
+

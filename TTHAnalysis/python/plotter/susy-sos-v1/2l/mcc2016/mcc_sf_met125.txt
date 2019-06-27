@@ -1,0 +1,2 @@
+ScaleFactorDY: 1.01; AlsoData
+ScaleFactorTT: 1.00; AlsoData

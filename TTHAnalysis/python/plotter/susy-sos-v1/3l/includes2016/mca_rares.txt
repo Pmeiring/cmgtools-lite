@@ -1,0 +1,20 @@
+
+## External Conversions
+## -----------------------------------------------------------
+rares  : TTGJets                : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isconv.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : ZGTo2LG_ext            : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isconv.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+
+
+## Rares
+## -----------------------------------------------------------
+rares  : TTWToLNu_ext                        : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : TTZToLLNuNu                         : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : TTZToLLNuNu_m1to10                  : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : TTJets_DiLepton+TTJets_DiLepton_ext : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : TTJets_SingleLeptonFromT            : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : TTJets_SingleLeptonFromTbar         : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : ZZZ                                 : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2 
+rares  : WZZ                                 : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : WWZ                                 : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2
+rares  : WWW                                 : xsec ; FakeRate="susy-sos-v1/3l/fakerate/fakerate_standard.txt\,susy-sos-v1/3l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/3l/fakerate/fakerate_load_isprompt.txt", Label="Rares", FillColor=ROOT.kMagenta+2 
+

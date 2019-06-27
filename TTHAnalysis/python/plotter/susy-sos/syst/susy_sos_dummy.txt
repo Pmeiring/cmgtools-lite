@@ -1,9 +1,22 @@
-Closure_systematics      : DYJets$|WJets$|TT1l$|T$|VVnp$|: .* : 1.3
-TTbar_pT_spin            : TT$|: .* : 1.1
-Flat_systematic          : VV$|: .* : 1.5
-Flat_systematic          : TW$|: .* : 2.0
-Signal_systematic        : TChiNeuWZ_80+$|TChiNeuWZ_90+$|TChiNeuWZ_95+$|T2ttDeg_330+$|T2ttDeg_315+$|T2ttDeg_300+$|: .* : 1.2
+# Flat background
+#CMS_sos_TT_xsec         : TT : .* : 1.05
+#CMS_sos_DYJets_xsec     : DYJets : .* : 1.10
 
-# Examples (from ttH)
-#CMS_ttHl_trigger_ee : ttH.*|TT[WZ]|Rares|Gstar|WWss|Convs : .*2lss_mm.* : 1.03
-#CMS_ttHl_trigger_em : ttH.*|TT[WZ]|Rares|Gstar|WWss|Convs : .*2lss_ee.* : trigEff_ee : templates
+Float_TT              : TT : .* : 2.0 : lnU
+Float_DY              : DYJets : .* : 2.0 : lnU
+
+CMS_sos_fake_closure    : fakes_data|fakes_mc : .* : 1.3 
+CMS_sos_VV_xsec         : VV|WG|ZZ : .* : 1.5
+CMS_sos_WZ_xsec         : WZ : .* : 1.2
+CMS_sos_TW_xsec         : TW : .* : 2.0
+CMS_sos_Rares_xsec      : Rares : .* : 2.0
+
+
+
+#Signal
+CMS_sos_signalflat      : TChiWZ_225_dM20+ : .* : 1.2
+
+
+#Lepton efficiencies and trigger (flat)
+CMS_sos_lepton_SF     : DYJets|TT|VV|TW|Rares|TChiWZ_225_dM20+ : .* : 1.05
+CMS_sos_triggerEff    : DYJets|TT|VV|TW|Rares|TChiWZ_225_dM20+ : .* : 1.05

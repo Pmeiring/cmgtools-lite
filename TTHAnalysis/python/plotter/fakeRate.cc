@@ -16,7 +16,7 @@ TH2 * FR3_el = 0;
 TH2 * FR4_el = 0;
 TH2 * FR5_el = 0;
 TH2 * QF_el = 0;
-TH2 * FRi_mu[30], *FRi_el[30], *FRi_tau[6];
+TH2 * FRi_mu[6], *FRi_el[6], *FRi_tau[6];
 TH2 * FR_tau = 0;
 TH2 * FR2_tau = 0;
 TH2 * FR3_tau = 0;
@@ -56,8 +56,7 @@ TH2 * MUSF2 = 0;
 TH2 * MUSF3 = 0;
 
 bool loadFRHisto(const std::string &histoName, const char *file, const char *name) {
-  TH2 **histo = 0, **hptr2 = 0;
-  TH2 * FR_temp = 0;
+    TH2 **histo = 0, **hptr2 = 0;
     if      (histoName == "FR_tau") { histo = & FR_tau; hptr2 = & FRi_tau[0]; }
     else if (histoName == "FR_mu")  { histo = & FR_mu;  hptr2 = & FRi_mu[0]; }
     else if (histoName == "FR_el")  { histo = & FR_el;  hptr2 = & FRi_el[0]; }
@@ -71,8 +70,6 @@ bool loadFRHisto(const std::string &histoName, const char *file, const char *nam
     else if (histoName == "FR4_el") { histo = & FR4_el; hptr2 = & FRi_el[4]; }
     else if (histoName == "FR5_mu") { histo = & FR5_mu; hptr2 = & FRi_mu[5]; }
     else if (histoName == "FR5_el") { histo = & FR5_el; hptr2 = & FRi_el[5]; }
-    else if (TString(histoName).BeginsWith("FR_mu_i")) {histo = & FR_temp; hptr2 = & FRi_mu[TString(histoName).ReplaceAll("FR_mu_i","").Atoi()];}
-    else if (TString(histoName).BeginsWith("FR_el_i")) {histo = & FR_temp; hptr2 = & FRi_el[TString(histoName).ReplaceAll("FR_el_i","").Atoi()];}
     else if (histoName == "QF_el") histo = & QF_el;
     else if (histoName == "FR_mu_FO1_QCD")  { histo = &FR_mu_FO1_QCD ;  hptr2 = & FRi_FO_mu[0]; }
     else if (histoName == "FR_mu_FO1_insitu")  { histo = &FR_mu_FO1_insitu ;  hptr2 = & FRi_FO_mu[1]; }
@@ -186,7 +183,7 @@ float fakeRateWeight_2lssCB_i(float l1pt, float l1eta, int l1pdgId, float l1relI
             int ptbin  = std::max(1, std::min(hist->GetNbinsX(), hist->GetXaxis()->FindBin(fpt)));
             int etabin = std::max(1, std::min(hist->GetNbinsY(), hist->GetYaxis()->FindBin(feta)));
             double fr = hist->GetBinContent(ptbin,etabin);
-            if (fr < 0)  { std::cerr << "WARNING, FR is " << fr << " for " << hist->GetName() << ", pt " << fpt << " eta " << feta << std::endl; if (fr<0) std::abort(); }
+            if (fr <= 0)  { std::cerr << "WARNING, FR is " << fr << " for " << hist->GetName() << ", pt " << fpt << " eta " << feta << std::endl; if (fr<0) std::abort(); }
             return fr/(1-fr);
         }
         case 2: {
@@ -195,13 +192,13 @@ float fakeRateWeight_2lssCB_i(float l1pt, float l1eta, int l1pdgId, float l1relI
             int ptbin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(l1pt)));
             int etabin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(std::abs(l1eta))));
             double fr1 = hist1->GetBinContent(ptbin1,etabin1);
-            if (fr1 < 0)  { std::cerr << "WARNING, FR is " << fr1 << " for " << hist1->GetName() << ", pt " << l1pt << " eta " << l1eta << std::endl; if (fr1<0) std::abort(); }
+            if (fr1 <= 0)  { std::cerr << "WARNING, FR is " << fr1 << " for " << hist1->GetName() << ", pt " << l1pt << " eta " << l1eta << std::endl; if (fr1<0) std::abort(); }
             TH2 *hist2 = (abs(l2pdgId) == 11 ? FRi_el[iFR] : FRi_mu[iFR]);
             if (hist2 == 0) { std::cerr << "ERROR, missing FR for pdgId " << l2pdgId << ", iFR " << iFR << std::endl; std::abort(); }
             int ptbin2  = std::max(1, std::min(hist2->GetNbinsX(), hist2->GetXaxis()->FindBin(l2pt)));
             int etabin2 = std::max(1, std::min(hist2->GetNbinsY(), hist2->GetYaxis()->FindBin(std::abs(l2eta))));
             double fr2 = hist2->GetBinContent(ptbin2,etabin2);
-            if (fr2 < 0)  { std::cerr << "WARNING, FR is " << fr2 << " for " << hist2->GetName() << ", pt " << l2pt << " eta " << l2eta << std::endl; if (fr2<0) std::abort(); }
+            if (fr2 <= 0)  { std::cerr << "WARNING, FR is " << fr2 << " for " << hist2->GetName() << ", pt " << l2pt << " eta " << l2eta << std::endl; if (fr2<0) std::abort(); }
             return -fr1*fr2/((1-fr1)*(1-fr2));
         }
         default: return 0;
@@ -226,12 +223,6 @@ float fakeRateWeight_2lss_2(float l1pt, float l1eta, int l1pdgId, float l1pass,
 {
     return fakeRateWeight_2lssCB_i(l1pt, l1eta, l1pdgId, -l1pass,
                             l2pt, l2eta, l2pdgId, -l2pass, -0.5, 2);
-}
-float fakeRateWeight_2lss_i(float l1pt, float l1eta, int l1pdgId, float l1pass,
-                            float l2pt, float l2eta, int l2pdgId, float l2pass, int iFR) 
-{
-    return fakeRateWeight_2lssCB_i(l1pt, l1eta, l1pdgId, -l1pass,
-                            l2pt, l2eta, l2pdgId, -l2pass, -0.5, iFR);
 }
 
 float fakeRateWeight_2lss_up(float l1pt, float l1eta, int l1pdgId, float l1pass,
@@ -692,14 +683,14 @@ float fakeRateWeight_3lCB(float l1pt, float l1eta, int l1pdgId, float l1relIso,
     return ret;
 }
 
-float fetchFR_i(float l1pt, float l1eta, int l1pdgId, int iFR) 
+float fetchFR_i(float l1pt, float l1eta, int l1pdgId, int iFR ) 
 {
     TH2 *hist1 = (abs(l1pdgId) == 11 ? FRi_el[iFR] : FRi_mu[iFR]);
     if (hist1 == 0) { std::cerr << "ERROR, missing FR for pdgId " << l1pdgId << ", iFR " << iFR << std::endl; std::abort(); }
     int ptbin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(l1pt)));
     int etabin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(std::abs(l1eta))));
     double fr1 = hist1->GetBinContent(ptbin1,etabin1);
-    if (fr1 < 0)  { std::cerr << "WARNING, FR is " << fr1 << " for " << hist1->GetName() << ", pt " << l1pt << " eta " << l1eta << std::endl; if (fr1<0) std::abort(); }
+    if (fr1 <= 0)  { std::cerr << "WARNING, FR is " << fr1 << " for " << hist1->GetName() << ", pt " << l1pt << " eta " << l1eta << std::endl; if (fr1<0) std::abort(); }
     return fr1;
 }
    
@@ -708,7 +699,7 @@ float fakeRateWeight_3l(float l1fr, int l1pass, float l2fr, int l2pass, float l3
     float ret = -1.0f;
     if (!l1pass) ret *=  -l1fr/(1.0f-l1fr);
     if (!l2pass) ret *=  -l2fr/(1.0f-l2fr);
-    if (!l3pass) ret *=  -l3fr/(1.0f-l3fr);
+    if (!l3pass) ret *=  -l2fr/(1.0f-l2fr);
     if (ret == -1.0f) ret = 0.0f;
     return ret;
 }
@@ -1148,3 +1139,104 @@ float fakeRatePromptRateWeight_2l_23(float l1pt, float l1eta, int l1pdgId, float
     return fakeRatePromptRateWeight_2l_ij(l1pt, l1eta, l1pdgId, l1pass,
                             l2pt, l2eta, l2pdgId, l2pass, 2, 3);
 }
+
+float fakeRatePromptRateWeight_2l_23_1f(float l1pt, float l1eta, int l1pdgId, float l1pass,
+                            float l2pt, float l2eta, int l2pdgId, float l2pass)
+{
+    if((l1pass && !l2pass) || (!l1pass && l2pass))
+        return fakeRatePromptRateWeight_2l_23(l1pt, l1eta, l1pdgId, l1pass,
+                            l2pt, l2eta, l2pdgId, l2pass);
+    return 0;
+}
+
+float fakeRatePromptRateWeight_2l_23_2f(float l1pt, float l1eta, int l1pdgId, float l1pass,
+                            float l2pt, float l2eta, int l2pdgId, float l2pass)
+{
+    if(!l1pass && !l2pass)
+        return fakeRatePromptRateWeight_2l_23(l1pt, l1eta, l1pdgId, l1pass,
+                            l2pt, l2eta, l2pdgId, l2pass);
+    return 0;
+}
+
+float fakeRatePromptRateWeight_3l_ijk(float l1fr, float l1pr , bool l1pass,
+				      float l2fr, float l2pr , bool l2pass,
+				      float l3fr, float l3pr , bool l3pass,
+				      int selhyp=-1, int selfs=111)
+{
+
+    // selhyp: -1 = all with at least one fake; 000 = triple-fakes, 011 = l1 is fake, 011 = l2 is fake, 001 = l1 and l2 are fakes, etc.
+    // selfs : 111 = pass-pass-pass, 00 = fail-fail-fail, 100 = pass-fail-fail, 011 = fail-pass-pass, etc.
+    // The math is:
+    // 1) 1/(p - f)   for each lepton
+    // 2) to predict the yield before selection in a given configuration of prompt and fake, get a factor
+    //         pass -> prompt :  ( 1 - f )
+    //         pass -> fake   : -( 1 - p )
+    //         fail -> prompt : -    f
+    //         fail -> fake   :      p
+    //  3) then add the various p, (1-p), f, (1-f) depending on what you want to predict
+
+  float f[3] = { l1fr, l2fr, l3fr };
+  float p[3] = { l1pr, l2pr, l3pr };
+  bool pass[3] = { l1pass, l2pass, l3pass };
+
+  int hypots[8] = { 0, 1, 10, 11, 100, 101, 110, 111 };
+  double weight = 0;
+  for (int h : hypots) {
+    if (!(selhyp == h || (selhyp == -1 && h != 111))) continue;
+    double myw = 1.0;
+    for (int i = 0; i < 3; ++i) {
+      int _h = h;
+      for (int j=0; j<2-i; j++) _h = _h/10;
+      int target = _h%2; // 1 if prompt, 0 if fake
+      // (1)
+      myw *= 1.0/(p[i]-f[i]);
+      // (2)
+      if (pass[i]) myw *= (target ? (1-f[i]) : -(1-p[i]) );
+      else         myw *= (target ? -  f[i]  :   p[i]    );
+      // (3)
+
+      int shouldpass = selfs;
+      for (int j=0; j<2-i; j++) shouldpass = shouldpass/10;
+      shouldpass = shouldpass%2; // 1 if I'm predicting a passing, 0 if I'm predicting a failing
+      if (shouldpass) myw *= (target ?    p[i]    :     f[i]   );
+      else            myw *= (target ? (1 - p[i]) : (1 - f[i]) );
+    }
+    weight += myw;
+  }
+
+ 
+  return weight;
+}
+
+
+
+float fakeRatePromptRateWeight_3l_ijk_1f(float l1fr, float l1pr , bool l1pass,
+				      float l2fr, float l2pr , bool l2pass,
+				      float l3fr, float l3pr , bool l3pass,
+				      int selhyp=-1, int selfs=111) {
+
+    if((!l1pass && l2pass && l3pass) || (l1pass && !l2pass && l3pass) || (l1pass && l2pass && !l3pass))
+		return fakeRatePromptRateWeight_3l_ijk(l1fr, l1pr, l1pass, l2fr, l2pr, l2pass, l3fr, l3pr, l3pass, selhyp, selfs);
+    return 0;
+}
+
+float fakeRatePromptRateWeight_3l_ijk_2f(float l1fr, float l1pr , bool l1pass,
+				      float l2fr, float l2pr , bool l2pass,
+				      float l3fr, float l3pr , bool l3pass,
+				      int selhyp=-1, int selfs=111) {
+
+    if((!l1pass && !l2pass && l3pass) || (l1pass && !l2pass && !l3pass) || (!l1pass && l2pass && !l3pass))
+		return fakeRatePromptRateWeight_3l_ijk(l1fr, l1pr, l1pass, l2fr, l2pr, l2pass, l3fr, l3pr, l3pass, selhyp, selfs);
+    return 0;
+}
+
+float fakeRatePromptRateWeight_3l_ijk_3f(float l1fr, float l1pr , bool l1pass,
+				      float l2fr, float l2pr , bool l2pass,
+				      float l3fr, float l3pr , bool l3pass,
+				      int selhyp=-1, int selfs=111) {
+
+    if(!l1pass && !l2pass && !l3pass)
+		return fakeRatePromptRateWeight_3l_ijk(l1fr, l1pr, l1pass, l2fr, l2pr, l2pass, l3fr, l3pr, l3pass, selhyp, selfs);
+    return 0;
+}
+

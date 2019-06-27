@@ -1,0 +1,14 @@
+
+## VV
+## -----------------------------------------------------------
+###prompt_vv : WGToLNuG_amcatanlo_ext  : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+###prompt_vv : WZTo2L2Q                : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+prompt_vv : WZTo3LNu_fxfx           : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+prompt_vv : WWTo2L2Nu               : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+prompt_vv : ZZTo2L2Nu               : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+###prompt_vv : VHToNonbb               : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+###prompt_vv : ZZTo2L2Q                : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+prompt_vv : ZZTo4L                  : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+prompt_vv : WWTo2L2Nu_DPS_hpp       : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+###prompt_vv : WpWpJJ                  : xsec ; FakeRate="susy-sos-v1/2l/fakerate/fakerate_standard.txt\,susy-sos-v1/2l/fakerate/fakerate_jec_central.txt\,susy-sos-v1/2l/fakerate/fakerate_load_isprompt.txt", Label="VV", FillColor=ROOT.kViolet-4
+

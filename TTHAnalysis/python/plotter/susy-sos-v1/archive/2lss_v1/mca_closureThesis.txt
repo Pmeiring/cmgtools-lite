@@ -1,0 +1,41 @@
+## STANDARD SELECTION (CENTRAL VALUE)
+## ===========================================================
+
+## OBSERVED
+## -----------------------------------------------------------
+
+matched_DY    : DYJetsToLL_M10to50                                          : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="DY (observed)"
+matched_DY    : DYJetsToLL_M50                                              : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="DY (observed)"
+matched_VV    : WZTo3LNu                                                    : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="DY (observed)"
+matched_VV    : WWTo2L2Nu                                                   : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="DY (observed)"
+matched_VV    : ZZTo4L                                                      : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="DY (observed)"
+matched_WJ    : WJetsToLNu                                                  : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="DY (observed)"
+matched_WJ    : WGToLNuG                                                    : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="DY (observed)"
+matched_TT    : TTJets_DiLepton+TTJets_DiLepton_ext                         : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="TT (observed)"
+matched_TT    : TTJets_SingleLeptonFromT+TTJets_SingleLeptonFromT_ext       : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="TT (observed)"
+matched_TT    : TTJets_SingleLeptonFromTbar+TTJets_SingleLeptonFromTbar_ext : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="TT (observed)"
+matched_TT    : TTJets_SingleLeptonFromTbar+TTJets_SingleLeptonFromTbar_ext : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="TT (observed)"
+matched_ST    : T_tch_powheg                                                : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="TT (observed)"
+matched_ST    : TBar_tch_powheg                                             : xsec : (LepGood1_mcUCSXMatchId==2 || LepGood1_mcUCSXMatchId==3) || (LepGood2_mcUCSXMatchId==2 || LepGood2_mcUCSXMatchId==3); FillColor=ROOT.kBlack, FakeRate="susy-ewkino/2lss_v1/fakerate_standard_central.txt", Label="TT (observed)"
+
+
+
+
+## PREDICTION
+## -----------------------------------------------------------
+
+appl_DY : DYJetsToLL_M10to50          : xsec ; FillColor=ROOT.kAzure+1, FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (DY)"
+appl_DY : DYJetsToLL_M50              : xsec ; FillColor=ROOT.kAzure+1, FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (DY)"
+appl_VV : WZTo3LNu                    : xsec ; FillColor=ROOT.kBlue-7 , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (WW)"
+appl_VV : WWTo2L2Nu                   : xsec ; FillColor=ROOT.kBlue-7 , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (WW)"
+appl_VV : ZZTo4L                      : xsec ; FillColor=ROOT.kGreen+1, FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (WW)"
+appl_WJ : WJetsToLNu                  : xsec ; FillColor=ROOT.kCyan   , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (WJ)"
+appl_WJ : WGToLNuG                    : xsec ; FillColor=ROOT.kCyan   , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (WJ)"
+appl_TT : TTJets_DiLepton+TTJets_DiLepton_ext                         : xsec ; FillColor=ROOT.kBlue+1 , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (TT)"
+appl_TT : TTJets_SingleLeptonFromT+TTJets_SingleLeptonFromT_ext       : xsec ; FillColor=ROOT.kBlue+1 , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (TT)"
+appl_TT : TTJets_SingleLeptonFromTbar+TTJets_SingleLeptonFromTbar_ext : xsec ; FillColor=ROOT.kBlue+1 , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (TT)"
+appl_ST : T_tch_powheg                : xsec ; FillColor=ROOT.kBlue+3 , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (ST)"
+appl_ST : TBar_tch_powheg             : xsec ; FillColor=ROOT.kBlue+3 , FakeRate="susy-ewkino/2lss_v1/fakerate_fakeappl_closure.txt", Label="nonprompt (ST)"
+
+
+

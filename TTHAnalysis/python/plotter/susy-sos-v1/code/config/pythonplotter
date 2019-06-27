@@ -1,0 +1,49 @@
+
+## general info
+moduleName  : treedrawer
+moduleType  : quasi
+
+## containers
+containers+ : mca_2l_master=susy-sos-v1/2l/mca_sos.txt
+containers+ : mca_2l_dy=susy-sos-v1/2l/includes/mca_dy.txt
+containers+ : mca_2l_tt=susy-sos-v1/2l/includes/mca_tt.txt
+containers+ : mca_2l_vv=susy-sos-v1/2l/includes/mca_vv.txt
+containers+ : mca_2l_fakes=susy-sos-v1/2l/includes/mca_fakes_appldata_M17_reminiAOD.txt
+containers+ : mca_2l_rares=susy-sos-v1/2l/includes/mca_rares.txt
+
+containers+ : mca_3l_master=susy-sos-v1/3l/mca_sos.txt
+containers+ : mca_3l_dy=susy-sos-v1/3l/includes/mca_dy.txt
+containers+ : mca_3l_tt=susy-sos-v1/3l/includes/mca_tt.txt
+containers+ : mca_3l_vv=susy-sos-v1/3l/includes/mca_vv.txt
+containers+ : mca_3l_fakes=susy-sos-v1/3l/includes/mca_fakes_appldata_M17_reminiAOD.txt
+containers+ : mca_3l_rares=susy-sos-v1/3l/includes/mca_rares.txt
+
+## parameters
+parameters+ : datasets          : type=slist
+parameters+ : samples           : type=slist    , depends=datasets
+parameters+ : samplescomponents : type=slist    , depends=samples  
+parameters+ : sampleslegend     : type=string   , depends=samples
+parameters+ : samplescolor      : type=string   , depends=samples
+parameters+ : samplesnorm       : type=string   , depends=samples, default=xsec
+parameters+ : samplesfrs        : type=slist    , depends=samples
+parameters+ : samplesissignal   : type=bool     , depends=samples
+
+## schemes
+schemes+    : default
+
+## modes
+modes+      : sos
+modes+      : 2losewk
+modes+      : 2losstop
+modes+      : 2lss
+modes+      : 3l  
+
+
+## information flow
+## setup this config here => it defines the quasi module on a general level (incl the linkage to containers per mode)
+## according to this definition, a cfg file covering the parameters needs to be provided
+## the cfg also selects mode and scheme
+## selecting a cfg, and editing its parameters on command line, one can run the code
+
+
+

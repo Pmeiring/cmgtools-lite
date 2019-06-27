@@ -1,0 +1,11 @@
+EventFilters16\b : Flag_HBHENoiseFilter>=1 && Flag_HBHENoiseIsoFilter>=1 && Flag_goodVertices>=1 && Flag_eeBadScFilter>=1 && Flag_EcalDeadCellTriggerPrimitiveFilter>=1 && Flag_globalTightHalo2016Filter >=1 && Flag_badChargedHadronFilter>=1 && Flag_badMuonMoriond2017>=1 && Flag_badCloneMuonMoriond2017>=1 ; AlsoData
+EventFilters17\b : Flag_HBHENoiseFilter>=1 && Flag_HBHENoiseIsoFilter>=1 && Flag_goodVertices>=1 && Flag_eeBadScFilter>=1 && Flag_EcalDeadCellTriggerPrimitiveFilter>=1 && Flag_globalTightHalo2016Filter >=1 ; AlsoData
+
+HLT_MuMu16\b    : HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_v || HLT_BIT_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v || HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v || HLT_BIT_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v ; AlsoData
+HLT_MuMuMET16\b : HLT_BIT_HLT_DoubleMu3_PFMET50_v  ; AlsoData
+HLT_HighMET16\b : HLT_BIT_HLT_PFMET90_PFMHT90_IDTight_v || HLT_BIT_HLT_PFMETNoMu90_PFMHTNoMu90_IDTight_v || HLT_BIT_HLT_PFMET100_PFMHT100_IDTight_v || HLT_BIT_HLT_PFMETNoMu100_PFMHTNoMu100_IDTight_v || HLT_BIT_HLT_PFMET110_PFMHT110_IDTight_v || HLT_BIT_HLT_PFMETNoMu110_PFMHTNoMu110_IDTight_v || HLT_BIT_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_v || HLT_BIT_HLT_PFMET120_PFMHT120_IDTight_v ; AlsoData
+
+HLT_MuMu17\b    : HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v || HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v ; AlsoData
+HLT_MuMuMET17\b : HLT_BIT_HLT_DoubleMu3_DZ_PFMET50_PFMHT60_v ; AlsoData
+HLT_HighMET17\b : HLT_BIT_HLT_PFMETNoMu100_PFMHTNoMu100_IDTight_PFHT60_v || HLT_BIT_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_PFHT60_v || HLT_BIT_HLT_PFMETNoMu120_PFMHTNoMu120_IDTight_v || HLT_BIT_HLT_PFMETNoMu140_PFMHTNoMu140_IDTight_v ; AlsoData
+

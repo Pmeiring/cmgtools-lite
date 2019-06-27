@@ -1,0 +1,2 @@
+alwaystrue  : 1
+veto        : !(HLT_MuMuMET16 || HLT_HighMET16)

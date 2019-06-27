@@ -1,0 +1,20 @@
+parent    : sos
+
+
+mca       : susy-sos-v1/2l/mca_sos.txt
+cuts      : susy-sos-v1/2l/cuts_2los_ewk.txt
+pfile     : susy-sos-v1/2l/plots_sos.txt
+mccs      : 
+weightbkg : 1.0
+weightsig : 1.0 
+
+
+## configuration or command line
+tdir      : 
+plots     : 
+
+
+## sos
+
+
+

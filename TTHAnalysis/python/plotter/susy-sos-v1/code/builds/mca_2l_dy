@@ -1,0 +1,5 @@
+
+for sample in $(samples):
+	if not "dy" in sample.datasets: continue
+	frstring = ", FakeRate=\""+",".join(sample.samplesfrs)+"\""
+	print sample.datasets +":"+ "+".join(sample.samplescomponent) +":"+ sample.samplesnorm +"; Label=\""+sample.samplelegend+"\", FillColor=\""+sample.samplescolor+"\", "+ frstring

@@ -10,14 +10,12 @@ from CMGTools.TTHAnalysis.plotter.cutsFile import *
 
 _loads = {}
 class FakeRate:
-    def __init__(self,filestring,lumi=None,loadFilesNow=True):
+    def __init__(self,filestring,lumi=None):
         files = filestring.split(",")
         self._weight = None
         self._mods = []
         self._cutMods = []
-        self._toLoad = []
         for file in files:
-            if file=='': continue
             stream = open(file,'r')
 	    for line in stream:
 	        if len(line.strip()) == 0 or line.strip()[0] == '#': continue
@@ -28,15 +26,22 @@ class FakeRate:
 	            if self._weight is not None: raise RuntimeError, "Duplicate weight definition in fake rate file "+file
 	            self._weight = fields[1]
 	        elif fields[0] == "change": 
-	            self._mods.append( SimpleCorrection(fields[1],fields[2],alsoData=True) )
+	            self._mods.append( SimpleCorrection(fields[1],fields[2]) )
 	        elif fields[0] == "cut-change": 
-	            self._cutMods.append( SimpleCorrection(fields[1],fields[2],onlyForCuts=True,alsoData=True) )
+	            self._cutMods.append( SimpleCorrection(fields[1],fields[2],onlyForCuts=True) )
 	        elif fields[0] == "load-histo":
 	            data = "%s/src/CMGTools/TTHAnalysis/data/" % os.environ['CMSSW_BASE'];
                     fname = fields[2].replace("$DATA",data)
                     hname = fields[3] if len(fields) >= 4 else fields[1]
-                    if loadFilesNow: self._loadFile(fields[1],fname,hname) 
-                    else:            self._toLoad.append((fields[1],fname,hname))
+                    if fields[1] in _loads:
+                        if _loads[fields[1]] != (fname,hname):
+                            print "Conflicting load for %s: %s, %s vs older " % (fields[1],fields[2],hname, _loads[fields[1]])
+                        else:
+                            #print "Duplicate load for %s: %s, %s" % (fields[1],fields[2],hname)
+                            pass
+                    else:
+                        _loads[fields[1]] = (fname,hname)
+	            ROOT.loadFRHisto(fields[1],fname,hname)
 	        elif fields[0] == 'norm-lumi-override':
 	            if self._weight is None: raise RuntimeError, "norm-lumi-override must follow weight declaration in fake rate file "+file
 	            if not lumi: raise RuntimeError, "lumi not set in options, cannot apply norm-lumi-override"
@@ -58,16 +63,3 @@ class FakeRate:
         return self._mods
     def cutMods(self): 
         return self._cutMods
-    def loadFiles(self):
-        for hist,fname,hname in self._toLoad:
-            self._loadFile(hist,fname,hname)
-        self._toLoad = []
-    def _loadFile(self,hist,fname,hname):
-        if hist in _loads:
-            if _loads[hist] != (fname,hname):
-                print "Conflicting load for %s: (%r, %r) vs older %s" % (hist, fname,hname, _loads[hist])
-        else:
-            _loads[hist] = (fname,hname)
-        ROOT.loadFRHisto(hist,fname,hname)
-
-

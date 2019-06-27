@@ -15,8 +15,7 @@ class SimpleCorrection:
         self._componentMatch = re.compile(componentMatch) if componentMatch else None
         self._onlyForCuts = onlyForCuts
         self.alsoData = alsoData
-    def __call__(self,expr,process,component,iscut,isdata):
-        if isdata and not self.alsoData: return expr
+    def __call__(self,expr,process,component,iscut):
         if self._procMatch and not re.match(self._procMatch, process): return expr
         if self._componentMatch and not re.match(self._componentMatch, component   ): return expr
         if self._onlyForCuts and not iscut: return expr
@@ -28,6 +27,7 @@ class MCCorrections:
         self._corrections = []
         infile = open(file,'r')
         for line in infile:
+            if len(line.strip())==0: continue
             if re.match("\s*#.*", line): continue
             while line.strip()[-1] == "\\":
                 line = line.strip()[:-1] + infile.next()
@@ -47,10 +47,10 @@ class MCCorrections:
                                     componentMatch=(extra['Component'] if 'Component' in extra else None),
                                     onlyForCuts=('OnlyForCuts' in extra),
                                     alsoData=('AlsoData' in extra)) )
-    def __call__(self,expr,process,component,iscut,isdata):
+    def __call__(self,expr,process,component,iscut):
         ret = expr
         for c in self._corrections:
-            ret = c(ret,process,component,iscut,isdata)
+            ret = c(ret,process,component,iscut)
         return ret
     def __str__(self): 
         return "MCCorrections('%s')" % self._file

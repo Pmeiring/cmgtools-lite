@@ -1,0 +1,41 @@
+
+This is an how-to to illustrate the steps needed for producing signal scans, from the production of datacards until the visualization of the
+final 2D plot.
+
+0) Produce the mca file containing the desired signal and systematics variations:
+   - go inside create_mca/
+   - edit the replace_strings.sh by specifying the input files
+   according to the explanation in the file header
+
+1) Copy the newly produced mca inside the susy-sos/ and modify the
+sos_plot.py in the following way:
+   - switch to dowhat = "limits"
+   - replace PLOTandCUTS="susy-sos/<your_new_mca>.txt susy-sos/2los_tight.txt"
+
+1a) Copy prepare_and_run_limits.sh into python/plotter
+    Copy go.sh into python/plotter
+
+2) Produce the datacards for a certain signal by modifying
+prepare_and_run_limits.sh inside plotter/ specifying the type of
+signal and the name of the directory you want to save the cards (see
+the file header for details)
+
+3) bash prepare_and_run_limits.sh
+
+4) Once the script has finished to run, go inside the output dir
+(output_scan_xxx/) where the cards for the signal poitns are produced
+and do the merging part.
+
+5) In order to do the merging, copy the set_combine.sh inside
+output_scan_xxx/ and run the script (remember to adapt the dir in the script
+where your CMSSW version for combine is located inside your local area).
+
+6) once it's finished, hadd of the root files, i.e.
+hadd higgsCombineTChiWZ.Asymptotic.FINAL.root sig_TN2C1*/*Asymptotic*.root
+
+7) copy the file higgsCombineTChiWZ.Asymptotic.FINAL.root under
+scan_plot/limits/ with an appropriate name which recalls how
+it has been produced (like "[..]_final_Moriond17.root").
+
+8) follow the instructions on scan_plot/README to produce
+the final plot.

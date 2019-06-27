@@ -1,0 +1,28 @@
+## Data
+## -----------------------------------------------------------
+incl_data        : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_data_M17_reminiAOD.txt"
+
+
+## Backgrounds: Prompts
+## -----------------------------------------------------------
+incl_vv          : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_vv.txt"
+
+
+## Backgrounds: Nonprompts
+## -----------------------------------------------------------
+incl_fakes_matched     : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_fakes_matched.txt"
+
+
+## Backgrounds: Rares
+## -----------------------------------------------------------
+incl_rares          : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_rares.txt"
+
+
+## Variations
+## -----------------------------------------------------------
+incl_puw            : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_prompts_sys_puw.txt"
+incl_jec            : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_prompts_sys_jec.txt"
+incl_btagHF         : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_prompts_sys_btagHF.txt"
+incl_btagLF         : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_prompts_sys_btagLF.txt"
+incl_lepSF          : + ; IncludeMca="susy-sos-v1/3l/includes2016/mca_prompts_sys_lepSF.txt"
+

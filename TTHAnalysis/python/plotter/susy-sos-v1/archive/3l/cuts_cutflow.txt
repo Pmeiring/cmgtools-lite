@@ -1,0 +1,11 @@
+alwaystrue: 1
+event     : BR > 0
+trigger   : $DATA{Triggers_ee||Triggers_em||Triggers_mm        } $MC{Triggers_ee||Triggers_em||Triggers_mm} $FASTSIM{1}
+3tight    : nLepSel >= 3 && is_3l && allTight(3, LepSel_isTight[0], LepSel_isTight[1], LepSel_isTight[2]) && LepSel4_isTight == 0
+#0taus     : countTaus(3, LepSel_pdgId[0], LepSel_pdgId[1], LepSel_pdgId[2])==0
+#lowmass   : (minMllSFOS_Mini > 12 || minMllSFOS_Mini == -1)
+#ptcut     : passPtMll
+##convs     : ((BR != 1 && BR != 3) || abs(m3L-91) > 15) && (minMllSFOS_Mini > 12 || minMllSFOS_Mini == -1)
+#bJetVeto  : nBJetMedium25 == 0
+#met       : met_pt > 50
+#convs     : ((BR != 1 && BR != 3) || abs(m3L-91) > 15)

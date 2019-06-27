@@ -1,0 +1,14 @@
+map1_el_2l  : abs(LepGood1_eta)\:LepGood1_pt : [5,7.5,10,15,20,30]*[0,1.47,2.5]         ; XTitle="p_{T}(e) [GeV]"   , YTitle="|#eta|(e)"   , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+map1_mu_2l  : abs(LepGood1_eta)\:LepGood1_pt : [3.5,5,7.5,10,15,20,30]*[0,1.2,2.4]      ; XTitle="p_{T}(#mu) [GeV]" , YTitle="|#eta|(#mu)" , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+
+map2_el_2l  : abs(LepGood1_eta)\:LepGood1_pt : [5,7.5,10,15,20,30]*[0,1.47,2.5]         ; XTitle="p_{T}(e) [GeV]"   , YTitle="|#eta|(e)"   , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+map2_mu_2l  : abs(LepGood1_eta)\:LepGood1_pt : [3.5,5,7.5,10,15,20,30]*[0,1.2,2.4]      ; XTitle="p_{T}(#mu) [GeV]" , YTitle="|#eta|(#mu)" , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+
+map1_el_3l  : abs(LepGood1_eta)\:LepGood1_pt : [5,7.5,10,15,20,30]*[0,1.47,2.5]         ; XTitle="p_{T}(e) [GeV]"   , YTitle="|#eta|(e)"   , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+map1_mu_3l  : abs(LepGood1_eta)\:LepGood1_pt : [3.5,5,7.5,10,15,20,30]*[0,1.2,2.4]      ; XTitle="p_{T}(#mu) [GeV]" , YTitle="|#eta|(#mu)" , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+
+map2_el_3l  : abs(LepGood2_eta)\:LepGood2_pt : [5,7.5,10,15,20,30]*[0,1.47,2.5]         ; XTitle="p_{T}(e) [GeV]"   , YTitle="|#eta|(e)"   , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+map2_mu_3l  : abs(LepGood2_eta)\:LepGood2_pt : [3.5,5,7.5,10,15,20,30]*[0,1.2,2.4]      ; XTitle="p_{T}(#mu) [GeV]" , YTitle="|#eta|(#mu)" , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+
+map3_el_3l  : abs(LepGood3_eta)\:LepGood2_pt : [5,7.5,10,15,20,30]*[0,1.47,2.5]         ; XTitle="p_{T}(e) [GeV]"   , YTitle="|#eta|(e)"   , UnbinnedData2D=True, PlotMode='COLZ TEXT E'
+map3_mu_3l  : abs(LepGood3_eta)\:LepGood2_pt : [3.5,5,7.5,10,15,20,30]*[0,1.2,2.4]      ; XTitle="p_{T}(#mu) [GeV]" , YTitle="|#eta|(#mu)" , UnbinnedData2D=True, PlotMode='COLZ TEXT E'

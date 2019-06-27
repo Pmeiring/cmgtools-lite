@@ -1,0 +1,51 @@
+# Dummy (to plot signals unstacked)
+dummy : TTWToLNu_ext1 : 0 ; FakeRate="susy-ewkino/3l/fakerate_standard_central.txt", Label=""
+
+## Sync samples
+## -----------------------------------------------------------
+incl_sync  : + ; IncludeMca="susy-ewkino/4l/includes/mca_sync.txt"
+
+## Signals
+## -----------------------------------------------------------
+#incl_sig_opt  : + ; IncludeMca="susy-ewkino/4l/includes/mca_sig_opt.txt"
+sig_TChiZZ4L_100_1+         : TChiZZ4L_100_1            : 0.01*16797.2148438/1000 ; FillColor=ROOT.kBlack, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="\#tilde{\#chi}^{0}\#tilde{\#chi}^{0}\#rightarrowZZ(100/1)", isFastSim, NormSystematic=0.3, LineStyle=2
+#sig_TChiZZ4L_300_1+         : TChiZZ4L_300_1            : 0.01*284.856933594/1000 ; FillColor=ROOT.kBlue+3, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="\#tilde{\#chi}^{0}\#tilde{\#chi}^{0}\#rightarrowZZ(300/1)", isFastSim, NormSystematic=0.3
+#sig_TChiZZ4L_400_1+         : TChiZZ4L_400_1            : 0.01*88.7325/1000       ; FillColor=ROOT.kBlue+1, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="\#tilde{\#chi}^{0}\#tilde{\#chi}^{0}\#rightarrowZZ(400/1)", isFastSim, NormSystematic=0.3, LineStyle=2
+#sig_TChiZZ4L_425_1+         : TChiZZ4L_425_1            : 0.01*68.6962661743/1000 ; FillColor=ROOT.kBlue+3, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="\#tilde{\#chi}^{0}\#tilde{\#chi}^{0}\#rightarrowZZ(425/1)", isFastSim, NormSystematic=0.3
+#sig_TChiZZ4L_800_1+         : TChiZZ4L_800_1            : 0.01*3.46143/1000       ; FillColor=ROOT.kBlue+1, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="\#tilde{\#chi}^{0}\#tilde{\#chi}^{0}\#rightarrowZZ(800/1)", isFastSim, NormSystematic=0.3, LineStyle=2
+#sig_TChiZZ4L_1000_1+        : TChiZZ4L_1000_1           : 0.01*0.968853/1000      ; FillColor=ROOT.kBlue+3, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="\#tilde{\#chi}^{0}\#tilde{\#chi}^{0}\#rightarrowZZ(1000/1)", isFastSim, NormSystematic=0.3
+
+
+## Data
+## -----------------------------------------------------------
+incl_data      : + ; IncludeMca="susy-ewkino/4l/includes/mca_data_M17_reminiAOD.txt"
+#incl_data      : + ; IncludeMca="susy-ewkino/4l/includes/mca_data_M17.txt"
+#incl_dataAsBkg : + ; IncludeMca="susy-ewkino/4l/includes/mca_data_M17_asBkg.txt"
+#incl_data : + ; IncludeMca="susy-ewkino/4l/includes/mca_data_ICHEP.txt"
+
+## WZ (to keep the order)
+## -----------------------------------------------------------
+prompt_WZ : WZTo3LNu : 1.12*xsec ; FillColor=ROOT.kOrange, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="WZ", NormSystematic=0.3
+bare_WZ   : WZTo3LNu : 1.12*xsec ; FillColor=ROOT.kOrange, FakeRate="susy-ewkino/4l/fakerate_standard_central.txt", Label="WZ", NormSystematic=0.3
+
+## ZZ (first in conference mode)
+## -----------------------------------------------------------
+conf_ZZH  : VHToNonbb                   : xsec ; FillColor=ROOT.kGreen+1 , FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="ZZ/H", NormSystematic=0.25
+conf_ZZH  : GGHZZ4L                     : xsec ; FillColor=ROOT.kGreen+1 , FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="ZZ/H", NormSystematic=0.25
+conf_ZZH  : ZZTo4L                      : xsec ; FillColor=ROOT.kGreen+1 , FakeRate="susy-ewkino/4l/fakerate_standard_central.txt\,susy-ewkino/4l/fakerate_load_isprompt.txt", Label="ZZ/H", NormSystematic=0.25
+
+## Backgrounds
+## -----------------------------------------------------------
+incl_fakes_appldata : + ; IncludeMca="susy-ewkino/4l/includes/mca_fakes_appldata_M17_reminiAOD.txt"
+#incl_fakes_appldata : + ; IncludeMca="susy-ewkino/4l/includes/mca_fakes_appldata_M17.txt"
+#incl_fakes_appldata : + ; IncludeMca="susy-ewkino/4l/includes/mca_fakes_appldata_ICHEP.txt"
+incl_promptsub      : + ; IncludeMca="susy-ewkino/4l/includes/mca_promptsub.txt"
+#incl_fakes_bare     : + ; IncludeMca="susy-ewkino/4l/includes/mca_fakes_bare.txt"
+#incl_fakes_matched  : + ; IncludeMca="susy-ewkino/4l/includes/mca_fakes_matched.txt"
+#incl_fakes_flavor   : + ; IncludeMca="susy-ewkino/4l/includes/mca_fakes_flavorsplit.txt"
+#incl_fakes_process  : + ; IncludeMca="susy-ewkino/4l/includes/mca_fakes_processsplit.txt"
+incl_prompts        : + ; IncludeMca="susy-ewkino/4l/includes/mca_prompts.txt"
+incl_bares          : + ; IncludeMca="susy-ewkino/4l/includes/mca_bare.txt"
+incl_conf           : + ; IncludeMca="susy-ewkino/4l/includes/mca_conf.txt"
+
+
