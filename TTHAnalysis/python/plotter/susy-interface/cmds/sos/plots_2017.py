@@ -6,7 +6,7 @@ today = datetime.datetime.now().strftime("%Y-%m-%d")
 ## == configuration =================================
 
 #tag  = "vtavolarTest_2017_fixMET_wHLT"
-tag  = "vtavolarTest_2017_fixMET_wHLT_cards"
+tag  = "vtavolarTest_2017_testFRmatched"
 
 
 pfx  = ""
@@ -19,8 +19,8 @@ add  = ""
 #add  = "--sP lep1.*"
 #add  = "--sP SR_2l_col_fine"
 
-do = 0 ## only all plots
-#do = 1 ## only SR cards
+#do = 0 ## only all plots
+do = 1 ## only SR cards
 #do = 2 ## only cards for all plots
 
 runBkgs = True
@@ -136,7 +136,7 @@ plotbase = "python susy-interface/plotmaker.py {C} {R} \"{T}\" {O} -l {L} --make
 #cardbkgs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --bkgOnly --redoBkg --flags \"{F}\" --mca susy-sos-v1/{FS}/mca_sos_{YR}_forScan_sdd.txt -j 4"
 #cardsigs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --sigOnly --flags \"{F}\" --postfix '--postfix-pred fakes_applmcBoth*=fixFakePredictionForZeroEvts --frFile $CMSSW_BASE/src/CMGTools/TTHAnalysis/data/fakerate/{FR} --frMap FR_SOS_QCD_FL_data_comb --mpfr {R}' --mca susy-sos-v1/{FS}/mca_sos_{YR}_forScan_sdd.txt -j 4"
 cardbkgs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --bkgOnly --redoBkg --flags \"{F}\" --mca susy-sos-v1/{FS}/mca_sos_{YR}.txt -j 4"
-cardsigs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --sigOnly --flags \"{F}\" --postfix '--postfix-pred fakes_applmcBoth*=fixFakePredictionForZeroEvts --frFile $CMSSW_BASE/src/CMGTools/TTHAnalysis/data/fakerate/{FR} --frMap FR_SOS_QCD_FL_data_comb --mpfr {R}' --mca susy-sos-v1/{FS}/mca_sos_{YR}.txt -j 4"
+cardsigs = "python susy-interface/scanmaker.py {C} {R} \"{T}\" {O} -l {L} --models {M} -o {S} --sigOnly --flags \"{F}\" --postfix ''  --mca susy-sos-v1/{FS}/mca_sos_{YR}.txt -j 4" #'--postfix-pred fakes_applmcBoth*=fixFakePredictionForZeroEvts --frFile $CMSSW_BASE/src/CMGTools/TTHAnalysis/data/fakerate/{FR} --frMap FR_SOS_QCD_FL_data_comb --mpfr {R}'
 
 
 ## == code ==========================================
