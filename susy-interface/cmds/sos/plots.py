@@ -6,7 +6,7 @@ today = datetime.datetime.now().strftime("%Y-%m-%d")
 ## == configuration =================================
 
 ##tag  = "vtavolarTest_newFtrees_SR_bkgOnly_noHLT"
-tag  = "vtavolarTest_cards_data"
+tag  = "vtavolarTest_cards_data_2016_new"
 
 pfx  = ""
 #####pfx  = "_sc"
@@ -18,13 +18,15 @@ add  = ""
 #add  = "--sP lep1.*"
 #add  = "--sP SR_2l_col_fine"
 
-do = 0 ## only all plots
-#do = 1 ## only SR cards
+#do = 0 ## only all plots
+do = 1 ## only SR cards
 #do = 2 ## only cards for all plots
 
 runBkgs = True
 runSigs = True
+###model   = "TChiWZ_flatXs"
 model   = "TChiWZ"
+###model   = "T2tt"
 
 
 ## --------------------------------------------------
@@ -83,6 +85,10 @@ modes = {
              #("closure3F", "fakes_sideband3fake_.*;fakes_applmc3"      , None                          ),
             ],
         }
+
+#####for extrapolation to full run2
+##redlumi16 = 125.9
+##fullumi16 = 137.1
 
 redlumi16 = 33.2
 fullumi16 = 35.9
@@ -163,7 +169,8 @@ if do == 1:
 	#association = {"2lss":"SR", "2los":"SR", "3l":"SR", "dy":"SRmc", "tt":"SRmc", "wz":"SRmc"}
 
 	for region in regions:
-
+		print region
+		print
 		if "vv" in region[1]: continue
 
 		year = 2017 if region[0][-2:]=="17" else 2016
@@ -171,7 +178,11 @@ if do == 1:
 		nlep = 3    if "3l" in region[0]    else 2
 
 		for key,value in association.iteritems():
-			if not key in region[1]: continue
+			if not key in region[1]: 
+				print key
+				print "key not in region"
+				print
+				continue
 
 			for mode in modes[nlep]:
 				if not mode[0]==value: continue

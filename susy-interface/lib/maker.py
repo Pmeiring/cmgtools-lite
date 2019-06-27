@@ -201,7 +201,7 @@ class Maker():
 		friends += getattr(self.config, "mcfriends", [])
 		if isFastSim:
 #			friends += ["--FMC sf/t {P}/"+f+"/evVarFriend_{cname}.root"  for f in getattr(self.options,"sfsfriends" ,[])] if len(self.options.sfsfriends )>0 else ["--FMC sf/t {P}/"+f+"/evVarFriend_{cname}.root"  for f in getattr(self.config,"sfsfriends" ,[])]
-			friends += ["--FMC sf/t {RP}/"+f+"/evVarFriend_{cname}.root" for f in getattr(self.options,"srfsfriends",[])] if len(self.options.srfsfriends)>0 else ["--FMC sf/t {RP}/"+f+"/evVarFriend_{cname}.root" for f in getattr(self.config,"srfsfriends",[])]
+##			friends += ["--FMC sf/t {RP}/"+f+"/evVarFriend_{cname}.root" for f in getattr(self.options,"srfsfriends",[])] if len(self.options.srfsfriends)>0 else ["--FMC sf/t {RP}/"+f+"/evVarFriend_{cname}.root" for f in getattr(self.config,"srfsfriends",[])]
 			friends += getattr(self.config, "fsfriends" , [])
 		return friends
 	def getFriendLocations(self):
