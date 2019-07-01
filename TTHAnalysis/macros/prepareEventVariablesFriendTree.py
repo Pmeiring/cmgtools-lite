@@ -92,6 +92,7 @@ parser.add_option("--checkchunks", dest="checkchunks",   action="store_true", de
 parser.add_option("--checkrunning", dest="checkrunning",   action="store_true", default=False, help="Check chunks that have been produced");
 parser.add_option("--quiet", dest="quiet",   action="store_true", default=False, help="Check chunks that have been produced");
 parser.add_option("-q", "--queue",   dest="queue",     type="string", default=None, help="Run jobs on lxbatch queue or condor instead of locally");
+parser.add_option("-a", "--accounting-group", dest="accounting_group", default=None, help="Accounting group for condor jobs");
 parser.add_option("--maxruntime", "--time",  dest="maxruntime", type="int", default=360, help="Condor job wall clock time in minutes (default: 6h)");
 parser.add_option("-n", "--new",  dest="newOnly", action="store_true", default=False, help="Make only missing trees");
 parser.add_option("--log", "--log-dir", dest="logdir", type="string", default=None, help="Directory of stdout and stderr");
@@ -292,13 +293,17 @@ for D in sorted(glob(args[0]+"/*")):
         if options.newOnly:
             if os.path.exists(fout):
                 f2 = ROOT.TFile.Open(fout)
-                t2 = f2.Get("Friends" if isNano else (options.treeDir+"/t"))
-                if t2.GetEntries() != entries:
-                    if not options.quiet: print "Component %s has to be remade, mismatching number of entries (%d vs %d)" % (short, entries, t2.GetEntries())
-                    f2.Close()
+                if (not f2) or f2.IsZombie() or f2.TestBit(tfile.kRecovered): 
+                    if f2: f2.Close()
+                    if not options.quiet: print "Component %s has to be remade, output tree is invalid or corrupted" % (short, entries, t2.GetEntries())
                 else:
-                    if not options.quiet: print "Component %s exists already and has matching number of entries (%d)" % (short, entries)
-                    continue
+                    t2 = f2.Get("Friends" if isNano else (options.treeDir+"/t"))
+                    if t2.GetEntries() != entries:
+                        if not options.quiet: print "Component %s has to be remade, mismatching number of entries (%d vs %d)" % (short, entries, t2.GetEntries())
+                        f2.Close()
+                    else:
+                        if not options.quiet: print "Component %s exists already and has matching number of entries (%d)" % (short, entries)
+                        continue
         chunk = options.chunkSize
         if entries < chunk:
             if not options.quiet: print "  ",os.path.basename(D),("  DATA" if data else "  MC")," single chunk (%d events)" % entries
@@ -367,8 +372,9 @@ use_x509userproxy = $ENV(X509_USER_PROXY)
 getenv = True
 request_memory = 2000
 +MaxRuntime = {maxruntime}
-
-""".format(runner = options.runner, logdir = logdir, maxruntime = options.maxruntime * 60, chunk = chunk))
+{accounting_group}
+""".format(runner = options.runner, logdir = logdir, maxruntime = options.maxruntime * 60, chunk = chunk,
+           accounting_group = '+AccountingGroup = "%s"'%options.accounting_group if options.accounting_group else ''))
 if options.queue:
     runner = ""
     super = ""
@@ -437,22 +443,26 @@ if options.queue:
       subfile.close()
       print "Saved condor submit file to %s" % options.subfile
       if not options.pretend:
-         os.system("condor_submit "+cmd)
+         os.system("condor_submit "+options.subfile)
     else:
       for (name,fin,fout,data,range,chunk,fs) in jobs:
         if chunk != -1:
             if options.logdir: writelog = "-o {logdir}/{data}_{chunk}.out -e {logdir}/{data}_{chunk}.err".format(logdir=logdir, data=name, chunk=chunk)
             cmd = "{super} {writelog} {base} -d {data} -c {chunk} {post}".format(super=super, writelog=writelog, base=basecmd, data=name, chunk=chunk, post=friendPost)
-            if options.queue == "batch":
+            if options.queue == "batch" and options.env != "oviedo":
                 cmd = "echo \"{base} -d {data} -c {chunk} {post}\" | {super} {writelog}".format(super=super, writelog=writelog, base=basecmd, data=name, chunk=chunk, post=friendPost)
+            elif options.env == "oviedo":
+                cmd = "{super} {writelog} {base} -d {data} -c {chunk} {post} ".format(super=super, writelog=writelog, base=basecmd, data=name, chunk=chunk, post=friendPost)
             if fs:
                 cmd += " --fineSplit %d --subChunk %d" % (fs[1], fs[0])
         else:
             if options.logdir: writelog = "-o {logdir}/{data}.out -e {logdir}/{data}.err".format(logdir=logdir, data=name)
             cmd = "{super} {writelog} {base} -d {data} {post}".format(super=super, writelog=writelog, base=basecmd, data=name, chunk=chunk, post=friendPost)
 
-            if options.queue == "batch":
+            if options.queue == "batch" and options.env != "oviedo":
                 cmd = "echo \"{base} -d {data} {post}\" | {super} {writelog}".format(super=super, writelog=writelog, base=basecmd, data=name, chunk=chunk, post=friendPost)
+            elif options.env == "oviedo":
+                cmd = "{super} {base} -d {data} {post} {writelog}".format(super=super, writelog=writelog, base=basecmd, data=name, chunk=chunk, post=friendPost)
         print cmd
         if not options.pretend:
             os.system(cmd)

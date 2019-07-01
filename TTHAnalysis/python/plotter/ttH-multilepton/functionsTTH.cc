@@ -275,3 +275,10 @@ float triggerSF_ttH(int pdgid1, float pt1, int pdgid2, float pt2, int nlep, floa
 
 
 }
+
+float smoothBFlav(float jetpt, float ptmin, float ptmax, int year, float scale_loose=1.0) {
+    float wploose[3]  = { 0.0614, 0.0521, 0.0494 };
+    float wpmedium[3] = { 0.3093, 0.3033, 0.2770 };
+    float x = std::min(std::max(0.f, jetpt - ptmin)/(ptmax-ptmin), 1.f); 
+    return x*wploose[year-2016]*scale_loose + (1-x)*wpmedium[year-2016];
+}

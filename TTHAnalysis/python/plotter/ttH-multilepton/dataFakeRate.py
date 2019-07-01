@@ -315,15 +315,19 @@ if __name__ == "__main__":
                                           df, df)
                     # == restore settings ===
                     options.yrange = ybackup; options.showRatio = rbackup; options.xcut = xcbackup
-                elif options.algo == "fitSimND":
-                    w = ROOT.RooWorkspace("w")
-                    ROOT.gSystem.Load("libHiggsAnalysisCombinedLimit")
-                    w.factory("num[pass=2,fail=1]")
-                    hist = freport_num_den["pass"]["data"]
-                    w.factory("f[%g,%g]" % (hist.GetXaxis().GetXmin(), hist.GetXaxis().GetXmax()))
-                    fedges =  [ hist.GetXaxis().GetBinLowEdge(i) for i in xrange(1,hist.GetNbinsX()+1) ]
-                    fedges += [ hist.GetXaxis().GetXmax() ]
-                    w.var("f").setBinning(ROOT.RooBinning(hist.GetNbinsX(),array('d',fedges)))
+                elif options.algo in ("fitSimND", "fitSemiParND","fitGlobalSimND"):
+                    if options.algo == "fitGlobalSimND":
+                        xprefix = "bin%d_" % ix
+                    elif options.algo in ("fitSimND","fitSemiParND"):
+                        xprefix = ""
+                        w = ROOT.RooWorkspace("w")
+                        ROOT.gSystem.Load("libHiggsAnalysisCombinedLimit")
+                        w.factory("num[pass=2,fail=1]")
+                    reportND = {}
+                    nuis = {}
+                    for k,o in ('sig',options.shapeSystSig),('bkg',options.shapeSystBkg):
+                        if k == 'sig' and 'SemiPar' in options.algo: continue
+                        nuis[k] = [ (f[:1],float(f[2:])) for f in o.split(",") ]
                     Ndata = sum(freport_num_den[i]["data"].Integral() for i in ("pass", "fail"))
                     Newk  = sum(freport_num_den[i][p].Integral() for i in ("pass", "fail") for p in mca.listBackgrounds() if p in freport_num_den[i])
                     Nqcd  = sum(freport_num_den[i][p].Integral() for i in ("pass", "fail") for p in mca.listSignals()     if p in freport_num_den[i])
@@ -370,12 +374,26 @@ if __name__ == "__main__":
                                     print "WARNING, bin %d filled in data (%d/%d) and not in MC" % ( b, rep["data"].GetBinContent(b), Ndata )
                                     rep["data"].SetBinContent(b, 0) 
                                     rep["data"].SetBinError(b, 0) 
+<<<<<<< HEAD
                         rdh = ROOT.RooDataHist("data_"+zstate,"data",ROOT.RooArgList(w.var("f")), rep["data"])
                         combiner.addSetAny(zstate,rdh)
                         # make systematic histograms
                         sighists = ROOT.TList(); sighists.Add(rep["signal"])
                         bkghists = ROOT.TList(); bkghists.Add(rep["background"])
                         for what,tlist in [('sig',sighists),('bkg',bkghists)]:
+=======
+                        if 'SemiPar' in options.algo:
+                            dfail = freport_num_den["fail"]["data"].Clone("signal_"+xprefix+zstate); dfail.SetDirectory(None)
+                            dfail.Scale((Nqcd*((1-fqcd) if zstate == "fail" else fqcd))/dfail.Integral())
+                            sighwn = ParametricHistoWN(dfail, nuisancePrefixName="signal_"+xprefix) # force same name, to correlate bins across pass and fail
+                            sighwn.SetName("signal_"+xprefix+zstate)
+                        else:
+                            sighwn = HistoWithNuisances(rep["signal"]); sighwn.SetName("signal_"+xprefix+zstate)
+                        bkghwn = HistoWithNuisances(rep["background"]); bkghwn.SetName("background_"+xprefix+zstate)
+                        # make systematic histograms
+                        for what,hwn in [('sig',sighwn),('bkg',bkghwn)]:
+                            if what == 'sig' and 'SemiPar' in options.algo: continue
+>>>>>>> peruzzim/104X_dev_nano
                             for n,val in nuis[what]:
                                 if n == "l": addPolySystBands(tlist, val, 1)
                                 if n == "q": addPolySystBands(tlist, val, 2)
@@ -391,6 +409,7 @@ if __name__ == "__main__":
                                         allnuis.add(w.var("nuis_{0}_shape".format(key)))
                         # make summary plots of templates
                         lsig = mca.listSignals()[0]; lbkg = mca.listBackgrounds()[0]
+<<<<<<< HEAD
                         for what,label,tlist in [('sig',lsig,sighists),('bkg',lbkg,bkghists)]:
                             postfixes = ["_"+x+d for (x,v) in nuis[what] for d in "Up", "Dn" if x != "b"]
                             shiftrep = dict([(label+p, tlist.At(i)) for (i,p) in enumerate([""]+postfixes)])
@@ -402,6 +421,45 @@ if __name__ == "__main__":
                         getattr(w,'import')(sigpdf, ROOT.RooFit.RecycleConflictNodes(), ROOT.RooFit.Silence())
                         getattr(w,'import')(bkgpdf, ROOT.RooFit.RecycleConflictNodes(), ROOT.RooFit.Silence())
                         w.factory('SUM::all_{0}(Nsig_{0} * signal_{0}, Nbkg_{0} * background_{0})'.format(zstate))
+=======
+                        for what,label,hwn in [('sig',lsig,sighwn),('bkg',lbkg,bkghwn)]:
+                            if what == 'sig' and 'SemiPar' in options.algo: continue
+                            shiftrep = {label: hwn.getCentral()}
+                            for n,v in nuis[what]:
+                                if n == 'b': continue
+                                for (i,d) in enumerate(["Up","Dn"]):
+                                    shiftrep["%s_%s%s"%(label,n,d)] = hwn.getVariation("nuis_%s%s_shape"%(xprefix+what,n))[i]
+                            for p,h in shiftrep.iteritems(): mca.stylePlot(p, h, fspec)
+                            plotter.printOnePlot(mca, fspec, shiftrep, extraProcesses = [l for l in shiftrep.keys() if l != label], plotmode="norm", printDir=bindirname, 
+                                             outputName = "%s_for_%s%s_%s_%s_%sSyst" % (fspec.name,xspec.name,bxname,yspec.name,zstate,what))
+                    if options.algo in ("fitSimND","fitSemiParND") or roofit == None:
+                        roofit = roofitizeReport(reportND, workspace=w, xvarName="f")
+                    else:
+                        roofitizeReport(reportND, context=roofit, xvarName="f")
+                    for what,wlong in ('sig','signal'),('bkg','background'):
+                        for zstate in "pass", "fail":
+                            reportND[wlong+"_"+zstate].addRooFitScaleFactor(w.function("%s_%s_sf" % (xprefix+what,zstate)))
+                    if options.algo in ("fitSimND","fitSemiParND") or combiner == None:
+                        combiner = ROOT.CombDataSetFactory(ROOT.RooArgSet(roofit.xvar), w.cat("num"))
+                    for zstate in "pass", "fail":
+                        rdh = ROOT.RooDataHist("data_"+xprefix+zstate,"data",ROOT.RooArgList(roofit.xvar), roofit.hist2roofit(freport_num_den[zstate]["data"]))
+                        combiner.addSetAny(xprefix+zstate,rdh)
+                        if options.algo == "fitGlobalSimND": 
+                            globalDataHists[xprefix+zstate] = rdh # prevent early deletion
+                        sigpdf, signorm = reportND["signal_"    +zstate].rooFitPdfAndNorm()
+                        bkgpdf, bkgnorm = reportND["background_"+zstate].rooFitPdfAndNorm()
+                        roofit.imp(sigpdf, ROOT.RooFit.RecycleConflictNodes(), ROOT.RooFit.Silence())
+                        roofit.imp(bkgpdf, ROOT.RooFit.RecycleConflictNodes(), ROOT.RooFit.Silence())
+                        w.factory('SUM::all_{1}{0}({1}Nsig_{0} * signal_{1}{0}_pdf, {1}Nbkg_{0} * background_{1}{0}_pdf)'.format(zstate,xprefix))
+                    if options.algo == "fitGlobalSimND":
+                        for k,v in reportND.iteritems():
+                            globalReportND[(ix,k)] = v
+                        for zstate in "pass","fail":
+                            globalReportND[(ix,"data_"+zstate)] = freport_num_den[zstate]["data"]
+                        globalFqcd[ix] = fqcd
+                        globalFbkg[ix] = fewk
+                        continue
+>>>>>>> peruzzim/104X_dev_nano
                     data = combiner.doneUnbinned("data","data")
                     w.factory('SIMUL::all(num, pass=all_pass, fail=all_fail)') 
                     sim = ROOT.RooSimultaneousOpt(w.pdf("all"), "")
@@ -417,6 +475,7 @@ if __name__ == "__main__":
                     minim.minimize("Minuit2","migrad")
                     minim.hesse();
                     result = minim.save()
+<<<<<<< HEAD
                     # post-fit plots
                     for zstate in "pass","fail":
                         pfrep = { 'data':freport_num_den[zstate]["data"] }
@@ -472,6 +531,35 @@ if __name__ == "__main__":
                             pfrep[label] = hist
                         plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
                                              outputName = "%s_for_%s%s_%s_%s_prefit" % (fspec.name,xspec.name,bxname,yspec.name,zstate)) 
+=======
+                    if result.status() != 0: # try again
+                        minim.setPrintLevel(1); minim.setStrategy(2);
+                        minim.minimize("Minuit2","migrad")
+                        minim.hesse();
+                        result = minim.save()
+                    postfit = PostFitSetup(fitResult=result)
+                    fspec.setLog("Fit", postfit.makeFitLog())
+                    postfit._roofitContext = roofit
+                    mca._postFit = postfit
+                    #for prefit we need a special setup that only varies the nuisances and not the unconstrained normalizations
+                    prefit = PostFitSetup(fitResult=result, params=nuisanceList)
+                    # pre and post-fit plots
+                    lsig = mca.listSignals()[0]; lbkg = mca.listBackgrounds()[0]
+                    for dopost,postlabel in (True,'postfit'), (False,'prefit'):
+                        if postlabel == 'prefit' and 'SemiPar' in options.algo: continue
+                        for k,h in reportND.iteritems():
+                            if h.Integral() > 0: 
+                                h.setPostFitInfo(postfit if dopost else prefit, dopost)
+                        w.allVars().assignValueOnly(result.floatParsFinal() if dopost else result.floatParsInit())
+                        for zstate in "pass","fail":
+                            pfrep = { 'data':freport_num_den[zstate]["data"],
+                                      lsig:reportND["signal_"+zstate],
+                                      lbkg:reportND["background_"+zstate] }
+                            for label in lsig, lbkg:
+                                mca.stylePlot(label, pfrep[label], fspec)
+                            plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
+                                                 outputName = "%s_for_%s%s_%s_%s_%s" % (fspec.name,xspec.name,bxname,yspec.name,zstate,postlabel)) 
+>>>>>>> peruzzim/104X_dev_nano
                     # minos for the efficiency
                     w.allVars().assignValueOnly(result.floatParsFinal())
                     nll = sim.createNLL(data, cmdArgs)
@@ -518,7 +606,11 @@ if __name__ == "__main__":
         else:    ereport = dict([(title, effFromH2D(hist,options, uncertainties="PF")) for (title, hist) in xzreport.iteritems()])
         if options.algo == "fQCD":
             ereport["data_fqcd"] = fr_fit
+<<<<<<< HEAD
         elif options.algo == "fitSimND":
+=======
+        elif options.algo in ("fitSimND","fitSemiParND","fitGlobalSimND"):
+>>>>>>> peruzzim/104X_dev_nano
             ereport["data_fit"] = fr_fit
         for p,g in ereport.iteritems(): 
             print "%-30s: %s" % (p,g) 
