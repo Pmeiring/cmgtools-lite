@@ -374,14 +374,6 @@ if __name__ == "__main__":
                                     print "WARNING, bin %d filled in data (%d/%d) and not in MC" % ( b, rep["data"].GetBinContent(b), Ndata )
                                     rep["data"].SetBinContent(b, 0) 
                                     rep["data"].SetBinError(b, 0) 
-<<<<<<< HEAD
-                        rdh = ROOT.RooDataHist("data_"+zstate,"data",ROOT.RooArgList(w.var("f")), rep["data"])
-                        combiner.addSetAny(zstate,rdh)
-                        # make systematic histograms
-                        sighists = ROOT.TList(); sighists.Add(rep["signal"])
-                        bkghists = ROOT.TList(); bkghists.Add(rep["background"])
-                        for what,tlist in [('sig',sighists),('bkg',bkghists)]:
-=======
                         if 'SemiPar' in options.algo:
                             dfail = freport_num_den["fail"]["data"].Clone("signal_"+xprefix+zstate); dfail.SetDirectory(None)
                             dfail.Scale((Nqcd*((1-fqcd) if zstate == "fail" else fqcd))/dfail.Integral())
@@ -393,7 +385,6 @@ if __name__ == "__main__":
                         # make systematic histograms
                         for what,hwn in [('sig',sighwn),('bkg',bkghwn)]:
                             if what == 'sig' and 'SemiPar' in options.algo: continue
->>>>>>> peruzzim/104X_dev_nano
                             for n,val in nuis[what]:
                                 if n == "l": addPolySystBands(tlist, val, 1)
                                 if n == "q": addPolySystBands(tlist, val, 2)
@@ -409,19 +400,6 @@ if __name__ == "__main__":
                                         allnuis.add(w.var("nuis_{0}_shape".format(key)))
                         # make summary plots of templates
                         lsig = mca.listSignals()[0]; lbkg = mca.listBackgrounds()[0]
-<<<<<<< HEAD
-                        for what,label,tlist in [('sig',lsig,sighists),('bkg',lbkg,bkghists)]:
-                            postfixes = ["_"+x+d for (x,v) in nuis[what] for d in "Up", "Dn" if x != "b"]
-                            shiftrep = dict([(label+p, tlist.At(i)) for (i,p) in enumerate([""]+postfixes)])
-                            for p,h in shiftrep.iteritems(): mca.stylePlot(p, h, fspec)
-                            plotter.printOnePlot(mca, fspec, shiftrep, extraProcesses = [label+x for x in postfixes], plotmode="norm", printDir=bindirname, 
-                                             outputName = "%s_for_%s%s_%s_%s_%sSyst" % (fspec.name,xspec.name,bxname,yspec.name,zstate,what)) 
-                        sigpdf = ROOT.FastVerticalInterpHistPdf2("signal_"+zstate,     "", w.var("f"), sighists, nuislists['sig'][zstate], 1., 1)
-                        bkgpdf = ROOT.FastVerticalInterpHistPdf2("background_"+zstate, "", w.var("f"), bkghists, nuislists['bkg'][zstate], 1., 1)
-                        getattr(w,'import')(sigpdf, ROOT.RooFit.RecycleConflictNodes(), ROOT.RooFit.Silence())
-                        getattr(w,'import')(bkgpdf, ROOT.RooFit.RecycleConflictNodes(), ROOT.RooFit.Silence())
-                        w.factory('SUM::all_{0}(Nsig_{0} * signal_{0}, Nbkg_{0} * background_{0})'.format(zstate))
-=======
                         for what,label,hwn in [('sig',lsig,sighwn),('bkg',lbkg,bkghwn)]:
                             if what == 'sig' and 'SemiPar' in options.algo: continue
                             shiftrep = {label: hwn.getCentral()}
@@ -459,7 +437,6 @@ if __name__ == "__main__":
                         globalFqcd[ix] = fqcd
                         globalFbkg[ix] = fewk
                         continue
->>>>>>> peruzzim/104X_dev_nano
                     data = combiner.doneUnbinned("data","data")
                     w.factory('SIMUL::all(num, pass=all_pass, fail=all_fail)') 
                     sim = ROOT.RooSimultaneousOpt(w.pdf("all"), "")
@@ -475,63 +452,6 @@ if __name__ == "__main__":
                     minim.minimize("Minuit2","migrad")
                     minim.hesse();
                     result = minim.save()
-<<<<<<< HEAD
-                    # post-fit plots
-                    for zstate in "pass","fail":
-                        pfrep = { 'data':freport_num_den[zstate]["data"] }
-                        for what,wlong,label in [('sig','signal',lsig),('bkg','background',lbkg)]:
-                            pdf  = w.pdf(wlong+"_"+zstate)
-                            # nominal
-                            w.allVars().assignValueOnly(result.floatParsFinal())
-                            hist = pdf.createHistogram(wlong+"_"+zstate,w.var("f")); hist.SetDirectory(None)
-                            hist.Scale(w.function("N%s_%s"%(what,zstate)).getVal()/hist.Integral())
-                            # toys
-                            ntoys = 500
-                            sumw2s = [ 0. for b in xrange(1,hist.GetNbinsX()+1) ]
-                            for itoy in xrange(ntoys):
-                                w.allVars().assignValueOnly(result.randomizePars())
-                                histT = pdf.createHistogram(wlong+"_"+zstate+"_toy",w.var("f")); histT.SetDirectory(None)
-                                histT.Scale(w.function("N%s_%s"%(what,zstate)).getVal()/histT.Integral())
-                                for b in xrange(1,hist.GetNbinsX()+1):
-                                    sumw2s[b-1] += (histT.GetBinContent(b)-hist.GetBinContent(b))**2
-                                del histT
-                            for b in xrange(1,hist.GetNbinsX()+1):
-                                hist.SetBinError(b, sqrt(sumw2s[b-1]/ntoys))
-                            mca.stylePlot(label, hist, fspec)
-                            pfrep[label] = hist
-                        plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
-                                             outputName = "%s_for_%s%s_%s_%s_postfit" % (fspec.name,xspec.name,bxname,yspec.name,zstate)) 
-                    # pre-fit plots
-                    for zstate in "pass","fail":
-                        pfrep = { 'data':freport_num_den[zstate]["data"] }
-                        for what,wlong,label in [('sig','signal',lsig),('bkg','background',lbkg)]:
-                            pdf  = w.pdf(wlong+"_"+zstate)
-                            # nominal
-                            w.allVars().assignValueOnly(result.floatParsInit())
-                            hist = pdf.createHistogram(wlong+"_"+zstate,w.var("f")); hist.SetDirectory(None)
-                            hist.Scale(w.function("N%s_%s"%(what,zstate)).getVal()/hist.Integral())
-                            # toys
-                            nuisancesSet = ROOT.RooArgSet(nuislists[what][zstate])
-                            nuispdfs  = ROOT.RooArgList()
-                            for c in constraints: nuispdfs.add(c)
-                            nuispdf = ROOT.RooProdPdf("nuispdf","",nuispdfs)
-                            ntoys = 500
-                            nuisvals = nuispdf.generate(nuisancesSet, ntoys)
-                            sumw2s = [ 0. for b in xrange(1,hist.GetNbinsX()+1) ]
-                            for itoy in xrange(ntoys):
-                                w.allVars().assignValueOnly(nuisvals.get(itoy))
-                                histT = pdf.createHistogram(wlong+"_"+zstate+"_toy",w.var("f")); histT.SetDirectory(None)
-                                histT.Scale(w.function("N%s_%s"%(what,zstate)).getVal()/histT.Integral())
-                                for b in xrange(1,hist.GetNbinsX()+1):
-                                    sumw2s[b-1] += (histT.GetBinContent(b)-hist.GetBinContent(b))**2
-                                del histT
-                            for b in xrange(1,hist.GetNbinsX()+1):
-                                hist.SetBinError(b, sqrt(sumw2s[b-1]/ntoys))
-                            mca.stylePlot(label, hist, fspec)
-                            pfrep[label] = hist
-                        plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
-                                             outputName = "%s_for_%s%s_%s_%s_prefit" % (fspec.name,xspec.name,bxname,yspec.name,zstate)) 
-=======
                     if result.status() != 0: # try again
                         minim.setPrintLevel(1); minim.setStrategy(2);
                         minim.minimize("Minuit2","migrad")
@@ -559,7 +479,6 @@ if __name__ == "__main__":
                                 mca.stylePlot(label, pfrep[label], fspec)
                             plotter.printOnePlot(mca, fspec, pfrep, printDir=bindirname, 
                                                  outputName = "%s_for_%s%s_%s_%s_%s" % (fspec.name,xspec.name,bxname,yspec.name,zstate,postlabel)) 
->>>>>>> peruzzim/104X_dev_nano
                     # minos for the efficiency
                     w.allVars().assignValueOnly(result.floatParsFinal())
                     nll = sim.createNLL(data, cmdArgs)
@@ -606,11 +525,7 @@ if __name__ == "__main__":
         else:    ereport = dict([(title, effFromH2D(hist,options, uncertainties="PF")) for (title, hist) in xzreport.iteritems()])
         if options.algo == "fQCD":
             ereport["data_fqcd"] = fr_fit
-<<<<<<< HEAD
-        elif options.algo == "fitSimND":
-=======
         elif options.algo in ("fitSimND","fitSemiParND","fitGlobalSimND"):
->>>>>>> peruzzim/104X_dev_nano
             ereport["data_fit"] = fr_fit
         for p,g in ereport.iteritems(): 
             print "%-30s: %s" % (p,g) 
