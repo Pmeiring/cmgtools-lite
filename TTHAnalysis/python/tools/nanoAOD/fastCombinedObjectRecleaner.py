@@ -103,8 +103,8 @@ class fastCombinedObjectRecleaner(Module):
 
     def analyze(self, event):
         # Init
-        wpL = _btagWPs["DeepFlav_%d_%s"%(event.year,"L")][1]
-        wpM = _btagWPs["DeepFlav_%d_%s"%(event.year,"M")][1]
+        wpL = self.btagL_thr #_btagWPs["DeepFlav_%d_%s"%(event.year,"L")][1]
+        wpM = self.btagM_thr #_btagWPs["DeepFlav_%d_%s"%(event.year,"M")][1]
         if self._ttreereaderversion != event._tree._ttreereaderversion:
             for x in self._helpers: x.initInputTree(event._tree)
             self.initReaders(event._tree)

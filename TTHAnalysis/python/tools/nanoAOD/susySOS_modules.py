@@ -81,29 +81,75 @@ def clean_and_FO_selection_TTH(lep):
              (abs(lep.pdgId)==13 and lep.jetBTagDeepCSV<0.07 and lep.segmentComp>0.3 and 1/(1 + lep.jetRelIso)>0.60) or \
              (abs(lep.pdgId)==11 and lep.jetBTagDeepCSV<0.07 and lep.mvaFall17V1noIso>0.5 and 1/(1 + lep.jetRelIso)>0.60)) 
 
+import numpy
+from numpy import log
+def calculateRawMVA(score):
+    if score == -1.:
+        return -999.
+    elif score == 1.:
+        return 999.
+    else:
+        return -0.5*numpy.log((1-score)/(1+score))
 
-tightLeptonSel = lambda lep : clean_and_FO_selection_TTH(lep) and (abs(lep.pdgId)!=13 or lep.mediumId>0) and lep.mvaTTH > 0.90
+
+def SOSTightID2018(lep):
+    if (lep.pt < 10): ##loose at low pt
+        return lep.mvaFall17V2noIso_WPL
+    else: #susy tight at higher, from https://twiki.cern.ch/twiki/pub/CMS/SUSLeptonSF/Run2_SUSYwp_EleCB_MVA_8Jan19.pdf
+        mvaRaw = calculateRawMVA(lep.mvaFall17V2noIso)
+        if abs(lep.eta<0.8):
+            if lep.pt<25:
+                return mvaRaw > 4.277 + 0.112*(lep.pt - 25)
+            else:
+                return mvaRaw > 4.277
+        elif abs(lep.eta>=0.8) and abs(lep.eta<1.479):
+            if lep.pt<25:
+                return mvaRaw > 3.152 + 0.60*(lep.pt - 25)
+            else:
+                return mvaRaw > 3.152
+        elif abs(lep.eta>=1.479):
+            if lep.pt<25:
+                return mvaRaw > 2.359 + 0.89*(lep.pt - 25)
+            else:
+                return mvaRaw > 2.359
+
+
+
+
+clean_and_FO_selection_SOS = lambda lep : lep.jetBTagCSV < 0.46 ##using std csv, what about deep?
+
+##tightLeptonSel = lambda lep : clean_and_FO_selection_TTH(lep) and (abs(lep.pdgId)!=13 or lep.mediumId>0) and lep.mvaTTH > 0.90
+tightLeptonSel_SOS = lambda lep : clean_and_FO_selection_SOS(lep) and ((abs(lep.pdgId)==13 or SOSTightID2018(lep) ) and lep.pfRelIso03_all<0.5 and (lep.pfRelIso03_all*lep.pt)<5. and abs(lep.ip3d)<0.01 and lep.sip3d<2)
+
+
+# (abs(lep.pdgId)!=13 or lep.mediumId>0) and lep.mvaTTH > 0.90
+
+
+
+
+
 
 from CMGTools.TTHAnalysis.tools.functionsTTH import tauID_oldDMdR0p3wLT2017v2_WP # FIXME get rid of this after validation
-foTauSel = lambda tau: tau.pt > 20 and abs(tau.eta)<2.3 and abs(tau.dxy) < 1000 and abs(tau.dz) < 0.2 and tauID_oldDMdR0p3wLT2017v2_WP(tau.pt,tau.rawMVAoldDMdR032017v2,1) and tau.idDecayMode
-tightTauSel = lambda tau: tauID_oldDMdR0p3wLT2017v2_WP(tau.pt,tau.rawMVAoldDMdR032017v2,2)
+foTauSel = lambda tau: False #tau.pt > 20 and abs(tau.eta)<2.3 and abs(tau.dxy) < 1000 and abs(tau.dz) < 0.2 and tauID_oldDMdR0p3wLT2017v2_WP(tau.pt,tau.rawMVAoldDMdR032017v2,1) and tau.idDecayMode
+tightTauSel = lambda tau: False #tauID_oldDMdR0p3wLT2017v2_WP(tau.pt,tau.rawMVAoldDMdR032017v2,2)
 
 from CMGTools.TTHAnalysis.tools.combinedObjectTaggerForCleaning import CombinedObjectTaggerForCleaning
 from CMGTools.TTHAnalysis.tools.nanoAOD.fastCombinedObjectRecleaner import fastCombinedObjectRecleaner
 recleaner_step1 = lambda : CombinedObjectTaggerForCleaning("InternalRecl",
                                        #looseLeptonSel = lambda lep : lep.miniPFRelIso_all < 0.4 and lep.sip3d < 8,
-                                       cleaningLeptonSel = clean_and_FO_selection_TTH,
-                                       FOLeptonSel = clean_and_FO_selection_TTH,
-                                       tightLeptonSel = tightLeptonSel,
+                                       cleaningLeptonSel = clean_and_FO_selection_SOS,
+                                       FOLeptonSel = clean_and_FO_selection_SOS,
+                                       tightLeptonSel = tightLeptonSel_SOS,
                                        FOTauSel = foTauSel,
                                        tightTauSel = tightTauSel,
-                                       selectJet = lambda jet: abs(jet.eta)<2.4 and jet.pt > 25 and j.jetId > 0, # FIXME need to select on pt or ptUp or ptDown
+                                       selectJet = lambda jet: abs(jet.eta)<2.4 and jet.pt > 25 and jet.jetId > 0, # FIXME need to select on pt or ptUp or ptDown
                                        coneptdef = lambda lep: conept_TTH(lep))
 recleaner_step2_mc = lambda : fastCombinedObjectRecleaner(label="Recl", inlabel="_InternalRecl",
                                        cleanTausWithLooseLeptons=True,
                                        cleanJetsWithFOTaus=True,
                                        doVetoZ=False, doVetoLMf=False, doVetoLMt=False,
                                        jetPts=[25,40],
+                                       jetPtsFwd=[25,40],
                                        btagL_thr=0.1522,
                                        btagM_thr=0.4941,
                                        isMC = True)
@@ -112,10 +158,13 @@ recleaner_step2_data = lambda : fastCombinedObjectRecleaner(label="Recl", inlabe
                                          cleanJetsWithFOTaus=True,
                                          doVetoZ=False, doVetoLMf=False, doVetoLMt=False,
                                          jetPts=[25,40],
+                                         jetPtsFwd=[25,40],
                                          btagL_thr=0.1522,
                                          btagM_thr=0.4941,
                                          isMC = False)
 
 from CMGTools.TTHAnalysis.tools.eventVars_2lss import EventVars2LSS
 eventVars = lambda : EventVars2LSS('','Recl', doSystJEC=False)
+
+from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetmetUncertainties import jetmetUncertainties2016, jetmetUncertainties2017, jetmetUncertainties2018
 
