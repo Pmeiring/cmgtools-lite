@@ -1,2 +1,24 @@
-muon:	(Muon_genPartFlav==1 || Muon_genPartFlav==15) && Muon_looseId==1 && Muon_isCleanMu_noBtag==1 && Muon_pt > 3.5	; Disable=True 
-ele:	(Electron_genPartFlav==1 || Electron_genPartFlav==15) && Electron_isCleanEle_noBtag==1 && Electron_pt > 5.0	; Disable=True
+muon		: (Muon_genPartFlav==1 || Muon_genPartFlav==15) && Muon_looseId==1 && Muon_pt > 3.5	; Disable=True 
+muonFOnoBtag	: Muon_isCleanMu_noBtag==1	; Disable=True
+muonPt30	: Muon_pt < 30.0	; Disable=True
+muonPt15	: Muon_pt < 15.0	; Disable=True
+muonPt10	: Muon_pt < 10.0	; Disable=True
+muonDeepCSV0	: Muon_jetBTagDeepCSV > 0.0	; Disable=True
+
+muonFO		: Muon_isCleanMu==1	; Disable=True
+muonFOnewBtag	: Muon_isCleanMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40	; Disable=True
+muonNoUnderflow	: Muon_jetIdx!=-1	; Disable=True
+
+muonFake	: !(Muon_genPartFlav==1 || Muon_genPartFlav==15) && Muon_looseId==1 && Muon_pt > 3.5     ; Disable=True
+
+ele 		: (Electron_genPartFlav==1 || Electron_genPartFlav==15) && Electron_pt > 5.0	; Disable=True
+eleFOnoBtag	: Electron_isCleanEle_noBtag==1	; Disable=True
+elePt30		: Electron_pt < 30.0	; Disable=True
+elePt15		: Electron_pt < 15.0	; Disable=True
+elePt10		: Electron_pt < 10.0	; Disable=True
+eleDeepCSV0	: Electron_jetBTagDeepCSV > 0.0	; Disable=True
+
+eleFO		: Electron_isCleanEle==1	; Disable=True
+eleFOnewBtag	: Electron_isCleanEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40	; Disable=True
+
+eleFake		: !(Electron_genPartFlav==1 || Electron_genPartFlav==15) && Electron_pt > 5.0	; Disable=True

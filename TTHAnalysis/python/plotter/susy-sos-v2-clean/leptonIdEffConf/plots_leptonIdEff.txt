@@ -1,13 +1,14 @@
 # Denominator = muons from Z/W/tau that pass the loose ID
-muonPtEff_FOnoBtag	: (Muon_isCleanMu_noBtag==1)\:Muon_pt		: 20,0.0,100.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 
 muonPtEff_Soft		: (Muon_softId==1)\:Muon_pt		: 20,0.0,100.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 muonPtEff_FO		: (Muon_isCleanMu==1)\:Muon_pt		: 20,0.0,100.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 muonPtEff_TightSOS	: (Muon_isTightSOSMu==1)\:Muon_pt	: 20,0.0,100.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 
-muonPtEff_Soft_PtRes	: (Muon_softId==1)\:Muon_pt		: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
-muonPtEff_FO_PtRes	: (Muon_isCleanMu==1)\:Muon_pt		: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
-muonPtEff_TightSOS_PtRes: (Muon_isTightSOSMu==1)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_Soft_PtRes		: (Muon_softId==1)\:Muon_pt		: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FO_PtRes		: (Muon_isCleanMu==1)\:Muon_pt		: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.75, YMax=1.05
+muonPtEff_FOnoBtag_PtRes	: (Muon_isCleanMu_noBtag==1)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FOnewBtag_PtRes	: (Muon_isCleanMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt		: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.95, YMax=1.05
+muonPtEff_TightSOS_PtRes	: (Muon_isTightSOSMu==1)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 
 muonPtEff_Soft_Barrel		: (Muon_softId==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 muonPtEff_FO_Barrel		: (Muon_isCleanMu==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
@@ -27,7 +28,6 @@ muonEtaEff_TightSOS_PtRes	: (Muon_isTightSOSMu==1)\:Muon_eta	: 25,-2.5,2.5	; XTi
 
 
 # Denominator = electrons from Z/W/tau
-elePtEff_FOnoBtag		: (Electron_isCleanEle_noBtag==1)\:Electron_pt	: 20,0.0,100.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 
 elePtEff_VLFO		: (Electron_isVLFOEle==1)\:Electron_pt : 20,0.0,100.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 elePtEff_TightWPL	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WPL==1) || (Electron_pt > 10.0 && Electron_isTightEle==1))\:Electron_pt	: 20,0.0,100.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
@@ -55,6 +55,8 @@ elePtEff_TightWPL_PtRes		: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WPL
 elePtEff_TightWP80_PtRes	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1) || (Electron_pt > 10.0 && Electron_isTightEle==1))\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 elePtEff_TightWP90_PtRes	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP90==1) || (Electron_pt > 10.0 && Electron_isTightEle==1))\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 elePtEff_FO_PtRes		: (Electron_isCleanEle==1)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FOnoBtag_PtRes		: (Electron_isCleanEle_noBtag==1)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FOnewBtag_PtRes	: (Electron_isCleanEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 elePtEff_TightSOS_PtRes		: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
 
 eleEtaEff_VLFO		: (Electron_isVLFOEle==1)\:Electron_eta : 25,-2.5,2.5	; XTitle="#eta", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
@@ -84,3 +86,87 @@ debug_elePtVsBtagCSV		: Electron_jetBTagCSV\:Electron_pt	: 20,0.0,100.0,12,-0.1,
 debug_elePtVsExtBtagCSV		: Electron_jetBTagCSV\:Electron_pt	: 20,0.0,100.0,22,-105.0,5.0	; XTitle="p_{T}(e) [GeV]", YTitle="CSV"
 debug_elePtVsBtagDeepCSV	: Electron_jetBTagDeepCSV\:Electron_pt	: 20,0.0,100.0,12,-0.1,1.1	; XTitle="p_{T}(e) [GeV]", YTitle="DeepCSV"
 debug_elePtVsExtBtagDeepCSV	: Electron_jetBTagDeepCSV\:Electron_pt	: 20,0.0,100.0,22,-105.0,5.0	; XTitle="p_{T}(e) [GeV]", YTitle="DeepCSV"
+
+debug_muonBtagCSVPt30		: Muon_jetBTagCSV	: 12,-0.1,1.1	; XTitle="Muon CSV"
+debug_muonBtagDeepCSVPt30	: Muon_jetBTagDeepCSV	: 12,-0.1,1.1	; XTitle="Muon Deep CSV"
+debug_muonBtagCSVPt15		: Muon_jetBTagCSV	: 12,-0.1,1.1	; XTitle="Muon CSV"
+debug_muonBtagDeepCSVPt15	: Muon_jetBTagDeepCSV	: 12,-0.1,1.1	; XTitle="Muon Deep CSV"
+debug_muonBtagCSVPt10		: Muon_jetBTagCSV	: 12,-0.1,1.1	; XTitle="Muon CSV"
+debug_muonBtagDeepCSVPt10	: Muon_jetBTagDeepCSV	: 12,-0.1,1.1	; XTitle="Muon Deep CSV"
+
+debug_muonBtagDeepCSVPt30_WP	: Muon_jetBTagDeepCSV	: 120,-0.1,1.1	; XTitle="Muon Deep CSV"
+
+debug_eleBtagCSVPt30		: Electron_jetBTagCSV		: 12,-0.1,1.1	; XTitle="Electron CSV"
+debug_eleBtagDeepCSVPt30	: Electron_jetBTagDeepCSV	: 12,-0.1,1.1	; XTitle="Electron Deep CSV"
+debug_eleBtagCSVPt15		: Electron_jetBTagCSV		: 12,-0.1,1.1	; XTitle="Electron CSV"
+debug_eleBtagDeepCSVPt15	: Electron_jetBTagDeepCSV	: 12,-0.1,1.1	; XTitle="Electron Deep CSV"
+debug_eleBtagCSVPt10		: Electron_jetBTagCSV		: 12,-0.1,1.1	; XTitle="Electron CSV"
+debug_eleBtagDeepCSVPt10	: Electron_jetBTagDeepCSV	: 12,-0.1,1.1	; XTitle="Electron Deep CSV"
+
+debug_eleBtagDeepCSVPt30_WP	: Electron_jetBTagDeepCSV	: 120,-0.1,1.1	; XTitle="Electron Deep CSV"
+
+debug_muonPtOverJetPt		: Muon_pt/Jet_pt[Muon_jetIdx]	: 120,0.0,1.2	; XTitle="p_{T}(#mu) / p_{T}(jet)", Legend='TL'
+
+
+debug_muonPtFR_btag		: (Muon_isCleanMu==1)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_muonPtFR_NewBtag		: (Muon_isCleanMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_muonPtFR_FO		: (Muon_isCleanMu==1)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_muonPtFR_NewFO		: (Muon_isCleanMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_muonPtFR_TightVsFO	: (Muon_isTightSOSMu==1)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_muonPtFR_NewTightVsFO	: (Muon_isTightSOSMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt	: 30,0.0,30.0	; XTitle="p_{T}(#mu) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+
+debug_elePtFR_btag		: (Electron_isCleanEle==1)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_elePtFR_NewBtag		: (Electron_isCleanEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_elePtFR_FO		: (Electron_isCleanEle==1)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_elePtFR_NewFO		: (Electron_isCleanEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+debug_elePtFR_TightVsFO		: (Electron_isTightSOSEle==1)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+#debug_elePtFR_TightVsFO		: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+#debug_elePtFR_TightVsFO_17	: ((Electron_pt < 10.0 && Electron_mvaFall17V1noIso_WP90==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+#debug_elePtFR_NewTightVsFO	: (((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle_noBtag==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle_noBtag==1)) && Electron_jetBTagDeepCSV < 0.40)\:Electron_pt	: 30,0.0,30.0	; XTitle="p_{T}(e) [GeV]", YTitle="Fake Rate", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+
+
+### Santander plots
+# 2018
+muonPtEff_FO_PtRes_18		: (Muon_isCleanMu==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FO_Barrel_18		: (Muon_isCleanMu==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FO_Endcap_18		: (Muon_isCleanMu==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_PtRes_18	: (Muon_isTightSOSMu==1)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_Barrel_18	: (Muon_isTightSOSMu==1)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_Endcap_18	: (Muon_isTightSOSMu==1)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+
+elePtEff_FO_PtRes_18		: (Electron_isCleanEle==1)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FO_Barrel_18		: (Electron_isCleanEle==1)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FO_Endcap_18		: (Electron_isCleanEle==1)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_PtRes_18	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_Barrel_18	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_Endcap_18	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+
+# 2017
+muonPtEff_FO_PtRes_17		: (Muon_isCleanMu==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FO_Barrel_17		: (Muon_isCleanMu==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FO_Endcap_17		: (Muon_isCleanMu==1)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_PtRes_17	: (Muon_isTightSOSMu==1)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_Barrel_17	: (Muon_isTightSOSMu==1)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_Endcap_17	: (Muon_isTightSOSMu==1)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+
+elePtEff_FO_PtRes_17		: (Electron_isCleanEle==1)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FO_Barrel_17		: (Electron_isCleanEle==1)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FO_Endcap_17		: (Electron_isCleanEle==1)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_PtRes_17	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP90==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_Barrel_17	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP90==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_Endcap_17	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP90==1 && Electron_isTightSOSEle==1) || (Electron_pt > 10.0 && Electron_isTightSOSEle==1))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+
+# 2016
+muonPtEff_FO_PtRes_16		: (Muon_isCleanMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FO_Barrel_16		: (Muon_isCleanMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_FO_Endcap_16		: (Muon_isCleanMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt		: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_PtRes_16	: (Muon_isTightSOSMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_Barrel_16	: (Muon_isTightSOSMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+muonPtEff_TightSOS_Endcap_16	: (Muon_isTightSOSMu_noBtag==1 && Muon_jetBTagDeepCSV < 0.40)\:Muon_pt	: [0.0,3.5,7.0,10.0,15.0,20.0,30.0]	; XTitle="p_{T}(#mu) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+
+elePtEff_FO_PtRes_16		: (Electron_isCleanEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FO_Barrel_16		: (Electron_isCleanEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_FO_Endcap_16		: (Electron_isCleanEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40)\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_PtRes_16	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40) || (Electron_pt > 10.0 && Electron_isTightSOSEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_Barrel_16	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40) || (Electron_pt > 10.0 && Electron_isTightSOSEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005
+elePtEff_TightSOS_Endcap_16	: ((Electron_pt < 10.0 && Electron_mvaFall17V2noIso_WP80==1 && Electron_isTightSOSEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40) || (Electron_pt > 10.0 && Electron_isTightSOSEle_noBtag==1 && Electron_jetBTagDeepCSV < 0.40))\:Electron_pt	: [0.0,5.0,10.0,15.0,20.0,25.0,30.0]	; XTitle="p_{T}(e) [GeV]", YTitle="Efficiency", Legend='BR', Profile1D=True, YMin=0.0, YMax=1.005

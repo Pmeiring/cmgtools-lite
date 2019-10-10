@@ -13,8 +13,8 @@ upsilonVeto	: m2l < 9 || m2l > 10.5
 dilepPt		: pt_2(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi) > 3 
 
 ISRjet		: Jet1_jetId >= 4
-METoverHT	: (MET_pt/(htJet25j_Recl-LepGood1_pt-LepGood2_pt))>(2/3) && (MET_pt/(htJet25j_Recl-LepGood1_pt-LepGood2_pt)) < 1.4
-minHT		: (htJet25j_Recl-LepGood1_pt-LepGood2_pt) > 100
+METoverHT	: (MET_pt/(htJet25j-LepGood1_pt-LepGood2_pt))>(2/3) && (MET_pt/(htJet25j-LepGood1_pt-LepGood2_pt)) < 1.4
+minHT		: (htJet25j-LepGood1_pt-LepGood2_pt) > 100
 
 
 ##### Triggers and Binning
@@ -83,22 +83,3 @@ CRVVmT		: mt_2(LepGood1_pt, LepGood1_phi, MET_pt, MET_phi) > 90. || mt_2(LepGood
 #### Application Region
 ### Disable twoTight cut
 oneNotTight	: !(LepGood1_isLepTight) || !(LepGood2_isLepTight)	; Disable=True
-
-
-######################################################################################
-# Useful cuts, to be used when needed
-
-##### Misc
-#oneLNT      : (!(LepGood1_isTightString) && (LepGood2_isTightString)) || ((LepGood1_isTightString) && !(LepGood2_isTightString)) ; Disable=True
-#twoLNT      : !(LepGood1_isTightString) && !(LepGood2_isTightString)                                                             ; Disable=True
-#oneNotTight : !(LepGood1_isLepTight_Recl) || !(LepGood2_isLepTight_Recl)                                                             ; Disable=True
-#oneLNT      : (!(LepGood1_isLepTight_Recl) && (LepGood2_isLepTight_Recl)) || ((LepGood1_isLepTight_Recl) && !(LepGood2_isLepTight_Recl)) ; Disable=True
-#twoLNT      : !(LepGood1_isLepTight_Recl) && !(LepGood2_isLepTight_Recl)                                                             ; Disable=True
-
-## to activate: SS
-#SS          : LepGood1_pdgId*LepGood2_pdgId>0                                                                              ; Disable=True
-
-## to activate: medium MET STOP
-#col200_met1 : MET_pt > 200 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 200 ; Disable=True
-#col200_met2 : MET_pt < 300                                                                                                 ; Disable=True
-#col200_trig : $FASTSIM{1} $DATA{HLT_HighMET16} $MC{HLT_HighMET16}                                                          ; Disable=True

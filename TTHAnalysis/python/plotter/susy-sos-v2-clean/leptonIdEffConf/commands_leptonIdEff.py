@@ -23,7 +23,7 @@ if sys.argv[2] not in ["2016","2017","2018"] :
 
 directory = options.pdir+"/"+sys.argv[2]+"/"+sys.argv[1]+options.moretext
 
-command = "python mcPlots.py --pdir "+directory+" --Fs {P}/eleFlags_withBtag -P /eos/cms/store/cmst3/user/vtavolar/susySOS/DYJets/"+sys.argv[2]+"/DYJetsToLL_M10to50_LO/ -f -j 8 --split-factor=-1 --year "+sys.argv[2]+" --s2v --tree NanoAOD susy-sos-v2-clean/leptonIdEffConf/mca_leptonIdEff.txt susy-sos-v2-clean/leptonIdEffConf/cuts_leptonIdEff.txt susy-sos-v2-clean/leptonIdEffConf/plots_leptonIdEff.txt -E ^"+sys.argv[1]+"Den"
+command = "python mcPlots.py --pdir "+directory+" --Fs {P}/eleFlags_withBtag --Fs {P}/lepBTag -P /eos/cms/store/cmst3/user/vtavolar/susySOS/DYJets/"+sys.argv[2]+"/DYJetsToLL_M10to50_LO/ -f -j 8 --split-factor=-1 --year "+sys.argv[2]+" --s2v --tree NanoAOD susy-sos-v2-clean/leptonIdEffConf/mca_leptonIdEff.txt susy-sos-v2-clean/leptonIdEffConf/cuts_leptonIdEff.txt susy-sos-v2-clean/leptonIdEffConf/plots_leptonIdEff.txt -E ^"+sys.argv[1]+"Den"
 
 if options.ptRes==True :
     command = command + " -E ^"+sys.argv[1]+"Pt --sP ^"+sys.argv[1]+".*\(?\<\=\(PtRes\)\)$ --out "+directory+"/"+sys.argv[1]+"Eff_PtRes.root"

@@ -1,4 +1,0 @@
-incl_sigprompt : + ; IncludeMca="susy-sos-v2-clean/mca-includes/mca-2los-sigprompt.txt"
-#incl_mcfakes   : + ; IncludeMca="susy-sos-v2-clean/mca-includes/mca-2los-mcfakes.txt"
-
-incl_data : + ; IncludeMca="susy-sos-v2-clean/mca-includes/mca-data.txt"

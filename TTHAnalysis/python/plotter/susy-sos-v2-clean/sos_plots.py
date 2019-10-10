@@ -48,9 +48,7 @@ submit = '{command}'
 
 P0="/eos/cms/store/cmst3/group/tthlep/peruzzi/NanoTrees_SOS_230819_v5/"
 nCores = 8
-#TREESALL = " --Fs {P}/recleaner -P "+P0+"%s "%(YEAR,)
-TREESALL = " --Fs /eos/cms/store/cmst3/user/vtavolar/susySOS/friends_fromv5/%s/recleaner_new/ -P "%(YEAR)+P0+"%s "%(YEAR)
-if YEAR == "2018": TREESALL = " --Fs /eos/cms/store/cmst3/user/vtavolar/susySOS/friends_fromv5/%s/recleaner -P "%(YEAR)+P0+"%s "%(YEAR) + "-P /eos/cms/store/cmst3/user/vtavolar/susySOS/missingDYJets2018/"
+TREESALL = " --Fs {P}/recleaner -P "+P0+"%s "%(YEAR,)
 
 def base(selection):
     CORE=TREESALL
@@ -61,10 +59,10 @@ def base(selection):
     LEGEND=" --legendColumns 2 --legendWidth 0.25 "
     LEGEND2=" --legendFontSize 0.042 "
     SPAM=" --noCms --topSpamSize 1.1 --lspam '#scale[1.1]{#bf{CMS}} #scale[0.9]{#it{Preliminary}}' "
-    if args.doWhat == "plots": CORE+=LUMI+RATIO+RATIO2+LEGEND+LEGEND2+SPAM+" --showMCError "
-    if args.doWhat == "plots" and args.signal: CORE+=" --noStackSig --showIndivSigs "
-    else: CORE+=" --xp incl_signal "
-
+    if args.doWhat == "plots": 
+        CORE+=LUMI+RATIO+RATIO2+LEGEND+LEGEND2+SPAM+" --showMCError "
+        if args.signal: CORE+=" --noStackSig --showIndivSigs "
+        else: CORE+=" --xp signal.* "
 
     wBG = " '1.0' "
     #wFS = " '1.0' "

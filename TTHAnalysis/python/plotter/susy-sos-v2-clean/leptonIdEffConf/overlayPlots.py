@@ -10,16 +10,16 @@ def canvasToImage(canvas):
     img.WriteImage(args.pdir+"overlayPlots/"+sys.argv[1]+"/"+str( canvas.GetName() )+".png")
 
 def histoCosmetics(histo,year):
-    histo.SetLineColor(color[year])
+    histo.SetLineColor(color[year]); histo.SetLineWidth(2)
     histo.SetMarkerColor(color[year]); histo.SetMarkerStyle(20); histo.SetMarkerSize(1.2)
-    histo.GetXaxis().SetTitleSize(0.05); histo.GetXaxis().SetTitleOffset(0.95); 
-    histo.GetYaxis().SetTitleSize(0.05); histo.GetYaxis().SetTitleOffset(0.85); 
+    histo.GetXaxis().SetTitleSize(0.05); histo.GetXaxis().SetTitleOffset(0.95)
+    histo.GetYaxis().SetTitleSize(0.05); histo.GetYaxis().SetTitleOffset(0.85) 
     histo.SetMinimum(0.0); histo.SetMaximum(1.0);
     
 
 helpText = "python overlayPlots.py [particle] [options]\n \
 [particle] can be 'muon' or 'ele'\n \
-[options] are described below (no option means all possible combinations:"
+[options] are described below (no option means all possible combinations):"
 
 parser = argparse.ArgumentParser(helpText)
 
@@ -62,9 +62,9 @@ for ID,kinRes,var in [(ID,kinRes,var) for ID in IDArr for kinRes in kinResArr fo
     for year in yearArr:
         fileKey = "{kinRes}_{year}".format(kinRes=kinRes,year=year)
         if not inFiles.has_key(fileKey):
-            inFiles[fileKey] = ROOT.TFile( args.pdir+"{year}/{particle}_final/{particle}Eff{kinRes}.root".format(year=year,particle=sys.argv[1],kinRes=kinRes),"read" )
+            inFiles[fileKey] = ROOT.TFile( args.pdir+"{year}/{particle}/{particle}Eff{kinRes}.root".format(year=year,particle=sys.argv[1],kinRes=kinRes),"read" )
 
-        histo = inFiles[fileKey].Get(name+"_prompt_dy")
+        histo = inFiles[fileKey].Get(name+"_%s_prompt_dy"%year[-2:])
         histo.SetName(year); histo.SetTitle(year); histo.Draw("same")
         histoCosmetics(histo,year)
 

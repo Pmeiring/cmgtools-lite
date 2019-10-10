@@ -1,0 +1,7 @@
+FO : LepGood_isLepFO_Recl; Disable=True
+mu  : abs(LepGood_pdgId) ==13 ; Disable=True
+ele : abs(LepGood_pdgId) ==11 ; Disable=True
+barrel : abs(LepGood_eta) < 0.83; Disable=True
+endcap : abs(LepGood_eta) < 2.4 && abs(LepGood_eta)> 0.83 ; Disable=True
+mu_pt : LepGood_pt > 3.5; Disable=True
+ele_pt : LepGood_pt > 5; Disable=True
