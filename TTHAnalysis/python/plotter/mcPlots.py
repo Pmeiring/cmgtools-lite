@@ -26,6 +26,7 @@ class PlotFile:
         infile = open(fileName,'r')
         iline = -1
         for line in infile:
+            # print line
             iline += 1
             if re.match("\s*#.*", line) or len(line.strip())==0: continue
             while line.strip()[-1] == "\\":
@@ -47,6 +48,7 @@ class PlotFile:
                     else: extra[setting] = True
             line = re.sub("#.*","",line) 
             field = [f.strip().replace(";",":") for f in line.replace("::",";;").replace("\\:",";").split(':')]
+            # print line
             if len(field) == 1 and field[0] == "*":
                 if len(self._plots): raise RuntimeError, "PlotFile defaults ('*') can be specified only before all plots"
                 print "Setting the following defaults for all plots: "
@@ -588,7 +590,7 @@ def doLegend(pmap,mca,corner="TR",textSize=0.035,cutoff=1e-2,cutoffSignals=True,
         if columns > 1: height = 1.3*height/columns
         (x1,y1,x2,y2) = (0.97-legWidth if doWide else .85-legWidth, .9 - height, .90, .91)
         if corner == "TR":
-            (x1,y1,x2,y2) = (0.97-legWidth if doWide else .85-legWidth, .9 - height, .90, .91)
+            (x1,y1,x2,y2) = (0.97-legWidth if doWide else 1.00-legWidth, .9 - height, .95, .91)
         elif corner == "TC":
             (x1,y1,x2,y2) = (.5, .9 - height, .55+legWidth, .91)
         elif corner == "TL":

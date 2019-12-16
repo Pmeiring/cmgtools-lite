@@ -251,6 +251,15 @@ float deepFlavB_WP(int year, int wp /*0 = loose, 1 = medium, 2=tight*/) {
     return -99;
 }
 
+float PeterTest(float x){
+    if (x < 2){
+        return -100;
+    }
+    else {
+        return x;
+    }
+}
+
 void functions() {}
 
 

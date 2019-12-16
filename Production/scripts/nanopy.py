@@ -127,11 +127,13 @@ if __name__ == "__main__":
 
     # this must be done before calling the source
     _loadHeppyGlobalOptions(options)
+    print("Loaded heppyGlobalOptions")
 
     cfg = args[1]
     cfo = imp.load_source(os.path.basename(cfg).rstrip('.py'), cfg, open(cfg,'r'))
     pp = cfo.POSTPROCESSOR
 
+    print("len(args) = %s" %len(args))
     if len(args) == 2:
         components = cfo.selectedComponents
     else:
@@ -139,6 +141,9 @@ if __name__ == "__main__":
 
     preprocessor = getattr(cfo, 'PREPROCESSOR', None)
 
+    print("len(components) = %s" %len(components))
+    print("options.ntasks = %s" %options.ntasks)
+    
     if options.single:
         if len(components) > 1: 
             print("WARNING: option --single specified but multiple components found")

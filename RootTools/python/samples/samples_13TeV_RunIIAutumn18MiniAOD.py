@@ -447,11 +447,13 @@ DYJetsToLL_M1to4 = [
     DYJetsToLL_M1to4_HT600toInf
 ]
 
+LocalSample=kreator.makePrivateMCComponentPETER("Local_SMS_TChiWZ","/afs/cern.ch/work/p/pmeiring/private/CMS/CMSSW_10_4_0/src/CMGTools/TTHAnalysis/cfg/SamplesFromGRID_RunIIAutumn18",["SingleGridFile_SMS_TChiWZ.root"])
+MyLocalSample = [LocalSample]
 
 # ----------------------------- summary ----------------------------------------
 
 
-mcSamples = QCDPt + QCDHT + QCD_Mus + QCD_EMs + QCD_bcToE + Ws + DYs + VJetsQQHT + TTs + Ts + TTXs + TTXXs + DiBosons + TriBosons + Higgs + SignalSUSY + ZZandVV_M1toInf + DYJetsToLL_M1to4
+mcSamples = QCDPt + QCDHT + QCD_Mus + QCD_EMs + QCD_bcToE + Ws + DYs + VJetsQQHT + TTs + Ts + TTXs + TTXXs + DiBosons + TriBosons + Higgs + SignalSUSY + ZZandVV_M1toInf + DYJetsToLL_M1to4 + MyLocalSample
 
 
 samples = mcSamples

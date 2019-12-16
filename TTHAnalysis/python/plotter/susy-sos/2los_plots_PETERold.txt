@@ -1,0 +1,35 @@
+yields         : 1 : 3,-1.5,1.5; XTitle="Total Event Yields"
+
+## Generator variables
+#genlep_fromWZ_pt1_fullrange_overflow		: GenLep_FromWZ_Leading_pt	 				: 60,0,10000  ; XTitle="Leading GenLepton from W/Z p_{T} [GeV]",YTitle="Events (norm.)"     , Legend='TR', IncludeOverflows=True
+#genlep_fromWZ_pt1_fullrange 				: GenLep_FromWZ_Leading_pt	 				: 60,0,10000  ; XTitle="Leading GenLepton from W/Z p_{T} [GeV]",YTitle="Events (norm.)"     , Legend='TR', IncludeOverflows=False
+#genlep_fromWZ_pt1_zoom 						: GenLep_FromWZ_Leading_pt	 				: 60,0,15  ; XTitle="Leading GenLepton from W/Z p_{T} [GeV]",YTitle="Events (norm.)"     , Legend='TR', IncludeOverflows=False
+
+GenLep_2LOS_pt1_yields					: if3(GenLep_2LOS_Leading_pt>0,0,-1)		: 3,0,3  ; XTitle="Leading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_pt1_zoom					: GenLep_2LOS_Leading_pt	 				: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_pt2_yields					: if3(GenLep_2LOS_Subleading_pt>0,0,-1)		: 3,0,3  ; XTitle="Subleading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_pt2_zoom					: GenLep_2LOS_Subleading_pt	 				: 60,0,15  ; XTitle="Subleading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+
+GenLep_2LOS_FromZ_pt1_yields			: if3(GenLep_2LOS_FromZ_Leading_pt>0,0,-1)	: 3,0,3  ; XTitle="Leading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_FromZ_pt1_zoom				: GenLep_2LOS_FromZ_Leading_pt	 			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_FromZ_pt2_yields			: if3(GenLep_2LOS_FromZ_Subleading_pt>0,0,-1)	: 3,0,3  ; XTitle="Subleading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_FromZ_pt2_zoom				: GenLep_2LOS_FromZ_Subleading_pt	 			: 60,0,15  ; XTitle="Subleading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False
+
+GenLep_2LOS_NotFromTau_pt1_yields		: if3(GenLep_2LOS_NotFromTau_Leading_pt>0,0,-1)	: 3,0,3  ; XTitle="Leading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_NotFromTau_pt1_zoom			: GenLep_2LOS_NotFromTau_Leading_pt	 			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_NotFromTau_pt2_yields		: if3(GenLep_2LOS_NotFromTau_Subleading_pt>0,0,-1)	: 3,0,3  ; XTitle="Subleading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_NotFromTau_pt2_zoom			: GenLep_2LOS_NotFromTau_Subleading_pt	 			: 60,0,15  ; XTitle="Subleading GenLepton p_{T} [GeV]"    , Legend='TR', IncludeOverflows=False
+
+GenLep_2LOS_FromZNotFromTau_pt1_yields	: if3(GenLep_2LOS_FromZNotFromTau_Leading_pt>0,0,-1) : 3,0,3  ; XTitle="Leading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_FromZNotFromTau_pt1_zoom	: GenLep_2LOS_FromZNotFromTau_Leading_pt	 		 : 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_FromZNotFromTau_pt2_yields	: if3(GenLep_2LOS_FromZNotFromTau_Subleading_pt>0,0,-1)	: 3,0,3  ; XTitle="Subleading GenLepton p_{T} [GeV]" , Legend='TR', IncludeOverflows=False
+GenLep_2LOS_FromZNotFromTau_pt2_zoom	: GenLep_2LOS_FromZNotFromTau_Subleading_pt	 			: 60,0,15  ; XTitle="Subleading GenLepton p_{T} [GeV]", Legend='TR', IncludeOverflows=False
+
+
+#genlep_pt2		: GenLep_SubLeading_pt	 			: 60,0,15  ; XTitle="Subleading GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+#genlep_pt  		: if3(GenPart_status==1 && (abs(GenPart_pdgId)==11 || abs(GenPart_pdgId)==13), GenPart_pt, -100) : 	60,0,15  ; XTitle="GenLepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False
+#genjet1_pt		: GenJet1_pt 					:	250,0,250; XTitle="Leading GenJet p_{T} [GeV]"		 , Legend='TR', IncludeOverflows=False
+#ngenjet		: nGenJet 						:	20,0,20;   XTitle="Number of GenJets"				 , Legend='TR', IncludeOverflows=False
+gen_x1			: Generator_x1 					:	100,0,1; XTitle="Momentum fragmentation x1"			 , Legend='TR', IncludeOverflows=True
+#gen_x2			: Generator_x2 					:	200,0,0.5; XTitle="Momentum fragmentation x2"		 , Legend='TR', IncludeOverflows=False
+#genmet		  	: GenMET_pt					    :   250,0,250; XTitle="Gen p_{T}^{miss} [GeV]" 			 , Legend='TR', IncludeOverflows=False

@@ -1,0 +1,48 @@
+##### Always applied cuts
+all_events : 1
+
+# Require at least 2 leptons (e/mu) ossf
+atleast_2lossf_gen : EvHas_OSSFpair==1
+
+# Require at least 2 leptons (e/mu) ossf in acceptance
+atleast_2lossf_in_acceptance : ( nGenLepFromWZ==2 && (((GenLepFromWZ_id[0]*GenLepFromWZ_id[1])==-121 && abs(GenLepFromWZ_eta[0]) < 2.5 && abs(GenLepFromWZ_eta[1]) < 2.5) || ((GenLepFromWZ_id[0]*GenLepFromWZ_id[1])==-169 && abs(GenLepFromWZ_eta[0]) < 2.4 && abs(GenLepFromWZ_eta[1]) < 2.4)) ) || (nGenLepFromWZ==3 && ( (((GenLepFromWZ_id[0]*GenLepFromWZ_id[1])==-121 && abs(GenLepFromWZ_eta[0]) < 2.5 && abs(GenLepFromWZ_eta[1]) < 2.5) || ((GenLepFromWZ_id[0]*GenLepFromWZ_id[1])==-169 && abs(GenLepFromWZ_eta[0]) < 2.4 && abs(GenLepFromWZ_eta[1]) < 2.4)) || (((GenLepFromWZ_id[0]*GenLepFromWZ_id[2])==-121 && abs(GenLepFromWZ_eta[0]) < 2.5 && abs(GenLepFromWZ_eta[2]) < 2.5) || ((GenLepFromWZ_id[0]*GenLepFromWZ_id[2])==-169 && abs(GenLepFromWZ_eta[0]) < 2.4 && abs(GenLepFromWZ_eta[2]) < 2.4)) || (((GenLepFromWZ_id[1]*GenLepFromWZ_id[2])==-121 && abs(GenLepFromWZ_eta[1]) < 2.5 && abs(GenLepFromWZ_eta[2]) < 2.5) || ((GenLepFromWZ_id[1]*GenLepFromWZ_id[2])==-169 && abs(GenLepFromWZ_eta[1]) < 2.4 && abs(GenLepFromWZ_eta[1]) < 2.4)) ))
+
+# Require exactly two FO Leptons
+Exactly2LepFO : nLepFO_trial_Recl==2
+
+# Require the two FO leptons to be genmatched
+Exactly2LepFO_genmatched : LepGood_mcMatchId[iLepFO_trial_Recl[0]]!=0 && LepGood_mcMatchId[iLepFO_trial_Recl[1]]!=0
+
+# Require the two FO leptons to be ossf
+Exactly2LepFO_genmatched_ossf : (LepGood_pdgId[iLepFO_trial_Recl[0]]*LepGood_pdgId[iLepFO_trial_Recl[1]]==-121) || (LepGood_pdgId[iLepFO_trial_Recl[0]]*LepGood_pdgId[iLepFO_trial_Recl[1]]==-169)
+
+
+met125 : MET_pt > 125 && metmm_pt(LepGood_pdgId[iLepFO_trial_Recl[0]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[0]], LepGood_pdgId[iLepFO_trial_Recl[1]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]], MET_pt, MET_phi) > 125
+
+ISRjet : Jet1_jetId >= 4
+
+minHT : (htJet25j_Recl-LepGood_pt[iLepFO_trial_Recl[0]]-LepGood_pt[iLepFO_trial_Recl[1]]) > 100
+
+METoverHT : (MET_pt/(htJet25j_Recl-LepGood_pt[iLepFO_trial_Recl[0]]-LepGood_pt[iLepFO_trial_Recl[1]]))>(2/3) && (MET_pt/(htJet25j_Recl-LepGood_pt[iLepFO_trial_Recl[0]]-LepGood_pt[iLepFO_trial_Recl[1]])) < 1.4
+
+bveto : nBJetLoose25_Recl == 0
+
+mtautau : 0.0 > mass_tautau(MET_pt,MET_phi,LepGood_pt[iLepFO_trial_Recl[0]],LepGood_eta[iLepFO_trial_Recl[0]],LepGood_phi[iLepFO_trial_Recl[0]],LepGood_pt[iLepFO_trial_Recl[1]],LepGood_eta[iLepFO_trial_Recl[1]],LepGood_phi[iLepFO_trial_Recl[1]]) || mass_tautau(MET_pt,MET_phi,LepGood_pt[iLepFO_trial_Recl[0]],LepGood_eta[iLepFO_trial_Recl[0]],LepGood_phi[iLepFO_trial_Recl[0]],LepGood_pt[iLepFO_trial_Recl[1]],LepGood_eta[iLepFO_trial_Recl[1]],LepGood_phi[iLepFO_trial_Recl[1]]) > 160.0
+
+upsilon_JPsi_Veto : mass_2(LepGood_pt[iLepFO_trial_Recl[0]], LepGood_eta[iLepFO_trial_Recl[0]], LepGood_phi[iLepFO_trial_Recl[0]], LepGood_mass[iLepFO_trial_Recl[0]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_eta[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]], LepGood_mass[iLepFO_trial_Recl[1]]) < 3 || (mass_2(LepGood_pt[iLepFO_trial_Recl[0]], LepGood_eta[iLepFO_trial_Recl[0]], LepGood_phi[iLepFO_trial_Recl[0]], LepGood_mass[iLepFO_trial_Recl[0]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_eta[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]], LepGood_mass[iLepFO_trial_Recl[1]]) > 3.2 && mass_2(LepGood_pt[iLepFO_trial_Recl[0]], LepGood_eta[iLepFO_trial_Recl[0]], LepGood_phi[iLepFO_trial_Recl[0]], LepGood_mass[iLepFO_trial_Recl[0]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_eta[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]], LepGood_mass[iLepFO_trial_Recl[1]]) < 9) || mass_2(LepGood_pt[iLepFO_trial_Recl[0]], LepGood_eta[iLepFO_trial_Recl[0]], LepGood_phi[iLepFO_trial_Recl[0]], LepGood_mass[iLepFO_trial_Recl[0]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_eta[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]], LepGood_mass[iLepFO_trial_Recl[1]]) > 10.5
+
+ledlepPt : 5.0 < LepGood_pt[iLepFO_trial_Recl[0]] && LepGood_pt[iLepFO_trial_Recl[0]] < 30.0
+
+sublepPt : LepGood_pt[iLepFO_trial_Recl[1]] > 5
+
+dilepPt : pt_2(LepGood_pt[iLepFO_trial_Recl[0]], LepGood_phi[iLepFO_trial_Recl[0]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]]) > 3 
+
+twoTight : LepGood_isLepTight_Recl[iLepFO_trial_Recl[0]] && LepGood_isLepTight_Recl[iLepFO_trial_Recl[1]]
+
+
+
+# Require exactly 2 leptons (e/mu) ossf
+# exactly_2lossf_gen : EvHas2LOSSF_FromZ_tau==1 || EvHas2LOSSF_FromZ_notau==1 || EvHas2LOSSF_FromWZ_tau==1
+
+# the 2 ossf gen leptons should be in acceptance
+# gen_in_acceptance  : (abs(GenLepFromWZ_id[0])==13 && abs(GenLepFromWZ_eta[0]) < 2.4 && abs(GenLepFromWZ_id[1])==13 && abs(GenLepFromWZ_eta[1]) < 2.4) || (abs(GenLepFromWZ_id[0])==11 && abs(GenLepFromWZ_eta[0]) < 2.5 && abs(GenLepFromWZ_id[1])==11 && abs(GenLepFromWZ_eta[1]) < 2.5 )
