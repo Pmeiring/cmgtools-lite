@@ -1,0 +1,27 @@
+yields         : 1 : 3,-1.5,1.5; XTitle="Total Event Yields"
+
+## Generator variables
+# gen_x1	  : 	Generator_x1 				:	100,0,1; XTitle="Momentum fragmentation x1"			 , Legend='TR', IncludeOverflows=True
+
+GenLepFromWZ_pt1	:		GenLepFromWZ_pt[0]	:	25,0,50; XTitle="p_{T} leading genlepton from W/Z"				 , Legend='TR', IncludeOverflows=False
+GenLepFromWZ_pt2	:		GenLepFromWZ_pt[1]	:	25,0,50; XTitle="p_{T} subleading genlepton from W/Z"			 , Legend='TR', IncludeOverflows=False
+GenLepFromWZ_eta1	:		GenLepFromWZ_eta[0]	:	25,-5,5; XTitle="#eta leading genlepton from W/Z"				 , Legend='TR', IncludeOverflows=False, MoreY=2.0
+GenLepFromWZ_eta2	:		GenLepFromWZ_eta[1]	:	25,-5,5; XTitle="#eta subleading genlepton from W/Z"			 , Legend='TR', IncludeOverflows=False, MoreY=2.0
+
+genmet		  		: 		GenMET_pt		    :   25,0,250; XTitle="Gen p_{T}^{miss} [GeV]" 			 , Legend='TR', IncludeOverflows=False
+
+ngenjets		  	:		nGenJet				: 10,0,10; XTitle="nGenJets", Legend='TR', IncludeOverflows=False
+
+
+
+## Reco variables
+FOLep_pt1        : LepGood_pt[iLepFO_Recl[0]]           : 25,0,50  ; XTitle="Leading FO lepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False, LegendCutoff=1e-10
+FOLep_pt2        : LepGood_pt[iLepFO_Recl[1]]           : 25,0,50  ; XTitle="Subleading FO lepton p_{T} [GeV]"  , Legend='TR', IncludeOverflows=False, LegendCutoff=1e-10
+FOLep_eta1       : LepGood_eta[iLepFO_Recl[1]]         : 25,-5,5 ; XTitle="Leading FO lepton #eta"       , Legend='TR', IncludeOverflows=False, MoreY=1.5
+FOLep_eta2       : LepGood_eta[iLepFO_Recl[1]]          : 25,-5,5 ; XTitle="Subleading FO lepton #eta"    , Legend='TR', IncludeOverflows=False, MoreY=1.5
+
+met           : MET_pt  								   : 25,0,250;  XTitle="p_{T}^{miss}  [GeV]", LegendCutoff=1e-3, Legend='TR', IncludeOverflows=False, MoreY=1.5
+
+njets		  : nJet							   : 10,0,10; XTitle="nJets", Legend='TR', IncludeOverflows=False, MoreY=2.0
+
+METoverHT :  MET_pt/(htJet25j_Recl-LepGood_pt[iLepFO_trial_Recl[0]]-LepGood_pt[iLepFO_trial_Recl[1]]) : 25,0,5 ; XTitle="MET / HT", Legend='TR', IncludeOverflows=False

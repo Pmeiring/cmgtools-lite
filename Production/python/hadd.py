@@ -154,7 +154,9 @@ def haddChunks(idir, removeDestDir, cleanUp=False, ignoreDirs=None, maxSize=None
     if ignoreDirs == None: ignoreDirs = set()
 
     for file in sorted(os.listdir(idir)):
+        print(file)
         filepath = '/'.join( [idir, file] )
+        print(filepath)
         isdir = os.path.isdir(filepath)
         # print filepath
         if isdir or (nanoAOD and filepath.endswith(".root")):

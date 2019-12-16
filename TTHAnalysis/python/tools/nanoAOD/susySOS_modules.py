@@ -1,8 +1,8 @@
 import os
 
 conf = dict(
-    muPt = 3, 
-    elePt = 5, 
+    muPt = 0, 
+    elePt = 0, 
     #        miniRelIso = 0.4,  # we use Iperbolic, see old cfg run_susySOS_cfg.py
     sip3d = 2.5, 
     dxy =  0.05, 
@@ -14,10 +14,10 @@ conf = dict(
 #    eleId = "mvaFall17V2noIso_WPL", ## CHECK
 #    muonId = "softMvaId" ###looseId
 )
-susySOS_skim_cut =  ("nMuon + nElectron >= 2 &&" + ##if heppy option fast
+susySOS_skim_cut =  ("nMuon + nElectron >= 0 &&" + ##if heppy option fast
 ###        "MET_pt > {minMet}  &&"+
        "Sum$(Muon_pt > {muPt}) +"
-       "Sum$(Electron_pt > {elePt}) >= 2").format(**conf) ## && Muon_miniPFRelIso_all < {miniRelIso} && Electron_miniPFRelIso_all < {miniRelIso}  #mettere qui MET_pt>50 #cp dal cfg la selezione
+       "Sum$(Electron_pt > {elePt}) >= 0").format(**conf) ## && Muon_miniPFRelIso_all < {miniRelIso} && Electron_miniPFRelIso_all < {miniRelIso}  #mettere qui MET_pt>50 #cp dal cfg la selezione
 #cut  = ttH_skim_cut
 muonSelection     = lambda l : abs(l.eta) < 2.4 and l.pt > conf["muPt"]  and l.sip3d < conf["sip3d"] and abs(l.dxy) < conf["dxy"] and abs(l.dz) < conf["dz"]  and l.pfRelIso03_all*l.pt < ( conf["iperbolic_iso_0"]+conf["iperbolic_iso_1"]/l.pt) and abs(l.ip3d) < conf["ip3d"] ##is it relIso03?  ##and l.miniPFRelIso_all < conf["miniRelIso"]##l.relIso03*l.pt
 electronSelection = lambda l : abs(l.eta) < 2.5 and l.pt > conf["elePt"]  and l.sip3d < conf["sip3d"] and abs(l.dxy) < conf["dxy"] and abs(l.dz) < conf["dz"] and l.pfRelIso03_all*l.pt < ( conf["iperbolic_iso_0"]+conf["iperbolic_iso_1"]/l.pt) and abs(l.ip3d) < conf["ip3d"]  ##is it relIso03? ##and l.miniPFRelIso_all < conf["miniRelIso"] #l.relIso03*l.pt
@@ -47,7 +47,8 @@ from CMGTools.TTHAnalysis.tools.nanoAOD.yearTagger import yearTag
 from CMGTools.TTHAnalysis.tools.nanoAOD.xsecTagger import xsecTag
 from CMGTools.TTHAnalysis.tools.nanoAOD.lepJetBTagAdder import lepJetBTagCSV, lepJetBTagDeepCSV, eleJetBTagDeepCSV, muonJetBTagDeepCSV
 
-susySOS_sequence_step1 = [lepSkim, lepMerge, autoPuWeight, yearTag, xsecTag, lepJetBTagCSV, lepJetBTagDeepCSV, lepMasses]
+# susySOS_sequence_step1 = [lepSkim, lepMerge, autoPuWeight, yearTag, xsecTag, lepJetBTagCSV, lepJetBTagDeepCSV, lepMasses]
+susySOS_sequence_step1 = [lepMerge, autoPuWeight, yearTag, xsecTag, lepJetBTagCSV, lepJetBTagDeepCSV, lepMasses]
 
 
 #==== 
@@ -231,8 +232,8 @@ def clean_and_FO_selection_SOS(lep, year):
     bTagCut = 0.4 if year==2016 else 0.1522 if year==2017 else 0.1241 ##2016 loose recomm is 0.2217, while 0.4 derived to match 2018 performance
 #    print "btagDeepB ",lep.btagDeepB
  #   print "jetBTagDeepCSV ",lep.jetBTagDeepCSV
-    return lep.jetBTagDeepCSV < bTagCut and ( (abs(lep.pdgId)==11 and VLooseFOEleID(lep, year) and lep.lostHits==0 and lep.convVeto)
-                                         or (abs(lep.pdgId)==13 and lep.softId ) )
+    return lep.jetBTagDeepCSV < bTagCut and ( (abs(lep.pdgId)==11 and lep.pt>5 and VLooseFOEleID(lep, year) and lep.lostHits==0 and lep.convVeto)
+                                         or (abs(lep.pdgId)==13 and lep.pt>3 and lep.softId ) )
 
 def clean_and_FO_selection_SOS_noBtag(lep, year):
     return ( (abs(lep.pdgId)==11 and VLooseFOEleID(lep, year) and lep.lostHits==0 and lep.convVeto)
@@ -264,8 +265,7 @@ from CMGTools.TTHAnalysis.tools.nanoAOD.fastCombinedObjectRecleaner import fastC
 recleaner_step1 = lambda : CombinedObjectTaggerForCleaning("InternalRecl",
                                        #looseLeptonSel = lambda lep : lep.miniPFRelIso_all < 0.4 and lep.sip3d < 8,
 
-                                       looseLeptonSel = lambda lep,year : ((abs(lep.pdgId)==11 and (VLooseFOEleID(lep, year) and lep.lostHits<=1))) or (abs(lep.pdgId)==13 and lep.looseId),
-
+                                       looseLeptonSel = lambda lep,year : ((abs(lep.pdgId)==11 and lep.pt>5 and (VLooseFOEleID(lep, year) and lep.lostHits<=1))) or (abs(lep.pdgId)==13 and lep.pt>3 and lep.looseId),
                                        cleaningLeptonSel = lambda lep,year : clean_and_FO_selection_SOS(lep, year), #veryLooseFO wp
                                        FOLeptonSel = lambda lep,year : clean_and_FO_selection_SOS(lep, year), #veryLooseFO wp
                                        tightLeptonSel = tightLeptonSel_SOS, #tight wp
@@ -304,6 +304,13 @@ isMatchRightCharge = lambda : ObjTagger('isMatchRightCharge','LepGood', [lambda 
 mcMatchId     = lambda : ObjTagger('mcMatchId','LepGood', [lambda l : (l.genPartFlav==1 or l.genPartFlav == 15) ])
 mcPromptGamma = lambda : ObjTagger('mcPromptGamma','LepGood', [lambda l : (l.genPartFlav==22)])
 mcMatch_seq   = [ isMatchRightCharge, mcMatchId ,mcPromptGamma]
+
+
+from CMGTools.TTHAnalysis.tools.genlepfromWZ import GenLepFromWZ
+GiveMeMyLeptons = lambda : GenLepFromWZ('','Peter')
+
+from CMGTools.TTHAnalysis.tools.genlepfromWZ_collection import GenLepFromWZ_Collection
+GiveMeMyLeptons_Collection = lambda : GenLepFromWZ_Collection('','Peter')
 
 from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetmetUncertainties import jetmetUncertainties2016, jetmetUncertainties2017, jetmetUncertainties2018
 

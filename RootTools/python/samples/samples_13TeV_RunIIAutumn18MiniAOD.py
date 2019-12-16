@@ -424,10 +424,13 @@ SignalSUSY = [
 SMS_TChiWZ
 ]
 
+LocalSample=kreator.makePrivateMCComponentPETER("Local_SMS_TChiWZ","/afs/cern.ch/work/p/pmeiring/private/CMS/CMSSW_10_4_0/src/CMGTools/TTHAnalysis/cfg/SamplesFromGRID_RunIIAutumn18",["SingleGridFile_SMS_TChiWZ.root"])
+MyLocalSample = [LocalSample]
+
 # ----------------------------- summary ----------------------------------------
 
 
-mcSamples = QCDPt + QCDHT + QCD_Mus + QCD_EMs + QCD_bcToE + Ws + DYs + VJetsQQHT + TTs + Ts + TTXs + TTXXs + DiBosons + TriBosons + Higgs + SignalSUSY
+mcSamples = QCDPt + QCDHT + QCD_Mus + QCD_EMs + QCD_bcToE + Ws + DYs + VJetsQQHT + TTs + Ts + TTXs + TTXXs + DiBosons + TriBosons + Higgs + SignalSUSY + MyLocalSample
 
 
 samples = mcSamples

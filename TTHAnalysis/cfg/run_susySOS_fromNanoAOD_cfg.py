@@ -45,71 +45,72 @@ if year == 2018:
     if analysis == "main":
         mcSamples = byCompName(mcSamples_, [
 
-##            "DYJetsToLL_M10to50_LO",
-##            "DYJetsToLL_M50_LO_ext",
+# ##            "DYJetsToLL_M10to50_LO",
+# ##            "DYJetsToLL_M50_LO_ext",
 
 
-            "T_tWch_noFullyHad$",
-            "TBar_tWch_noFullyHad$",
+#             "T_tWch_noFullyHad$",
+#             "TBar_tWch_noFullyHad$",
 
-            "DYJetsToLL_M4to50_HT70to100",
-            "DYJetsToLL_M4to50_HT100to200",
-            "DYJetsToLL_M4to50_HT200to400",
-            "DYJetsToLL_M4to50_HT400to600",
-            "DYJetsToLL_M4to50_HT600toInf",
+#             "DYJetsToLL_M4to50_HT70to100",
+#             "DYJetsToLL_M4to50_HT100to200",
+#             "DYJetsToLL_M4to50_HT200to400",
+#             "DYJetsToLL_M4to50_HT400to600",
+#             "DYJetsToLL_M4to50_HT600toInf",
 
-            "DYJetsToLL_M50_HT100to200",
-            "DYJetsToLL_M50_HT200to400",
-            "DYJetsToLL_M50_HT400to600," 
-##            "DYJetsToLL_M50_HT400to600_ext2",
-            "DYJetsToLL_M50_HT600to800",
-            "DYJetsToLL_M50_HT800to1200",
-            "DYJetsToLL_M50_HT1200to2500",
-            "DYJetsToLL_M50_HT2500toInf",
+#             "DYJetsToLL_M50_HT100to200",
+#             "DYJetsToLL_M50_HT200to400",
+#             "DYJetsToLL_M50_HT400to600," 
+# ##            "DYJetsToLL_M50_HT400to600_ext2",
+#             "DYJetsToLL_M50_HT600to800",
+#             "DYJetsToLL_M50_HT800to1200",
+#             "DYJetsToLL_M50_HT1200to2500",
+#             "DYJetsToLL_M50_HT2500toInf",
 
-            "TTJets_DiLepton$",
+#             "TTJets_DiLepton$",
 
-            #check if VVTo2L2Nu is there
-            "WWTo2L2Nu$",
-            "ZZTo2L2Nu",
-            "TTJets_SingleLeptonFromT$", "TTJets_SingleLeptonFromTbar$", 
+#             #check if VVTo2L2Nu is there
+#             "WWTo2L2Nu$",
+#             "ZZTo2L2Nu",
+#             "TTJets_SingleLeptonFromT$", "TTJets_SingleLeptonFromTbar$", 
             
-            "WJetsToLNu_HT100to200",
-            "WJetsToLNu_HT200to400",
-            "WJetsToLNu_HT400to600",
-            "WJetsToLNu_HT600to800",
-            "WJetsToLNu_HT800to1200",
-            "WJetsToLNu_HT1200to2500",
-            "WJetsToLNu_HT2500toInf",
+#             "WJetsToLNu_HT100to200",
+#             "WJetsToLNu_HT200to400",
+#             "WJetsToLNu_HT400to600",
+#             "WJetsToLNu_HT600to800",
+#             "WJetsToLNu_HT800to1200",
+#             "WJetsToLNu_HT1200to2500",
+#             "WJetsToLNu_HT2500toInf",
 
-            "WZTo3LNu_fxfx$",
-            "WWToLNuQQ",
-            #"WZTo1L1Nu2Q",
-            "ZZTo4L$",
-            "WWW",#_4F
-            "WZZ$",
-            "WWZ", #FIX! not _4F
-            "ZZZ$",
-            "T_tch$",
-            "TBar_tch$",
-            "T_sch_lep$",
-            #"WWTo2L2Nu_DPS_hpp",           
-            "TTWToLNu_fxfx$",
-            "TTZToLLNuNu_amc$",
-            "TTZToLLNuNu_m1to10$",
-            "TTGJets$",
-            "TGJets_lep", 
+#             "WZTo3LNu_fxfx$",
+#             "WWToLNuQQ",
+#             #"WZTo1L1Nu2Q",
+#             "ZZTo4L$",
+#             "WWW",#_4F
+#             "WZZ$",
+#             "WWZ", #FIX! not _4F
+#             "ZZZ$",
+#             "T_tch$",
+#             "TBar_tch$",
+#             "T_sch_lep$",
+#             #"WWTo2L2Nu_DPS_hpp",           
+#             "TTWToLNu_fxfx$",
+#             "TTZToLLNuNu_amc$",
+#             "TTZToLLNuNu_m1to10$",
+#             "TTGJets$",
+#             "TGJets_lep", 
 
-            #missing tbc
-#            "ZZTo2L2Q", 
-            "WpWpJJ",
-#            "WZTo1L3Nu",
-#            "WGToLNuG_amcatnlo_ext",
-#            "ZGTo2LG_ext",
-#            "WZTo2L2Q",
+#             #missing tbc
+# #            "ZZTo2L2Q", 
+#             "WpWpJJ",
+# #            "WZTo1L3Nu",
+# #            "WGToLNuG_amcatnlo_ext",
+# #            "ZGTo2LG_ext",
+# #            "WZTo2L2Q",
 
             ##signal SUSY
             "SMS_TChiWZ"
+            # "Local_SMS_TChiWZ"
             
 ###relics from tth             
 ###            "TT[WZ]_LO$",
@@ -335,10 +336,12 @@ elif year == 2016:
 # make MC
 
 print "mcSamples ",mcSamples
+for (pd,trigs) in DatasetsAndTriggers:
+    print "triggers ",trigs
 
 mcTriggers = sum((trigs for (pd,trigs) in DatasetsAndTriggers), [])
-for comp in mcSamples:
-    comp.triggers = mcTriggers
+# for comp in mcSamples:
+#     comp.triggers = mcTriggers
 
 # make data
 dataSamples = []; vetoTriggers = []
@@ -363,7 +366,8 @@ if getHeppyOption("nanoPreProcessor"):
     preproc_cfg = {2016: ("mc94X2016","data94X2016"),
                    2017: ("mc94Xv2","data94Xv2"),
                    2018: ("mc102X","data102X_ABC","data102X_D")}
-    preproc_cmsswArea = "/afs/cern.ch/user/v/vtavolar/work/SusySOSSW_2_clean/nanoAOD/CMSSW_10_2_15" #MODIFY ACCORDINGLY
+    # preproc_cmsswArea = "/afs/cern.ch/user/v/vtavolar/work/SusySOSSW_2_clean/nanoAOD/CMSSW_10_2_15" #MODIFY ACCORDINGLY
+    preproc_cmsswArea = "/afs/cern.ch/work/p/pmeiring/private/CMS/CMSSW_10_2_16_UL" #MODIFY ACCORDINGLY
     preproc_mc = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,preproc_cfg[year][0]),cmsswArea=preproc_cmsswArea,keepOutput=True)
     if year==2018:
         preproc_data_ABC = nanoAODPreprocessor(cfg='%s/src/PhysicsTools/NanoAOD/test/%s_NANO.py'%(preproc_cmsswArea,preproc_cfg[year][1]),cmsswArea=preproc_cmsswArea,keepOutput=True, injectTriggerFilter=True, injectJSON=True)
@@ -390,12 +394,12 @@ if getHeppyOption("nanoPreProcessor"):
             comp.preprocessor._inlineCustomize = ("""
 process.selectEl = cms.EDFilter("PATElectronRefSelector",
     src = cms.InputTag("slimmedElectrons"),
-    cut = cms.string("pt > 4.5"),
+    cut = cms.string("pt > 10"), 
     filter = cms.bool(False),
 )
 process.selectMu = cms.EDFilter("PATMuonRefSelector",
     src = cms.InputTag("slimmedMuons"),
-    cut = cms.string("pt > 3"),
+    cut = cms.string("pt > 10"),
     filter = cms.bool(False),
 )
 process.skimNLeps = cms.EDFilter("PATLeptonCountFilter",
@@ -423,7 +427,7 @@ from CMGTools.TTHAnalysis.tools.nanoAOD.susySOS_modules import *
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import PostProcessor
 
 modules = susySOS_sequence_step1
-cut = susySOS_skim_cut 
+cut = None 
 
 branchsel_in = os.environ['CMSSW_BASE']+"/src/CMGTools/TTHAnalysis/python/tools/nanoAOD/branchsel_in.txt"
 branchsel_out = None

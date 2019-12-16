@@ -57,6 +57,11 @@ class fastCombinedObjectRecleaner(Module):
         self.branches.extend([(var+self.label,_type) for var,_type in self.outjetvars])
         self.branches += [("LepGood_conePt","F",100,"nLepGood")]
 
+        self.branches += [ ("iLepTight_trial"+self.label, "I", 20, "nLepTight_trial"+self.label) ]
+        self.branches += [ ("iLepFO_trial"+self.label, "I", 20, "nLepFO_trial"+self.label) ]
+        self.branches += [ ("iLepLoose_trial"+self.label, "I", 20, "nLepLoose_trial"+self.label) ]
+
+
         self._helper_lepsF = CollectionSkimmer("LepFO"+self.label, "LepGood", floats=[], maxSize=10, saveTagForAll=True, saveSelectedIndices=True,padSelectedIndicesWith=0)
         self._helper_lepsT = CollectionSkimmer("LepTight"+self.label, "LepGood", floats=[], maxSize=10, saveTagForAll=True)
         self._helper_taus = CollectionSkimmer("TauSel"+self.label, self.tauc, floats=self.vars+self.vars_taus, ints=self.vars_taus_int, uchars=self.vars_taus_uchar, maxSize=10)
@@ -140,6 +145,8 @@ class fastCombinedObjectRecleaner(Module):
         for delta,varname in self.systsJEC.iteritems():
             for x in self._worker.GetJetSums(delta):
                 for var in self._outjetvars: 
+                    # print var%x.thr+varname+self.label
+                    # print x,var
                     self.wrappedOutputTree.fillBranch(var%x.thr+varname+self.label, getattr(x,var.replace('%d','').replace(self.jc,'Jet')))
                 self.wrappedOutputTree.fillBranch('nFwdJet'+varname+self.label,getattr(x,'nFwdJet'))
                 self.wrappedOutputTree.fillBranch('FwdJet1_pt'+varname+self.label,getattr(x,'fwd1_pt'))
@@ -148,6 +155,36 @@ class fastCombinedObjectRecleaner(Module):
         self._workerMV.clear()
         self._workerMV.loadTags(tags)
         self._workerMV.run()
+
+        # print self.nLepGood.Get()[0]
+        # for i in xrange(self.nLepGood.Get()[0]):
+        #     print tags.lepsT[i],
+        # print "\n"
+
+        # ret['iLepTight'+self.label] = [0, 1, 2, 4, 8]
+        iLepTight=[]
+        iLepFO=[]
+        iLepLoose=[]
+
+        # print "event"
+
+        for il in range(self.nLepGood.Get()[0]):
+            # print tags.lepsL[il], tags.lepsF[il], tags.lepsT[il]
+            if tags.lepsT[il]==True:
+                iLepTight.append(il)
+            if tags.lepsL[il]==True:
+                iLepLoose.append(il)
+            if tags.lepsF[il]==True:
+                iLepFO.append(il)
+
+        # print iLepLoose
+        # print iLepFO
+        # print iLepTight
+
+        self.wrappedOutputTree.fillBranch('iLepTight_trial'+self.label, [x for x in iLepTight])
+        self.wrappedOutputTree.fillBranch('iLepFO_trial'+self.label,    [x for x in iLepFO])
+        self.wrappedOutputTree.fillBranch('iLepLoose_trial'+self.label, [x for x in iLepLoose])
+
 
         masses = self._workerMV.GetPairMasses()
         for var in self.outmasses: 

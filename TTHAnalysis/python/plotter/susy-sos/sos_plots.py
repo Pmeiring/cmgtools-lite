@@ -49,6 +49,7 @@ submit = '{command}'
 #args.doWhat = "ntuple"
 
 P0="/eos/cms/store/cmst3/group/tthlep/peruzzi/NanoTrees_SOS_230819_v5/"
+# P0="/afs/cern.ch/work/p/pmeiring/private/CMS/CMSSW_10_4_0/src/CMGTools/TTHAnalysis/cfg/BatchSignalOnly/"
 nCores = 8
 TREESALL = " --Fs {P}/recleaner -P "+P0+"%s "%(YEAR,)
 

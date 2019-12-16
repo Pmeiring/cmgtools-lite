@@ -40,7 +40,32 @@ class ComponentCreator(object):
          component.splitFactor = 100
 
          return component
-    
+
+    def makePrivateMCComponentPETER(self,name,dataset,files,xSec=1, prefix="auto"):
+         if len(files) == 0:
+            raise RuntimeError, "Trying to make a component %s with no files" % name
+         dprefix = dataset +"/" if files[0][0] != "/" else ""
+         if prefix == "auto":
+            if (dprefix+files[0]).startswith("/store"): 
+                print "here"
+                prefix = "root://eoscms.cern.ch//eos/cms"
+            else: prefix = ""
+         print dprefix  
+         print files  
+         # prefix filenames with dataset unless they start with "/"
+         component = cfg.MCComponent(
+             dataset=dataset,
+             name = name,
+             files = [''.join([prefix,dprefix,f]) for f in files],
+             xSection = xSec,
+             nGenEvents = 1,
+             triggers = [],
+             effCorrFactor = 1,
+         )
+         print component.files
+         component.splitFactor = 100
+
+         return component    
     def makePrivateDataComponent(self,name,dataset,files,json,xSec=1):
          if len(files) == 0:
             raise RuntimeError, "Trying to make a component %s with no files" % name
