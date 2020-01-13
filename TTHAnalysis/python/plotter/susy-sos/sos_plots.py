@@ -75,13 +75,7 @@ def base(selection):
          if args.doWhat in ["cards"]: GO+="  minMllSFOS [4,10,20,30,50] "
          
 
-         if YEAR == "2016":
-             wBG = " 'puWeight*eventBTagSF' " #" 'getLepSF_16(LepGood1_pt, LepGood1_eta, LepGood1_pdgId)*getLepSF_16(LepGood2_pt, LepGood2_eta, LepGood2_pdgId)*triggerSFfullsim(LepGood1_pt, LepGood1_eta, LepGood2_pt, LepGood2_eta, MET_pt, metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt,LepGood2_phi, MET_pt, MET_phi))' "
-             #wFS = " 'getLepSFFS(LepGood1_pt, LepGood1_eta, LepGood1_pdgId)*getLepSFFS(LepGood2_pt, LepGood2_eta, LepGood2_pdgId)*ISREwkCor*bTagWeightFS*triggerEff(LepGood1_pt, LepGood1_eta, LepGood2_pt,LepGood2_eta, MET_pt, metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi))' "
-         elif YEAR == "2017": 
-             wBG = " 'puWeight*eventBTagSF' " #" 'getLepSF_17(LepGood1_pt, LepGood1_eta, LepGood1_pdgId)*getLepSF_17(LepGood2_pt, LepGood2_eta, LepGood2_pdgId)' "
-         elif YEAR == "2018":
-             wBG = " 'puWeight*eventBTagSF' "
+         wBG = " 'puWeight*eventBTagSF*triggerSF(muDleg_SF(%s,LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta), MET_pt, metmm_pt(LepGood1_pdgId,LepGood1_pt,LepGood1_phi,LepGood2_pdgId,LepGood2_pt,LepGood2_phi,MET_pt,MET_phi), %s)' "%(YEAR,YEAR) # Lepton SF missing
          GO="%s -W %s"%(GO,wBG)
 
          if args.doWhat == "plots": GO=GO.replace(LEGEND, " --legendColumns 3 --legendWidth 0.52 ")
@@ -96,13 +90,7 @@ def base(selection):
         GO="%s susy-sos/mca/mca-3l-%s.txt susy-sos/3l_cuts.txt "%(CORE,YEAR)
         if args.doWhat in ["plots","ntuple"]: GO+=" susy-sos/3l_plots.txt "
         
-        if YEAR == "2016":
-            wBG = " 'puWeight*eventBTagSF' " #" 'getLepSF_16(LepGood1_pt, LepGood1_eta, LepGood1_pdgId)*getLepSF_16(LepGood2_pt, LepGood2_eta, LepGood2_pdgId)*getLepSF_16(LepGood3_pt, LepGood3_eta, LepGood3_pdgId)*triggerSFfullsim3L(LepGood1_pt, LepGood1_eta, LepGood2_pt, LepGood2_eta, LepGood3_pt, LepGood3_eta, MET_pt, metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi, LepGood3_pt, LepGood3_phi, MET_pt, MET_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)), lepton_permut(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId))' "
-            #wFS = " 'getLepSFFS(LepGood1_pt, LepGood1_eta, LepGood1_pdgId) * getLepSFFS(LepGood2_pt, LepGood2_eta, LepGood2_pdgId) * getLepSFFS(LepGood3_pt, LepGood3_eta, LepGood3_pdgId)*ISREwkCor*bTagWeightFS * triggerEff3L(LepGood1_pt, LepGood1_eta, LepGood2_pt, LepGood2_eta, LepGood3_pt, LepGood3_eta, MET_pt, metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi, LepGood3_pt, LepGood3_phi, MET_pt, MET_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)), lepton_permut(LepGood3_pdgId, LepGood3_pdgId, LepGood3_pdgId))' "
-        elif YEAR == "2017":
-            wBG = " 'puWeight*eventBTagSF' " #" 'getLepSF_17(LepGood1_pt, LepGood1_eta, LepGood1_pdgId)*getLepSF_17(LepGood2_pt, LepGood2_eta, LepGood2_pdgId)*getLepSF_17(LepGood3_pt, LepGood3_eta, LepGood3_pdgId)' "
-        elif YEAR == "2018":
-             wBG = " 'puWeight*eventBTagSF' "
+        wBG = " 'puWeight*eventBTagSF*triggerSF(muDleg_SF(%s,LepGood1_pt,LepGood1_eta,LepGood2_pt,LepGood2_eta,LepGood3_pt,LepGood3_eta,lepton_permut(LepGood1_pdgId,LepGood2_pdgId,LepGood3_pdgId)), MET_pt, metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi, LepGood3_pt, LepGood3_phi, MET_pt, MET_phi, lepton_Id_selection(LepGood1_pdgId,LepGood2_pdgId,LepGood3_pdgId)), %s)' "%(YEAR,YEAR) # Lepton SF missing
         GO="%s -W %s"%(GO,wBG)
 
         if args.doWhat == "plots": GO=GO.replace(LEGEND, " --legendColumns 3 --legendWidth 0.42 ")
@@ -249,6 +237,7 @@ if __name__ == '__main__':
             if '_low' in torun: 
                 x = add(x,"-E ^CRWZPtLep_MuMu$ ")
                 x = x.replace('-E ^met125_trig','-E ^met125_trig_CR')
+                x = x.replace('triggerSF','triggerWZSF')
             if '_med' in torun: x = add(x,"-E ^CRWZPtLep_HighMET$ ")
 
 
@@ -270,14 +259,9 @@ if __name__ == '__main__':
 ######################################################################################
 # Useful options for plotting, to be used when needed
 #
-#        if '_appl' in torun: x = add(x,'-I ^TT ')
 #        if '_1fo' in torun:
 #            x = add(x,"-A alwaystrue 1FO 'LepGood1_isLepTight+LepGood2_isLepTight==1'")
 #        if '_2fo' in torun: x = add(x,"-A alwaystrue 2FO 'LepGood1_isLepTight+LepGood2_isLepTight==0'")
-#        if '_relax' in torun: x = add(x,'-X ^TT ')
-#        if '_extr' in torun:
-#            x = x.replace('mca-2lss-mc.txt','mca-2lss-mc-sigextr.txt').replace('--showRatio --maxRatioRange 0 2','--showRatio --maxRatioRange 0 1 --ratioYLabel "S/B"')
-#        if '_data' not in torun: x = add(x,'--xp data ')
 #        if '_table' in torun:
 #            x = x.replace('mca-2lss-mc.txt','mca-2lss-mc-table.txt')
 #        if '_frdata' in torun: # Why?
@@ -289,7 +273,3 @@ if __name__ == '__main__':
 #            x = x.replace('mca-2lss-mcdata.txt','mca-2lss-mcdata-frdata.txt')
 #            if '_table' in torun:
 #                x = x.replace('mca-2lss-mcdata-frdata.txt','mca-2lss-mcdata-frdata-table.txt')
-###
-#            if '_leadmupt25' in torun: x = add(x,"-A 'entry point' leadmupt25 'abs(LepGood1_pdgId)==13 && LepGood1_pt>25' ")
-#            if '_highMetNoBCut' in torun: x = add(x,"-A 'entry point' highMET 'met_pt>60'")
-#            else: x = add(x,"-E ^1B ")
