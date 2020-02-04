@@ -6,21 +6,23 @@ eventFilters	: $DATA{EventFilters} $MC{1}	; Disable=True
 dilep		: nLepGood == 2
 sublepPt	: (fabs(LepGood2_pdgId)==13 && LepGood2_pt > 3.5) || (fabs(LepGood2_pdgId)==11 && LepGood2_pt > 5)
 
-mll		: minMllSFOS > 4 && minMllSFOS < 50
-upsilonVeto	: minMllSFOS < 9 || minMllSFOS > 10.5
+mll		: mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) > 4 && mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) < 50
+upsilonVeto	: mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) < 9 || mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) > 10.5
 dilepPt		: pt_2(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi) > 3 
 
-ISRjet		: Jet1_jetId >= 4
-METoverHT	: (MET_pt/(htJet25j-LepGood1_pt-LepGood2_pt))>(2/3) && (MET_pt/(htJet25j-LepGood1_pt-LepGood2_pt)) < 1.4
-minHT		: (htJet25j-LepGood1_pt-LepGood2_pt) > 100
+ISRjet		: JetSel1_Recl_jetId >= 4
+METoverHT	: (MET_pt/htJet25j)>(2/3) && (MET_pt/htJet25j) < 1.4
+minHT		: htJet25j > 100
 
 
 ##### Triggers and Binning
 ### Low MET
-met125		: MET_pt > 125 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 125 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) < 200	; Disable=True
+met125		: MET_pt > 125 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 125 	; Disable=True
 met125_trig		: (year==2016 && HLT_MuMuMET16) || ( (year==2017 || year==2018) && HLT_MuMuMET )	; Disable=True
-### Med MET	
-met200		: metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 200 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) < 250	; Disable=True
+
+
+####### Med MET	
+met200		: metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 200 	; Disable=True
 met200_col	: metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 200 && metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) < 300	; Disable=True
 met200_CR	: metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 200	; Disable=True
 met200_trig	: (year==2016 && HLT_HighMET16) || ( (year==2017 || year==2018) && HLT_HighMET )	; Disable=True
@@ -30,11 +32,24 @@ met300_col	: metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId,
 met250_trig	: (year==2016 && HLT_HighMET16) || ( (year==2017 || year==2018) && HLT_HighMET )	; Disable=True
 
 
+
+
+###### Med MET	
+###met200		: MET_pt > 200 	; Disable=True
+###met200_col	: MET_pt > 200 && MET_pt < 300	; Disable=True
+###met200_CR	: MET_pt > 200	; Disable=True
+###met200_trig	: (year==2016 && HLT_HighMET16) || ( (year==2017 || year==2018) && HLT_HighMET )	; Disable=True
+###### High MET
+###met250		: MET_pt > 250	; Disable=True
+###met300_col	: MET_pt > 300	; Disable=True
+###met250_trig	: (year==2016 && HLT_HighMET16) || ( (year==2017 || year==2018) && HLT_HighMET )	; Disable=True
+
+
 ##### SR (enabled by default but likely to be inverted cuts)
 OS		: LepGood1_pdgId*LepGood2_pdgId<0
 ledlepPt	: 5.0 < LepGood1_pt && LepGood1_pt < 30.0
 twoTight	: LepGood1_isLepTight && LepGood2_isLepTight
-bveto		: nBJetLoose25 == 0
+bveto		: nBJetMedium25_Recl == 0
 mtautau		: 0.0 > mass_tautau(MET_pt,MET_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi) || mass_tautau(MET_pt,MET_phi,LepGood1_pt,LepGood1_eta,LepGood1_phi,LepGood2_pt,LepGood2_eta,LepGood2_phi) > 160.0
 ### EWK
 mT		: mt_2(LepGood1_pt, LepGood1_phi, MET_pt, MET_phi) < 70. && mt_2(LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) < 70.0
@@ -63,14 +78,19 @@ btag		: nBJetLoose40 > 0	; Disable=True
 ### Disable leplepPt, mT
 CRVVlepId	: LepGood1_isTightLepVV && LepGood2_isTightLepVV	; Disable=True
 CRVVleplepPt	: 20.0 < LepGood1_pt	; Disable=True
+CRVVbveto		: nBJetLoose25_Recl == 0; Disable=True
 CRVVmT		: mt_2(LepGood1_pt, LepGood1_phi, MET_pt, MET_phi) > 90. || mt_2(LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) > 90.0	; Disable=True
-
+CRVVbveto		: nBJetLoose25_Recl == 0; Disable=True
 
 ##### SS CR
 ### Disable pt5sublep, mT
 ### Invert OS
-
+1LNT : LepGood1_isLepTight+LepGood2_isLepTight==1 ; Disable=True
+2LNT : LepGood1_isLepTight+LepGood2_isLepTight==0; Disable=True
 
 #### Application Region
 ### Disable twoTight cut
 oneNotTight	: !(LepGood1_isLepTight) || !(LepGood2_isLepTight)	; Disable=True
+
+
+

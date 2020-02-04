@@ -1,9 +1,3 @@
 ### 2018
-data : DoubleMuon_Run2018A_1Junel2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
-data : DoubleMuon_Run2018B_1June2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
-data : DoubleMuon_Run2018C_1June2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
-data : DoubleMuon_Run2018D_1June2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
-data : MET_Run2018A_1June2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
-data : MET_Run2018B_1June2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
-data : MET_Run2018C_1June2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
-data : MET_Run2018D_1June2019	 ; FakeRate="susy-sos-v2-clean/fakerate/2018/3l/fakerate_applmc.txt, Label="Nonprompt e/\#mu" , years="2018"
+FRfakes_data : DoubleMuon_Run2018_1June2019      ; FakeRate="susy-sos/fakerate/2018/3l/fakerate_appldata.txt", years="2018", Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+FRfakes_data : MET_Run2018_1June2019             ; FakeRate="susy-sos/fakerate/2018/3l/fakerate_appldata.txt", years="2018",Label="Nonprompt e/\#mu", FillColor=ROOT.kGray

@@ -1,9 +1,0 @@
-cut-change: (0==1)      : 1
-cut-change: placeholder : 1
-
-weight: fakeRatePromptRateWeight_3l_ijk(fetchFR_i(LepGood1_pt, LepGood1_eta, LepGood1_pdgId, 2),fetchFR_i(LepGood1_pt,LepGood1_eta, LepGood1_pdgId,3), LepGood1_isTightString, fetchFR_i(LepGood2_pt, LepGood2_eta, LepGood2_pdgId,2), fetchFR_i(LepGood2_pt, LepGood2_eta, LepGood2_pdgId, 3), LepGood2_isTightString, fetchFR_i(LepGood3_pt, LepGood3_eta, LepGood3_pdgId,2), fetchFR_i(LepGood3_pt, LepGood3_eta, LepGood3_pdgId,3), LepGood3_isTightString)
-
-load-histo: FR2_mu : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_QCD_mu_data_comb
-load-histo: FR2_el : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_QCD_el_data_comb
-load-histo: FR3_mu : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_mu_PromptBkg
-load-histo: FR3_el : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_el_PromptBkg

@@ -155,8 +155,9 @@ class MCAnalysis:
                 extra_to_pass = copy(extra)
                 del extra_to_pass['IncludeMca']
                 selectProcesses = None
-                if 'Processes' in extra_to_pass: 
-                    selectProcesses = extra_to_pass['Processes']
+                if 'Processes' in extra_to_pass:
+                    if not options.allProcesses: 
+                        selectProcesses = extra_to_pass['Processes']
                     del extra_to_pass['Processes']
                 self.readMca(open(extra['IncludeMca'],'r'),options,addExtras=extra_to_pass,selectProcesses=selectProcesses) # call readMca recursively on included mca files
                 continue
@@ -342,7 +343,6 @@ class MCAnalysis:
                 else:
                     if total_w != 0: raise RuntimeError, "Weights from pck file shoulnd't be there for NanoAOD for %s " % pname
                     self._groupsToNormalize.append( (ttys, genSumWeightName if is_w == 1 else "genEventCount", scale) )
-                    
             #for tty in ttys: tty.makeTTYVariations()
         #if len(self._signals) == 0: raise RuntimeError, "No signals!"
         #if len(self._backgrounds) == 0: raise RuntimeError, "No backgrounds!"
@@ -357,6 +357,8 @@ class MCAnalysis:
     def isSignal(self,process):
         return self._isSignal[process]
     def listSignals(self,allProcs=False):
+        if self._options.allProcesses:
+            allProcs = self._options.allProcesses
         ret = [ p for p in self._allData.keys() if p != 'data' and self._isSignal[p] and (self.getProcessOption(p, 'SkipMe') != True or allProcs) ]
         ret.sort(key = lambda n : self._rank[n])
         return ret
@@ -478,7 +480,6 @@ class MCAnalysis:
                         unc[var] = (up.Integral(),dn.Integral())
                     thisret[k].append(copy(unc))
             formatted_report.append((cn,copy(thisret)))
-        print formatted_report
         return formatted_report
     def getPlotsRaw(self,name,expr,bins,cut,process=None,nodata=False,makeSummary=False,closeTreeAfter=False):
         return self.getPlots(PlotSpec(name,expr,bins,{}),cut,process=process,nodata=nodata,makeSummary=makeSummary,closeTreeAfter=closeTreeAfter)
@@ -846,7 +847,8 @@ class MCAnalysis:
     def _normalizeGroups(self):
         tasks = []
         for igroup, (ttys, genWName, scale) in enumerate(self._groupsToNormalize):
-            for tty in ttys: tasks.append( (igroup, tty, genWName) )
+            for tty in ttys: 
+                tasks.append( (igroup, tty, genWName) )
         retlist = self._processTasks(_runSumW, tasks, name="sumw")
         mergemap = defaultdict(float)
         for (igroup,w) in retlist:

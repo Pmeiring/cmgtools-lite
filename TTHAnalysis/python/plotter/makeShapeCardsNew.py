@@ -109,8 +109,6 @@ for binname, report in allreports.iteritems():
     if b not in allyields: continue
     if allyields[b] == 0: continue
     procs.append(b); iproc[b] = i+1
-  #for p in procs: print "%-10s %10.4f" % (p, allyields[p])
-
   systs = {}
   for name in nuisances:
     effshape = {}

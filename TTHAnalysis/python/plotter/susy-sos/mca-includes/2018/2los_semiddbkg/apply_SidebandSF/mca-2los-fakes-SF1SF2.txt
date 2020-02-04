@@ -1,0 +1,34 @@
+##Fake(!F 2F, SF1F, SF2F)
+##-------------------------------------------------
+fakes_1FSF1F           : WJetsToLNu_HT100to200        : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : WJetsToLNu_HT200to400        : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : WJetsToLNu_HT400to600        : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray   
+fakes_1FSF1F           : WJetsToLNu_HT600to800        : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray    
+fakes_1FSF1F           : WJetsToLNu_HT800to1200       : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray   
+fakes_1FSF1F           : WJetsToLNu_HT1200to2500      : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_1FSF1F           : WJetsToLNu_HT2500toInf       : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_1FSF1F           : TTJets_DiLepton              : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : TTJets_SingleLeptonFromTbar  : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : TTJets_SingleLeptonFromT     : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : T_sch_lep                    : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : T_tch                        : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : TBar_tch                     : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+#fakes_1FSF1F           : WZTo1L1Nu2Q                  : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_1FSF1F           : WWToLNuQQ                    : ScaleFactor1F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+
+
+fakes_2FSF           : WJetsToLNu_HT100to200        : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_2FSF           : WJetsToLNu_HT200to400        : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_2FSF           : WJetsToLNu_HT400to600        : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray   
+fakes_2FSF           : WJetsToLNu_HT600to800        : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray    
+fakes_2FSF           : WJetsToLNu_HT800to1200       : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray   
+fakes_2FSF           : WJetsToLNu_HT1200to2500      : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_2FSF           : WJetsToLNu_HT2500toInf       : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray 
+fakes_2FSF           : TTJets_DiLepton              : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_2FSF           : TTJets_SingleLeptonFromTbar  : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_2FSF           : TTJets_SingleLeptonFromT     : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_2FSF           : T_sch_lep                    : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray
+fakes_2FSF           : T_tch                        : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_2FSF           : TBar_tch                     : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+#fakes_2FSF           : WZTo1L1Nu2Q                  : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray  
+fakes_2FSF           : WWToLNuQQ                    : ScaleFactor2F*xsec  : LepGood1_mcMatchId==0 || LepGood2_mcMatchId==0 ; Label="Nonprompt e/\#mu", FillColor=ROOT.kGray

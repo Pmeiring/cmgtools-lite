@@ -17,12 +17,17 @@ upsilonVeto	: !( fabs(LepGood1_pdgId) == fabs(LepGood2_pdgId) && LepGood1_pdgId*
 met75		: MET_pt > 75 && MET_pt < 125	; Disable= True
 met75_trig_CR		: (year==2016 && HLT_MuMu16) || ( (year==2017 || year==2018) && HLT_MuMu )	; Disable=True
 ### Low MET
-met125		: MET_pt > 125 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, MET_pt, MET_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 125 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, MET_pt, MET_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) < 200	; Disable=True
+met125		: MET_pt > 125 && metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, MET_pt, MET_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 125 	; Disable=True
 met125_trig		: (year==2016 && HLT_MuMuMET16) || ( (year==2017 || year==2018) && HLT_MuMuMET )	; Disable=True
 met125_trig_CR	: (year==2016 && HLT_MuMu16) || ( (year==2017 || year==2018) && HLT_MuMu )	; Disable=True
+
 ### Med MET
 met200		: metmmm_pt(LepGood1_pt, LepGood1_phi, LepGood2_pt, LepGood2_phi,LepGood3_pt,LepGood3_phi, MET_pt, MET_phi, lepton_Id_selection(LepGood1_pdgId, LepGood2_pdgId, LepGood3_pdgId)) > 200	; Disable=True
 met200_trig	: (year==2016 && HLT_HighMET16) || ( (year==2017 || year==2018) && HLT_HighMET )	; Disable=True
+
+###### Med MET
+###met200		: MET_pt > 200	; Disable=True
+###met200_trig	: (year==2016 && HLT_HighMET16) || ( (year==2017 || year==2018) && HLT_HighMET )	; Disable=True
 
 
 ##### SR (enabled by default but likely to be inverted cuts)
@@ -31,7 +36,7 @@ minMll		: minMllSFOS > 4 && minMllSFOS < 50
 ZvetoTrigger	: maxMllSFOS < 60 
 ledlepPt	: 5.0 < LepGood1_pt && LepGood1_pt < 30.0
 threeTight	: LepGood1_isLepTight && LepGood2_isLepTight && LepGood3_isLepTight
-bveto		: nBJetLoose25 == 0
+bveto		: nBJetMedium25_Recl == 0
 pt5sublep	: LepGood2_pt > 5 && LepGood3_pt > 5
 ### Low MET
 mm		: ( abs(LepGood1_pdgId)==13 && abs(LepGood2_pdgId)==13 ) || ( abs(LepGood1_pdgId)==13 && abs(LepGood3_pdgId)==13 ) || ( abs(LepGood2_pdgId)==13 && abs(LepGood3_pdgId)==13 )  
@@ -50,3 +55,6 @@ CRWZPtLep_HighMET	: ( (fabs(LepGood1_pdgId) ==13 || fabs(LepGood1_pdgId) ==11) &
 #### Application Region
 ### Disable threeTight cut
 oneNotTight	: !LepGood1_isLepTight || !LepGood2_isLepTight || !LepGood3_isLepTight	; Disable=True
+1LNT            : LepGood1_isLepTight+LepGood2_isLepTight+LepGood3_isLepTight==2  ;  Disable=True
+2LNT            : LepGood1_isLepTight+LepGood2_isLepTight+LepGood3_isLepTight==1 ; Disable=True
+3LNT            : LepGood1_isLepTight+LepGood2_isLepTight+LepGood3_isLepTight==0 ; Disable=True 

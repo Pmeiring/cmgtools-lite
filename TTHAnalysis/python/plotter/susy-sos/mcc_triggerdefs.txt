@@ -1,4 +1,4 @@
-EventFilters\b	: Flag_goodVertices>=1 && Flag_globalSuperTightHalo2016Filter>=1 && Flag_HBHENoiseFilter>=1 && Flag_HBHENoiseIsoFilter>=1 && Flag_EcalDeadCellTriggerPrimitiveFilter>=1 && Flag_BadPFMuonFilter>=1 && Flag_eeBadScFilter>=1 && AltBranch$(Flag_ecalBadCalibFilterV2,1)>=1	; AlsoData
+EventFilters\b	: Flag_goodVertices>=1 && Flag_globalSuperTightHalo2016Filter>=1 && Flag_HBHENoiseFilter>=1 && Flag_HBHENoiseIsoFilter>=1 && Flag_EcalDeadCellTriggerPrimitiveFilter>=1 && Flag_BadPFMuonFilter>=1 && AltBranch$(Flag_ecalBadCalibFilterV2,1)>=1	; AlsoData
 HLT_MuMu16\b		: AltBranch$(HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ,0) || AltBranch$(HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ,0) ; AlsoData
 HLT_MuMuMET16\b		: AltBranch$(HLT_DoubleMu3_PFMET50,0)	; AlsoData
 HLT_HighMET16\b		: AltBranch$(HLT_PFMETNoMu120_PFMHTNoMu120_IDTight,0)	; AlsoData

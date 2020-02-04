@@ -1,6 +1,8 @@
 # vim: syntax=sh
 
 
+norm_fakes : .*fakes.* : .* : normSymm : 1.4
+
 ### Alias definitions. Careful to avoid trailing '.*' to avoid matching _promptsub
 $alias : ttH : ttH|ttH_h[a-z]+
 $alias : tHq : tHq|tHq_h[a-z]+

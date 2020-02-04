@@ -1,9 +1,9 @@
-cut-change: (0==1)      : 1
-cut-change: placeholder : 1
+cut-change:LepGood_isLepTight_Recl\[iLepFO_Recl\[0\]\]:1
+cut-change:LepGood_isLepTight_Recl\[iLepFO_Recl\[1\]\]:(LepGood_isLepTight_Recl[iLepFO_Recl[0]]+LepGood_isLepTight_Recl[iLepFO_Recl[1]]==0)
 
-weight: fakeRatePromptRateWeight_2l_23_2f(LepGood1_pt,LepGood1_eta,LepGood1_pdgId,LepGood1_isTightString,LepGood2_pt,LepGood2_eta,LepGood2_pdgId,LepGood2_isTightString)
+weight: fakeRateWeight_2lss_i(LepGood_pt[iLepFO_Recl[0]],LepGood_eta[iLepFO_Recl[0]],LepGood_pdgId[iLepFO_Recl[0]],LepGood_isLepTight_Recl[iLepFO_Recl[0]],LepGood_pt[iLepFO_Recl[1]],LepGood_eta[iLepFO_Recl[1]],LepGood_pdgId[iLepFO_Recl[1]],LepGood_isLepTight_Recl[iLepFO_Recl[1]],2)*(LepGood_isLepTight_Recl[iLepFO_Recl[0]]+LepGood_isLepTight_Recl[iLepFO_Recl[1]]==0)
 
-load-histo: FR2_mu : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_QCD_mu_data_comb
-load-histo: FR2_el : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_QCD_el_data_comb
-load-histo: FR3_mu : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_mu_PromptBkg
-load-histo: FR3_el : $DATA/fakerate/FR_PR_SOS_v3.1.root : FR_SOS_el_PromptBkg
+load-histo: FR2_mu : $DATA/fakerate/SOS_FSR2020/fr_2016.root : FR_mu_data_comb
+load-histo: FR2_el : $DATA/fakerate/SOS_FSR2020/fr_2016.root : FR_el_data_comb
+#load-histo: FR3_mu : $DATA/fakerate/SOS_FSR2020/fr_2016.root  : PR_mu_muon_tight_pt_fineEff_background
+#load-histo: FR3_el : $DATA/fakerate/SOS_FSR2020/fr_2016.root  : PR_el_ele_tight_pt_fineEff_background           

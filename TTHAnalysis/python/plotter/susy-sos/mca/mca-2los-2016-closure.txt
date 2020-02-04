@@ -1,0 +1,5 @@
+## Non prompt Bkg
+---------------------------------------
+incl_mcfakes	       : + ; IncludeMca="susy-sos/mca-includes/2016/mca-2los-mcfakes-closure.txt"
+incl-frfakes           : + ; IncludeMca="susy-sos/mca-includes/2016/2los_semiddbkg/mca-fakes-closure.txt"
+

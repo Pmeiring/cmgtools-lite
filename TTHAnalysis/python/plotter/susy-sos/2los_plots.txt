@@ -1,10 +1,10 @@
 yields			: 1 : 1,-0.5,0.5; XTitle="Total Event Yields"
 #nVert: nVert	: 40,-0.5,41.5; XTitle="N_{vtx}"
 
-SR_2l_ewk		: minMllSFOS         : [4,10,20,30,50] ; XTitle="M(ll) [GeV]", Legend='TR', IncludeOverflows=True, LegendCutoff=1e-3, YMore=2.2
+SR_2l_ewk		: mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass)         : [4,10,20,30,50] ; XTitle="M(ll) [GeV]", Legend='TR', IncludeOverflows=True, LegendCutoff=1e-3, YMore=2.2
 SR_2l_col		: LepGood1_pt : [5,12,20,30]    ; XTitle="Leading lepton p_{T} [GeV]", Legend='TR', LegendCutoff=1e-3, MoreY=2.8
 
-SR_2l_ewk_fine	: minMllSFOS         : 10,0,50         ; XTitle="M(ll) [GeV]", Legend='TR', IncludeOverflows=True, LegendCutoff=0, MoreY=2, LegendCutoff=1e-3
+SR_2l_ewk_fine	: mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass)         : 10,0,50         ; XTitle="M(ll) [GeV]", Legend='TR', IncludeOverflows=True, LegendCutoff=0, MoreY=2, LegendCutoff=1e-3
 SR_2l_col_fine	: LepGood1_pt : 20,0,40         ; XTitle="Leading lepton p_{T} [GeV]", Legend='TR', LegendCutoff=1e-2
 
 ## Lepton variables
@@ -77,8 +77,8 @@ lep2ptext		: LepGood2_pt                                             : 9,0,180  
 #lep2_mcMatchID		: LepGood2_mcMatchId      : 30, 0, 30 ; XTitle="mcMatchID lep2"
 #lep1_genPartFlav	: LepGood1_genPartFlav : 30, 0,30; XTitle="Gen Part Flavor lep1"
 #lep2_genPartFlav	: LepGood2_genPartFlav : 30, 0,30; XTitle="Gen Part Flavor lep2"
-mll					: minMllSFOS         : 12,4,124 ; XTitle="M(ll) [GeV]", Legend='TL', LegendCutoff=0
-#fine_mll_50		: minMllSFOS: 23,4,50; XTitle="M(ll) [GeV]",LegendCutoff=1e-10
+mll					: mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass)         : 12,4,124 ; XTitle="M(ll) [GeV]", Legend='TL', LegendCutoff=0
+#fine_mll_50		: mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass): 23,4,50; XTitle="M(ll) [GeV]",LegendCutoff=1e-10
 met					: MET_pt  : 20,50,450;  XTitle="p_{T}^{miss}  [GeV]", LegendCutoff=1e-3,Legend='TR' 
 metmm				: metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi): 20,50,450;  XTitle="p_{T}^{miss\,corr}  [GeV]"
 #metMinusMetmm		: (MET_pt - metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi) )	: 20,-100,100;  XTitle="p_{T}^{miss} - p_{T}^{miss\,corr}  [GeV]"
@@ -89,8 +89,8 @@ ptll				: pt_2(LepGood1_pt,LepGood1_phi, LepGood2_pt,LepGood2_phi) : 10,0,50  ; 
 
 nJet25		: nJet25                            : [-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5] ; XTitle='N(jet\, p_{T} > 25)'
 nBJet25		: nBJetLoose25                      : [-0.5,0.5,1.5,2.5,3.5,4.5,5.5,6.5] ; XTitle='N(Bjet_{Loose}\, p_{T} > 25)'
-htJet25		: htJet25j-LepGood1_pt-LepGood2_pt : 8,0,400  ; XTitle="H_{T}(jet p_{T} > 25)  [GeV]"
-metovht		: (MET_pt/(htJet25j-LepGood1_pt-LepGood2_pt))               : 10,0,2   ; XTitle="p_{T}^{miss}/H_{T}(jet p_{T} > 25)"
+htJet25		: htJet25j							: 8,0,400  ; XTitle="H_{T}(jet p_{T} > 25)  [GeV]"
+metovht		: (MET_pt/htJet25j)					: 10,0,2   ; XTitle="p_{T}^{miss}/H_{T}(jet p_{T} > 25)"
 
 #lep1MetDphi	: abs(deltaPhi(LepGood1_phi, MET_phi))                     : 7,0,3.14 ; XTitle="#Delta#phi(l1\,p_{T}^{miss})", MoreY=1.5
 #lep2MetDphi	: abs(deltaPhi(LepGood2_phi, MET_phi))                     : 7,0,3.14 ; XTitle="#Delta#phi(l2\,p_{T}^{miss})", MoreY=1.5
