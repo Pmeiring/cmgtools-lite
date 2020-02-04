@@ -16,7 +16,6 @@ Exactly2LepFO_genmatched : LepGood_mcMatchId[iLepFO_trial_Recl[0]]!=0 && LepGood
 # Require the two FO leptons to be ossf
 Exactly2LepFO_genmatched_ossf : (LepGood_pdgId[iLepFO_trial_Recl[0]]*LepGood_pdgId[iLepFO_trial_Recl[1]]==-121) || (LepGood_pdgId[iLepFO_trial_Recl[0]]*LepGood_pdgId[iLepFO_trial_Recl[1]]==-169)
 
-
 met125 : MET_pt > 125 && metmm_pt(LepGood_pdgId[iLepFO_trial_Recl[0]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[0]], LepGood_pdgId[iLepFO_trial_Recl[1]], LepGood_pt[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]], MET_pt, MET_phi) > 125
 
 ISRjet : Jet1_jetId >= 4
@@ -39,10 +38,4 @@ dilepPt : pt_2(LepGood_pt[iLepFO_trial_Recl[0]], LepGood_phi[iLepFO_trial_Recl[0
 
 twoTight : LepGood_isLepTight_Recl[iLepFO_trial_Recl[0]] && LepGood_isLepTight_Recl[iLepFO_trial_Recl[1]]
 
-
-
-# Require exactly 2 leptons (e/mu) ossf
-# exactly_2lossf_gen : EvHas2LOSSF_FromZ_tau==1 || EvHas2LOSSF_FromZ_notau==1 || EvHas2LOSSF_FromWZ_tau==1
-
-# the 2 ossf gen leptons should be in acceptance
-# gen_in_acceptance  : (abs(GenLepFromWZ_id[0])==13 && abs(GenLepFromWZ_eta[0]) < 2.4 && abs(GenLepFromWZ_id[1])==13 && abs(GenLepFromWZ_eta[1]) < 2.4) || (abs(GenLepFromWZ_id[0])==11 && abs(GenLepFromWZ_eta[0]) < 2.5 && abs(GenLepFromWZ_id[1])==11 && abs(GenLepFromWZ_eta[1]) < 2.5 )
+mT : mt_2(LepGood_pt[iLepFO_trial_Recl[0]], LepGood_phi[iLepFO_trial_Recl[0]], MET_pt, MET_phi) < 70. && mt_2(LepGood_pt[iLepFO_trial_Recl[1]], LepGood_phi[iLepFO_trial_Recl[1]], MET_pt, MET_phi) < 70.0

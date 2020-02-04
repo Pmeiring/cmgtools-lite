@@ -4,7 +4,7 @@ echo Will run mcPlots.py for the 2l and/or 3l case, using mN2=100GeV and/or mN2=
 
 pwd=$PWD
 TTHpath=/afs/cern.ch/work/p/pmeiring/private/CMS/CMSSW_10_4_0/src/CMGTools/TTHAnalysis
-CERNboxpath=/eos/user/p/pmeiring/www/SUSY_SOS/GenLep_TChiWZ_categorization/v8
+CERNboxpath=/eos/user/p/pmeiring/www/SUSY_SOS/GenLep_TChiWZ_categorization/RemoveMe/CutFlow/
 PSIWorkpath=/work/pmeiring/PlayGroundAuto
 Samplepath=/eos/cms/store/user/pmeiring
 
@@ -28,13 +28,13 @@ Run_mcPlots() {
 	rm -rf $CERNboxpath/"$1"
 	
 	python mcPlots.py 	--pdir $CERNboxpath/"$1" \
-						--Fs $TTHpath/cfg/SkimsRemoved_191029/LepFromWZselection_OSSF_BR_taus2/ \
-						--Fs $TTHpath/cfg/SkimsRemoved_191029/recleaner_withptcuts/ \
+						--Fs $Samplepath/NanoTrees_SOS_291019_NoSkimNoTrigger/2018/genlep_SMS_TChiWZ/ \
+						--Fs $Samplepath/NanoTrees_SOS_291019_NoSkimNoTrigger/2018/recleaner/ \
 						"$2" "$3" "$4" \
-						-P $Samplepath/SkimsRemoved_191029/SMS_TChiWZ/ \
+						-P $Samplepath/NanoTrees_SOS_291019_NoSkimNoTrigger/2018/ \
 						-j 8 --year 2018 -l 137.1 --tree NanoAOD --s2v --noCms --lspam '#scale[1.1]{#bf{CMS}} #scale[0.9]{#it{Preliminary}}' --rspam '59.74 fb^{-1} [13 TeV]' \
 						--xp data --xp prompt_tt --xp prompt_dy --xp prompt_vv --xp Fakes_Wj --xp Fakes_tt --xp Fakes_t --xp Fakes_vv --xp Rares --xp Convs \
-						--legendWidth 0.52 --legendFontSize 0.042 --plotmode nostack -L susy-sos/functionsSOS.cc | tee logfile.log;
+						--legendWidth 0.52 --legendFontSize 0.042 --plotmode nostack -L susy-sos/functionsSOS.cc ;
 }
 
 	#	3l 100GeV
@@ -57,9 +57,9 @@ Run_mcPlots() {
 # Run_mcPlots N2_100GeV_3L_ee_xsec "$mca_mN2_100GeV_xsec" "$cuts_3l_ee" susy-sos/3l_plots_PETER.txt
 # Run_mcPlots N2_100GeV_3L_mumu_xsec "$mca_mN2_100GeV_xsec" "$cuts_3l_mm" susy-sos/3l_plots_PETER.txt
 cd $pwd
-# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_100GeV_3L_xsec $TTHpath/python/plotter/$cuts_3l | tee RemoveMe.log
-# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_100GeV_3L_ee_xsec $TTHpath/python/plotter/$cuts_3l_ee | tee RemoveMe.log
-# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_100GeV_3L_mumu_xsec $TTHpath/python/plotter/$cuts_3l_mm | tee RemoveMe.log
+# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_100GeV_3L_xsec $TTHpath/python/plotter/$cuts_3l 
+# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_100GeV_3L_ee_xsec $TTHpath/python/plotter/$cuts_3l_ee 
+# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_100GeV_3L_mumu_xsec $TTHpath/python/plotter/$cuts_3l_mm 
 # python MergeCutFlow_eemm.py $CERNboxpath/N2_100GeV_3L_ee_xsec $CERNboxpath/N2_100GeV_3L_mumu_xsec
 
 
@@ -69,9 +69,9 @@ cd $TTHpath/python/plotter
 # # Run_mcPlots N2_200GeV_3L_ee_xsec "$mca_mN2_200GeV_xsec" "$cuts_3l_ee" susy-sos/3l_plots_PETER.txt
 # # Run_mcPlots N2_200GeV_3L_mumu_xsec "$mca_mN2_200GeV_xsec" "$cuts_3l_mm" susy-sos/3l_plots_PETER.txt
 cd $pwd
-# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_200GeV_3L_xsec $TTHpath/python/plotter/$cuts_3l | tee RemoveMe.log
-# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_200GeV_3L_ee_xsec $TTHpath/python/plotter/$cuts_3l_ee | tee RemoveMe.log
-# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_200GeV_3L_mumu_xsec $TTHpath/python/plotter/$cuts_3l_mm | tee RemoveMe.log
+# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_200GeV_3L_xsec $TTHpath/python/plotter/$cuts_3l
+# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_200GeV_3L_ee_xsec $TTHpath/python/plotter/$cuts_3l_ee 
+# python DetermineCutFlow_withStatError.py $CERNboxpath/N2_200GeV_3L_mumu_xsec $TTHpath/python/plotter/$cuts_3l_mm 
 # python MergeCutFlow_eemm.py $CERNboxpath/N2_200GeV_3L_ee_xsec $CERNboxpath/N2_200GeV_3L_mumu_xsec
 
 
