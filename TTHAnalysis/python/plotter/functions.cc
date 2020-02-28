@@ -251,13 +251,47 @@ float deepFlavB_WP(int year, int wp /*0 = loose, 1 = medium, 2=tight*/) {
     return -99;
 }
 
-float PeterTest(float x){
-    if (x < 2){
-        return -100;
+bool is_MpMn_or_EpEm_inAcc(float l1eta, int l1pdgId, float l2eta, int l2pdgId){
+    if (l1pdgId*l2pdgId==-121 && abs(l1eta)<2.5 && abs(l2eta)<2.5){
+        return 1;
     }
-    else {
-        return x;
+    if (l1pdgId*l2pdgId==-169 && abs(l1eta)<2.4 && abs(l2eta)<2.4){
+        return 1;
     }
+    return 0;
+}
+
+// float minDRll_genLepWZ(float l1eta, float l1phi, int l1pdgId, float l2eta, float l2phi, int l2pdgId, float l3eta, float l3phi, int l3pdgId){
+//     return abs(l1eta);
+// }
+
+float minDRll_genLepWZ(float l1eta, float l1phi, int l1pdgId, float l2eta, float l2phi, int l2pdgId, float l3eta, float l3phi, int l3pdgId){
+    float minDRll = 100;
+
+    int nGenLepWZ=0;
+    if (abs(l3pdgId)<20) nGenLepWZ=3;
+    if (abs(l3pdgId)>20 && abs(l2pdgId)<20) nGenLepWZ=2;
+
+    if (nGenLepWZ==2){
+        if (is_MpMn_or_EpEm_inAcc(l1eta, l1pdgId, l2eta, l2pdgId)){
+            minDRll = min(minDRll, deltaR(l1eta, l1phi, l2eta, l2phi));
+        }
+    }
+
+    if (nGenLepWZ==3){
+        if (is_MpMn_or_EpEm_inAcc(l1eta, l1pdgId, l2eta, l2pdgId)){
+            minDRll = min(minDRll, deltaR(l1eta, l1phi, l2eta, l2phi));
+        }
+        if (is_MpMn_or_EpEm_inAcc(l1eta, l1pdgId, l3eta, l3pdgId)){
+            minDRll = min(minDRll, deltaR(l1eta, l1phi, l3eta, l3phi));
+        }
+        if (is_MpMn_or_EpEm_inAcc(l3eta, l3pdgId, l2eta, l2pdgId)){
+            minDRll = min(minDRll, deltaR(l3eta, l3phi, l2eta, l2phi));
+        }                        
+    }
+
+    return minDRll;
+
 }
 
 void functions() {}

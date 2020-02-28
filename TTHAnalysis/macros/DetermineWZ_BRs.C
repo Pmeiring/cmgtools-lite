@@ -21,7 +21,7 @@ void DetermineWZ_BRs(){
 	
 	ROOT::EnableImplicitMT();
 
-	std::string filename = "/eos/user/p/pmeiring/www/SUSY_SOS/PlayGround/2los_3l_plots_PETER.root";
+	std::string filename = "/eos/user/p/pmeiring/www/SUSY_SOS/GenLep_TChiWZ_categorization/BranchingRatios/N2_100GeV_BR_xsec/2los_3l_plots_PETER.root";
 	const char *fileName = filename.c_str();
 	TFile *RootFile= TFile::Open(fileName);
 
@@ -156,42 +156,44 @@ void DetermineWZ_BRs(){
 	float w_qq[9];
 					
 
-
-
-
 	for (int mp=0; mp<nMassPoints; mp++){
+		float yieldsZnorm = (yieldsZ[mp][0]+yieldsZ[mp][1]+yieldsZ[mp][2]);
+		float yieldsZtaunorm= (yieldsZ[mp][0]+yieldsZ[mp][1]+yieldsZtau[mp][0]+yieldsZtau[mp][1]+yieldsZtau[mp][2]);
+		float yieldsWnorm = (yieldsW[mp][0]+yieldsW[mp][1]+yieldsW[mp][2]+yieldsW[mp][3]+yieldsW[mp][4]+yieldsW[mp][5]+yieldsW[mp][6]+yieldsW[mp][7]+yieldsW[mp][8]+yieldsW[mp][9]+yieldsW[mp][10]+yieldsW[mp][11]);
+		float yieldsWtaunorm= (yieldsW[mp][0]+yieldsW[mp][1]+yieldsW[mp][2]+yieldsW[mp][3]+yieldsW[mp][4]+yieldsW[mp][5]+yieldsW[mp][6]+yieldsW[mp][7]+yieldsW[mp][8]+yieldsWtau[mp][0]+yieldsWtau[mp][1]+yieldsW[mp][10]+yieldsW[mp][11]);
+
 		dmz[mp] = (float)StringToMassPoint(MassPointsZ[mp]);		
-		z_ee[mp] = yieldsZ[mp][0];
-		z_mm[mp] = yieldsZ[mp][1];
-		z_tt[mp] = yieldsZ[mp][2];
-		z_ll[mp] = z_ee[mp] + z_mm[mp];
+		z_ee[mp] = yieldsZ[mp][0] / yieldsZnorm;
+		z_mm[mp] = yieldsZ[mp][1] / yieldsZnorm;
+		z_tt[mp] = yieldsZ[mp][2] / yieldsZnorm;
+		z_ll[mp] = z_ee[mp] + z_mm[mp] / yieldsZnorm;
 
 		dmztau[mp] = (float)StringToMassPoint(MassPointsZtau[mp]);		
-		z_tltl[mp] = yieldsZtau[mp][0];
-		z_thtl[mp] = yieldsZtau[mp][1];
-		z_thth[mp] = yieldsZtau[mp][2];
+		z_tltl[mp] = yieldsZtau[mp][0] /yieldsZtaunorm;
+		z_thtl[mp] = yieldsZtau[mp][1] /yieldsZtaunorm;
+		z_thth[mp] = yieldsZtau[mp][2] /yieldsZtaunorm;
 
 		//  tb,ts,td,cb,cs,cd,ub,us,ud,tauv,muv ,ev
 		dmw[mp] = (float)StringToMassPoint(MassPointsW[mp]);
-		w_ev[mp] = yieldsW[mp][11];
-		w_mv[mp] = yieldsW[mp][10];
-		w_tv[mp] = yieldsW[mp][9];
-		w_lv[mp] = w_mv[mp] + w_ev[mp];
+		w_ev[mp] = yieldsW[mp][11] / yieldsWnorm;
+		w_mv[mp] = yieldsW[mp][10] / yieldsWnorm;
+		w_tv[mp] = yieldsW[mp][9] / yieldsWnorm;
+		// w_lv[mp] = (w_mv[mp] + w_ev[mp]) / yieldsWnorm;
 
-		w_tb[mp] = yieldsW[mp][0];
-		w_ts[mp] = yieldsW[mp][1];
-		w_td[mp] = yieldsW[mp][2];
-		w_cb[mp] = yieldsW[mp][3];
-		w_cs[mp] = yieldsW[mp][4];
-		w_cd[mp] = yieldsW[mp][5];
-		w_ub[mp] = yieldsW[mp][6];
-		w_us[mp] = yieldsW[mp][7];
-		w_ud[mp] = yieldsW[mp][8];
-		w_qq[mp] = w_tb[mp] + w_ts[mp] + w_td[mp] + w_cb[mp] + w_cs[mp] + w_cd[mp] + w_ub[mp] + w_us[mp] + w_ud[mp];
+		w_tb[mp] = yieldsW[mp][0] / yieldsWnorm;
+		w_ts[mp] = yieldsW[mp][1] / yieldsWnorm;
+		w_td[mp] = yieldsW[mp][2] / yieldsWnorm;
+		w_cb[mp] = yieldsW[mp][3] / yieldsWnorm;
+		w_cs[mp] = yieldsW[mp][4] / yieldsWnorm;
+		w_cd[mp] = yieldsW[mp][5] / yieldsWnorm;
+		w_ub[mp] = yieldsW[mp][6] / yieldsWnorm;
+		w_us[mp] = yieldsW[mp][7] / yieldsWnorm;
+		w_ud[mp] = yieldsW[mp][8] / yieldsWnorm;
+		w_qq[mp] = (w_tb[mp] + w_ts[mp] + w_td[mp] + w_cb[mp] + w_cs[mp] + w_cd[mp] + w_ub[mp] + w_us[mp] + w_ud[mp]);
 
 		dmwtau[mp] = (float)StringToMassPoint(MassPointsWtau[mp]);
-		w_tlv[mp] = yieldsWtau[mp][0];
-		w_thv[mp] = yieldsWtau[mp][1];
+		w_tlv[mp] = yieldsWtau[mp][0] / yieldsWtaunorm;
+		w_thv[mp] = yieldsWtau[mp][1] / yieldsWtaunorm;
 
 	}
 
@@ -330,10 +332,10 @@ TCanvas *c2 = new TCanvas("c2","Canvas",900,900);
 
 	gPad->WaitPrimitive();
 
-	c1->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/PlayGround/BRs_Z_v1.png");
-	c2->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/PlayGround/BRs_W_v1.png");
-	c3->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/PlayGround/BRs_Z_v2.png");
-	c4->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/PlayGround/BRs_W_v2.png");
+	c1->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/GenLep_TChiWZ_categorization/BranchingRatios/N2_100GeV_BR_xsec/BRs_Z_v1.png");
+	c2->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/GenLep_TChiWZ_categorization/BranchingRatios/N2_100GeV_BR_xsec/BRs_W_v1.png");
+	c3->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/GenLep_TChiWZ_categorization/BranchingRatios/N2_100GeV_BR_xsec/BRs_Z_v2.png");
+	c4->SaveAs("/eos/user/p/pmeiring/www/SUSY_SOS/GenLep_TChiWZ_categorization/BranchingRatios/N2_100GeV_BR_xsec/BRs_W_v2.png");
 	// c1->Print("/eos/user/p/pmeiring/www/SUSY_SOS/PlayGround/BRs.pdf","PDF"); 
 
 	c1->Close();	

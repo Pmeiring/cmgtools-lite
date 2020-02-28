@@ -1,26 +1,26 @@
 yields         : 1 : 3,-1.5,1.5; XTitle="Total Event Yields"
 
 ## Generator variables
-gen_x1											: 	Generator_x1 				:	100,0,1; XTitle="Momentum fragmentation x1"			 , Legend='TR', IncludeOverflows=True
+# gen_x1											: 	Generator_x1 				:	100,0,1; XTitle="Momentum fragmentation x1"			 , Legend='TR', IncludeOverflows=True
 
-EvHas_OSSFpair_yields 	 : 	if3(EvHas_OSSFpair==1, EvHas_OSSFpair, -100)	: 3,0,3 ; XTitle="Yields for EvHas_OSSFpair"     , Legend='TR', IncludeOverflows=False
-EvHas_OSSFpair_GenLep_pt1 :	if3(EvHas_OSSFpair==1, GenLepFromWZ_pt[0], -100)			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False		
+# EvHas_OSSFpair_yields 	 : 	if3(EvHas_OSSFpair==1, EvHas_OSSFpair, -100)	: 3,0,3 ; XTitle="Yields for EvHas_OSSFpair"     , Legend='TR', IncludeOverflows=False
+# EvHas_OSSFpair_GenLep_pt1 :	if3(EvHas_OSSFpair==1, GenLepFromWZ_pt[0], -100)			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False		
 	
-EvHas2LOSSF_FromZ_tau_yields 	 : 	if3(EvHas2LOSSF_FromZ_tau==1, EvHas2LOSSF_FromZ_tau, -100)	: 3,0,3 ; XTitle="Yields for 2LOSSF_FromZ_tau"     , Legend='TR', IncludeOverflows=False
-EvHas2LOSSF_FromZ_tau_GenLep_pt1 :	if3(EvHas2LOSSF_FromZ_tau==1, GenLepFromWZ_pt[0], -100)			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
+# EvHas2LOSSF_FromZ_tau_yields 	 : 	if3(EvHas2LOSSF_FromZ_tau==1, EvHas2LOSSF_FromZ_tau, -100)	: 3,0,3 ; XTitle="Yields for 2LOSSF_FromZ_tau"     , Legend='TR', IncludeOverflows=False
+# EvHas2LOSSF_FromZ_tau_GenLep_pt1 :	if3(EvHas2LOSSF_FromZ_tau==1, GenLepFromWZ_pt[0], -100)			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
 
-EvHas2LOSSF_FromZ_notau_yields 	 : 	if3(EvHas2LOSSF_FromZ_notau==1, EvHas2LOSSF_FromZ_notau, -100)	: 3,0,3 ; XTitle="Yields for 2LOSSF_FromZ_notau"     , Legend='TR', IncludeOverflows=False
-EvHas2LOSSF_FromZ_notau_GenLep_pt1 :	if3(EvHas2LOSSF_FromZ_notau==1, GenLepFromWZ_pt[0], -100)		: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
+# EvHas2LOSSF_FromZ_notau_yields 	 : 	if3(EvHas2LOSSF_FromZ_notau==1, EvHas2LOSSF_FromZ_notau, -100)	: 3,0,3 ; XTitle="Yields for 2LOSSF_FromZ_notau"     , Legend='TR', IncludeOverflows=False
+# EvHas2LOSSF_FromZ_notau_GenLep_pt1 :	if3(EvHas2LOSSF_FromZ_notau==1, GenLepFromWZ_pt[0], -100)		: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
 
 
-EvHas2LOSSF_FromWZ_tau_yields 	 : 	if3(EvHas2LOSSF_FromWZ_tau==1, EvHas2LOSSF_FromWZ_tau, -100)	: 3,0,3 ; XTitle="Yields for 2LOSSF_FromWZ_tau"     , Legend='TR', IncludeOverflows=False
-EvHas2LOSSF_FromWZ_tau_GenLep_pt1 :	if3(EvHas2LOSSF_FromWZ_tau==1, GenLepFromWZ_pt[0], -100)			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
+# EvHas2LOSSF_FromWZ_tau_yields 	 : 	if3(EvHas2LOSSF_FromWZ_tau==1, EvHas2LOSSF_FromWZ_tau, -100)	: 3,0,3 ; XTitle="Yields for 2LOSSF_FromWZ_tau"     , Legend='TR', IncludeOverflows=False
+# EvHas2LOSSF_FromWZ_tau_GenLep_pt1 :	if3(EvHas2LOSSF_FromWZ_tau==1, GenLepFromWZ_pt[0], -100)			: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
 
-EvHas3L_FromWZ_notau_yields 	 : 	if3(EvHas3L_FromWZ_notau==1, EvHas3L_FromWZ_notau, -100)	: 3,0,3 ; XTitle="Yields for 3L_FromWZ_notau"     , Legend='TR', IncludeOverflows=False
-EvHas3L_FromWZ_notau_GenLep_pt1 :	if3(EvHas3L_FromWZ_notau==1, GenLepFromWZ_pt[0], -100)		: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
+# EvHas3L_FromWZ_notau_yields 	 : 	if3(EvHas3L_FromWZ_notau==1, EvHas3L_FromWZ_notau, -100)	: 3,0,3 ; XTitle="Yields for 3L_FromWZ_notau"     , Legend='TR', IncludeOverflows=False
+# EvHas3L_FromWZ_notau_GenLep_pt1 :	if3(EvHas3L_FromWZ_notau==1, GenLepFromWZ_pt[0], -100)		: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
 
-EvHas3L_FromWZ_tau_yields 	 : 	if3(EvHas3L_FromWZ_tau==1, EvHas3L_FromWZ_tau, -100)	: 3,0,3 ; XTitle="Yields for 3L_FromWZ_tau"     , Legend='TR', IncludeOverflows=False
-EvHas3L_FromWZ_tau_GenLep_pt1 :	if3(EvHas3L_FromWZ_tau==1, GenLepFromWZ_pt[0], -100)		: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
+# EvHas3L_FromWZ_tau_yields 	 : 	if3(EvHas3L_FromWZ_tau==1, EvHas3L_FromWZ_tau, -100)	: 3,0,3 ; XTitle="Yields for 3L_FromWZ_tau"     , Legend='TR', IncludeOverflows=False
+# EvHas3L_FromWZ_tau_GenLep_pt1 :	if3(EvHas3L_FromWZ_tau==1, GenLepFromWZ_pt[0], -100)		: 60,0,15  ; XTitle="Leading GenLepton p_{T} [GeV]"   	  , Legend='TR', IncludeOverflows=False	
 
 Z_decays : Z_decays: 2000,0,2000 ; XTitle="Z decays: appended id of daughters", Legend='TR', IncludeOverflows=False
 W_decays : W_decays: 2000,0,2000 ; XTitle="W decays: appended id of daughters", Legend='TR', IncludeOverflows=False

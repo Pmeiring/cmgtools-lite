@@ -325,11 +325,11 @@ mcPromptGamma = lambda : ObjTagger('mcPromptGamma','LepGood', [lambda l: (l.genP
 mcMatch_seq   = [ isMatchRightCharge, mcMatchId ,mcPromptGamma]
 
 
-from CMGTools.TTHAnalysis.tools.genlepfromWZ import GenLepFromWZ
-GiveMeMyLeptons = lambda : GenLepFromWZ('','Peter')
+# from CMGTools.TTHAnalysis.tools.genlepfromWZ import GenLepFromWZ
+# GiveMeMyLeptons = lambda : GenLepFromWZ('','Peter')
 
 from CMGTools.TTHAnalysis.tools.genlepfromWZ_collection import GenLepFromWZ_Collection
-GiveMeMyLeptons_Collection = lambda : GenLepFromWZ_Collection('','Peter')
+GenLepFromWZ = lambda : GenLepFromWZ_Collection("")
 
 from PhysicsTools.NanoAODTools.postprocessing.modules.jme.jetmetUncertainties import jetmetUncertainties2016, jetmetUncertainties2017, jetmetUncertainties2018
 

@@ -1,28 +1,25 @@
-yields         : 1 : 3,-1.5,1.5; XTitle="Total Event Yields"
+yields         : -1 : 3,-1.5,1.5; XTitle="Total Event Yields"
 
-## Generator variables
-# gen_x1	  : 	Generator_x1 				:	100,0,1; XTitle="Momentum fragmentation x1"			 , Legend='TR', IncludeOverflows=True
+# gen_x1	  		: 	Generator_x1 				:	100,0,1; XTitle="Momentum fragmentation x1"			 , Legend='TR', IncludeOverflows=True
 
-#GenLepFromWZ_pt1	:		GenLepFromWZ_pt[0]	:	30,0,30; XTitle="p_{T} leading genlepton from W/Z"				 , Legend='TR', IncludeOverflows=True
-#GenLepFromWZ_pt2	:		GenLepFromWZ_pt[1]	:	30,0,30; XTitle="p_{T} subleading genlepton from W/Z"			 , Legend='TR', IncludeOverflows=True
-#GenLepFromWZ_eta1	:		GenLepFromWZ_eta[0]	:	50,-5,5; XTitle="#eta leading genlepton from W/Z"				 , Legend='TR', IncludeOverflows=True, MoreY=2.0
-#GenLepFromWZ_eta2	:		GenLepFromWZ_eta[1]	:	50,-5,5; XTitle="#eta subleading genlepton from W/Z"			 , Legend='TR', IncludeOverflows=True, MoreY=2.0
+GenLepFromWZ_pt1	:		GenLepFromWZ_pt[0]	:	30,0,30; XTitle="p_{T} leading genlepton from W/Z [GeV]"				 , Legend='TR', IncludeOverflows=True, MoreY=1.5
+GenLepFromWZ_pt2	:		GenLepFromWZ_pt[1]	:	30,0,30; XTitle="p_{T} subleading genlepton from W/Z [GeV]"			 , Legend='TR', IncludeOverflows=True
+# GenLepFromWZ_eta1	:		GenLepFromWZ_eta[0]	:	50,-5,5; XTitle="#eta leading genlepton from W/Z"				 , Legend='TR', IncludeOverflows=True, MoreY=2.0
+# GenLepFromWZ_eta2	:		GenLepFromWZ_eta[1]	:	50,-5,5; XTitle="#eta subleading genlepton from W/Z"			 , Legend='TR', IncludeOverflows=True, MoreY=2.0
 
-#genmet		  		: 		GenMET_pt		    :   50,0,250; XTitle="Gen p_{T}^{miss} [GeV]" 			 , Legend='TR', IncludeOverflows=True
-#met           : MET_pt  								   : 50,0,250;  XTitle="p_{T}^{miss}  [GeV]", LegendCutoff=1e-3, Legend='TR', IncludeOverflows=True, MoreY=1.5
+LepGood_pt1         :       LepGood1_pt  :   30,0,30; XTitle="p_{T} leading lepton [GeV]"               , Legend='TR', IncludeOverflows=True, MoreY=1.5
+LepGood_pt2         :       LepGood2_pt  :   30,0,30; XTitle="p_{T} subleading lepton [GeV]"            , Legend='TR', IncludeOverflows=True
 
-#METoverHT :  MET_pt/(htJet25j_Recl-LepGood_pt[iLepFO_trial_Recl[0]]-LepGood_pt[iLepFO_trial_Recl[1]]) : 25,0,5 ; XTitle="MET / HT", Legend='TR', IncludeOverflows=True
+genmet		  		: 		GenMET_pt		    :   50,0,250; XTitle="Gen p_{T}^{miss} [GeV]" 			 , Legend='TR', IncludeOverflows=True
+met          		:	 	MET_pt  	 	   : 50,0,250;  XTitle="p_{T}^{miss}  [GeV]", LegendCutoff=1e-3, Legend='TR', IncludeOverflows=True, MoreY=1.5
+metmm_pt         	:	 	metmm_pt(LepGood1_pdgId, LepGood1_pt, LepGood1_phi, LepGood2_pdgId, LepGood2_pt, LepGood2_phi, MET_pt, MET_phi)  	 	   : 50,0,250;  XTitle="p_{T}^{MissCorr}  [GeV]", LegendCutoff=1e-3, Legend='TR', IncludeOverflows=True, MoreY=1.5
 
+mll	:		mass_2(LepGood1_pt, LepGood1_eta, LepGood1_phi, LepGood1_mass, LepGood2_pt, LepGood2_eta, LepGood2_phi, LepGood2_mass) : 50,0,50; XTitle="m(ll) [GeV]"
 
+METoverHT 			:  MET_pt/htJet25j : 25,0,5 ; XTitle="MET / HT", Legend='TR', IncludeOverflows=True
 
-#ngenjets		  	:		nGenJet				: 10,0,10; XTitle="nGenJets", Legend='TR', IncludeOverflows=False
+dRll_gen			: deltaR(GenLepFromWZ_eta[0], GenLepFromWZ_phi[0], GenLepFromWZ_eta[1], GenLepFromWZ_phi[1]): 50,0,5; XTitle="dR(ll) (gen)"
 
+minDR_ossfGenLepFromWZ : minDRll_genLepWZ(GenLepFromWZ_eta[0], GenLepFromWZ_phi[0], GenLepFromWZ_id[0], GenLepFromWZ_eta[1], GenLepFromWZ_phi[1], GenLepFromWZ_id[1], GenLepFromWZ_eta[2], GenLepFromWZ_phi[2], GenLepFromWZ_id[2]) : 50,0,5; XTitle="min dR(ll) (gen)"
 
-
-## Reco variables
-#FOLep_pt1        : LepGood_pt[iLepFO_Recl[0]]           : 25,0,50  ; XTitle="Leading FO lepton p_{T} [GeV]"     , Legend='TR', IncludeOverflows=False, LegendCutoff=1e-10
-#FOLep_pt2        : LepGood_pt[iLepFO_Recl[1]]           : 25,0,50  ; XTitle="Subleading FO lepton p_{T} [GeV]"  , Legend='TR', IncludeOverflows=False, LegendCutoff=1e-10
-#FOLep_eta1       : LepGood_eta[iLepFO_Recl[1]]         : 25,-5,5 ; XTitle="Leading FO lepton #eta"       , Legend='TR', IncludeOverflows=False, MoreY=1.5
-#FOLep_eta2       : LepGood_eta[iLepFO_Recl[1]]          : 25,-5,5 ; XTitle="Subleading FO lepton #eta"    , Legend='TR', IncludeOverflows=False, MoreY=1.5
-
-#njets		  : nJet							   : 10,0,10; XTitle="nJets", Legend='TR', IncludeOverflows=False, MoreY=2.0
+dRll_FO				: deltaR(LepGood1_eta, LepGood1_phi, LepGood2_eta, LepGood2_phi): 50,0,5; XTitle="dR(ll)"

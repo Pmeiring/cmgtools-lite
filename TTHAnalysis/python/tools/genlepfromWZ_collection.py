@@ -5,7 +5,7 @@ from CMGTools.TTHAnalysis.treeReAnalyzer import Collection as CMGCollection
 from CMGTools.TTHAnalysis.tools.nanoAOD.friendVariableProducerTools import declareOutput, writeOutput
 
 class GenLepFromWZ_Collection(Module):
-    def __init__(self, label="", recllabel='Recl', doSystJEC=True):
+    def __init__(self, label=""):
         self.namebranches = [   "nGenLepFromWZ",
                                 "EvHas_OSSFpair",
                                 "EvHas2LOSSF_FromZ_tau",
@@ -19,18 +19,11 @@ class GenLepFromWZ_Collection(Module):
                                 "Z_decays",
                                 "Ztau_decays",
                                 "W_decays",
-                                "Wtau_decays"
-                                # "nTauFromZ",
-                                # "nTauFromZ_l",
-                                # "nTauFromZ_h",
-                                # "nTauFromW",
-                                # "nTauFromW_l",
-                                # "nTauFromW_h"                                
+                                "Wtau_decays"                            
                             ]
         self.label = "" if (label in ["",None]) else ("_"+label)
-        self.inputlabel = '_'+recllabel
+        # self.inputlabel = '_'+recllabel
         self.branches = []
-        # for var in self.systsJEC: self.branches.extend([br+self.label+self.systsJEC[var] for br in self.namebranches])
         for name in self.namebranches: self.branches.extend([name])
 
     # old interface (CMG)
@@ -56,29 +49,23 @@ class GenLepFromWZ_Collection(Module):
         writeOutput(self, self.run(event, NanoAODCollection, "GenLep_FromWZ"))
         return True
 
-    # def HadronInWdecay(self, FamilyTree):
-    #     counter = 0
-    #     IndexOfBoson=-1
-    #     for l in FamilyTree:
-    #         if abs(l)==24:
-    #             IndexOfW=counter
-    #             if (FamilyTree[IndexOfW-1]) in {11, 13, 15}:
-    #                 #W decays to e/mu/tau, now check if tau decays leptonically
-    #                 return 0 
-    #         counter=counter+1
-    #     return 1
+    # Function to determine what to print
+    def Log(self,message,v):
+        verbosity = 0 #0:nothing, 1:event info, 2:specific particles, 3:all particles
+        if v<=verbosity:
+            print(message)
 
+    # Function to determine if particle is prompt, based on its family tree. 
     def IsPrompt(self, FamilyTree):
         if len(FamilyTree)<2:
-            print FamilyTree
+            print "WARNING: Found particle that has no family:", FamilyTree
             return 0
         if abs(FamilyTree[1]) in {23,24}:       # Final state lepton is direct daughter of Z or W
             return 1
-        elif abs(FamilyTree[1]) == 15:          # If Final state lepton is dauchter of tau
+        elif abs(FamilyTree[1]) == 15:          # If Final state lepton is daughter of tau
             if len(FamilyTree)<3:
-                print FamilyTree
+                print "WARNING: Found particle from tau that has no family:", FamilyTree
                 return 0
-
             if abs(FamilyTree[2]) in {23,24}:   # If the tau is direct daughter of Z or W, the lepton is still prompt
                 return 1
             else:
@@ -86,128 +73,31 @@ class GenLepFromWZ_Collection(Module):
         else:
             return 0 
 
-    # logic of the algorithm
-    def run(self,event,Collection,genLepname):
-        allret = {}
+    # Function that loops back through the gen-particle family tree and makes the list of corresponding ids
+    def BuildFamilyTree(self, i, allgenpart):
+        MotherIndex = i
+        OGParentFound=0
+        family_tree = []
 
-        all_genpart = [gp for gp in Collection(event,"GenPart")]
+        # Continue as long as the ultimate mother is not yet found.
+        while not OGParentFound:
+            # Build the familty tree
+            if allgenpart[MotherIndex].pdgId not in family_tree:
+                family_tree.append(allgenpart[MotherIndex].pdgId)
+                self.Log("Particle in family-tree:\t %d \t|\tid: %d   \t|\tpt: %f" % (MotherIndex, allgenpart[MotherIndex].pdgId, allgenpart[MotherIndex].pt), 3)
 
-        genLep = filter(lambda x : (abs(x.pdgId)==11 or abs(x.pdgId)==13) and x.status==1, all_genpart)
+            # Cycle back through the family tree
+            MotherIndex = allgenpart[MotherIndex].genPartIdxMother
 
-        # prepare output
-        ret = dict([(name,0.0) for name in self.namebranches])
-        index=-1
-        # print("Number of final state leptons: ", len(all_genpart))
-        LepFromWZ = []
-        LepFromWZ_FamilyTrees = []
+            # Check if the mother has a mother
+            OGParentFound = MotherIndex==-1         
 
-        Z_daughters = []
-        W_daughters = []
-
-        # Track the tau decays from W and Z
-        nTauFromZ=0
-        nTauFromZ_h=0
-        nTauFromZ_l=0        
-        nTauFromW=0
-        nTauFromW_h=0
-        nTauFromW_l=0
-
-        for gp in all_genpart:
-            # if index==-1:
-            #     print("\nEvent")
-            index=index+1
-
-            # Incoming partons
-            if gp.status==21:
-                # print("Incoming parton: ",gp.pdgId)
-                continue;
-
-            # If we cannot determine the mother, continue;
-            if gp.genPartIdxMother==-1:
-                continue
-
-            # Cheat to see what are the daughters of the Z (to cross-check)
-            if abs(all_genpart[gp.genPartIdxMother].pdgId)==23:
-                # print("Daughter of a Z-boson:   ",gp.pdgId,"    |   status: ",gp.status,"    |   index: ",index)
-                Z_daughters.append(gp.pdgId)
-                if (abs(gp.pdgId)==15):
-                    nTauFromZ+=1
-
-            
-            if abs(all_genpart[gp.genPartIdxMother].pdgId)==24:
-                # print("Daughter of a W-boson:   ",gp.pdgId,"    |   status: ",gp.status)
-                W_daughters.append(gp.pdgId)
-                if (abs(gp.pdgId)==15):
-                    nTauFromW+=1
-
-            # print("Particle     %i  |   %i     |   pt: %f" %(index, gp.pdgId, gp.pt))
-
-            # For all final state particles, build the family tree and print
-            if all_genpart[index].status==1:
-                # print("Final state particle     %i  |   %i     |   pt: %f" %(index, gp.pdgId, gp.pt))
-                # Continue as long as the ultimate mother is not yet found.
-
-                MotherIndex = index
-                OGParentFound=0
-                FamilyTree = []
-                while not OGParentFound:
-                    # Build the familty tree
-                    if all_genpart[MotherIndex].pdgId not in FamilyTree:
-                        FamilyTree.append(all_genpart[MotherIndex].pdgId)
-
-                    # print("Particle in family-tree: %i  |   %i     |   pt: %f" %(MotherIndex, all_genpart[MotherIndex].pdgId, all_genpart[MotherIndex].pt))
-                    
-                    # Cycle back through the family tree
-                    MotherIndex = all_genpart[MotherIndex].genPartIdxMother
-
-                    # Check if the mother has a mother
-                    OGParentFound = MotherIndex==-1               
-
-                isFromZ = (23 in FamilyTree and 1000023 in FamilyTree) 
-                isFromW = (24 in FamilyTree and 1000024 in FamilyTree) or (-24 in FamilyTree and -1000024 in FamilyTree)
-                isFromWZ = isFromW or isFromZ
-                isFromTau = (15 in FamilyTree or -15 in FamilyTree)
-                isPrompt = self.IsPrompt(FamilyTree)
+        return family_tree
 
 
-                # if ((abs(gp.pdgId)==11 or abs(gp.pdgId)==13)):
-                #     print "f.s. lep: ",isPrompt, FamilyTree, (index,gp.pt,gp.pdgId,isFromZ,isFromTau)
-              
-                if ((abs(gp.pdgId)==11 or abs(gp.pdgId)==13) and isFromWZ and isPrompt):
-                    LepFromWZ.append((index,gp.pt,gp.pdgId,isFromZ,isFromTau,gp.eta,gp.phi))
-                    LepFromWZ_FamilyTrees.append((FamilyTree))
-                    # print "f.s. lep: ",isPrompt, FamilyTree, (index,gp.pt,gp.pdgId,isFromZ,isFromTau)
-
-        # Sort based on the particle pt
-        LepFromWZ.sort(key=lambda Particle: Particle[1], reverse=True)        
-
-        # DEBUG: events with > 3 prompt leptons in fs. | Overwrite if this is the case..
-        if len(LepFromWZ)>3:
-            print "Event with >3 f.s. leptons"
-            # print LepFromWZ
-            LepFromWZ = []
-
-
-        ret["nGenLepFromWZ"] = len(LepFromWZ)
-
-        for i in range(3-len(LepFromWZ)):
-            # print "Length = ",len(LepFromWZ),", appending dummy..."
-            LepFromWZ.append((-100,-100,-100,-100,-100,-100,-100,-100))
-
-
-        GenLepFromWZ_id =       list(LepFromWZ[l][2] for l in range(len(LepFromWZ)))
-        GenLepFromWZ_charge =   list(1 if LepFromWZ[l][2]>0 else -1 for l in range(len(LepFromWZ)))
-        GenLepFromWZ_isFromZ =  list(LepFromWZ[l][3] for l in range(len(LepFromWZ)))
-        GenLepFromWZ_isFromTau =list(LepFromWZ[l][4] for l in range(len(LepFromWZ)))
-
-        self.out.fillBranch("GenLepFromWZ_pt",          list(LepFromWZ[l][1] for l in range(len(LepFromWZ))))
-        self.out.fillBranch("GenLepFromWZ_eta",         list(LepFromWZ[l][5] for l in range(len(LepFromWZ))))
-        self.out.fillBranch("GenLepFromWZ_phi",         list(LepFromWZ[l][6] for l in range(len(LepFromWZ))))
-        self.out.fillBranch("GenLepFromWZ_id",          list(LepFromWZ[l][2] for l in range(len(LepFromWZ))))
-        self.out.fillBranch("GenLepFromWZ_charge",      list(1 if LepFromWZ[l][2]>0 else -1 for l in range(len(LepFromWZ))))
-        self.out.fillBranch("GenLepFromWZ_isFromZ",     list(LepFromWZ[l][3] for l in range(len(LepFromWZ))))
-        self.out.fillBranch("GenLepFromWZ_isFromTau",   list(LepFromWZ[l][4] for l in range(len(LepFromWZ))))
-
+    # Function to categorize the events, see:
+    # https://indico.cern.ch/event/870087/contributions/3669284/attachments/1959791/3256711/MCsignal_study_lowDM.pdf 
+    def Prepare_2l3l_categories_returns(self, ret, GenLepFromWZ_id, GenLepFromWZ_charge, GenLepFromWZ_isFromZ, GenLepFromWZ_isFromTau):
         ret["EvHas_OSSFpair"]=0
         ret["EvHas2LOS_FromZ_tau"]=0
         ret["EvHas2LOS_FromZ_notau"]=0
@@ -259,22 +149,24 @@ class GenLepFromWZ_Collection(Module):
             else:
                 ret["EvHas3L_notOSSF_FromWZ_tau"]=1     # <- orange   (Z->tautau->l+l, W->(tau->)l)
 
+        return ret           
 
+
+    def Prepare_WZtoTau_decays_returns(self, ret, nTauFromZ, nTauFromW, LepFromWZ):
+        nTauFromW_h=0
+        nTauFromW_l=0
+        nTauFromZ_h=0
+        nTauFromZ_l=0 
 
         if (nTauFromZ>0 or nTauFromW>0):
             for l in range(3):
-                # print(LepFromWZ[l][3],LepFromWZ[l][4])
                 if (LepFromWZ[l][3]==1 and LepFromWZ[l][4]==1):         #lepton is from Z and from tau (Z->tau->l)
                     nTauFromZ_l+=1
-                    # print("Z->tau->l")
                 elif (LepFromWZ[l][3]==1 and LepFromWZ[l][4]!=1):       #lepton is from Z but not from tau (Z->l), we don't care
-                    # print("Z->l")
                     continue 
-                elif (LepFromWZ[l][3]!=1 and LepFromWZ[l][4]==1):   #lepton is not from Z, but is from tau (W->tau->l)
+                elif (LepFromWZ[l][3]!=1 and LepFromWZ[l][4]==1):       #lepton is not from Z, but is from tau (W->tau->l)
                     nTauFromW_l+=1
-                    # print("W->tau->l")                    
-                else:                                           #lepton is not from Z and not from tau (W->l), we don't care
-                    # print("W->l")
+                else:                                                   #lepton is not from Z and not from tau (W->l), we don't care
                     continue
             nTauFromZ_h = nTauFromZ - nTauFromZ_l
             nTauFromW_h = nTauFromW - nTauFromW_l
@@ -289,7 +181,7 @@ class GenLepFromWZ_Collection(Module):
         elif (nTauFromZ_h==0 and nTauFromZ_l==0):
             ret["Ztau_decays"]=0        # no taus from Z
         else:
-            print("Found unkown decay for Z->tautau",nTauFromZ,nTauFromZ_h,nTauFromZ_l,LepFromWZ_FamilyTrees)
+            # print("Found unkown decay for Z->tautau",nTauFromZ,nTauFromZ_h,nTauFromZ_l,LepFromWZ_FamilyTrees)
             ret["Ztau_decays"]=0
 
         if (nTauFromW_h==1 and nTauFromW_l==0):
@@ -299,11 +191,13 @@ class GenLepFromWZ_Collection(Module):
         elif (nTauFromW_h==0 and nTauFromW_l==0):
             ret["Wtau_decays"]=0     #0 no taus from W
         else:
-            print("Found unkown decay for W->tauv",nTauFromW,nTauFromW_h,nTauFromW_l,LepFromWZ_FamilyTrees)
+            # print("Found unkown decay for W->tauv",nTauFromW,nTauFromW_h,nTauFromW_l,LepFromWZ_FamilyTrees)
             ret["Wtau_decays"]=0
 
+        return ret
 
 
+    def Prepare_WZ_decays_returns(self, ret, Z_daughters, W_daughters):
 
         if (11 in Z_daughters and -11 in Z_daughters):
             ret["Z_decays"]=1111
@@ -342,17 +236,117 @@ class GenLepFromWZ_Collection(Module):
         else:
             print("Found unknown W decay! ",W_daughters)
             ret["W_decays"]=0
-       
-        # ret["nTauFromZ"]  =nTauFromZ
-        # ret["nTauFromZ_l"]=nTauFromZ_l
-        # ret["nTauFromZ_h"]=nTauFromZ_h
-        # ret["nTauFromW"]  =nTauFromW
-        # ret["nTauFromW_l"]=nTauFromW_l
-        # ret["nTauFromW_h"]=nTauFromW_h
 
+        return ret
+
+
+
+    # logic of the algorithm
+    def run(self,event,Collection,genLepname):
+
+        # Put the generator particles in a list so we can loop over it
+        all_genpart = [gp for gp in Collection(event,"GenPart")]
+
+        # prepare output
+        ret = dict([(name,0.0) for name in self.namebranches])
+        
+        LepFromWZ = []
+        # LepFromWZ_FamilyTrees = []
+
+        Z_daughters = []
+        W_daughters = []
+
+        # Track the tau decays from W and Z
+        nTauFromZ=0      
+        nTauFromW=0
+
+        # Loop over all generator particles
+        for index,gp in enumerate(all_genpart):
+
+            # Incoming partons have status 21; We don't care about these particles
+            if gp.status==21:
+                continue;
+
+            # If we cannot determine the mother, continue;
+            if gp.genPartIdxMother==-1:
+                continue
+
+            # Z-Boson daughters
+            if abs(all_genpart[gp.genPartIdxMother].pdgId)==23:
+                self.Log("Daughter of a Z-boson:\t %d \t|\tid: %d   \t|\tstatus: %d" % (index, gp.pdgId, gp.status),2)
+                Z_daughters.append(gp.pdgId)
+                if (abs(gp.pdgId)==15):
+                    nTauFromZ+=1
+
+            # W-Boson daughters
+            if abs(all_genpart[gp.genPartIdxMother].pdgId)==24:
+                self.Log("Daughter of a W-boson:\t %d \t|\tid: %d   \t|\tstatus: %d" % (index, gp.pdgId, gp.status),2)
+                W_daughters.append(gp.pdgId)
+                if (abs(gp.pdgId)==15):
+                    nTauFromW+=1
+
+            # For all final state particles, build the family tree and print
+            if all_genpart[index].status==1:
+                self.Log("Final state particle:\t %d \t|\tid: %d   \t|\tpt: %f" % (index, gp.pdgId, gp.pt), 3)
+
+                # Determine the familytree
+                FamilyTree = self.BuildFamilyTree(index,all_genpart)
+    
+                # Determine some properties regarding origin
+                isFromZ = (23 in FamilyTree and 1000023 in FamilyTree) 
+                isFromW = (24 in FamilyTree and 1000024 in FamilyTree) or (-24 in FamilyTree and -1000024 in FamilyTree)
+                isFromWZ = isFromW or isFromZ
+                isFromTau = (15 in FamilyTree or -15 in FamilyTree)
+                isPrompt = self.IsPrompt(FamilyTree)
+
+                # Build the LepFromWZ list, which contains only electrons/muons that are from W/Z and prompt
+                if ((abs(gp.pdgId)==11 or abs(gp.pdgId)==13) and isFromWZ and isPrompt):
+                    LepFromWZ.append((index,gp.pt,gp.pdgId,isFromZ,isFromTau,gp.eta,gp.phi))
+                    # LepFromWZ_FamilyTrees.append((FamilyTree))
+        
+        # END of for loop over all generator particles
+        # Prepare the output to fill the branches
+       
+        # Sort based on the particle pt
+        LepFromWZ.sort(key=lambda Particle: Particle[1], reverse=True)        
+
+        # DEBUG: events with > 3 prompt leptons in the final state (happens if event has e.g. Z->e+e-e+). | Unphysical -> overwrite if this is the case..
+        if len(LepFromWZ)>3:
+            self.Log("WARNING: Found event with >3 f.s. leptons", 1)
+            LepFromWZ = []
+
+
+        ret["nGenLepFromWZ"] = len(LepFromWZ)
+
+        # If there are less than 3 f.s. LepFromWZ, fill this list with dummy values
+        for i in range(3-len(LepFromWZ)):
+            LepFromWZ.append((-100,-100,-100,-100,-100,-100,-100,-100))
+
+
+        GenLepFromWZ_id =       list(LepFromWZ[l][2] for l in range(len(LepFromWZ)))
+        GenLepFromWZ_charge =   list(1 if LepFromWZ[l][2]>0 else -1 for l in range(len(LepFromWZ)))
+        GenLepFromWZ_isFromZ =  list(LepFromWZ[l][3] for l in range(len(LepFromWZ)))
+        GenLepFromWZ_isFromTau =list(LepFromWZ[l][4] for l in range(len(LepFromWZ)))
+
+        self.out.fillBranch("GenLepFromWZ_pt",          list(LepFromWZ[l][1] for l in range(len(LepFromWZ))))
+        self.out.fillBranch("GenLepFromWZ_eta",         list(LepFromWZ[l][5] for l in range(len(LepFromWZ))))
+        self.out.fillBranch("GenLepFromWZ_phi",         list(LepFromWZ[l][6] for l in range(len(LepFromWZ))))
+        self.out.fillBranch("GenLepFromWZ_id",          list(LepFromWZ[l][2] for l in range(len(LepFromWZ))))
+        self.out.fillBranch("GenLepFromWZ_charge",      list(1 if LepFromWZ[l][2]>0 else -1 for l in range(len(LepFromWZ))))
+        self.out.fillBranch("GenLepFromWZ_isFromZ",     list(LepFromWZ[l][3] for l in range(len(LepFromWZ))))
+        self.out.fillBranch("GenLepFromWZ_isFromTau",   list(LepFromWZ[l][4] for l in range(len(LepFromWZ))))
+
+
+        ret = self.Prepare_2l3l_categories_returns(ret, GenLepFromWZ_id, GenLepFromWZ_charge, GenLepFromWZ_isFromZ, GenLepFromWZ_isFromTau)
+        ret = self.Prepare_WZtoTau_decays_returns(ret, nTauFromZ, nTauFromW, LepFromWZ)
+        ret = self.Prepare_WZ_decays_returns(ret, Z_daughters, W_daughters)
+    
+
+        # Put all ret branches together
+        allret = {}
         for br in self.namebranches:
             allret[br+self.label] = ret[br]
-	 	
+
 	return allret
 
 
