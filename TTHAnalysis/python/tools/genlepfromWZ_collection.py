@@ -43,7 +43,12 @@ class GenLepFromWZ_Collection(Module):
         self.out.branch("GenLepFromWZ_isFromZ", "I", 3)
         self.out.branch("GenLepFromWZ_isFromTau", "I", 3)
 
+        self.out.branch("GenTauFromZ_pt", "F", 2)
+        self.out.branch("GenTauFromZ_eta", "F", 2)
+        self.out.branch("GenTauFromZ_phi", "F", 2)
+
         declareOutput(self, wrappedOutputTree, self.branches)
+        self.inputTree = inputTree
 
     def analyze(self, event):
         writeOutput(self, self.run(event, NanoAODCollection, "GenLep_FromWZ"))
@@ -247,6 +252,24 @@ class GenLepFromWZ_Collection(Module):
         # Put the generator particles in a list so we can loop over it
         all_genpart = [gp for gp in Collection(event,"GenPart")]
 
+        # EventsTree = self.inputTree 
+        # # genmodel = [gm for gm in Collection(event,"GenModel"+self.systsJEC[_var],"nJet"+self.systsJEC[_var])]
+        # genmodels = ["GenModel_TChiWZ_ZToLL_100_80"]
+        
+        # # print listBranches
+        # isgm = 0
+        # for gm in genmodels:
+        #     print "here"
+        #     print EventsTree.Scan(gm)
+        #     # gmBranch = EventsTree.GetBranch(gm)
+        #     # EventsTree.SetBranchAddress(gm, isgm)
+        #     # EventsTree.GetEntry()
+        #     # if isgm==1: print isgm
+        #     # isgenmodel = getattr(event,gmBranch)
+        # #     print gm, isgenmodel
+
+        # # objarray = ROOT.TObjArray(self.inputTree)
+
         # prepare output
         ret = dict([(name,0.0) for name in self.namebranches])
         
@@ -257,7 +280,8 @@ class GenLepFromWZ_Collection(Module):
         W_daughters = []
 
         # Track the tau decays from W and Z
-        nTauFromZ=0      
+        nTauFromZ=0
+        TauFromZ = []    
         nTauFromW=0
 
         # Loop over all generator particles
@@ -276,6 +300,7 @@ class GenLepFromWZ_Collection(Module):
                 self.Log("Daughter of a Z-boson:\t %d \t|\tid: %d   \t|\tstatus: %d" % (index, gp.pdgId, gp.status),2)
                 Z_daughters.append(gp.pdgId)
                 if (abs(gp.pdgId)==15):
+                    TauFromZ.append((gp.pt,gp.eta,gp.phi))
                     nTauFromZ+=1
 
             # W-Boson daughters
@@ -322,6 +347,9 @@ class GenLepFromWZ_Collection(Module):
         for i in range(3-len(LepFromWZ)):
             LepFromWZ.append((-100,-100,-100,-100,-100,-100,-100,-100))
 
+        for i in range(2-len(TauFromZ)):
+            TauFromZ.append((-100,-100,-100,-100,-100,-100,-100,-100))
+
 
         GenLepFromWZ_id =       list(LepFromWZ[l][2] for l in range(len(LepFromWZ)))
         GenLepFromWZ_charge =   list(1 if LepFromWZ[l][2]>0 else -1 for l in range(len(LepFromWZ)))
@@ -336,6 +364,9 @@ class GenLepFromWZ_Collection(Module):
         self.out.fillBranch("GenLepFromWZ_isFromZ",     list(LepFromWZ[l][3] for l in range(len(LepFromWZ))))
         self.out.fillBranch("GenLepFromWZ_isFromTau",   list(LepFromWZ[l][4] for l in range(len(LepFromWZ))))
 
+        self.out.fillBranch("GenTauFromZ_pt",          list(TauFromZ[l][0] for l in range(len(TauFromZ))))
+        self.out.fillBranch("GenTauFromZ_eta",         list(TauFromZ[l][1] for l in range(len(TauFromZ))))
+        self.out.fillBranch("GenTauFromZ_phi",         list(TauFromZ[l][2] for l in range(len(TauFromZ))))
 
         ret = self.Prepare_2l3l_categories_returns(ret, GenLepFromWZ_id, GenLepFromWZ_charge, GenLepFromWZ_isFromZ, GenLepFromWZ_isFromTau)
         ret = self.Prepare_WZtoTau_decays_returns(ret, nTauFromZ, nTauFromW, LepFromWZ)
